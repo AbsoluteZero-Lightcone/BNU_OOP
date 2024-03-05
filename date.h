@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.h
   * @author  Zhang Yifa
-  * @version V1.2.0
+  * @version V1.2.1
   * @date    2024-03-05
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -48,15 +48,30 @@ public:
 
 public:
     void setDate(Year year,Month month,Day day);
-    Date& addDay();
-    Date& subDay();
-    Date& operator++(int);
-    Date& operator--(int);
-    Date& operator++();
-    Date& operator--();
+// 自增自减逻辑
+    Date& toNextDay();
+    Date& toPreviousDay();
+    inline Date& operator++(int);
+    inline Date& operator--(int);
+    inline Date& operator++();
+    inline Date& operator--();
 
-    Date& addDay(uint8_t n);
-    Date& subDay(uint8_t n);
+// 加减逻辑
+    Date& addDay(int n = 1);
+    Date& subDay(int n = 1);
+    Date& operator+(int n){
+        return this->addDay(n);
+    }
+    Date& operator-(int n){
+        return this->subDay(n);
+    }
+// 计算相差天数
+    int diff(Date& date){
+        // todo
+    }
+    int operator-(Date& date){
+        return diff(date);
+    }
 
     Year getYear()const;
     Month getMonth()const;

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.2.0
+  * @version V1.2.1
   * @date    2024-03-05
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -132,7 +132,7 @@ void Date::setDate(Year year,Month month,Day day){
   * @brief  日期+1
   * @retval *this 可用于链式编程
   */
-Date& Date::addDay(){
+Date& Date::toNextDay(){
     _day++;
     if(_day > getDays()){
         _day = 1;
@@ -148,7 +148,7 @@ Date& Date::addDay(){
   * @brief  日期-1
   * @retval *this 可用于链式编程
   */
-Date& Date::subDay(){
+Date& Date::toPreviousDay(){
     _day--;
     if(_day < 1){
         _month--;
@@ -164,85 +164,54 @@ Date& Date::subDay(){
   * @brief  重载前置自增运算符
   * @retval *this 可用于链式编程
   */
-Date& Date::operator++(){
-    _day++;
-    if(_day > getDays()){
-        _day = 1;
-        _month++;
-        if(_month > 12){
-            _month = 1;
-            _year++;
-        }
-    }
-    return *this;
-}
+inline Date& Date::operator++(){
+  return toNextDay();
+  }
 /**
   * @brief  重载前置自减运算符
   * @retval *this 可用于链式编程
   */
-Date& Date::operator--(){
-    _day--;
-    if(_day < 1){
-        _month--;
-        _day = getDays();
-        if(_month < 1){
-            _month = 12;
-            _year--;
-        }
-    }
-    return *this;
+inline Date& Date::operator--(){
+  return toPreviousDay();
 }
 /**
   * @brief  重载后置自增运算符
   * @retval *this 可用于链式编程
   */
-Date& Date::operator++(int){
-    _day++;
-    if(_day > getDays()){
-        _day = 1;
-        _month++;
-        if(_month > 12){
-            _month = 1;
-            _year++;
-        }
-    }
-    return *this;
+inline Date& Date::operator++(int){
+  return toNextDay();
 }
 /**
   * @brief  重载后置自减运算符
   * @retval *this 可用于链式编程
   */
-Date& Date::operator--(int){
-    _day--;
-    if(_day < 1){
-        _month--;
-        _day = getDays();
-        if(_month < 1){
-            _month = 12;
-            _year--;
-        }
-    }
-    return *this;
+inline Date& Date::operator--(int){
+  return toPreviousDay();
 }
 /**
   * @brief  日期往后n天
-  * @param  n 日期往后n天
+  * @param  n 日期往后n天，可以是负数
   * @retval *this 可用于链式编程
   */
-Date& Date::addDay(uint8_t n){
+Date& Date::addDay(int n){
     // This is a temp solution.
     // Todo: remove loops
-    for(uint8_t i = 0 ; i < n ; i++)(*this)++;
+    if(n==0)return *this;
+    if(n>0)for(uint8_t i = 0 ; i < n ; i++)(*this)++;
+    if(n<0)for(uint8_t i = 0 ; i < -n ; i++)(*this)--;
     return *this;
 }
 /**
   * @brief  日期往前n天
-  * @param  n 日期往前n天
+  * @param  n 日期往前n天，可以是负数
   * @retval *this 可用于链式编程
   */
-Date& Date::subDay(uint8_t n){
+Date& Date::subDay(int n){
     // This is a temp solution.
     // Todo: remove loops
+    if(n==0)return *this;
+    if(n>0)for(uint8_t i = 0 ; i < n ; i++)(*this)--;
+    if(n<0)for(uint8_t i = 0 ; i < -n ; i++)(*this)++;
     for(uint8_t i = 0 ; i < n ; i++)(*this)--;
     return *this;
 }
