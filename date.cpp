@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.1.0
+  * @version V1.2.0
   * @date    2024-03-05
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -22,7 +22,7 @@
   * @param  year 输入年份
   * @retval bool 1 for 闰年 and 0 for 不是闰年
   */
-bool Date::_isLeapYear(Year year){
+bool Date::isLeapYear(Year year){
     if(year % 100 == 0){
         if(year % 400 == 0)return 1;
         return 0;
@@ -35,7 +35,7 @@ bool Date::_isLeapYear(Year year){
   * @param  month 输入月份
   * @retval bool 1 for 是31天的月份 and 0 for 不是31天的月份
   */
-bool Date::_is31Days(Month month){
+bool Date::is31Days(Month month){
     if(month == 1)return 1;
     if(month == 3)return 1;
     if(month == 5)return 1;
@@ -51,19 +51,19 @@ bool Date::_is31Days(Month month){
   * @param  month 输入月份
   * @retval 月份的总天数
   */
-Day Date::_getDays(Year year,Month month){
+Day Date::getDays(Year year,Month month){
     if( month == 2 ){
-        if(_isLeapYear(year)) return 29;
+        if(isLeapYear(year)) return 29;
         return 28;
     }
-    else if(_is31Days(month))return 31;
+    else if(is31Days(month))return 31;
     return 30;
 }
 /**
   * @brief  判断当前对象所在年份是否是闰年
   * @retval bool 1 for 闰年 and 0 for 不是闰年
   */
-bool Date::_isLeapYear(){
+bool Date::isLeapYear()const{
     if(_year % 100 == 0){
         if(_year % 400 == 0)return 1;
         return 0;
@@ -75,7 +75,7 @@ bool Date::_isLeapYear(){
   * @brief  判断当前对象所在月份是否是31天
   * @retval bool 1 for 是31天的月份 and 0 for 不是31天的月份
   */
-bool Date::_is31Days(){
+bool Date::is31Days()const{
     if(_month == 1)return 1;
     if(_month == 3)return 1;
     if(_month == 5)return 1;
@@ -89,12 +89,12 @@ bool Date::_is31Days(){
   * @brief  获取当前对象所在月份的总天数
   * @retval 月份的总天数
   */
-Day Date::_getDays(){
+Day Date::getDays()const{
     if( _month == 2 ){
-        if(_isLeapYear(_year)) return 29;
+        if(isLeapYear(_year)) return 29;
         return 28;
     }
-    else if(_is31Days(_month))return 31;
+    else if(is31Days(_month))return 31;
     return 30;
 }
 /**
@@ -104,10 +104,10 @@ Day Date::_getDays(){
   * @param  day   输入日期
   * @retval bool 1 for 日期有效 and 0 for 日期无效
   */
-bool Date::_isValid(Year year,Month month,Day day){
+bool Date::isValid(Year year,Month month,Day day){
     if( year == 0 )return 0;
     if( month > 12 || month < 1 )return 0;
-    if( day > _getDays(year,month) || day < 1 )return 0;
+    if( day > getDays(year,month) || day < 1 )return 0;
     return 1;
 }
 
@@ -120,7 +120,7 @@ bool Date::_isValid(Year year,Month month,Day day){
   * @retval void
   */
 void Date::setDate(Year year,Month month,Day day){
-    if(!_isValid(year,month,day)){
+    if(!isValid(year,month,day)){
         _info_output_callback("Invalid Date");
         return;
     }
@@ -134,7 +134,7 @@ void Date::setDate(Year year,Month month,Day day){
   */
 Date& Date::addDay(){
     _day++;
-    if(_day > _getDays()){
+    if(_day > getDays()){
         _day = 1;
         _month++;
         if(_month > 12){
@@ -152,7 +152,7 @@ Date& Date::subDay(){
     _day--;
     if(_day < 1){
         _month--;
-        _day = _getDays();
+        _day = getDays();
         if(_month < 1){
             _month = 12;
             _year--;
@@ -166,7 +166,7 @@ Date& Date::subDay(){
   */
 Date& Date::operator++(){
     _day++;
-    if(_day > _getDays()){
+    if(_day > getDays()){
         _day = 1;
         _month++;
         if(_month > 12){
@@ -184,7 +184,7 @@ Date& Date::operator--(){
     _day--;
     if(_day < 1){
         _month--;
-        _day = _getDays();
+        _day = getDays();
         if(_month < 1){
             _month = 12;
             _year--;
@@ -198,7 +198,7 @@ Date& Date::operator--(){
   */
 Date& Date::operator++(int){
     _day++;
-    if(_day > _getDays()){
+    if(_day > getDays()){
         _day = 1;
         _month++;
         if(_month > 12){
@@ -216,7 +216,7 @@ Date& Date::operator--(int){
     _day--;
     if(_day < 1){
         _month--;
-        _day = _getDays();
+        _day = getDays();
         if(_month < 1){
             _month = 12;
             _year--;
@@ -247,9 +247,9 @@ Date& Date::subDay(uint8_t n){
     return *this;
 }
 
-inline Year Date::getYear(){return _year;}
-inline Month Date::getMonth(){return _month;}
-inline Day Date::getDay(){return _day;}
+inline Year Date::getYear()const{return _year;}
+inline Month Date::getMonth()const{return _month;}
+inline Day Date::getDay()const{return _day;}
 
 /**
   * @brief  信息输出的默认回调函数
@@ -266,9 +266,10 @@ void _defaultOutput(std::string s){
   * @param  day   日期
   * @retval void
   */
-void _defaultOutput(Year year,Month month,Day day){
-    std::cout << (int)year << " " << (int)month << " " << (int)day << " " << std::endl;
-    // 这里将uint8_t强转成int，避免被认为是char
+void _defaultOutput(int year,int month,int day){    
+  // 这里将uint8_t隐式类型转换成int，避免被认为是char
+    std::cout << year << " " << month << " " << day << " " << std::endl;
+
 }
 /**
   * @brief  展示当前日期
@@ -299,5 +300,4 @@ Date::~Date(){
     // 空实现
 }
 
-// todo : static const public
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

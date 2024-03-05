@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.h
   * @author  Zhang Yifa
-  * @version V1.1.0
+  * @version V1.2.0
   * @date    2024-03-05
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -20,7 +20,7 @@ typedef uint8_t Month;
 typedef uint8_t Day;
 
 void _defaultOutput(std::string s);
-void _defaultOutput(Year year,Month month,Day day);
+void _defaultOutput(int year,int month,int day);
 
 class Date{
 private:
@@ -29,19 +29,21 @@ private:
     Day _day;
     
     typedef void (*_info_output_callback_t)(std::string);
-    typedef void (*_date_output_callback_t)(Year,Month,Day);
+    typedef void (*_date_output_callback_t)(int,int,int);
     _info_output_callback_t _info_output_callback;
     _date_output_callback_t _date_output_callback;
 
-    bool _isLeapYear(Year year);
-    bool _is31Days(Month month);
-    Day _getDays(Year year,Month month);
+public:
 
-    bool _isLeapYear();
-    bool _is31Days();
-    Day _getDays();
+    bool isLeapYear()const;
+    bool is31Days()const;
+    Day getDays()const;
 
-    bool _isValid(Year year,Month month,Day day);
+// 对日期的通用操作函数，应该不用实例化就能调用，使之能类外复用：
+    static bool isLeapYear(Year year);
+    static bool is31Days(Month month);
+    static Day getDays(Year year,Month month);
+    static bool isValid(Year year,Month month,Day day);
 
 
 public:
@@ -56,14 +58,16 @@ public:
     Date& addDay(uint8_t n);
     Date& subDay(uint8_t n);
 
-    Year getYear();
-    Month getMonth();
-    Day getDay();
+    Year getYear()const;
+    Month getMonth()const;
+    Day getDay()const;
     void showDate();
-    void set_date_output_callback(_date_output_callback_t _date_output_callback){
+    void set_date_output_callback(_date_output_callback_t _date_output_callback)
+    {
         this->_date_output_callback = _date_output_callback;
     }
-    void set_info_output_callback(_info_output_callback_t _info_output_callback){
+    void set_info_output_callback(_info_output_callback_t _info_output_callback)
+    {
         this->_info_output_callback = _info_output_callback;
     }
 
