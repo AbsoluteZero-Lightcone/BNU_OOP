@@ -15,12 +15,22 @@ private:
     bool _isLeapYear(Year year);
     bool _is31Days(Month month);
     Day _getDays(Year year,Month month);
+
+    bool _isLeapYear();
+    bool _is31Days();
+    Day _getDays();
+
     bool _isValid(Year year,Month month,Day day);
 
 public:
     void (*info_output_interface_callback_handler)(std::string);
     void (*date_output_interface_callback_handler)(Year,Month,Day);
+
     void setDate(Year year,Month month,Day day);
+    Date& addDay();
+    Date& subDay();
+    Date& operator++();
+    Date& operator--();
 
     Year getYear();
     Month getMonth();
