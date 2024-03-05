@@ -3,7 +3,12 @@
 #include <string>
 // private:
 bool Date::_isLeapYear(Year year){
-    // todo
+    if(year % 100 == 0){
+        if(year % 400 == 0)return 1;
+        return 0;
+    }
+    else if(year % 4 == 0)return 1;
+    return 0;
 }
 bool Date::_is31Days(Month month){
     if(month == 1)return 1;
