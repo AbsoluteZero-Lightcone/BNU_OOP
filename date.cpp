@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.3.0
+  * @version V1.3.1
   * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -164,36 +164,34 @@ Date& Date::toPreviousDay(){
   * @brief  重载前置自增运算符
   * @retval *this 可用于链式编程
   */
-inline Date& Date::operator++(){
+Date& Date::operator++(){
   return toNextDay();
   }
 /**
   * @brief  重载前置自减运算符
   * @retval *this 可用于链式编程
   */
-inline Date& Date::operator--(){
+Date& Date::operator--(){
   return toPreviousDay();
 }
 /**
   * @brief  重载后置自增运算符
   * @retval *this 可用于链式编程
   */
-inline Date& Date::operator++(int){
+Date& Date::operator++(int){
   return toNextDay();
 }
 /**
   * @brief  重载后置自减运算符
   * @retval *this 可用于链式编程
   */
-inline Date& Date::operator--(int){
+Date& Date::operator--(int){
   return toPreviousDay();
 }
-
-inline Date Date::getNextDay()const{
+Date Date::getNextDay()const{
     return Date(*this)++;
 }
-
-inline Date Date::getPreviousDay()const{
+Date Date::getPreviousDay()const{
     return Date(*this)--;
 }
 
@@ -224,11 +222,10 @@ Date& Date::subDay(int n){
     if(n<0)for(unsigned int i = 0 ; i < -n ; i++)(*this)++;
     return *this;
 }
-
-inline Date& Date::operator+=(int n){
+Date& Date::operator+=(int n){
     return this->addDay(n);
 }
-inline Date& Date::operator-=(int n){
+Date& Date::operator-=(int n){
     return this->subDay(n);
 }
 
@@ -266,13 +263,13 @@ bool Date::operator<=(const Date& date)const{
     return 1;
     }
 
-inline bool Date::operator!=(const Date& date)const{
+bool Date::operator!=(const Date& date)const{
     return !(*this==date);
     }
-inline bool Date::operator>(const Date& date)const{
+bool Date::operator>(const Date& date)const{
     return !(*this<date);
     }
-inline bool Date::operator>=(const Date& date)const{
+bool Date::operator>=(const Date& date)const{
     return !(*this<=date);
     }
 
@@ -309,16 +306,16 @@ int Date::diff(Date date1,Date date2){
  * @param  date 目标日期
  * @retval 返回还差多少天
  */
-inline int Date::diff(const Date& date){
+int Date::diff(const Date& date){
     return diff(*this,date);
 }
-inline int Date::operator-(const Date& date){
+int Date::operator-(const Date& date){
     return diff(date,*this);
 }
 
-inline Year Date::getYear()const{return _year;}
-inline Month Date::getMonth()const{return _month;}
-inline Day Date::getDay()const{return _day;}
+Year Date::getYear()const{return _year;}
+Month Date::getMonth()const{return _month;}
+Day Date::getDay()const{return _day;}
 
 void Date::set_date_output_callback(_date_output_callback_t _date_output_callback)
 {

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa
-  * @version V1.2.4
-  * @date    2024-03-05
+  * @version V1.3.1
+  * @date    2024-03-06
   * @brief   A demonstration of the class Date.
   * @encode  UTF-8
   ******************************************************************************
@@ -24,14 +24,39 @@ void output(string s){
 
 int main(){
     //system("chcp 65001");
-    Date today(2024,3,5, output, output);
-    today.showDate();
+    int year,month,day;
+    while(1){
+        cout << "输入date1：";
+        cin >> year>>month >>day;
+        if(Date::isValid(year,month,day))break;// 调用静态函数接口
+        cout << "请输入正确的日期。"<< endl;
+    }
+    Date date1(year,month,day, output, output);
+    while(1){
+        cout << "输入date2：";
+        cin >> year>>month >>day;
+        if(Date::isValid(year,month,day))break;// 调用静态函数接口
+        cout << "请输入正确的日期。"<< endl;
+    }
+    Date date2(year,month,day, output, output);
+    while(1){
+        cout << "输入today：";
+        cin >> year>>month >>day;
+        if(Date::isValid(year,month,day))break;// 调用静态函数接口
+        cout << "请输入正确的日期。"<< endl;
+    }
+    Date today(year,month,day, output, output);
+    cout << "today = ";today.showDate();
     today++;// 重载了自增自减运算符
-    today.showDate();
-    today++++++++;// 并可以链式调用
-    today.showDate();
-    today.setDate(0, 0, 0);// 带有合法性检查的set函数
-    cout << (Date::isValid(0, 0, 0)?"有效":"无效") << endl;// 类外不用实例化，就能使用类提供的静态函数
+    cout << "today = ";today.showDate();
+     today++++++++;// 并可以链式调用
+     cout << "today = ";today.showDate();
+     today+=6;// 重载+=运算符
+     cout << "today = ";today.showDate();
+     today.setDate(0, 0, 0);// 带有合法性检查的set函数
+     cout << "today = ";today.showDate();
+     today.getNextDay().getNextDay().getNextDay().showDate();
+     cout << "today = ";today.showDate();
     system("pause");
     return 0;
 }

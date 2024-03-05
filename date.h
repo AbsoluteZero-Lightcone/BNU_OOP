@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.h
   * @author  Zhang Yifa
-  * @version V1.3.0
+  * @version V1.3.1
   * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -51,6 +51,11 @@ public:
 // 自增自减逻辑
     Date& toNextDay();
     Date& toPreviousDay();
+    Date& toNextMonth();// todo
+    Date& toPreviousMonth();// todo
+    Date& toNextYear();// todo
+    Date& toPreviousYear();// todo
+
     Date& operator++();
     Date& operator--();
     Date& operator++(int);
@@ -58,15 +63,25 @@ public:
 
     Date getNextDay()const;
     Date getPreviousDay()const;
+    Date getNextMonth()const;// todo
+    Date getPreviousMonth()const;// todo
+    Date getNextYear()const;// todo
+    Date getPreviousYear()const;// todo
 
 // 加减逻辑
     Date& addDay(int n = 1);
     Date& subDay(int n = 1);
+    Date& addMonth(int n = 1);// todo
+    Date& subMonth(int n = 1);// todo
+    Date& addYear(int n = 1);// todo
+    Date& subYear(int n = 1);// todo
+    
     Date& operator+=(int n);
     Date& operator-=(int n);
 
     Date operator+(int n)const;
     Date operator-(int n)const;
+
 
 // 比较大小
     bool operator==(const Date& date)const;
@@ -75,7 +90,6 @@ public:
     bool operator!=(const Date& date)const;
     bool operator>(const Date& date)const;
     bool operator>=(const Date& date)const;
-
 
 
 // 计算相差天数
