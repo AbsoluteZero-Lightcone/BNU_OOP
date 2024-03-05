@@ -35,7 +35,7 @@ void output_today(string s) {
 }
 
 int main() {
-	//system("chcp 65001");
+	system("chcp 65001");
 	int year, month, day;
 	while (1) {
 		cout << "输入date1：";
