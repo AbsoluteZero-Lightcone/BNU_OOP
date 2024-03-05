@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.h
   * @author  Zhang Yifa
-  * @version V1.2.8
+  * @version V1.3.0
   * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -70,11 +70,13 @@ public:
 
 // 比较大小
     bool operator==(const Date& date)const;
-    bool operator!=(const Date& date)const;// todo
-    bool operator>=(const Date& date)const;// todo
-    bool operator<=(const Date& date)const;// todo
-    bool operator>(const Date& date)const;// todo
-    bool operator<(const Date& date)const;// todo
+    bool operator<(const Date& date)const;
+    bool operator<=(const Date& date)const;
+    bool operator!=(const Date& date)const;
+    bool operator>(const Date& date)const;
+    bool operator>=(const Date& date)const;
+
+
 
 // 计算相差天数
     static int diff(Date date1,Date date2);

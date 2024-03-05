@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.2.8
+  * @version V1.3.0
   * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -247,18 +247,34 @@ Date Date::operator-(int n)const{
     return temp;
 }
 
-inline int Date::operator-(const Date& date){
-    return diff(date);
-}
-
 bool Date::operator==(const Date& date)const{
     if(_day != date.getDay())return 0;
     if(_month != date.getMonth())return 0;
     if(_year != date.getYear())return 0;
     return 1;
 }
+bool Date::operator<(const Date& date)const{
+    if(_year < date.getYear())return 1;
+    else if(_month < date.getMonth())return 1;
+    else if(_day < date.getDay())return 1;
+    return 0;
+    }
+bool Date::operator<=(const Date& date)const{
+    if(_year > date.getYear())return 0;
+    else if(_month > date.getMonth())return 0;
+    else if(_day > date.getDay())return 0;
+    return 1;
+    }
 
-
+inline bool Date::operator!=(const Date& date)const{
+    return !(*this==date);
+    }
+inline bool Date::operator>(const Date& date)const{
+    return !(*this<date);
+    }
+inline bool Date::operator>=(const Date& date)const{
+    return !(*this<=date);
+    }
 
 
 
@@ -293,12 +309,13 @@ int Date::diff(Date date1,Date date2){
  * @param  date 目标日期
  * @retval 返回还差多少天
  */
-int Date::diff(const Date& date){
+inline int Date::diff(const Date& date){
     return diff(*this,date);
 }
-int Date::operator-(const Date& date){
+inline int Date::operator-(const Date& date){
     return diff(date,*this);
 }
+
 inline Year Date::getYear()const{return _year;}
 inline Month Date::getMonth()const{return _month;}
 inline Day Date::getDay()const{return _day;}
