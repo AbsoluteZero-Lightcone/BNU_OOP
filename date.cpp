@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-03-05
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -119,7 +119,7 @@ bool Date::_isValid(Year year,Month month,Day day){
   */
 void Date::setDate(Year year,Month month,Day day){
     if(!_isValid(year,month,day)){
-        info_output_interface_callback_handler("Invalid Date");
+        _info_output_interface_callback_handler("Invalid Date");
         return;
     }
     _year = year;
@@ -249,7 +249,14 @@ inline Year Date::getYear(){return _year;}
 inline Month Date::getMonth(){return _month;}
 inline Day Date::getDay(){return _day;}
 
-inline void Date::showDate(){date_output_interface_callback_handler(_year,_month,_day);}
+/**
+  * @brief  展示当前日期
+  * @param  指定输出显示接口的回调函数
+  * @retval void
+  */
+inline void Date::showDate(){
+        _date_output_interface_callback_handler(_year,_month,_day);
+        }
 
 inline Date::Date():_year(2024),_month(1),_day(1){}
 inline Date::Date(Year year,Month month,Day day){
