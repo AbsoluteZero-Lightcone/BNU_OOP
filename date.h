@@ -8,7 +8,9 @@
   * @encode  UTF-8
   ******************************************************************************
   */
-#pragma once
+#ifndef __DATE_H
+#define __DATE_H
+
 #include <iostream>
 #include <cstdint>
 #include <string>
@@ -17,12 +19,8 @@ typedef int16_t Year;
 typedef uint8_t Month;
 typedef uint8_t Day;
 
-void _defaultOutput(std::string s){
-    std::cout << s << std::endl;
-}
-void _defaultOutput(Year year,Month month,Day day){
-    std::cout << year << "年" << month << "月" << day << "日" << std::endl;
-}
+void _defaultOutput(std::string s);
+void _defaultOutput(Year year,Month month,Day day);
 
 class Date{
 private:
@@ -30,10 +28,10 @@ private:
     Month _month;
     Day _day;
     
-    typedef void (*_info_output_interface_callback_handler_t)(std::string);
-    typedef void (*_date_output_interface_callback_handler_t)(Year,Month,Day);
-    _info_output_interface_callback_handler_t _info_output_interface_callback_handler = _defaultOutput;
-    _date_output_interface_callback_handler_t _date_output_interface_callback_handler = _defaultOutput;
+    typedef void (*_info_output_callback_t)(std::string);
+    typedef void (*_date_output_callback_t)(Year,Month,Day);
+    _info_output_callback_t _info_output_callback;
+    _date_output_callback_t _date_output_callback;
 
     bool _isLeapYear(Year year);
     bool _is31Days(Month month);
@@ -62,16 +60,19 @@ public:
     Month getMonth();
     Day getDay();
     void showDate();
-    void set_date_output_interface_callback_handler(_date_output_interface_callback_handler_t _date_output_interface_callback_handler){
-        this->_date_output_interface_callback_handler = _date_output_interface_callback_handler;
+    void set_date_output_callback(_date_output_callback_t _date_output_callback){
+        this->_date_output_callback = _date_output_callback;
     }
-    void set_info_output_interface_callback_handler(_info_output_interface_callback_handler_t _info_output_interface_callback_handler){
-        this->_info_output_interface_callback_handler = _info_output_interface_callback_handler;
+    void set_info_output_callback(_info_output_callback_t _info_output_callback){
+        this->_info_output_callback = _info_output_callback;
     }
 
     Date();
-    Date(Year year,Month month,Day day);
+    Date(Year year,Month month,Day day,
+    _info_output_callback_t _info_output_callback = _defaultOutput,
+    _date_output_callback_t _date_output_callback = _defaultOutput);
     ~Date();
     
 };
+#endif /* __DATE_H */
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

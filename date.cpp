@@ -13,6 +13,7 @@
 #include "date.h"
 #include <cstdint>
 #include <string>
+#include <iostream>
 
 // private:
 
@@ -107,6 +108,7 @@ bool Date::_isValid(Year year,Month month,Day day){
     if( year == 0 )return 0;
     if( month > 12 || month < 1 )return 0;
     if( day > _getDays(year,month) || day < 1 )return 0;
+    return 1;
 }
 
 // public:
@@ -119,7 +121,7 @@ bool Date::_isValid(Year year,Month month,Day day){
   */
 void Date::setDate(Year year,Month month,Day day){
     if(!_isValid(year,month,day)){
-        _info_output_interface_callback_handler("Invalid Date");
+        _info_output_callback("Invalid Date");
         return;
     }
     _year = year;
@@ -250,21 +252,52 @@ inline Month Date::getMonth(){return _month;}
 inline Day Date::getDay(){return _day;}
 
 /**
-  * @brief  展示当前日期
-  * @param  指定输出显示接口的回调函数
+  * @brief  信息输出的默认回调函数
+  * @param  s 字符串
   * @retval void
   */
-inline void Date::showDate(){
-        _date_output_interface_callback_handler(_year,_month,_day);
+void _defaultOutput(std::string s){
+    std::cout << s << std::endl;
+}
+/**
+  * @brief  日期输出的默认回调函数
+  * @param  year  年份
+  * @param  month 月份
+  * @param  day   日期
+  * @retval void
+  */
+void _defaultOutput(Year year,Month month,Day day){
+    std::cout << (int)year << " " << (int)month << " " << (int)day << " " << std::endl;
+    // 这里将uint8_t强转成int，避免被认为是char
+}
+/**
+  * @brief  展示当前日期
+  * @retval void
+  */
+void Date::showDate(){
+        _date_output_callback(_year,_month,_day);
         }
 
-inline Date::Date():_year(2024),_month(1),_day(1){}
-inline Date::Date(Year year,Month month,Day day){
+Date::Date():
+_year(2024),
+_month(1),
+_day(1),
+_info_output_callback(_defaultOutput),
+_date_output_callback(_defaultOutput)
+{}
+
+Date::Date(Year year,Month month,Day day,
+    _info_output_callback_t _info_output_callback,
+    _date_output_callback_t _date_output_callback
+):_info_output_callback(_info_output_callback),
+_date_output_callback(_date_output_callback)
+{
     setDate(year,month,day);
 }
-inline Date::~Date(){
+
+Date::~Date(){
     // 空实现
 }
 
-
+// todo : static const public
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
