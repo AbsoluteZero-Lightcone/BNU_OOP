@@ -1,18 +1,7 @@
-#pragma once
-#include <iostream>
+#include "date.h"
 #include <cstdint>
 #include <string>
-using namespace std;
-
-typedef int16_t Year;
-typedef uint8_t Month;
-typedef uint8_t Day;
-
-class Date{
-    private:
-    Year _year;
-    Month _month;
-    Day _day;
+// private:
     bool _isLeapYear(Year year){}
     bool _is31Days(Month month){
         if(month == 1)return 1;
@@ -37,7 +26,7 @@ class Date{
         if( month > 12 || month < 1 )return 0;
         if( day > _getDays(year,month) || day < 1 )return 0;
     }
-    public:
+// public:
     void (*info_output_interface_callback_handler)(string);
     void (*date_output_interface_callback_handler)(Year,Month,Day);
     void setDate(Year year,Month month,Day day){
@@ -58,5 +47,4 @@ class Date{
         setDate(year,month,day);
     }
     ~Date(){}
-    
-};
+
