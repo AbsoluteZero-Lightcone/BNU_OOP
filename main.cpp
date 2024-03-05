@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa
-  * @version V1.2.3
+  * @version V1.2.4
   * @date    2024-03-05
   * @brief   A demonstration of the class Date.
   * @encode  UTF-8
@@ -36,5 +36,4 @@ int main(){
     return 0;
 }
 
-// todo: +- toNextMonth toNextYear 返回拷贝对象的运算操作
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
