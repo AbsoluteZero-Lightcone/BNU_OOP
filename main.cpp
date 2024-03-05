@@ -1,12 +1,11 @@
 #include <iostream>
 using namespace std;
 
-#include "inline_test.h"
+#include "date.h"
 
 int main(){
-    int i = 1;
-    inline_test it1(i,temp(1));// 匿名对象
-    cout << 1 <<endl;
+    Date today(2024,3,5);
+    
 
     return 0;
 }

@@ -1,7 +1,26 @@
+/**
+  ******************************************************************************
+  * @file    date.cpp
+  * @author  Zhang Yifa
+  * @version V1.0.0
+  * @date    2024-03-05
+  * @brief   Abstract a class for handling date data.
+  * @encode  UTF-8
+  ******************************************************************************
+  */
+
+ // includes:
 #include "date.h"
 #include <cstdint>
 #include <string>
+
 // private:
+
+/**
+  * @brief  判断是否是闰年
+  * @param  year 输入年份
+  * @retval bool 1 for 闰年 and 0 for 不是闰年
+  */
 bool Date::_isLeapYear(Year year){
     if(year % 100 == 0){
         if(year % 400 == 0)return 1;
@@ -10,6 +29,11 @@ bool Date::_isLeapYear(Year year){
     else if(year % 4 == 0)return 1;
     return 0;
 }
+/**
+  * @brief  判断是否是31天的月份
+  * @param  month 输入月份
+  * @retval bool 1 for 是31天的月份 and 0 for 不是31天的月份
+  */
 bool Date::_is31Days(Month month){
     if(month == 1)return 1;
     if(month == 3)return 1;
@@ -20,14 +44,25 @@ bool Date::_is31Days(Month month){
     if(month == 12)return 1;
     return 0;
 }
-Day Date::_getDays(){
-    if( _month == 2 ){
-        if(_isLeapYear(_year)) return 29;
+/**
+  * @brief  获取输入年月的月份的总天数
+  * @param  year  输入年份
+  * @param  month 输入月份
+  * @retval 月份的总天数
+  */
+Day Date::_getDays(Year year,Month month){
+    if( month == 2 ){
+        if(_isLeapYear(year)) return 29;
         return 28;
     }
-    else if(_is31Days(_month))return 31;
+    else if(_is31Days(month))return 31;
     return 30;
-}bool Date::_isLeapYear(){
+}
+/**
+  * @brief  判断当前对象所在年份是否是闰年
+  * @retval bool 1 for 闰年 and 0 for 不是闰年
+  */
+bool Date::_isLeapYear(){
     if(_year % 100 == 0){
         if(_year % 400 == 0)return 1;
         return 0;
@@ -35,6 +70,10 @@ Day Date::_getDays(){
     else if(_year % 4 == 0)return 1;
     return 0;
 }
+/**
+  * @brief  判断当前对象所在月份是否是31天
+  * @retval bool 1 for 是31天的月份 and 0 for 不是31天的月份
+  */
 bool Date::_is31Days(){
     if(_month == 1)return 1;
     if(_month == 3)return 1;
@@ -45,15 +84,25 @@ bool Date::_is31Days(){
     if(_month == 12)return 1;
     return 0;
 }
-Day Date::_getDays(Year year,Month month){
-    if( month == 2 ){
-        if(_isLeapYear(year)) return 29;
+/**
+  * @brief  获取当前对象所在月份的总天数
+  * @retval 月份的总天数
+  */
+Day Date::_getDays(){
+    if( _month == 2 ){
+        if(_isLeapYear(_year)) return 29;
         return 28;
     }
-    else if(_is31Days(month))return 31;
+    else if(_is31Days(_month))return 31;
     return 30;
 }
-
+/**
+  * @brief  判断输入的年月日是否正确
+  * @param  year  输入年份
+  * @param  month 输入月份
+  * @param  day   输入日期
+  * @retval bool 1 for 日期有效 and 0 for 日期无效
+  */
 bool Date::_isValid(Year year,Month month,Day day){
     if( year == 0 )return 0;
     if( month > 12 || month < 1 )return 0;
@@ -61,6 +110,13 @@ bool Date::_isValid(Year year,Month month,Day day){
 }
 
 // public:
+/**
+  * @brief  设置日期
+  * @param  year  输入年份
+  * @param  month 输入月份
+  * @param  day   输入日期
+  * @retval void
+  */
 void Date::setDate(Year year,Month month,Day day){
     if(!_isValid(year,month,day)){
         info_output_interface_callback_handler("Invalid Date");
@@ -70,7 +126,10 @@ void Date::setDate(Year year,Month month,Day day){
     _month = month;
     _day = day;
 }
-
+/**
+  * @brief  日期+1
+  * @retval *this 可用于链式编程
+  */
 Date& Date::addDay(){
     _day++;
     if(_day > _getDays()){
@@ -83,6 +142,10 @@ Date& Date::addDay(){
     }
     return *this;
 }
+/**
+  * @brief  日期-1
+  * @retval *this 可用于链式编程
+  */
 Date& Date::subDay(){
     _day--;
     if(_day < 1){
@@ -95,6 +158,10 @@ Date& Date::subDay(){
     }
     return *this;
 }
+/**
+  * @brief  重载前置自增运算符
+  * @retval *this 可用于链式编程
+  */
 Date& Date::operator++(){
     _day++;
     if(_day > _getDays()){
@@ -107,6 +174,10 @@ Date& Date::operator++(){
     }
     return *this;
 }
+/**
+  * @brief  重载前置自减运算符
+  * @retval *this 可用于链式编程
+  */
 Date& Date::operator--(){
     _day--;
     if(_day < 1){
@@ -119,6 +190,10 @@ Date& Date::operator--(){
     }
     return *this;
 }
+/**
+  * @brief  重载后置自增运算符
+  * @retval *this 可用于链式编程
+  */
 Date& Date::operator++(int){
     _day++;
     if(_day > _getDays()){
@@ -131,6 +206,10 @@ Date& Date::operator++(int){
     }
     return *this;
 }
+/**
+  * @brief  重载后置自减运算符
+  * @retval *this 可用于链式编程
+  */
 Date& Date::operator--(int){
     _day--;
     if(_day < 1){
@@ -143,12 +222,22 @@ Date& Date::operator--(int){
     }
     return *this;
 }
+/**
+  * @brief  日期往后n天
+  * @param  n 日期往后n天
+  * @retval *this 可用于链式编程
+  */
 Date& Date::addDay(uint8_t n){
     // This is a temp solution.
     // Todo: remove loops
     for(uint8_t i = 0 ; i < n ; i++)(*this)++;
     return *this;
 }
+/**
+  * @brief  日期往前n天
+  * @param  n 日期往前n天
+  * @retval *this 可用于链式编程
+  */
 Date& Date::subDay(uint8_t n){
     // This is a temp solution.
     // Todo: remove loops
@@ -166,5 +255,9 @@ inline Date::Date():_year(2024),_month(1),_day(1){}
 inline Date::Date(Year year,Month month,Day day){
     setDate(year,month,day);
 }
-inline Date::~Date(){}
+inline Date::~Date(){
+    // 空实现
+}
 
+
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

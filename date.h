@@ -1,3 +1,13 @@
+/**
+  ******************************************************************************
+  * @file    date.h
+  * @author  Zhang Yifa
+  * @version V1.0.0
+  * @date    2024-03-05
+  * @brief   Abstract a class for handling date data.
+  * @encode  UTF-8
+  ******************************************************************************
+  */
 #pragma once
 #include <cstdint>
 #include <string>
@@ -29,8 +39,13 @@ public:
     void setDate(Year year,Month month,Day day);
     Date& addDay();
     Date& subDay();
+    Date& operator++(int);
+    Date& operator--(int);
     Date& operator++();
     Date& operator--();
+
+    Date& addDay(uint8_t n);
+    Date& subDay(uint8_t n);
 
     Year getYear();
     Month getMonth();
@@ -42,3 +57,4 @@ public:
     ~Date();
     
 };
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
