@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.2.6
+  * @version V1.2.7
   * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -189,11 +189,11 @@ inline Date& Date::operator--(int){
   return toPreviousDay();
 }
 
-inline Date Date::getNextDay(){
+inline Date Date::getNextDay()const{
     return Date(*this)++;
 }
 
-inline Date Date::getPreviousDay(){
+inline Date Date::getPreviousDay()const{
     return Date(*this)--;
 }
 
@@ -232,14 +232,14 @@ inline Date& Date::operator-=(int n){
     return this->subDay(n);
 }
 
-Date Date::operator+(int n){
+Date Date::operator+(int n)const{
     if(n==0)return Date(*this);
     Date temp = Date(*this);
     if(n>0)for(unsigned int i = 0 ; i < n ; i++)temp++;
     if(n<0)for(unsigned int i = 0 ; i < -n ; i++)temp--;
     return temp;
 }
-Date Date::operator-(int n){
+Date Date::operator-(int n)const{
     if(n==0)return Date(*this);
     Date temp = Date(*this);
     if(n>0)for(unsigned int i = 0 ; i < n ; i++)temp--;
@@ -247,8 +247,15 @@ Date Date::operator-(int n){
     return temp;
 }
 
-inline int Date::operator-(Date& date){
+inline int Date::operator-(const Date& date){
     return diff(date);
+}
+
+bool Date::operator==(const Date& date)const{
+    if(_day != date.getDay())return 0;
+    if(_month != date.getMonth())return 0;
+    if(_year != date.getYear())return 0;
+    return 1;
 }
 
 inline Year Date::getYear()const{return _year;}
