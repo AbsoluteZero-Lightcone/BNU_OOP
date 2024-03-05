@@ -45,15 +45,15 @@ void Date::setDate(Year year,Month month,Day day){
     _day = day;
 }
 
-Year Date::getYear(){return _year;}
-Month Date::getMonth(){return _month;}
-Day Date::getDay(){return _day;}
+inline Year Date::getYear(){return _year;}
+inline Month Date::getMonth(){return _month;}
+inline Day Date::getDay(){return _day;}
 
-void Date::showDate(){date_output_interface_callback_handler(_year,_month,_day);}
+inline void Date::showDate(){date_output_interface_callback_handler(_year,_month,_day);}
 
-Date::Date():_year(2024),_month(1),_day(1){}
-Date::Date(Year year,Month month,Day day){
+inline Date::Date():_year(2024),_month(1),_day(1){}
+inline Date::Date(Year year,Month month,Day day){
     setDate(year,month,day);
 }
-Date::~Date(){}
+inline Date::~Date(){}
 
