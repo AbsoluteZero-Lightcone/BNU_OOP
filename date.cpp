@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.2.7
+  * @version V1.2.8
   * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -205,7 +205,7 @@ inline Date Date::getPreviousDay()const{
   */
 Date& Date::addDay(int n){
     // This is a temp solution.
-    // Todo: remove loops
+    // Todo: 优化时间复杂度
     if(n==0)return *this;
     if(n>0)for(unsigned int i = 0 ; i < n ; i++)(*this)++;
     if(n<0)for(unsigned int i = 0 ; i < -n ; i++)(*this)--;
@@ -218,7 +218,7 @@ Date& Date::addDay(int n){
   */
 Date& Date::subDay(int n){
     // This is a temp solution.
-    // Todo: remove loops
+    // Todo: 优化时间复杂度
     if(n==0)return *this;
     if(n>0)for(unsigned int i = 0 ; i < n ; i++)(*this)--;
     if(n<0)for(unsigned int i = 0 ; i < -n ; i++)(*this)++;
@@ -258,6 +258,47 @@ bool Date::operator==(const Date& date)const{
     return 1;
 }
 
+
+
+
+
+/**
+ * @brief  算增量，末减前
+ * @param  date1 初始
+ * @param  date2 目标
+ * @retval 增量
+ */
+int Date::diff(Date date1,Date date2){
+    // 差得多时计算速度就比较灾难
+    // todo: 优化时间复杂度
+    if(date1 == date2)return 0;
+    int cnt = 0;
+    if(date1 > date2){
+        while(date1 != date2){
+            cnt++;
+            date2++;
+        }
+        return -cnt;
+    }
+    //if(date1 < date2){
+        while(date1 != date2){
+            cnt++;
+            date1++;
+        }
+        return cnt;
+    //}
+}
+/**
+ * @brief  返回离目标日期还差多少天
+ * @param  date 目标日期
+ * @retval 返回还差多少天
+ */
+int Date::diff(const Date& date){
+    return diff(*this,date);
+}
+int Date::operator-(const Date& date){
+    return diff(date,*this);
+}
 inline Year Date::getYear()const{return _year;}
 inline Month Date::getMonth()const{return _month;}
 inline Day Date::getDay()const{return _day;}
