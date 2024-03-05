@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.2.5
+  * @version V1.2.6
   * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -188,6 +188,16 @@ inline Date& Date::operator++(int){
 inline Date& Date::operator--(int){
   return toPreviousDay();
 }
+
+inline Date Date::getNextDay(){
+    return Date(*this)++;
+}
+
+inline Date Date::getPreviousDay(){
+    return Date(*this)--;
+}
+
+
 /**
   * @brief  日期往后n天
   * @param  n 日期往后n天，可以是负数
