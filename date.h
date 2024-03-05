@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    date.h
   * @author  Zhang Yifa
-  * @version V1.2.4
-  * @date    2024-03-05
+  * @version V1.2.5
+  * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
   ******************************************************************************
@@ -35,6 +35,9 @@ private:
 
 public:
 
+    void setDate(Year year,Month month,Day day);
+
+// 对现行对象使用的函数
     bool isLeapYear()const;
     bool is31Days()const;
     Day getDays()const;
@@ -45,9 +48,6 @@ public:
     static Day getDays(Year year,Month month);
     static bool isValid(Year year,Month month,Day day);
 
-
-public:
-    void setDate(Year year,Month month,Day day);
 // 自增自减逻辑
     Date& toNextDay();
     Date& toPreviousDay();
@@ -66,28 +66,18 @@ public:
 // 加减逻辑
     Date& addDay(int n = 1);
     Date& subDay(int n = 1);
-    Date& operator+=(int n){
-        return this->addDay(n);
-    }
-    Date& operator-=(int n){
-        return this->subDay(n);
-    }
+    Date& operator+=(int n);
+    Date& operator-=(int n);
 
-    Date operator+(int n){
-        // todo
-    }
-    Date operator-(int n){
-        // todo
-    }
+    Date operator+(int n);
+    Date operator-(int n);
 
 // 计算相差天数
     int diff(Date& date){
         // todo
         return 0;
     }
-    int operator-(Date& date){
-        return diff(date);
-    }
+    int operator-(Date& date);
 
 // get方法
     Year getYear()const;
@@ -96,14 +86,8 @@ public:
     void showDate();
 
 // 设置输出接口的回调函数
-    void set_date_output_callback(_date_output_callback_t _date_output_callback)
-    {
-        this->_date_output_callback = _date_output_callback;
-    }
-    void set_info_output_callback(_info_output_callback_t _info_output_callback)
-    {
-        this->_info_output_callback = _info_output_callback;
-    }
+    void set_date_output_callback(_date_output_callback_t);
+    void set_info_output_callback(_info_output_callback_t);
 
 // 构造析构
     Date(Year year = 2024,Month month = 3,Day day=5,

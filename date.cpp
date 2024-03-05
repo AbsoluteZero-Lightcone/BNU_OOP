@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.2.4
-  * @date    2024-03-05
+  * @version V1.2.5
+  * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
   ******************************************************************************
@@ -197,8 +197,8 @@ Date& Date::addDay(int n){
     // This is a temp solution.
     // Todo: remove loops
     if(n==0)return *this;
-    if(n>0)for(uint8_t i = 0 ; i < n ; i++)(*this)++;
-    if(n<0)for(uint8_t i = 0 ; i < -n ; i++)(*this)--;
+    if(n>0)for(unsigned int i = 0 ; i < n ; i++)(*this)++;
+    if(n<0)for(unsigned int i = 0 ; i < -n ; i++)(*this)--;
     return *this;
 }
 /**
@@ -210,15 +210,49 @@ Date& Date::subDay(int n){
     // This is a temp solution.
     // Todo: remove loops
     if(n==0)return *this;
-    if(n>0)for(uint8_t i = 0 ; i < n ; i++)(*this)--;
-    if(n<0)for(uint8_t i = 0 ; i < -n ; i++)(*this)++;
-    for(uint8_t i = 0 ; i < n ; i++)(*this)--;
+    if(n>0)for(unsigned int i = 0 ; i < n ; i++)(*this)--;
+    if(n<0)for(unsigned int i = 0 ; i < -n ; i++)(*this)++;
     return *this;
+}
+
+inline Date& Date::operator+=(int n){
+    return this->addDay(n);
+}
+inline Date& Date::operator-=(int n){
+    return this->subDay(n);
+}
+
+Date Date::operator+(int n){
+    if(n==0)return Date(*this);
+    Date temp = Date(*this);
+    if(n>0)for(unsigned int i = 0 ; i < n ; i++)temp++;
+    if(n<0)for(unsigned int i = 0 ; i < -n ; i++)temp--;
+    return temp;
+}
+Date Date::operator-(int n){
+    if(n==0)return Date(*this);
+    Date temp = Date(*this);
+    if(n>0)for(unsigned int i = 0 ; i < n ; i++)temp--;
+    if(n<0)for(unsigned int i = 0 ; i < -n ; i++)temp++;
+    return temp;
+}
+
+inline int Date::operator-(Date& date){
+    return diff(date);
 }
 
 inline Year Date::getYear()const{return _year;}
 inline Month Date::getMonth()const{return _month;}
 inline Day Date::getDay()const{return _day;}
+
+void Date::set_date_output_callback(_date_output_callback_t _date_output_callback)
+{
+    this->_date_output_callback = _date_output_callback;
+}
+void Date::set_info_output_callback(_info_output_callback_t _info_output_callback)
+{
+    this->_info_output_callback = _info_output_callback;
+}
 
 /**
   * @brief  信息输出的默认回调函数
