@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.2.1
+  * @version V1.2.2
   * @date    2024-03-05
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -248,13 +248,6 @@ void Date::showDate(){
         _date_output_callback(_year,_month,_day);
         }
 
-Date::Date():
-_year(2024),
-_month(1),
-_day(1),
-_info_output_callback(_defaultOutput),
-_date_output_callback(_defaultOutput)
-{}
 
 Date::Date(Year year,Month month,Day day,
     _info_output_callback_t _info_output_callback,

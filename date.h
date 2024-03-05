@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.h
   * @author  Zhang Yifa
-  * @version V1.2.1
+  * @version V1.2.2
   * @date    2024-03-05
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -72,11 +72,13 @@ public:
     int operator-(Date& date){
         return diff(date);
     }
-
+// get方法
     Year getYear()const;
     Month getMonth()const;
     Day getDay()const;
     void showDate();
+
+// 设置输出接口的回调函数
     void set_date_output_callback(_date_output_callback_t _date_output_callback)
     {
         this->_date_output_callback = _date_output_callback;
@@ -86,8 +88,8 @@ public:
         this->_info_output_callback = _info_output_callback;
     }
 
-    Date();
-    Date(Year year,Month month,Day day,
+// 构造析构
+    Date(Year year = 2024,Month month = 3,Day day=5,
     _info_output_callback_t _info_output_callback = _defaultOutput,
     _date_output_callback_t _date_output_callback = _defaultOutput);
     ~Date();

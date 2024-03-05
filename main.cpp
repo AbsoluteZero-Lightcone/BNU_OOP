@@ -1,8 +1,8 @@
-/**
+ï»¿/**
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa
-  * @version V1.2.0
+  * @version V1.2.2
   * @date    2024-03-05
   * @brief   A demonstration of the class Date.
   * @encode  UTF-8
@@ -14,27 +14,27 @@ using namespace std;
 
 #include "date.h"
 
-// ÓÃ»Øµ÷º¯ÊıÊµÏÖÁËÔÚÀàÍâ×Ô¶¨ÒåÊä³ö¸ñÊ½
+// ç”¨å›è°ƒå‡½æ•°å®ç°äº†åœ¨ç±»å¤–è‡ªå®šä¹‰è¾“å‡ºæ ¼å¼
 void output(int year, int month, int day) {
-    cout << year << "Äê" << month << "ÔÂ" << day << "ÈÕ" << endl;
+    cout << year << "å¹´" << month << "æœˆ" << day << "æ—¥" << endl;
 }
 void output(string s){
-    cout << "ÌáÊ¾ĞÅÏ¢£º" << s << endl;
+    cout << "æç¤ºä¿¡æ¯ï¼š" << s << endl;
 }
 
 int main(){
     //system("chcp 65001");
     Date today(2024,3,5, output, output);
     today.showDate();
-    today++;// ÖØÔØÁË×ÔÔö×Ô¼õÔËËã·û
+    today++;// é‡è½½äº†è‡ªå¢è‡ªå‡è¿ç®—ç¬¦
     today.showDate();
-    today++++++++;// ²¢¿ÉÒÔÁ´Ê½µ÷ÓÃ
+    today++++++++;// å¹¶å¯ä»¥é“¾å¼è°ƒç”¨
     today.showDate();
-    today.setDate(0, 0, 0);// ´øÓĞºÏ·¨ĞÔ¼ì²éµÄsetº¯Êı
-    cout << (Date::isValid(0, 0, 0)?"ÓĞĞ§":"ÎŞĞ§") << endl;// ÀàÍâ²»ÓÃÊµÀı»¯£¬¾ÍÄÜÊ¹ÓÃÀàÌá¹©µÄ¾²Ì¬º¯Êı
+    today.setDate(0, 0, 0);// å¸¦æœ‰åˆæ³•æ€§æ£€æŸ¥çš„setå‡½æ•°
+    cout << (Date::isValid(0, 0, 0)?"æœ‰æ•ˆ":"æ— æ•ˆ") << endl;// ç±»å¤–ä¸ç”¨å®ä¾‹åŒ–ï¼Œå°±èƒ½ä½¿ç”¨ç±»æä¾›çš„é™æ€å‡½æ•°
     system("pause");
     return 0;
 }
 
-// todo: +- toNextMonth toNextYear ·µ»Ø¿½±´¶ÔÏóµÄÔËËã²Ù×÷
+// todo: +- toNextMonth toNextYear è¿”å›æ‹·è´å¯¹è±¡çš„è¿ç®—æ“ä½œ
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
