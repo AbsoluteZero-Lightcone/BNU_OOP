@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa
-  * @version V1.2.2
+  * @version V1.2.3
   * @date    2024-03-05
   * @brief   A demonstration of the class Date.
   * @encode  UTF-8

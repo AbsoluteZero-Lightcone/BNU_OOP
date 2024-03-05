@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.2.2
+  * @version V1.2.3
   * @date    2024-03-05
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.h
   * @author  Zhang Yifa
-  * @version V1.2.2
+  * @version V1.2.3
   * @date    2024-03-05
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -51,23 +51,24 @@ public:
 // 自增自减逻辑
     Date& toNextDay();
     Date& toPreviousDay();
-    inline Date& operator++(int);
-    inline Date& operator--(int);
-    inline Date& operator++();
-    inline Date& operator--();
+    Date& operator++(int);
+    Date& operator--(int);
+    Date& operator++();
+    Date& operator--();
 
 // 加减逻辑
     Date& addDay(int n = 1);
     Date& subDay(int n = 1);
-    Date& operator+(int n){
+    Date& operator+=(int n){
         return this->addDay(n);
     }
-    Date& operator-(int n){
+    Date& operator-=(int n){
         return this->subDay(n);
     }
 // 计算相差天数
     int diff(Date& date){
         // todo
+        return 0;
     }
     int operator-(Date& date){
         return diff(date);
