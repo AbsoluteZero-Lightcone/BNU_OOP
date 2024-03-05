@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.3.1
+  * @version V1.3.2
   * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -124,9 +124,11 @@ void Date::setDate(Year year,Month month,Day day){
         _info_output_callback("Invalid Date");
         return;
     }
+    _info_output_callback("Valid Date");
     _year = year;
     _month = month;
     _day = day;
+    _info_output_callback("Update Successfully");
 }
 /**
   * @brief  日期+1
@@ -309,7 +311,7 @@ int Date::diff(Date date1,Date date2){
 int Date::diff(const Date& date){
     return diff(*this,date);
 }
-int Date::operator-(const Date& date){
+int Date::operator-(const Date& date)const{
     return diff(date,*this);
 }
 

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    date.h
   * @author  Zhang Yifa
-  * @version V1.3.1
+  * @version V1.3.2
   * @date    2024-03-06
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -95,7 +95,7 @@ public:
 // 计算相差天数
     static int diff(Date date1,Date date2);
     int diff(const Date& date);
-    int operator-(const Date& date);
+    int operator-(const Date& date)const;
 
 // get方法
     Year getYear()const;
