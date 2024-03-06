@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
-  * @version V1.3.2
-  * @date    2024-03-06
+  * @version V1.3.4
+  * @date    2024-03-07
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
   ******************************************************************************
@@ -134,12 +134,12 @@ void Date::setDate(Year year,Month month,Day day){
   * @brief  日期+1
   * @retval *this 可用于链式编程
   */
-Date& Date::toNextDay(){
+Date& Date::toNextDay() {
     _day++;
-    if(_day > getDays()){
+    if (_day > getDays()) {
         _day = 1;
         _month++;
-        if(_month > 12){
+        if (_month > 12) {
             _month = 1;
             _year++;
         }
@@ -150,16 +150,61 @@ Date& Date::toNextDay(){
   * @brief  日期-1
   * @retval *this 可用于链式编程
   */
-Date& Date::toPreviousDay(){
+Date& Date::toPreviousDay() {
     _day--;
-    if(_day < 1){
+    if (_day < 1) {
         _month--;
         _day = getDays();
-        if(_month < 1){
+        if (_month < 1) {
             _month = 12;
             _year--;
         }
     }
+    return *this;
+}
+/**
+  * @brief  月+1，若新的月份天数减少，没有这天，则转到这个月的最后一天
+  * @retval *this 可用于链式编程
+  */
+Date& Date::toNextMonth() {
+    _month++;
+    if (_month > 12) {
+        _month = 1;
+        _year++;
+        if (!isValid(_year, _month, _day))_day = getDays();
+    }
+    return *this;
+}
+/**
+  * @brief  月-1，若新的月份天数减少，没有这天，则转到这个月的最后一天
+  * @retval *this 可用于链式编程
+  */
+Date& Date::toPreviousMonth() {
+    _month--;
+    _day = getDays();
+    if (_month < 1) {
+        _month = 12;
+        _year--;
+        if (!isValid(_year, _month, _day))_day = getDays();
+    }
+    return *this;
+}
+/**
+  * @brief  年+1，若新的月份天数减少，没有这天，则转到这个月的最后一天
+  * @retval *this 可用于链式编程
+  */
+Date& Date::toNextYear() {
+    _year++;
+    if (!isValid(_year, _month, _day))_day = getDays();
+    return *this;
+}
+/**
+  * @brief  年-1，若新的月份天数减少，没有这天，则转到这个月的最后一天
+  * @retval *this 可用于链式编程
+  */
+Date& Date::toPreviousYear() {
+    _year--;
+    if (!isValid(_year, _month, _day))_day = getDays();
     return *this;
 }
 /**
@@ -190,11 +235,25 @@ Date& Date::operator++(int){
 Date& Date::operator--(int){
   return toPreviousDay();
 }
-Date Date::getNextDay()const{
+Date Date::getNextDay()const {
     return Date(*this)++;
 }
-Date Date::getPreviousDay()const{
+Date Date::getPreviousDay()const {
     return Date(*this)--;
+}
+
+Date Date::getNextMonth()const {
+    return Date(*this).toNextMonth();
+}
+Date Date::getPreviousMonth()const {
+    return Date(*this).toPreviousMonth();
+}
+
+Date Date::getNextYear()const {
+    return Date(*this).toNextYear();
+}
+Date Date::getPreviousYear()const {
+    return Date(*this).toPreviousYear();
 }
 
 
@@ -203,12 +262,12 @@ Date Date::getPreviousDay()const{
   * @param  n 日期往后n天，可以是负数
   * @retval *this 可用于链式编程
   */
-Date& Date::addDay(int n){
+Date& Date::addDay(int n) {
     // This is a temp solution.
     // Todo: 优化时间复杂度
-    if(n==0)return *this;
-    if(n>0)for(int i = 0 ; i < n ; i++)(*this)++;
-    if(n<0)for(int i = 0 ; i < -n ; i++)(*this)--;
+    if (n == 0)return *this;
+    if (n > 0)for (int i = 0; i < n; i++)(*this)++;
+    if (n < 0)for (int i = 0; i < -n; i++)(*this)--;
     return *this;
 }
 /**
@@ -216,12 +275,64 @@ Date& Date::addDay(int n){
   * @param  n 日期往前n天，可以是负数
   * @retval *this 可用于链式编程
   */
-Date& Date::subDay(int n){
+Date& Date::subDay(int n) {
     // This is a temp solution.
     // Todo: 优化时间复杂度
-    if(n==0)return *this;
-    if(n>0)for(int i = 0 ; i < n ; i++)(*this)--;
-    if(n<0)for(int i = 0 ; i < -n ; i++)(*this)++;
+    if (n == 0)return *this;
+    if (n > 0)for (int i = 0; i < n; i++)(*this)--;
+    if (n < 0)for (int i = 0; i < -n; i++)(*this)++;
+    return *this;
+}
+/**
+  * @brief  月份往后n月
+  * @param  n 月份往后n月，可以是负数
+  * @retval *this 可用于链式编程
+  */
+Date& Date::addMonth(int n) {
+    // This is a temp solution.
+    // Todo: 优化时间复杂度
+    if (n == 0)return *this;
+    if (n > 0)for (int i = 0; i < n; i++)(*this).toNextMonth();
+    if (n < 0)for (int i = 0; i < -n; i++)(*this).toPreviousMonth();
+    return *this;
+}
+/**
+  * @brief  月份往前n月
+  * @param  n 月份往前n月，可以是负数
+  * @retval *this 可用于链式编程
+  */
+Date& Date::subMonth(int n) {
+    // This is a temp solution.
+    // Todo: 优化时间复杂度
+    if (n == 0)return *this;
+    if (n > 0)for (int i = 0; i < n; i++)(*this).toPreviousMonth();
+    if (n < 0)for (int i = 0; i < -n; i++)(*this).toNextMonth();
+    return *this;
+}
+/**
+  * @brief  年往后n年
+  * @param  n 年往后n年，可以是负数
+  * @retval *this 可用于链式编程
+  */
+Date& Date::addYear(int n) {
+    // This is a temp solution.
+    // Todo: 优化时间复杂度
+    if (n == 0)return *this;
+    if (n > 0)for (int i = 0; i < n; i++)(*this).toNextYear();
+    if (n < 0)for (int i = 0; i < -n; i++)(*this).toPreviousYear();
+    return *this;
+}
+/**
+  * @brief  年往前n年
+  * @param  n 年往前n年，可以是负数
+  * @retval *this 可用于链式编程
+  */
+Date& Date::subYear(int n) {
+    // This is a temp solution.
+    // Todo: 优化时间复杂度
+    if (n == 0)return *this;
+    if (n > 0)for (int i = 0; i < n; i++)(*this).toPreviousYear();
+    if (n < 0)for (int i = 0; i < -n; i++)(*this).toNextYear();
     return *this;
 }
 Date& Date::operator+=(int n){

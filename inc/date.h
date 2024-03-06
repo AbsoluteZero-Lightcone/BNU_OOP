@@ -1,9 +1,9 @@
-/**
+﻿/**
   ******************************************************************************
   * @file    date.h
   * @author  Zhang Yifa
-  * @version V1.3.2
-  * @date    2024-03-06
+  * @version V1.3.4
+  * @date    2024-03-07
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
   ******************************************************************************
@@ -51,10 +51,10 @@ public:
 // 自增自减逻辑
     Date& toNextDay();
     Date& toPreviousDay();
-    Date& toNextMonth();// todo
-    Date& toPreviousMonth();// todo
-    Date& toNextYear();// todo
-    Date& toPreviousYear();// todo
+    Date& toNextMonth();
+    Date& toPreviousMonth();
+    Date& toNextYear();
+    Date& toPreviousYear();
 
     Date& operator++();
     Date& operator--();
@@ -63,18 +63,18 @@ public:
 
     Date getNextDay()const;
     Date getPreviousDay()const;
-    Date getNextMonth()const;// todo
-    Date getPreviousMonth()const;// todo
-    Date getNextYear()const;// todo
-    Date getPreviousYear()const;// todo
+    Date getNextMonth()const;
+    Date getPreviousMonth()const;
+    Date getNextYear()const;
+    Date getPreviousYear()const;
 
 // 加减逻辑
     Date& addDay(int n = 1);
     Date& subDay(int n = 1);
-    Date& addMonth(int n = 1);// todo
-    Date& subMonth(int n = 1);// todo
-    Date& addYear(int n = 1);// todo
-    Date& subYear(int n = 1);// todo
+    Date& addMonth(int n = 1);
+    Date& subMonth(int n = 1);
+    Date& addYear(int n = 1);
+    Date& subYear(int n = 1);
     
     Date& operator+=(int n);
     Date& operator-=(int n);
@@ -108,6 +108,7 @@ public:
     // 这里经测试const加不加都行
     Date operator-(int)const;
 
+
     // 重载 Date - Date = int 运算
     // int operator-(const Date&);报错
     // int operator-(const Date&)const;正确
@@ -116,12 +117,7 @@ public:
     // 但现在具体不明白的点就是这里的const是有什么特殊的语义吗（VS提示我“注意：限定调整(const/volatile)可能会造成多义性”），
     // 以至于导致了这里的const能影响编译器对函数重载的推导
     // 换句话来说，函数不带const时，为什么编译器会觉得（int）和（const Date&）这两个形参列表很像
-
-
-    // 我又研究了一会儿发现一个比较好的现象，函数和参数都不加const时，程序也能跑，这可能能够帮助解释上面的问题
-    // int operator-(Date&);
-
-
+    // 理解这个问题能帮助我们理解const的正确用法
     int operator-(
 #if WITH_PARAM_CONST == 1
         const
@@ -131,6 +127,10 @@ public:
         const
 #endif
         ;
+    // 我又研究了一会儿发现一个比较好的现象，函数和参数都不加const时，程序也能跑，这可能能够帮助解释上面的问题
+    // int operator-(Date&);
+
+
 
 
 
