@@ -1,24 +1,16 @@
 ﻿/**
   ******************************************************************************
-  * @file    main.cpp
+  * @file    demo.h
   * @author  Zhang Yifa
   * @version V1.3.3
   * @date    2024-03-06
-  * @brief   The intrance of the program.
+  * @brief   A demonstration of the class Date.
   * @encode  UTF-8
   ******************************************************************************
-  */
-#include <iostream>
-using namespace std;
+  */#ifndef __DEMO_H
+#define __DEMO_H
 
-#include "date.h"
-#include "demo.h"
+void demo();
 
-int main() {
-	system("chcp 65001");
-	demo();
-	system("pause");
-	return 0;
-}
-
+#endif /* __DEMO_H */
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

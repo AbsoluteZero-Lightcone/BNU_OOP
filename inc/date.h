@@ -80,8 +80,7 @@ public:
     Date& operator-=(int n);
 
     Date operator+(int n)const;
-    Date operator-(int n)const;
-
+    //Date operator-(int)const;
 
 // 比较大小
     bool operator==(const Date& date)const;
@@ -95,7 +94,49 @@ public:
 // 计算相差天数
     static int diff(Date date1,Date date2);
     int diff(const Date& date);
-    int operator-(const Date& date)const;
+    //int operator-(const Date&)const;
+
+
+
+
+
+
+
+
+public:
+    // 重载 Date - int = Date 运算
+    // 这里经测试const加不加都行
+    Date operator-(int)const;
+
+    // 重载 Date - Date = int 运算
+    // int operator-(const Date&);报错
+    // int operator-(const Date&)const;正确
+    // 这里的const试过了不能去掉，
+    // 一开始我对const修饰成员函数的理解不够深入，只知道是能够防止该成员函数修改当前对象的成员变量
+    // 但现在具体不明白的点就是这里的const是有什么特殊的语义吗（VS提示我“注意：限定调整(const/volatile)可能会造成多义性”），
+    // 以至于导致了这里的const能影响编译器对函数重载的推导
+    // 换句话来说，函数不带const时，为什么编译器会觉得（int）和（const Date&）这两个形参列表很像
+
+
+    // 我又研究了一会儿发现一个比较好的现象，函数和参数都不加const时，程序也能跑，这可能能够帮助解释上面的问题
+    // int operator-(Date&);
+
+
+    int operator-(
+#if WITH_PARAM_CONST == 1
+        const
+#endif
+        Date&)
+#if WITH_FUNC_CONST == 1
+        const
+#endif
+        ;
+
+
+
+
+
+
 
 // get方法
     Year getYear()const;

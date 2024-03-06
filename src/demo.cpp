@@ -1,4 +1,4 @@
-/**
+﻿/**
   ******************************************************************************
   * @file    demo.cpp
   * @author  Zhang Yifa
@@ -64,7 +64,7 @@ void demo(){
 	// 重载了运算符并可以链式调用
 	today++++++++; today.showDate();
 	((today += 6)+=3)+=7; today.showDate();
-	((today+6)-9).showDate();
+	//((today+6)-9).showDate();
 	
 	today.getNextDay().getNextDay().getNextDay().showDate(); today.showDate();// 可链式调用的get函数
 	date1.showDate();

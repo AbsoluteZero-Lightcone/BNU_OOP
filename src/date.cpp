@@ -1,4 +1,4 @@
-/**
+﻿/**
   ******************************************************************************
   * @file    date.cpp
   * @author  Zhang Yifa
@@ -207,8 +207,8 @@ Date& Date::addDay(int n){
     // This is a temp solution.
     // Todo: 优化时间复杂度
     if(n==0)return *this;
-    if(n>0)for(unsigned int i = 0 ; i < n ; i++)(*this)++;
-    if(n<0)for(unsigned int i = 0 ; i < -n ; i++)(*this)--;
+    if(n>0)for(int i = 0 ; i < n ; i++)(*this)++;
+    if(n<0)for(int i = 0 ; i < -n ; i++)(*this)--;
     return *this;
 }
 /**
@@ -220,8 +220,8 @@ Date& Date::subDay(int n){
     // This is a temp solution.
     // Todo: 优化时间复杂度
     if(n==0)return *this;
-    if(n>0)for(unsigned int i = 0 ; i < n ; i++)(*this)--;
-    if(n<0)for(unsigned int i = 0 ; i < -n ; i++)(*this)++;
+    if(n>0)for(int i = 0 ; i < n ; i++)(*this)--;
+    if(n<0)for(int i = 0 ; i < -n ; i++)(*this)++;
     return *this;
 }
 Date& Date::operator+=(int n){
@@ -234,18 +234,17 @@ Date& Date::operator-=(int n){
 Date Date::operator+(int n)const{
     if(n==0)return Date(*this);
     Date temp = Date(*this);
-    if(n>0)for(unsigned int i = 0 ; i < n ; i++)temp++;
-    if(n<0)for(unsigned int i = 0 ; i < -n ; i++)temp--;
+    if(n>0)for(int i = 0 ; i < n ; i++)temp++;
+    if(n<0)for(int i = 0 ; i < -n ; i++)temp--;
     return temp;
 }
-Date Date::operator-(int n)const{
-    if(n==0)return Date(*this);
-    Date temp = Date(*this);
-    if(n>0)for(unsigned int i = 0 ; i < n ; i++)temp--;
-    if(n<0)for(unsigned int i = 0 ; i < -n ; i++)temp++;
-    return temp;
-}
-
+//Date Date::operator-(int n)const {
+//    if (n == 0)return Date(*this);
+//    Date temp = Date(*this);
+//    if (n > 0)for (int i = 0; i < n; i++)temp--;
+//    if (n < 0)for (int i = 0; i < -n; i++)temp++;
+//    return temp;
+//}
 bool Date::operator==(const Date& date)const{
     if(_day != date.getDay())return 0;
     if(_month != date.getMonth())return 0;
@@ -311,9 +310,58 @@ int Date::diff(Date date1,Date date2){
 int Date::diff(const Date& date){
     return diff(*this,date);
 }
-int Date::operator-(const Date& date)const{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 重载 Date - int = Date 运算
+Date Date::operator-(int n)const{
+    if (n == 0)return Date(*this);
+    Date temp = Date(*this);
+    if (n > 0)for (int i = 0; i < n; i++)temp--;
+    if (n < 0)for (int i = 0; i < -n; i++)temp++;
+    return temp;
+}
+// 重载 Date - Date = int 运算
+int Date::operator-(
+#if WITH_PARAM_CONST == 1
+    const 
+#endif
+    Date& date)
+#if WITH_FUNC_CONST == 1
+const
+#endif
+{
     return diff(date,*this);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Year Date::getYear()const{return _year;}
 Month Date::getMonth()const{return _month;}
