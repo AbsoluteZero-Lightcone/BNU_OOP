@@ -13,12 +13,7 @@ using namespace std;
 //#include "demo.h"
 
 
-
-
-
-
-
-
+//=============有问题的部分=============
 
 // 将有问题的部分隔离：
 #define WITH_PARAM_CONST 0
@@ -47,6 +42,7 @@ void test() {
 	Date temp = today - 9;// 主要是测试这个减法运算是否能够被编译器正确重载
 	temp.showDate();
 }
+//=============有问题的部分=============
 
 
 
