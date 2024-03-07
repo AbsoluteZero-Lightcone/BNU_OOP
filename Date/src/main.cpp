@@ -17,7 +17,7 @@ using namespace std;
 
 // 将有问题的部分隔离：
 #define WITH_PARAM_CONST 1
-#define WITH_FUNC_CONST 0
+#define WITH_FUNC_CONST 1
 
 #include "date.h"
 /* 
