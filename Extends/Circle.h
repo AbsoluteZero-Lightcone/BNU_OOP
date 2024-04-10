@@ -2,9 +2,10 @@
 
 #include <iostream>
 using namespace std;
-#include "Shape.h"
 
+#include "Shape.h"
 #define PI 3.14
+
 class Circle :public Shape {
 private:
 	Point m_pointCenter;

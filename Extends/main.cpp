@@ -1,43 +1,39 @@
-#include "Shapes.h"
-
+#include <fstream>
+#include <string>
 #include <iostream>
 using namespace std;
+#include "Shapes.h"
 
-class Rectangle :public Shape {
-private:
-	Point m_pointLeftTop;
-	Point m_pointRightBottom;
-public:
-	Rectangle() :m_pointLeftTop(0,0), m_pointRightBottom(0,0){
-
-	}
-	void Show()const {
-		cout << "¾ØÐÎ" << endl;
-	}
-	double Area()const {
-		cout << 0 << endl;
-	}
-	double Perimeter()const {
-		cout << 0 << endl;
-	}
-};
-class Triangle : public Shape {
-private:
-	double m_nX;
-	double m_nY;
-public:
-	void Show()const {
-		cout << "" << endl;
-	}
-	double Area() const {
-		cout <<  << endl;
-	}
-	double Perimeter() const {
-		cout << 0 << endl;
-	}
-};
-
+void data_format() {
+    ifstream infile("shape.csv");
+    ofstream outfile("shape.txt");
+    char temp[50] = { 0 };
+    char outtemp[50] = { 0 };
+    do
+    {
+        for (int i = 0; i < 50; i++)
+        {
+            temp[i] = 0;
+            outtemp[i] = 0;
+        }
+        infile.getline(temp, 49);
+        for (int i = 0; i < strlen(temp); i++)
+            if (temp[i] != ',')
+                outtemp[i] = temp[i];
+            else
+                outtemp[i] = ' ';
+        outfile << outtemp << endl;
+    } while (!infile.eof());
+    infile.close();
+    outfile.close();
+}
 int main() {
 
+    data_format();
+    ifstream file("shape.txt", ios::in);
+    int n;
+    file >> n;
+	Shape** ShapeArray;
+	ShapeArray = new Shape*[n];
 	return 0;
 }
