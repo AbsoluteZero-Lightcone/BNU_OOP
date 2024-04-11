@@ -27,6 +27,13 @@ void data_format() {
     infile.close();
     outfile.close();
 }
+
+void input_from_fstream(ifstream& file, Shape* ptr_shape) {
+    double t_dCenterX, t_dCenterY, t_dRadius;
+    file >> t_dCenterX >> t_dCenterY >> t_dRadius;
+    ptr_shape = new Circle(t_dCenterX, t_dCenterY, t_dRadius);
+}
+
 int main() {
 
     data_format();
@@ -34,6 +41,24 @@ int main() {
     int n;
     file >> n;
 	Shape** ShapeArray;
-	ShapeArray = new Shape*[n];
+    int* index;
+    index = new int[n];
+    ShapeArray = new Shape*[n];
+    for (int i = 0; i < n; i++) {
+        int cur_index;
+        string type;
+        file >>cur_index >>type;
+        index[i] = cur_index;
+        if (type == "circle") {
+            double t_dCenterX, t_dCenterY, t_dRadius;
+            file >> t_dCenterX >> t_dCenterY >> t_dRadius;
+            ShapeArray[i] = new Circle(t_dCenterX, t_dCenterY, t_dRadius);
+        }
+        else if (type == "rectangle") {
+        }
+        else if (type == "triangle") {
+
+        }
+    }
 	return 0;
 }
