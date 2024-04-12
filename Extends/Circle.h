@@ -37,5 +37,6 @@ public:
 	double Perimeter() const {
 		cout << 2 * PI * m_dRadius << endl;
 	}
+
 };
 #endif // !__CIRCLE_H

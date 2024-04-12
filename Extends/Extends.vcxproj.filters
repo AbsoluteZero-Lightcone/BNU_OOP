@@ -21,6 +21,9 @@
     <ClCompile Include="Shape.h">
       <Filter>头文件</Filter>
     </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Point.h">

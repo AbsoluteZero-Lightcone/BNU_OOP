@@ -9,9 +9,17 @@ private:
 	Point m_pointLeftTop;
 	Point m_pointRightBottom;
 public:
-	Rectangle() :m_pointLeftTop(0, 0), m_pointRightBottom(0, 0) {
-
-	}
+	Rectangle() :
+		m_pointLeftTop(0, 1),
+		m_pointRightBottom(1, 0) 
+	{}
+	Rectangle(
+		double t_dPointLeftTopX, double t_dPointLeftTopY,
+		double t_dPointRightBottomX, double t_dPointRightBottomY
+	) :
+		m_pointLeftTop(t_dPointLeftTopX, t_dPointLeftTopY),
+		m_pointRightBottom(t_dPointRightBottomX, t_dPointRightBottomY)
+	{}
 	void Show()const {
 		cout << "¾ØÐÎ" << endl;
 	}
