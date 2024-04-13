@@ -1,6 +1,4 @@
 #ifndef __POINT_H
-
-#include "Shape.h"
 #include <iostream>
 using namespace std;
 
@@ -25,14 +23,15 @@ public:
 	void Show()const {
 		cout << "µã" << endl;
 	}
-	double Area() const {
-		cout << 0 << endl;
+	double Area()const {
+		return 0;
 	}
-	double Perimeter() const {
-		cout << 0 << endl;
+	double Perimeter()const {
+		return 0;
 	}
-
 	friend class Circle;
+	friend class Triangle;
+	friend class Rectangle;
 
 };
 #endif // !__POINT_H

@@ -1,6 +1,4 @@
 #ifndef __RECTANGLE_H
-
-#include "Shape.h"
 #include <iostream>
 using namespace std;
 
@@ -20,14 +18,15 @@ public:
 		m_pointLeftTop(t_dPointLeftTopX, t_dPointLeftTopY),
 		m_pointRightBottom(t_dPointRightBottomX, t_dPointRightBottomY)
 	{}
+	~Rectangle() {}
 	void Show()const {
 		cout << "¾ØÐÎ" << endl;
 	}
 	double Area()const {
-		cout << 0 << endl;
+		return 0;
 	}
 	double Perimeter()const {
-		cout << 0 << endl;
+		return 0;
 	}
 };
 #endif // !__RECTANGLE_H

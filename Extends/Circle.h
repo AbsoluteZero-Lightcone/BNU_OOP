@@ -3,7 +3,6 @@
 #include <iostream>
 using namespace std;
 
-#include "Shape.h"
 #define PI 3.14
 
 class Circle :public Shape {
@@ -17,6 +16,7 @@ public:
 		m_pointCenter(t_pointCenter), m_dRadius(t_dRadius) {}
 	Circle(double t_dPointX, double t_dPointY, double t_dRadius) :
 		m_pointCenter(t_dPointX, t_dPointY), m_dRadius(t_dRadius) {}
+	~Circle() {}
 public:
 	Point getCenter()const { return m_pointCenter; }
 	double getRadius()const { return m_dRadius; }
@@ -29,13 +29,13 @@ public:
 	}
 public:
 	void Show()const {
-		cout << "Բ" << endl;
+		cout << "" << endl;
 	}
 	double Area() const {
-		cout << PI * m_dRadius * m_dRadius << endl;
+		return PI * m_dRadius * m_dRadius ;
 	}
 	double Perimeter() const {
-		cout << 2 * PI * m_dRadius << endl;
+		return 2 * PI * m_dRadius ;
 	}
 
 };

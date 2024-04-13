@@ -1,6 +1,5 @@
 #ifndef __TRIANGLE_H
 
-#include "Shape.h"
 #include <iostream>
 using namespace std;
 
@@ -25,15 +24,15 @@ public:
 		m_pointP2(0,1), 
 		m_pointP3(1,0) 
 	{}
-	
+	~Triangle() {}
 	void Show()const {
 		cout << "" << endl;
 	}
-	double Area() const {
-		cout << 0 << endl;
+	double Area()const {
+		return 0;
 	}
-	double Perimeter() const {
-		cout << 0 << endl;
+	double Perimeter()const {
+		return 0;
 	}
 };
 #endif // !__TRIANGLE_H
