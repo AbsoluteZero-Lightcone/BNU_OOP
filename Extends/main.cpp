@@ -3,11 +3,13 @@
 #include <iostream>
 using namespace std;
 #include "FileOperate.h"
+
 #include "Shapes.h"
 int main() {
 
     data_format();
     ifstream file("shape.txt", ios::in);
+
     int n;
     file >> n;
 	Shape** ShapeArray;

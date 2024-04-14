@@ -11,11 +11,14 @@ private:
 	double m_dRadius;
 public:
 	Circle() :
-		m_pointCenter(0, 0), m_dRadius(1.0) {}
+		m_pointCenter(0, 0), m_dRadius(1.0) 
+	{}
 	Circle(Point t_pointCenter, double t_dRadius) :
-		m_pointCenter(t_pointCenter), m_dRadius(t_dRadius) {}
+		m_pointCenter(t_pointCenter), m_dRadius(t_dRadius)
+	{}
 	Circle(double t_dPointX, double t_dPointY, double t_dRadius) :
-		m_pointCenter(t_dPointX, t_dPointY), m_dRadius(t_dRadius) {}
+		m_pointCenter(t_dPointX, t_dPointY), m_dRadius(t_dRadius) 
+	{}
 	~Circle() {}
 public:
 	Point getCenter()const { return m_pointCenter; }
