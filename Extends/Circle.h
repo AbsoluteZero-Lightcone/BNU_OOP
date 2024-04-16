@@ -32,7 +32,7 @@ public:
 	}
 public:
 	void Show()const {
-		cout << "" << endl;
+		cout << "Բ" << endl;
 	}
 	double Area() const {
 		return PI * m_dRadius * m_dRadius ;
