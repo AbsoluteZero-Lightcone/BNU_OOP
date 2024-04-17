@@ -26,7 +26,14 @@ public:
 	{}
 	~Triangle() {}
 	void Show()const {
-		cout << "" << endl;
+		cout << "Èý½ÇÐÎ" 
+			<<" "<< m_pointP1.m_dX
+			<<" "<< m_pointP1.m_dY
+			<<" "<< m_pointP2.m_dX
+			<<" "<< m_pointP2.m_dY
+			<<" "<< m_pointP3.m_dX
+			<<" "<< m_pointP3.m_dY
+			<< endl;
 	}
 	double Area()const {
 		return 0;

@@ -13,8 +13,8 @@ public:
     void GetInfo() const {
         cout << "这是一个";
         Show();
-        cout << endl << "它的面积是" << Area();
-        cout << endl << "它的周长是" << Perimeter();
+        cout << "它的面积是" << Area()<< endl;
+        cout << "它的周长是" << Perimeter() << endl;
     }
     virtual void Show()const = 0;
     virtual double Area()const = 0;

@@ -21,7 +21,10 @@ public:
 		m_dY = t_dY;
 	}
 	void Show()const {
-		cout << "µã" << endl;
+		cout << "µã" 
+			<<" "<< m_dX
+			<<" "<< m_dY
+			<< endl;
 	}
 	double Area()const {
 		return 0;

@@ -32,7 +32,11 @@ public:
 	}
 public:
 	void Show()const {
-		cout << "Բ" << endl;
+		cout << "Բ" 
+			<<" "<< m_pointCenter.m_dX 
+			<<" "<< m_pointCenter.m_dY
+			<<" "<< m_dRadius
+			<< endl;
 	}
 	double Area() const {
 		return PI * m_dRadius * m_dRadius ;

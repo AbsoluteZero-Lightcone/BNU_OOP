@@ -56,6 +56,8 @@ int main() {
 		}
 	}
 	for (int i = 0; i < n; i++) {
+		cout << endl;
+		cout << "ÐÎ×´" << index[i] << ":" << endl;
 		ShapeArray[i]->GetInfo();
 	}
 	for (int i = 0; i < n; i++) {

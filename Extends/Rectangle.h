@@ -20,7 +20,12 @@ public:
 	{}
 	~Rectangle() {}
 	void Show()const {
-		cout << "¾ØÐÎ" << endl;
+		cout << "¾ØÐÎ" 
+			<<" "<< m_pointLeftTop.m_dX
+			<<" "<< m_pointLeftTop.m_dY
+			<<" "<< m_pointRightBottom.m_dX
+			<<" "<< m_pointRightBottom.m_dY
+			<< endl;
 	}
 	double Area()const {
 		return 0;
