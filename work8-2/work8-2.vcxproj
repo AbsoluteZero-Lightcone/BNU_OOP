@@ -18,6 +18,21 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\Complex.h" />
+    <ClInclude Include="inc\Fraction.h" />
+    <ClInclude Include="inc\Huge_Int.h" />
+    <ClInclude Include="inc\Number.h" />
+    <ClInclude Include="inc\Numbers.h" />
+    <ClInclude Include="inc\Sum.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Complex.cpp" />
+    <ClCompile Include="src\Fraction.cpp" />
+    <ClCompile Include="src\Huge_Int.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Number.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -70,6 +85,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>.\inc;$(IncludePath)</IncludePath>
+    <SourcePath>.\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -126,21 +145,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Complex.cpp" />
-    <ClCompile Include="Fraction.cpp" />
-    <ClCompile Include="Huge_Int.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Number.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Complex.h" />
-    <ClInclude Include="Fraction.h" />
-    <ClInclude Include="Huge_Int.h" />
-    <ClInclude Include="Number.h" />
-    <ClInclude Include="Numbers.h" />
-    <ClInclude Include="Sum.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
