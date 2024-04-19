@@ -41,19 +41,17 @@ public:
 	void Add(Sum* num);
 };
 int GCD(int a, int b) {
-	if (a == b)return a;// 剪枝
 	if (a > b)swap(a, b);// 保证  n1 < n2
 	int c = a % b;
 	while (1) {
+		if (b % c == 0)return c;
 		// GCD 步骤数列： 
-		// a   b    c
-		//     a    b      c
-		// a , b , a%b , a%(a%b) , ... , (n-2)%(n-1) , ... , GCD , 0
-		// 数组向cba方向移动
+		// 变量	a   b    c
+		//		a , b , a%b , a%(a%b) , ... , (n-2)%(n-1) , ... , GCD , 0
+		// 数组向 <-- 方向移动
 		a = b;
 		b = c;
 		c = a % b;
-		if (b % c == 0)return c;
 	}
 }
 class Fraction :public Sum {
@@ -76,6 +74,7 @@ public:
 
 int main()
 {
+	cout << GCD(15888, 8) << endl;
 	Sum* ps1, * ps2;
 	//cout << typeid(class Huge_Int).name() << endl;
 	// 
