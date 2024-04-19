@@ -29,6 +29,7 @@ int main() {
 	int* index;
 	index = new int[n];
 	ShapeArray = new Shape * [n];
+
 	for (int i = 0; i < n; i++) {
 		int cur_index;
 		string type;
