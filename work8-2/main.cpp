@@ -41,6 +41,10 @@ public:
 	void Add(Sum* num);
 };
 int GCD(int a, int b) {
+	if (a < 0)a = -a;
+	if (b < 0)b = -b;
+	if (a == 0 || b == 0)
+		throw "参与最大公因数计算的数值不能为0";
 	if (a > b)swap(a, b);// 保证  n1 < n2
 	int c = a % b;
 	while (1) {
@@ -58,23 +62,35 @@ class Fraction :public Sum {
 private:
 	int m_nNum;
 	int m_nDen;
-
-	void Format();
+	// 正负号给分子
+	void Format() {
+		if (m_nNum == 0)m_nDen = 1;
+		else {
+			int gcd = GCD(m_nNum, m_nDen);
+			m_nNum /= gcd;
+			m_nDen /= gcd;
+		}
+	}
 public:
-	Fraction(int n = 0, int d = 1);
+	Fraction(int n = 0, int d = 1) {
+		m_nNum = n;
+		m_nDen = d;
+		Format();
+	}
 	~Fraction() {}
 
 
 	// 规定动作
-	void Show();
-	void Add(Sum* num);
-
-
+	void Show() {
+		cout << m_nNum << "/" << m_nDen;
+	}
+	void Add(Sum* num){}
 };
 
 int main()
 {
-	cout << GCD(15888, 8) << endl;
+	cout << GCD(15888, 111) << endl;
+	cout << (0) % (-3) << endl;
 	Sum* ps1, * ps2;
 	//cout << typeid(class Huge_Int).name() << endl;
 	// 
