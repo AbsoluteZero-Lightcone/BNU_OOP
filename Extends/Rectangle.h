@@ -10,7 +10,7 @@
 #define __RECTANGLE_H
 #include <iostream>
 using namespace std;
-#include "util.h"
+#include <cmath>
 #include "Shape.h"
 
 class Rectangle :public Shape {
@@ -19,12 +19,12 @@ private:
 	Point m_pointRightBottom;
 
 	void correct() {
-		if (m_pointLeftTop.m_dY < m_pointRightBottom.m_dY){}
+		if (m_pointLeftTop.m_dY < m_pointRightBottom.m_dY) {}
 	}
 public:
 	Rectangle() :
 		m_pointLeftTop(0, 1),
-		m_pointRightBottom(1, 0) 
+		m_pointRightBottom(1, 0)
 	{}
 	Rectangle(
 		double t_dPointLeftTopX, double t_dPointLeftTopY,
@@ -35,22 +35,23 @@ public:
 	{}
 	~Rectangle() {}
 	void Show()const {
-		cout << "¾ØÐÎ" 
-			<<" "<< m_pointLeftTop.m_dX
-			<<" "<< m_pointLeftTop.m_dY
-			<<" "<< m_pointRightBottom.m_dX
-			<<" "<< m_pointRightBottom.m_dY
+		cout << "¾ØÐÎ"
+			<< " " << m_pointLeftTop.m_dX
+			<< " " << m_pointLeftTop.m_dY
+			<< " " << m_pointRightBottom.m_dX
+			<< " " << m_pointRightBottom.m_dY
 			<< endl;
 	}
 	double Area()const {
-		return 
-			(m_pointRightBottom.m_dX- m_pointLeftTop.m_dX)*
-			(m_pointLeftTop.m_dY-m_pointRightBottom.m_dY);
+		return
+			abs(m_pointRightBottom.m_dX - m_pointLeftTop.m_dX) *
+			abs(m_pointLeftTop.m_dY - m_pointRightBottom.m_dY);
 	}
 	double Perimeter()const {
-		return
-			((m_pointRightBottom.m_dX - m_pointLeftTop.m_dX) +
-			(m_pointLeftTop.m_dY - m_pointRightBottom.m_dY))*2;
+		return (
+			abs(m_pointRightBottom.m_dX - m_pointLeftTop.m_dX) +
+			abs(m_pointLeftTop.m_dY - m_pointRightBottom.m_dY)
+			) * 2;
 	}
 };
 #endif // !__RECTANGLE_H

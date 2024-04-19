@@ -16,18 +16,18 @@ class Shape
 {
 public:
 
-    Shape() {}
-    virtual ~Shape() {}
+	Shape() {}
+	virtual ~Shape() {}
 
-    void GetInfo() const {
-        cout << "这是一个";
-        Show();
-        cout << "它的面积是" << Area()<< endl;
-        cout << "它的周长是" << Perimeter() << endl;
-    }
-    virtual void Show()const = 0;
-    virtual double Area()const = 0;
-    virtual double Perimeter()const = 0;
+	void GetInfo() const {
+		cout << "这是一个";
+		Show();
+		cout << "它的面积是" << Area() << endl;
+		cout << "它的周长是" << Perimeter() << endl;
+	}
+	virtual void Show()const = 0;
+	virtual double Area()const = 0;
+	virtual double Perimeter()const = 0;
 
 };
 

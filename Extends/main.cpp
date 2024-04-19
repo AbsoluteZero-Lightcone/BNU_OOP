@@ -63,15 +63,24 @@ int main() {
 			);
 		}
 	}
+	double sum_area = 0.0, sum_perimeter = 0.0;
 	for (int i = 0; i < n; i++) {
 		cout << endl;
 		cout << "形状" << index[i] << ":" << endl;
 		ShapeArray[i]->GetInfo();
+		sum_area += ShapeArray[i]->Area();
+		sum_perimeter += ShapeArray[i]->Perimeter();
 	}
+
+	cout << endl;
+	cout << "总面积是：" << sum_area << endl;
+	cout << "总周长是：" << sum_perimeter << endl;
+
+
 	for (int i = 0; i < n; i++) {
-		delete ShapeArray[i];
+		if (ShapeArray[i])delete ShapeArray[i];
 	}
-	delete[] ShapeArray;
+	if (ShapeArray)delete[] ShapeArray;
 	infile.close();
 	return 0;
 }
