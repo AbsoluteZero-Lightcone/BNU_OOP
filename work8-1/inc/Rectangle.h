@@ -27,6 +27,10 @@ public:
 		double t_dPointRightBottomX, double t_dPointRightBottomY
 	);
 	~Rectangle();
+	Point getLeftTop()const;
+	Point getRightBottom()const;
+	void setRightBottom(const Point& t_pointRightBottom);
+	void setLeftTop(const Point& t_pointLeftTop);
 	void Show()const;
 	double Area()const;
 	double Perimeter()const;

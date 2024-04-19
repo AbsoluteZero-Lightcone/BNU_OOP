@@ -8,7 +8,6 @@
   */
 #include "Triangle.h"
 
-
 Triangle::Triangle(
 	double t_dPoint1X, double t_dPoint1Y,
 	double t_dPoint2X, double t_dPoint2Y,
@@ -48,5 +47,11 @@ double Triangle::Perimeter()const {
 		getLength(m_pointP3, m_pointP1)
 		;
 }
+Point Triangle::getP1()const { return m_pointP1; }
+Point Triangle::getP2()const { return m_pointP2; }
+Point Triangle::getP3()const { return m_pointP3; }
+void Triangle::setP1(const Point& t_pointP1) { m_pointP1 = t_pointP1; }
+void Triangle::setP2(const Point& t_pointP2) { m_pointP2 = t_pointP2; }
+void Triangle::setP3(const Point& t_pointP3) { m_pointP3 = t_pointP3; }
 
 /******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

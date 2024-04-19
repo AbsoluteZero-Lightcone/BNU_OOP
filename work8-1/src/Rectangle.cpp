@@ -43,4 +43,20 @@ double Rectangle::Perimeter()const {
 		abs(m_pointLeftTop.m_dY - m_pointRightBottom.m_dY)
 		) * 2;
 }
+
+
+Point Rectangle::getLeftTop()const {
+	return m_pointLeftTop;
+}
+Point Rectangle::getRightBottom()const {
+	return m_pointRightBottom;
+}
+void Rectangle::setRightBottom(const Point& t_pointRightBottom) {
+	m_pointLeftTop.m_dX = t_pointRightBottom.m_dX;
+	m_pointLeftTop.m_dY = t_pointRightBottom.m_dY;
+}
+void Rectangle::setLeftTop(const Point& t_pointLeftTop) {
+	m_pointRightBottom.m_dX = t_pointLeftTop.m_dX;
+	m_pointRightBottom.m_dY = t_pointLeftTop.m_dY;
+}
 /******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

@@ -32,6 +32,12 @@ public:
 	void Show()const;
 	double Area()const;
 	double Perimeter()const;
+	Point getP1()const;
+	Point getP2()const;
+	Point getP3()const;
+	void setP1(const Point& t_pointP1);
+	void setP2(const Point& t_pointP2);
+	void setP3(const Point& t_pointP3);
 };
 #endif // !__TRIANGLE_H
 
