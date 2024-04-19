@@ -19,13 +19,19 @@ private:
 public:
 	Number() :m_dData(0.0) {}
 	Number(double t_dData) :m_dData(t_dData) {}
+	Number(const Number& n) {
+		m_dData = n.m_dData;
+	}
 	~Number() {}
 	// 规定动作
 	void Show() {
 		cout << m_dData;
 	}
 	void Add(Sum* num) {
-
+		Number* n = dynamic_cast<Number*>(num);
+		if (n != NULL) {
+			Number(*n + *this).Show();
+		}
 	}
 	friend Number operator+(const Number& n1, const Number& n2);
 };
@@ -43,17 +49,26 @@ public:
 	Complex(double t_dReal, double t_dImag) :
 		m_dReal(t_dReal), m_dImag(t_dImag)
 	{}
-		~Complex() {}
-	// 规定动作
-	void Show(){
-		cout << m_dReal << "+"<< m_dImag <<"i";
+	Complex(const Complex& n) {
+		m_dReal = n.m_dReal;
+		m_dImag = n.m_dImag;
 	}
-	void Add(Sum* num){}
+	~Complex() {}
+	// 规定动作
+	void Show() {
+		cout << m_dReal << "+" << m_dImag << "i";
+	}
+	void Add(Sum* num) {
+		Complex* n = dynamic_cast<Complex*>(num);
+		if (n != NULL) {
+			Complex(*n + *this).Show();
+		}
+	}
 
 	friend Complex operator+(const Complex& n1, const Complex& n2);
 };
 Complex operator+(const Complex& n1, const Complex& n2) {
-	return Complex(n1.m_dReal+ n2.m_dReal, n1.m_dImag + n2.m_dImag);
+	return Complex(n1.m_dReal + n2.m_dReal, n1.m_dImag + n2.m_dImag);
 }
 
 int GCD(int a, int b) {
@@ -88,9 +103,9 @@ private:
 		}
 	}
 public:
-	Fraction(const Fraction& f) {
-		m_nNum = f.m_nNum;
-		m_nDen = f.m_nDen;
+	Fraction(const Fraction& n) {
+		m_nNum = n.m_nNum;
+		m_nDen = n.m_nDen;
 	}
 	Fraction(int n = 0, int d = 1) {
 		m_nNum = n;
@@ -104,10 +119,10 @@ public:
 	void Show() {
 		cout << m_nNum << "/" << m_nDen;
 	}
-	void Add(Sum* num){
-		Fraction* frac = dynamic_cast<Fraction*>(num);
-		if (frac != NULL) {
-			Fraction(*frac + *this).Show();
+	void Add(Sum* num) {
+		Fraction* n = dynamic_cast<Fraction*>(num);
+		if (n != NULL) {
+			Fraction(*n + *this).Show();
 		}
 	}
 
