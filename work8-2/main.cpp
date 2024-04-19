@@ -123,7 +123,6 @@ Huge_Int operator-(Huge_Int n) {
 	if (n.m_cSign == '-')n.m_cSign = '+';
 	return n;
 }
-
 Huge_Int abs(Huge_Int n) {
 	if (n.m_cSign == '-')n.m_cSign = '+';
 	return n;
@@ -170,6 +169,9 @@ Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2) {
 	}
 	return sum;
 }
+Huge_Int operator-(const Huge_Int& n1, const Huge_Int& n2){
+	return n1 + (-n2);
+}
 
 int main()
 {
@@ -191,7 +193,8 @@ int main()
 	Huge_Int ha("123"), hb("-999");
 	ps1 = &ha; ps2 = &hb;
 	ps1->Show(); cout << " + "; ps2->Show(); cout << " = "; ps1->Add(ps2); cout << endl;
-
+	cout << ha + hb << endl;
+	cout << ha - hb << endl;
 	return 0;
 }
 
