@@ -53,8 +53,8 @@ ostream& operator<<(ostream& out, const Huge_Int& n) {
 }
 bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
 	if (n1.m_cSign == '+' && n2.m_cSign == '-')return 1;
-	if (n1.m_cSign == '-' && n2.m_cSign == '+')return 0;
-	if (n1.m_cSign == '+' && n2.m_cSign == '+') {
+	else if (n1.m_cSign == '-' && n2.m_cSign == '+')return 0;
+	else if (n1.m_cSign == '+' && n2.m_cSign == '+') {
 		for (int i = 110 - 1; i >= 0; i--) {
 			if (n1.m_nUnsignedData[i] > n2.m_nUnsignedData[i])
 				return 1;// 大于
@@ -63,7 +63,8 @@ bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
 		}
 		return 0;// 等于
 	}
-	if (n1.m_cSign == '-' && n2.m_cSign == '-') {
+	else if (n1.m_cSign == '-' && n2.m_cSign == '-')
+	{
 		for (int i = 110 - 1; i >= 0; i--) {
 			if (n1.m_nUnsignedData[i] > n2.m_nUnsignedData[i])
 				return 0;
@@ -71,6 +72,10 @@ bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
 				return 1;
 		}
 		return 1;
+	}
+	else { 
+		//throw "非法正负符号";
+		return 0;
 	}
 }
 Huge_Int operator-(Huge_Int n) {

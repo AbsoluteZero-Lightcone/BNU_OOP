@@ -21,9 +21,17 @@ public:
 	Number(double t_dData) :m_dData(t_dData) {}
 	~Number() {}
 	// 规定动作
-	void Show();
-	void Add(Sum* num);
+	void Show() {
+		cout << m_dData;
+	}
+	void Add(Sum* num) {
+
+	}
+	friend Number operator+(const Number& n1, const Number& n2);
 };
+Number operator+(const Number& n1, const Number& n2) {
+	return Number(n1.m_dData + n2.m_dData);
+}
 class Complex :public Sum {
 private:
 	double m_dReal;
@@ -37,9 +45,17 @@ public:
 	{}
 		~Complex() {}
 	// 规定动作
-	void Show();
-	void Add(Sum* num);
+	void Show(){
+		cout << m_dReal << "+"<< m_dImag <<"i";
+	}
+	void Add(Sum* num){}
+
+	friend Complex operator+(const Complex& n1, const Complex& n2);
 };
+Complex operator+(const Complex& n1, const Complex& n2) {
+	return Complex(n1.m_dReal+ n2.m_dReal, n1.m_dImag + n2.m_dImag);
+}
+
 int GCD(int a, int b) {
 	if (a < 0)a = -a;
 	if (b < 0)b = -b;
@@ -72,6 +88,10 @@ private:
 		}
 	}
 public:
+	Fraction(const Fraction& f) {
+		m_nNum = f.m_nNum;
+		m_nDen = f.m_nDen;
+	}
 	Fraction(int n = 0, int d = 1) {
 		m_nNum = n;
 		m_nDen = d;
@@ -84,8 +104,22 @@ public:
 	void Show() {
 		cout << m_nNum << "/" << m_nDen;
 	}
-	void Add(Sum* num){}
+	void Add(Sum* num){
+		Fraction* frac = dynamic_cast<Fraction*>(num);
+		if (frac != NULL) {
+			Fraction(*frac + *this).Show();
+		}
+	}
+
+	friend Fraction operator+(const Fraction& n1, const Fraction& n2);
 };
+Fraction operator+(const Fraction& n1, const Fraction& n2) {
+	Fraction f;
+	f.m_nDen = n1.m_nDen * n2.m_nDen;
+	f.m_nNum = n1.m_nNum * n2.m_nDen + n1.m_nDen * n2.m_nNum;
+	f.Format();
+	return f;
+}
 
 int main()
 {
