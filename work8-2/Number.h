@@ -6,4 +6,8 @@
   * @brief   各种数值类型头文件
   ******************************************************************************
   */
+#include "Sum.h"
+
+#include "Huge_Int.h"
+
 /******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

@@ -11,7 +11,7 @@
 #include <iostream>
 #include <cstdint>
 using namespace std;
-#include "Sum.h"
+#include "Number.h"
 
 class Number :public Sum {
 private:

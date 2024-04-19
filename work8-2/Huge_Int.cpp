@@ -8,9 +8,8 @@
   */
 #include "Huge_Int.h"
 
-
 int getStringLength(const char* str);
-Huge_Int::Huge_Int(const char* str = "0") {
+Huge_Int::Huge_Int(const char* str) {
 	bool isSigned = 0;
 	if (str[0] == '+' || str[0] == '-') {
 		m_cSign = str[0];
