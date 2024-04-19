@@ -17,18 +17,61 @@ class Number :public Sum {
 private:
 	double m_dData;
 public:
+	Number() :m_dData(0.0) {}
+	Number(double t_dData) :m_dData(t_dData) {}
+	~Number() {}
+	// 规定动作
+	void Show();
+	void Add(Sum* num);
 };
 class Complex :public Sum {
 private:
 	double m_dReal;
 	double m_dImag;
 public:
+	Complex() :
+		m_dReal(0.0), m_dImag(0.0)
+	{}
+	Complex(double t_dReal, double t_dImag) :
+		m_dReal(t_dReal), m_dImag(t_dImag)
+	{}
+		~Complex() {}
+	// 规定动作
+	void Show();
+	void Add(Sum* num);
 };
+int GCD(int a, int b) {
+	if (a == b)return a;// 剪枝
+	if (a > b)swap(a, b);// 保证  n1 < n2
+	int c = a % b;
+	while (1) {
+		// GCD 步骤数列： 
+		// a   b    c
+		//     a    b      c
+		// a , b , a%b , a%(a%b) , ... , (n-2)%(n-1) , ... , GCD , 0
+		// 数组向cba方向移动
+		a = b;
+		b = c;
+		c = a % b;
+		if (b % c == 0)return c;
+	}
+}
 class Fraction :public Sum {
 private:
 	int m_nNum;
 	int m_nDen;
+
+	void Format();
 public:
+	Fraction(int n = 0, int d = 1);
+	~Fraction() {}
+
+
+	// 规定动作
+	void Show();
+	void Add(Sum* num);
+
+
 };
 
 int main()

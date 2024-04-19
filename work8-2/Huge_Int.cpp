@@ -25,13 +25,7 @@ Huge_Int::Huge_Int(const char* str) {
 	}
 }
 Huge_Int::~Huge_Int() {}
-void Huge_Int::Show() {
-	cout << *this;
-}
 
-void Huge_Int::Add(Sum* num) {
-	cout << *(Huge_Int*)this + *(Huge_Int*)num;
-}
 void Huge_Int::operator=(const Huge_Int& n) {
 	m_cSign = n.m_cSign;
 	for (int i = 0; i < 110; i++) {
@@ -132,6 +126,16 @@ Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2) {
 }
 Huge_Int operator-(const Huge_Int& n1, const Huge_Int& n2) {
 	return n1 + (-n2);
+}
+
+
+// 规定动作
+void Huge_Int::Show() {
+	cout << *this;
+}
+
+void Huge_Int::Add(Sum* num) {
+	cout << *(Huge_Int*)this + *(Huge_Int*)num;
 }
 
 /******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

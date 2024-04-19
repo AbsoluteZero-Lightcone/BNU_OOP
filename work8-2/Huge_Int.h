@@ -21,15 +21,18 @@ private:
 public:
 	Huge_Int(const char* str = "0");
 	~Huge_Int();
-	void Show();
 
-	void Add(Sum* num);
 	void operator=(const Huge_Int& n);
 	friend ostream& operator<<(ostream& out, const Huge_Int& n);
 	friend Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2);
 	friend bool operator>(const Huge_Int& n1, const Huge_Int& n2);
 	friend Huge_Int operator-(Huge_Int n);
 	friend Huge_Int abs(Huge_Int n);
+
+
+	// 规定动作
+	void Show();
+	void Add(Sum* num);
 };
 ostream& operator<<(ostream& out, const Huge_Int& n);
 bool operator>(const Huge_Int& n1, const Huge_Int& n2);
