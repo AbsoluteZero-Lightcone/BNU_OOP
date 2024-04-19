@@ -131,8 +131,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Complex.h" />
+    <ClInclude Include="Fraction.h" />
     <ClInclude Include="Huge_Int.h" />
     <ClInclude Include="Number.h" />
+    <ClInclude Include="Numbers.h" />
     <ClInclude Include="Sum.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

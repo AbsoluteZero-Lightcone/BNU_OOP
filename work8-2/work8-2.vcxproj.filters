@@ -29,7 +29,16 @@
     <ClInclude Include="Sum.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Numbers.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="Number.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Complex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Fraction.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
