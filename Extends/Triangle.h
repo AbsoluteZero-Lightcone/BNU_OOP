@@ -13,6 +13,7 @@
 using namespace std;
 #include "util.h"
 #include "Shape.h"
+#include "Point.h"
 #include <cmath>
 
 class Triangle : public Shape {
