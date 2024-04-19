@@ -66,35 +66,11 @@ public:
 	}
 	~Huge_Int() {}
 	void Show() {
-		if (m_cSign == '-')cout << '-';
-		bool started = 0;// 判断是否到有效数字区
-		for (int i = 110 - 1; i >= 0; i--) {
-			if (!started)
-				if (m_nUnsignedData[i] == 0)
-					continue;
-				else started = 1;
-			cout << m_nUnsignedData[i];
-		}
+		cout << *this;
 	}
-	void Add(Sum* num) {
-		if (typeid(*num) == typeid(class Huge_Int)) {
-			Huge_Int* huge_num = (Huge_Int*)num;
-			bool carryFlag = 0;// 进位
-			for (int i = 0; i < 110; i++) {
-				if (huge_num->m_cSign == m_cSign) {
-					m_nUnsignedData[i] += huge_num->m_nUnsignedData[i] + carryFlag;
-					if (m_nUnsignedData[i] >= 10) {
-						carryFlag = 1;
-						m_nUnsignedData[i] -= 10;
-					}
-					else carryFlag = 0;
-				}
-				else {
 
-				}
-			}
-		}
-		Show();
+	void Add(Sum* num) {
+		cout << *(Huge_Int*)this + *(Huge_Int*)num;
 	}
 	void operator=(const Huge_Int& n) {
 		m_cSign = n.m_cSign;
@@ -102,25 +78,45 @@ public:
 			m_nUnsignedData[i] = n.m_nUnsignedData[i];
 		}
 	}
+	friend ostream& operator<<(ostream& out, const Huge_Int& n);
 	friend Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2);
 	friend bool operator>(const Huge_Int& n1, const Huge_Int& n2);
 	friend Huge_Int operator-(Huge_Int n);
 	friend Huge_Int abs(Huge_Int n);
 };
-
+ostream& operator<<(ostream& out, const Huge_Int& n) {
+	if (n.m_cSign == '-')out << '-';
+	bool started = 0;// 判断是否到有效数字区
+	for (int i = 110 - 1; i >= 0; i--) {
+		if (!started)
+			if (n.m_nUnsignedData[i] == 0)
+				continue;
+			else started = 1;
+		out << n.m_nUnsignedData[i];
+	}
+	return out;
+}
 bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
 	if (n1.m_cSign == '+' && n2.m_cSign == '-')return 1;
 	if (n1.m_cSign == '-' && n2.m_cSign == '+')return 0;
-	if (n1.m_cSign == '+' && n2.m_cSign == '+')
+	if (n1.m_cSign == '+' && n2.m_cSign == '+') {
 		for (int i = 110 - 1; i >= 0; i--) {
 			if (n1.m_nUnsignedData[i] > n2.m_nUnsignedData[i])
-				return 1;
+				return 1;// 大于
+			if (n1.m_nUnsignedData[i] < n2.m_nUnsignedData[i])
+				return 0;// 小于（剪枝）
 		}
-	if (n1.m_cSign == '-' && n2.m_cSign == '-')
+		return 0;// 等于
+	}
+	if (n1.m_cSign == '-' && n2.m_cSign == '-') {
 		for (int i = 110 - 1; i >= 0; i--) {
 			if (n1.m_nUnsignedData[i] > n2.m_nUnsignedData[i])
 				return 0;
+			if (n1.m_nUnsignedData[i] < n2.m_nUnsignedData[i])
+				return 1;
 		}
+		return 1;
+	}
 }
 Huge_Int operator-(Huge_Int n) {
 	if (n.m_cSign == '+')n.m_cSign = '-';
@@ -132,17 +128,14 @@ Huge_Int abs(Huge_Int n) {
 	if (n.m_cSign == '-')n.m_cSign = '+';
 	return n;
 }
-void swap(Huge_Int& n1, Huge_Int& n2) {
-	Huge_Int temp = n1;
-	n1 = n2;
-	n2 = temp;
-}
 Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2) {
-	Huge_Int sum(n1);
-	bool carryFlag = 0;// 进位
-	if (sum.m_cSign == n2.m_cSign) {
-		for (int i = 0; i < 110; i++) {
-			sum.m_nUnsignedData[i] += n2.m_nUnsignedData[i] + carryFlag;
+	Huge_Int sum("0");
+	if (n1.m_cSign == n2.m_cSign) {
+		// 同号情形
+		sum.m_cSign = n1.m_cSign;
+		bool carryFlag = 0;// 进位
+		for (int i = 0; i < 110; i++) {// 由低位到高位
+			sum.m_nUnsignedData[i] = n1.m_nUnsignedData[i] + n2.m_nUnsignedData[i] + carryFlag;
 			if (sum.m_nUnsignedData[i] >= 10) {
 				carryFlag = 1;
 				sum.m_nUnsignedData[i] -= 10;
@@ -151,11 +144,23 @@ Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2) {
 		}
 	}
 	else {
+		// 异号情形
 		if (abs(n1) > abs(n2)) {
 			sum.m_cSign = n1.m_cSign;
 			bool carryFlag = 0;// 借位
-			for (int i = 0; i < 110; i++) {
+			for (int i = 0; i < 110; i++) {// 由低位到高位
 				sum.m_nUnsignedData[i] = n1.m_nUnsignedData[i] - n2.m_nUnsignedData[i] - carryFlag;
+				if (sum.m_nUnsignedData[i] < 0) {
+					carryFlag = 1;
+					sum.m_nUnsignedData[i] += 10;
+				}
+			}
+		}
+		else {
+			sum.m_cSign = n2.m_cSign;
+			bool carryFlag = 0;// 借位
+			for (int i = 0; i < 110; i++) {// 由低位到高位
+				sum.m_nUnsignedData[i] = n2.m_nUnsignedData[i] - n1.m_nUnsignedData[i] - carryFlag;
 				if (sum.m_nUnsignedData[i] < 0) {
 					carryFlag = 1;
 					sum.m_nUnsignedData[i] += 10;
@@ -183,7 +188,7 @@ int main()
 	//ps1 = &fa; ps2 = &fb;
 	//ps1->Show(); cout << " + "; ps2->Show(); cout << " = "; ps1->Add(ps2); cout << endl;
 
-	Huge_Int ha("+12345678901234567890"), hb("-99999999999999999999");
+	Huge_Int ha("123"), hb("-999");
 	ps1 = &ha; ps2 = &hb;
 	ps1->Show(); cout << " + "; ps2->Show(); cout << " = "; ps1->Add(ps2); cout << endl;
 
