@@ -17,7 +17,7 @@ int main() {
 	data_format();
 	// 注意.csv文件的编码格式
 
-	ifstream infile("shape.txt", ios::in);
+	ifstream infile("res\\shape.txt", ios::in);
 	if (!infile.is_open()) {
 		cout << "File Error" << endl;
 		return 1;
