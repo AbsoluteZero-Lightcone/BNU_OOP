@@ -11,6 +11,7 @@
 
 #include <iostream>
 using namespace std;
+#include "Shape.h"
 
 class Point :public Shape {
 private:

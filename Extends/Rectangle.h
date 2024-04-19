@@ -11,6 +11,7 @@
 #include <iostream>
 using namespace std;
 #include "util.h"
+#include "Shape.h"
 
 class Rectangle :public Shape {
 private:

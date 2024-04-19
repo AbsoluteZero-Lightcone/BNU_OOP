@@ -12,6 +12,7 @@
 #include <iostream>
 using namespace std;
 #include "util.h"
+#include "Shape.h"
 
 
 class Triangle : public Shape {

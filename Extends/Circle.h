@@ -10,6 +10,7 @@
 #define __CIRCLE_H
 #include <iostream>
 using namespace std;
+#include "Shape.h"
 
 #define PI 3.14
 
