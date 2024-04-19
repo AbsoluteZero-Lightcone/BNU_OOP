@@ -89,12 +89,51 @@ public:
 					}
 					else carryFlag = 0;
 				}
+				else {
+
+				}
 			}
 		}
 		Show();
 	}
-
+	friend Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2);
+	friend bool operator>(const Huge_Int& n1, const Huge_Int& n2);
 };
+bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
+	if (n1.m_cSign == '+' && n2.m_cSign == '-')return 1;
+	if (n1.m_cSign == '-' && n2.m_cSign == '+')return 0;
+	if (n1.m_cSign == '+' && n2.m_cSign == '+')
+		for (int i = 110 - 1; i >= 0; i--) {
+			if (n1.m_nUnsignedData[i] > n2.m_nUnsignedData[i])
+				return 1;
+		}
+	if (n1.m_cSign == '-' && n2.m_cSign == '-')
+		for (int i = 110 - 1; i >= 0; i--) {
+			if (n1.m_nUnsignedData[i] > n2.m_nUnsignedData[i])
+				return 0;
+		}
+}
+Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2) {
+	Huge_Int sum(n1);
+	bool carryFlag = 0;// 进位
+	for (int i = 0; i < 110; i++) {
+		if (sum.m_cSign == n2.m_cSign) {
+			sum.m_nUnsignedData[i] += n2.m_nUnsignedData[i] + carryFlag;
+			if (sum.m_nUnsignedData[i] >= 10) {
+				carryFlag = 1;
+				sum.m_nUnsignedData[i] -= 10;
+			}
+			else carryFlag = 0;
+		}
+		else {
+
+			// - + + 绝对值大减小 - 绝对值小减大
+			// + + - 绝对值大减小 + 绝对值小减大
+		}
+	}
+	return sum;
+}
+
 int main()
 {
 	Sum* ps1, * ps2;
