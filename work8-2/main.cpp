@@ -98,6 +98,8 @@ public:
 	}
 	friend Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2);
 	friend bool operator>(const Huge_Int& n1, const Huge_Int& n2);
+	friend Huge_Int operator-(Huge_Int n);
+	friend Huge_Int abs(Huge_Int n);
 };
 bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
 	if (n1.m_cSign == '+' && n2.m_cSign == '-')return 1;
@@ -113,11 +115,21 @@ bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
 				return 0;
 		}
 }
+Huge_Int operator-(Huge_Int n) {
+	if (n.m_cSign == '+')n.m_cSign = '-';
+	if (n.m_cSign == '-')n.m_cSign = '+';
+	return n;
+}
+
+Huge_Int abs(Huge_Int n) {
+	if (n.m_cSign == '-')n.m_cSign = '+';
+	return n;
+}
 Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2) {
 	Huge_Int sum(n1);
 	bool carryFlag = 0;// 进位
-	for (int i = 0; i < 110; i++) {
-		if (sum.m_cSign == n2.m_cSign) {
+	if (sum.m_cSign == n2.m_cSign) {
+		for (int i = 0; i < 110; i++) {
 			sum.m_nUnsignedData[i] += n2.m_nUnsignedData[i] + carryFlag;
 			if (sum.m_nUnsignedData[i] >= 10) {
 				carryFlag = 1;
@@ -125,12 +137,21 @@ Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2) {
 			}
 			else carryFlag = 0;
 		}
-		else {
-
-			// - + + 绝对值大减小 - 绝对值小减大
-			// + + - 绝对值大减小 + 绝对值小减大
+	}
+	else {
+		if (abs(n1) > abs(n2)) {
+			sum.m_cSign = n1.m_cSign;
+			bool carryFlag = 0;// 借位
+			for (int i = 0; i < 110; i++) {
+				sum.m_nUnsignedData[i] = n1.m_nUnsignedData[i] - n2.m_nUnsignedData[i] - carryFlag;
+				if (sum.m_nUnsignedData[i] < 0) {
+					carryFlag = 1;
+					sum.m_nUnsignedData[i] += 10;
+				}
+			}
 		}
 	}
+
 	return sum;
 }
 
