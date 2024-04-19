@@ -8,8 +8,8 @@
   */
 
 #ifndef __UTIL_H
+#define __UTIL_H
 class Point;
-double getLength(const Point& p1, const Point& p2);
 #endif // !__UTIL_H
 
 /******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

@@ -7,6 +7,7 @@
   ******************************************************************************
   */
 #ifndef __FILE_OPERATE_H
+#define __FILE_OPERATE_H
 
 void data_format();
 

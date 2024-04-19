@@ -6,46 +6,31 @@
   * @brief   Point class
   ******************************************************************************
   */
-#ifndef __POINT_H
-#include <iostream>
-using namespace std;
+#include "Point.h"
 
-class Point :public Shape {
-private:
-	double m_dX;
-	double m_dY;
-public:
-	Point() :m_dX(0.0), m_dY(0.0) {}
-	Point(double t_dX, double t_dY) :m_dX(t_dX), m_dY(t_dY) {}
-	Point(const Point& t_pointP) :m_dX(t_pointP.m_dX), m_dY(t_pointP.m_dY) {}
-	~Point() {}
-public:
-	double getX()const { return m_dX; }
-	double getY()const { return m_dY; }
-	void setX(double t_dX) {
-		m_dX = t_dX;
-	}
-	void setY(double t_dY) {
-		m_dY = t_dY;
-	}
-	void Show()const {
-		cout << "µã"
-			<< " " << m_dX
-			<< " " << m_dY
-			<< endl;
-	}
-	double Area()const {
-		return 0;
-	}
-	double Perimeter()const {
-		return 0;
-	}
-	friend class Circle;
-	friend class Triangle;
-	friend class Rectangle;
-	friend double getLength(const Point& p1, const Point& p2);
+Point::Point() :m_dX(0.0), m_dY(0.0) {}
+Point::Point(double t_dX, double t_dY) :m_dX(t_dX), m_dY(t_dY) {}
+Point::Point(const Point& t_pointP) :m_dX(t_pointP.m_dX), m_dY(t_pointP.m_dY) {}
+Point::~Point() {}
 
-};
-#endif // !__POINT_H
-
+double Point::getX()const { return m_dX; }
+double Point::getY()const { return m_dY; }
+void Point::setX(double t_dX) {
+	m_dX = t_dX;
+}
+void Point::setY(double t_dY) {
+	m_dY = t_dY;
+}
+void Point::Show()const {
+	cout << "µã"
+		<< " " << m_dX
+		<< " " << m_dY
+		<< endl;
+}
+double Point::Area()const {
+	return 0;
+}
+double Point::Perimeter()const {
+	return 0;
+}
 /******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

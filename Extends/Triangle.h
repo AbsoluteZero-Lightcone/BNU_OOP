@@ -7,6 +7,7 @@
   ******************************************************************************
   */
 #ifndef __TRIANGLE_H
+#define __TRIANGLE_H
 
 #include <iostream>
 using namespace std;

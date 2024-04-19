@@ -7,7 +7,7 @@
   ******************************************************************************
   */
 #ifndef __CIRCLE_H
-
+#define __CIRCLE_H
 #include <iostream>
 using namespace std;
 

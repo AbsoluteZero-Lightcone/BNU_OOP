@@ -7,6 +7,7 @@
   ******************************************************************************
   */
 #ifndef __SHAPE_H
+#define __SHAPE_H
 
 #include <iostream>
 using namespace std;

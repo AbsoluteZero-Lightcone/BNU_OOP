@@ -7,6 +7,7 @@
   ******************************************************************************
   */
 #ifndef __RECTANGLE_H
+#define __RECTANGLE_H
 #include <iostream>
 using namespace std;
 #include "util.h"
