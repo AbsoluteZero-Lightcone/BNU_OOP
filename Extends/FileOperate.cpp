@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file    FileOperate.cpp
+  * @author  张亦法
+  * @date    2024-04-19
+  * @brief   文件读写操作
+  ******************************************************************************
+  */
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -17,3 +25,4 @@ void data_format() {
     infile.close();
     outfile.close();
 }
+/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

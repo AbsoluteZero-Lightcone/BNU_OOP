@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Point.h
+  * @file    Point.cpp
   * @author  张亦法
   * @date    2024-04-19
   * @brief   Point class
@@ -29,9 +29,9 @@ public:
 		m_dY = t_dY;
 	}
 	void Show()const {
-		cout << "点" 
-			<<" "<< m_dX
-			<<" "<< m_dY
+		cout << "点"
+			<< " " << m_dX
+			<< " " << m_dY
 			<< endl;
 	}
 	double Area()const {

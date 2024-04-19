@@ -1,7 +1,16 @@
+/**
+  ******************************************************************************
+  * @file    Triangle.h
+  * @author  ’≈“‡∑®
+  * @date    2024-04-19
+  * @brief   Triangle class
+  ******************************************************************************
+  */
 #ifndef __TRIANGLE_H
 
 #include <iostream>
 using namespace std;
+#include "util.h"
 
 
 class Triangle : public Shape {
@@ -36,10 +45,14 @@ public:
 			<< endl;
 	}
 	double Area()const {
+
 		return 0;
 	}
 	double Perimeter()const {
+
 		return 0;
 	}
 };
 #endif // !__TRIANGLE_H
+
+/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file    main.cpp
+  * @author  张亦法
+  * @date    2024-04-19
+  * @brief   入口函数
+  ******************************************************************************
+  */
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -67,3 +75,4 @@ int main() {
 	infile.close();
 	return 0;
 }
+/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

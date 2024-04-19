@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file    Circle.h
+  * @author  ’≈“‡∑®
+  * @date    2024-04-19
+  * @brief   Circle class
+  ******************************************************************************
+  */
 #ifndef __CIRCLE_H
 
 #include <iostream>
@@ -32,7 +40,7 @@ public:
 	}
 public:
 	void Show()const {
-		cout << "‘≤" 
+		cout << "" 
 			<<" "<< m_pointCenter.m_dX 
 			<<" "<< m_pointCenter.m_dY
 			<<" "<< m_dRadius
@@ -47,3 +55,5 @@ public:
 
 };
 #endif // !__CIRCLE_H
+
+/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

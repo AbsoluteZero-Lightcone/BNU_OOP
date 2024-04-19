@@ -1,21 +1,15 @@
 /**
   ******************************************************************************
-  * @file    Shapes.h
+  * @file    util.h
   * @author  张亦法
   * @date    2024-04-19
-  * @brief   形状类型头文件
+  * @brief   实用工具库
   ******************************************************************************
   */
-#ifndef __SHAPES_H
 
-#include "Shape.h"
-
-#include "Point.h"
-#include "Circle.h"
-#include "Rectangle.h"
-#include "Triangle.h"
-
-
-#endif // !__SHAPES_H
+#ifndef __UTIL_H
+class Point;
+double getLength(const Point& p1, const Point& p2);
+#endif // !__UTIL_H
 
 /******************* Absolute Zero Studio - Lightcone **********END OF FILE****/

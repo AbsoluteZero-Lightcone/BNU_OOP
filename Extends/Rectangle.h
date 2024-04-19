@@ -1,11 +1,24 @@
+/**
+  ******************************************************************************
+  * @file    Rectangle.h
+  * @author  ’≈“‡∑®
+  * @date    2024-04-19
+  * @brief   Rectangle class
+  ******************************************************************************
+  */
 #ifndef __RECTANGLE_H
 #include <iostream>
 using namespace std;
+#include "util.h"
 
 class Rectangle :public Shape {
 private:
 	Point m_pointLeftTop;
 	Point m_pointRightBottom;
+
+	void correct() {
+		if (m_pointLeftTop.m_dY < m_pointRightBottom.m_dY){}
+	}
 public:
 	Rectangle() :
 		m_pointLeftTop(0, 1),
@@ -28,10 +41,16 @@ public:
 			<< endl;
 	}
 	double Area()const {
-		return 0;
+		return 
+			(m_pointRightBottom.m_dX- m_pointLeftTop.m_dX)*
+			(m_pointLeftTop.m_dY-m_pointRightBottom.m_dY);
 	}
 	double Perimeter()const {
-		return 0;
+		return
+			((m_pointRightBottom.m_dX - m_pointLeftTop.m_dX) +
+			(m_pointLeftTop.m_dY - m_pointRightBottom.m_dY))*2;
 	}
 };
 #endif // !__RECTANGLE_H
+
+/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
