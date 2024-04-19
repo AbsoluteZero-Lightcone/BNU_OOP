@@ -96,11 +96,18 @@ public:
 		}
 		Show();
 	}
+	void operator=(const Huge_Int& n) {
+		m_cSign = n.m_cSign;
+		for (int i = 0; i < 110; i++) {
+			m_nUnsignedData[i] = n.m_nUnsignedData[i];
+		}
+	}
 	friend Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2);
 	friend bool operator>(const Huge_Int& n1, const Huge_Int& n2);
 	friend Huge_Int operator-(Huge_Int n);
 	friend Huge_Int abs(Huge_Int n);
 };
+
 bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
 	if (n1.m_cSign == '+' && n2.m_cSign == '-')return 1;
 	if (n1.m_cSign == '-' && n2.m_cSign == '+')return 0;
@@ -124,6 +131,11 @@ Huge_Int operator-(Huge_Int n) {
 Huge_Int abs(Huge_Int n) {
 	if (n.m_cSign == '-')n.m_cSign = '+';
 	return n;
+}
+void swap(Huge_Int& n1, Huge_Int& n2) {
+	Huge_Int temp = n1;
+	n1 = n2;
+	n2 = temp;
 }
 Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2) {
 	Huge_Int sum(n1);
@@ -151,7 +163,6 @@ Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2) {
 			}
 		}
 	}
-
 	return sum;
 }
 
@@ -172,7 +183,7 @@ int main()
 	//ps1 = &fa; ps2 = &fb;
 	//ps1->Show(); cout << " + "; ps2->Show(); cout << " = "; ps1->Add(ps2); cout << endl;
 
-	Huge_Int ha("+12345678901234567890"), hb("+99999999999999999999");
+	Huge_Int ha("+12345678901234567890"), hb("-99999999999999999999");
 	ps1 = &ha; ps2 = &hb;
 	ps1->Show(); cout << " + "; ps2->Show(); cout << " = "; ps1->Add(ps2); cout << endl;
 
