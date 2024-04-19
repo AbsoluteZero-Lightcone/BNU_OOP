@@ -73,7 +73,7 @@ bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
 		}
 		return 1;
 	}
-	else { 
+	else {
 		//throw "非法正负符号";
 		return 0;
 	}

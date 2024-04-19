@@ -127,8 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Complex.cpp" />
+    <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="Huge_Int.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Number.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Complex.h" />

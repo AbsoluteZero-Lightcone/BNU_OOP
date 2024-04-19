@@ -21,6 +21,15 @@
     <ClCompile Include="Huge_Int.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Complex.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Number.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Fraction.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Huge_Int.h">

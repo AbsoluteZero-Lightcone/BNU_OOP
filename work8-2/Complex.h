@@ -18,35 +18,17 @@ private:
 	double m_dReal;
 	double m_dImag;
 public:
-	Complex() :
-		m_dReal(0.0), m_dImag(0.0)
-	{}
-	Complex(double t_dReal, double t_dImag) :
-		m_dReal(t_dReal), m_dImag(t_dImag)
-	{}
-	Complex(const Complex& n) {
-		m_dReal = n.m_dReal;
-		m_dImag = n.m_dImag;
-	}
-	~Complex() {}
+	Complex();
+	Complex(double t_dReal, double t_dImag);
+	Complex(const Complex& n);
+	~Complex();
 	// 规定动作
-	void Show() {
-		cout << m_dReal << "+" << m_dImag << "i";
-	}
-	void Add(Sum* num) {
-		Complex* n = dynamic_cast<Complex*>(num);
-		if (n != NULL) {
-			Complex(*n + *this).Show();
-		}
-	}
+	void Show();
+	void Add(Sum* num);
 
 	friend Complex operator+(const Complex& n1, const Complex& n2);
 };
-Complex operator+(const Complex& n1, const Complex& n2) {
-	return Complex(n1.m_dReal + n2.m_dReal, n1.m_dImag + n2.m_dImag);
-}
-
-
+Complex operator+(const Complex& n1, const Complex& n2);
 
 #endif // !__COMPLEX_H
 
