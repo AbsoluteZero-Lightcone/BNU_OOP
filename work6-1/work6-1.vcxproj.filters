@@ -21,9 +21,15 @@
     <ClCompile Include="main.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
+    <ClCompile Include="WorldClock.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldClock.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

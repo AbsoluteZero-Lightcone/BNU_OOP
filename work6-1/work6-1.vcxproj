@@ -130,9 +130,11 @@
   <ItemGroup>
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="WorldClock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="WorldClock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

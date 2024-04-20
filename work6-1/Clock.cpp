@@ -95,6 +95,10 @@ Clock Clock::Sub(const Clock& c) const {
   * @retval 使用引用参数返回
   */
 void Standarize(int& t_nHour, int& t_nMinute, int& t_nSecond) {
+	// work6中的类设计允许自由的时分秒数值，不强制标准化，安全性欠佳，
+	// 在这里Clock类中封装的成员变量值受setter严格管理，必须为合法量，不可能为负值，需要处理传入的负数
+	// 于是Standardize函数的实现和作业要求略有不同：
+	// 这里做的是 标准化传入的时分秒的原始数据，而不是标准化Clock对象，因为这种类设计无需手动标准化
 	int temp_h = t_nHour;
 	int temp_m = t_nMinute;
 	int temp_s = t_nSecond;
