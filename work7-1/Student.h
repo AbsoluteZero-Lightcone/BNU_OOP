@@ -16,9 +16,10 @@
 #include <iostream>
 #include <string>
 using namespace std;
+#include "Person.h"
 
 /* Class ---------------------------------------------------------------------*/
-class Student {
+class Student :virtual public Person {
 private:
 	string m_strMajor;
 	string m_strStudentID;

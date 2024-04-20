@@ -18,9 +18,11 @@
 #include <cmath>
 #include <cstdint>
 using namespace std;
+#include "Student.h"
+#include "Employee.h"
 
 /* Class ---------------------------------------------------------------------*/
-class StuEmployee {
+class StuEmployee:public Student,public Employee {
 private:
 public:
 	// Constructors & Deconstructor
