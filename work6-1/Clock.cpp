@@ -55,7 +55,7 @@ void Clock::set_nMinute(int t_nMinute) {
 	if (t_nMinute >= 60 || t_nMinute < 0) {
 		cout << "Incorrect Time Format." << endl;
 		return;
-	} 
+	}
 	m_nMinute = t_nMinute;
 }
 int Clock::get_nSecond() { return m_nSecond; }
@@ -64,7 +64,7 @@ void Clock::set_nSecond(int t_nSecond) {
 		cout << "Incorrect Time Format." << endl;
 		return;
 	}
-	m_nSecond = t_nSecond; 
+	m_nSecond = t_nSecond;
 }
 
 void Clock::setTime(int t_nHour, int t_nMinute, int t_nSecond) {
@@ -114,7 +114,7 @@ void Clock::operator=(const Clock& source) {
 }
 
 /**
-  * @brief 类内重载自增运算符
+  * @brief 类内重载自增运算符，到下一秒
   * @param 无
   * @retval 返回自身引用实现链式编程
   */
@@ -136,8 +136,8 @@ Clock& Clock::operator++(int) {
 }
 
 /**
-  * @brief 类内重载+=运算符
-  * @param n : 待加的值
+  * @brief 类内重载+=运算符，加上对应的秒数
+  * @param n : 待加的秒数
   * @retval 返回自身引用实现链式编程
   */
 Clock& Clock::operator+=(int n) {
@@ -153,8 +153,10 @@ Clock& Clock::operator+=(int n) {
   * @retval bool, true for n1 > n2
   */
 bool operator>(const Clock& n1, const Clock& n2) {
-	
-	return false;
+	if (n1.m_nHour > n2.m_nHour)return true;
+	else if (n1.m_nMinute > n2.m_nMinute)return true;
+	else if (n1.m_nSecond > n2.m_nSecond)return true;
+	else return false;
 }
 
 /**
@@ -164,32 +166,36 @@ bool operator>(const Clock& n1, const Clock& n2) {
   * @retval bool, true for n1 == n2
   */
 bool operator==(const Clock& n1, const Clock& n2) {
-	// todo
-	return false;
+	if (n1.m_nHour != n2.m_nHour)return false;
+	else if (n1.m_nMinute != n2.m_nMinute)return false;
+	else if (n1.m_nSecond != n2.m_nSecond)return false;
+	return true;
 }
 
 /**
-  * @brief 重载加法运算符
-  * @param const Clock& n1 : 加号左边的值
-  * @param const Clock& n2 : 加号右边的值
-  * @retval n1 + n2
-  */
-Clock operator+(const Clock& n1, const Clock& n2) {
-	Clock temp;
-	// todo
-	return temp;
-}
-
-/**
-  * @brief 重载减法运算符
+  * @brief 重载减法运算符，返回相差的秒数
   * @param const Clock& n1 : 被减数
   * @param const Clock& n2 : 减数
-  * @retval n1 - n2
+  * @retval 相差的秒数
   */
-Clock operator-(const Clock& n1, const Clock& n2) {
-	Clock temp;
-	// todo
-	return temp;
+int operator-(const Clock& n1, const Clock& n2) {
+	// todo : 继承Date后要修改这段，将不同日期考虑进来
+
+	return
+		(n1.m_nHour - n2.m_nHour) * 60 * 60 +
+		(n1.m_nMinute - n2.m_nMinute) * 60 +
+		(n1.m_nSecond - n2.m_nSecond);
+}
+/**
+  * @brief 类内重载+=运算符，加上对应的秒数
+  * @param c : Clock Object
+  * @param n : 待加的秒数
+  * @retval 返回自身引用实现链式编程
+  */
+Clock operator+(Clock c, int n) {
+	for (int i = 0; i < n; i++)
+		c++;
+	return c;
 }
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
