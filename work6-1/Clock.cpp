@@ -19,11 +19,19 @@ Clock::Clock() :
 	m_nSecond(0)
 {}
 
-Clock::Clock(int t_nHour, int t_nMinute, int t_nSecond) :
-	m_nHour(t_nHour),
-	m_nMinute(t_nMinute),
-	m_nSecond(t_nSecond)
-{}
+Clock::Clock(int t_nHour, int t_nMinute, int t_nSecond) {
+	if (isValid(t_nHour, t_nMinute, t_nSecond)) {
+		m_nHour = t_nHour;
+		m_nMinute = t_nMinute;
+		m_nSecond = t_nSecond;
+	}
+	else {
+		m_nHour = 0;
+		m_nMinute = 0;
+		m_nSecond = 0;
+		cout << "Incorrect Time Format." << endl;
+	}
+}
 
 Clock::Clock(const Clock& source) :
 	m_nHour(source.m_nHour),
@@ -35,19 +43,51 @@ Clock::~Clock() {}
 
 /* Getters & Setters -------------------------------------------------------- */
 int Clock::get_nHour() { return m_nHour; }
-void Clock::set_nHour(int t_nHour) { m_nHour = t_nHour; }
+void Clock::set_nHour(int t_nHour) {
+	if (t_nHour >= 24 || t_nHour < 0) {
+		cout << "Incorrect Time Format." << endl;
+		return;
+	}
+	m_nHour = t_nHour;
+}
 int Clock::get_nMinute() { return m_nMinute; }
-void Clock::set_nMinute(int t_nMinute) { m_nMinute = t_nMinute; }
+void Clock::set_nMinute(int t_nMinute) {
+	if (t_nMinute >= 60 || t_nMinute < 0) {
+		cout << "Incorrect Time Format." << endl;
+		return;
+	} 
+	m_nMinute = t_nMinute;
+}
 int Clock::get_nSecond() { return m_nSecond; }
-void Clock::set_nSecond(int t_nSecond) { m_nSecond = t_nSecond; }
+void Clock::set_nSecond(int t_nSecond) {
+	if (t_nSecond >= 60 || t_nSecond < 0) {
+		cout << "Incorrect Time Format." << endl;
+		return;
+	}
+	m_nSecond = t_nSecond; 
+}
 
 void Clock::setTime(int t_nHour, int t_nMinute, int t_nSecond) {
-	m_nHour = t_nHour;
-	m_nMinute = t_nMinute;
-	m_nSecond = t_nSecond;
+	if (isValid(t_nHour, t_nMinute, t_nSecond)) {
+		m_nHour = t_nHour;
+		m_nMinute = t_nMinute;
+		m_nSecond = t_nSecond;
+	}
+	else {
+		cout << "Incorrect Time Format." << endl;
+	}
 }
 
 /* Exported functions ------------------------------------------------------- */
+
+bool isValid(int t_nHour, int t_nMinute, int t_nSecond) {
+	if (
+		t_nHour >= 24 || t_nHour < 0 ||
+		t_nMinute >= 60 || t_nMinute < 0 ||
+		t_nSecond >= 60 || t_nSecond < 0
+		)return 0;
+	else return 1;
+}
 
 /**
   * @brief 重载标准输出流 <<运算符
@@ -89,7 +129,19 @@ Clock& Clock::operator+=(int n) {
   * @retval 返回自身引用实现链式编程
   */
 Clock& Clock::operator++() {
-	// todo
+	m_nSecond++;
+	if (m_nSecond == 60) {
+		m_nSecond = 0;
+		m_nMinute++;
+		if (m_nMinute == 60) {
+			m_nMinute = 0;
+			m_nHour++;
+			if (m_nHour == 24) {
+				m_nHour = 0;
+				// m_nDay++; //todo 从Date中继承
+			}
+		}
+	}
 	return *this;
 }
 
