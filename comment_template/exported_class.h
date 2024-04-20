@@ -24,6 +24,9 @@ typedef int datatype2;
 #define __exported_class_H
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
+#include <string>
+#include <cmath>
+#include <cstdint>
 using namespace std;
 
 /* Class ---------------------------------------------------------------------*/
