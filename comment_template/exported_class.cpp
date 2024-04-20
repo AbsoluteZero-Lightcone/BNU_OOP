@@ -13,8 +13,21 @@
 #include "exported_class.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
-exported_class::exported_class() {}
-exported_class::exported_class(const exported_class& source) {}
+exported_class::exported_class() :
+	m_dataname1(0),
+	m_dataname2(0)
+{}
+
+exported_class::exported_class(datatype1 t_dataname1, datatype2 t_dataname2):
+	m_dataname1(t_dataname1), 
+	m_dataname2(t_dataname2)
+{}
+
+exported_class::exported_class(const exported_class& source) :
+	m_dataname1(source.m_dataname1),
+	m_dataname2(source.m_dataname2)
+{}
+
 exported_class::~exported_class() {}
 
 /* Getters & Setters -------------------------------------------------------- */

@@ -34,6 +34,7 @@ private:
 public:
 	// Constructors & Deconstructor
 	exported_class();
+	exported_class(datatype1 t_dataname1, datatype2 t_dataname2);
 	exported_class(const exported_class& source);
 	~exported_class();
 
