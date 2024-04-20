@@ -15,8 +15,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <string>
-#include <cmath>
-#include <cstdint>
 using namespace std;
 
 /* Class ---------------------------------------------------------------------*/
@@ -37,20 +35,7 @@ public:
 	int get_nAge();
 	void set_nAge(int t_nAge);
 
-	// ‘ÀÀ„∑˚÷ÿ‘ÿ
-	void operator=(const Person& source);
-	void operator=(int n);
-	Person& operator+=(int n);
-	Person& operator++();
 };
-
-/* Exported functions ------------------------------------------------------- */
-ostream& operator<<(ostream& out, const Person& source);
-bool operator>(const Person& n1, const Person& n2);
-bool operator==(const Person& n1, const Person& n2);
-Person operator-(Person n);
-Person operator+(const Person& n1, const Person& n2);
-Person operator-(const Person& n1, const Person& n2);
 
 #endif /* !__PERSON_H */
 

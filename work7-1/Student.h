@@ -26,6 +26,7 @@ private:
 public:
 	// Constructors & Deconstructor
 	Student();
+	Student(string t_strName, int t_nAge, string t_strMajor, string t_strStudentID);
 	Student(const Student& source);
 	~Student();
 
@@ -35,20 +36,7 @@ public:
 	string get_strStudentID();
 	void set_strStudentID(string t_strStudentID);
 
-	// ÔËËã·ûÖØÔØ
-	void operator=(const Student& source);
-	void operator=(int n);
-	Student& operator+=(int n);
-	Student& operator++();
 };
-
-/* Exported functions ------------------------------------------------------- */
-ostream& operator<<(ostream& out, const Student& source);
-bool operator>(const Student& n1, const Student& n2);
-bool operator==(const Student& n1, const Student& n2);
-Student operator-(Student n);
-Student operator+(const Student& n1, const Student& n2);
-Student operator-(const Student& n1, const Student& n2);
 
 #endif /* !__STUDENT_H */
 

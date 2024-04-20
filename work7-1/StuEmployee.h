@@ -15,36 +15,23 @@
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <string>
-#include <cmath>
-#include <cstdint>
 using namespace std;
 #include "Student.h"
 #include "Employee.h"
 
 /* Class ---------------------------------------------------------------------*/
 class StuEmployee:public Student,public Employee {
-private:
 public:
 	// Constructors & Deconstructor
 	StuEmployee();
+	StuEmployee(
+		string t_strName, int t_nAge, 
+		string t_strMajor, string t_strStudentID,
+		string t_strDepartment, string t_strEmployeeID
+	);
 	StuEmployee(const StuEmployee& source);
 	~StuEmployee();
-
-
-	// ‘ÀÀ„∑˚÷ÿ‘ÿ
-	void operator=(const StuEmployee& source);
-	void operator=(int n);
-	StuEmployee& operator+=(int n);
-	StuEmployee& operator++();
 };
-
-/* Exported functions ------------------------------------------------------- */
-ostream& operator<<(ostream& out, const StuEmployee& source);
-bool operator>(const StuEmployee& n1, const StuEmployee& n2);
-bool operator==(const StuEmployee& n1, const StuEmployee& n2);
-StuEmployee operator-(StuEmployee n);
-StuEmployee operator+(const StuEmployee& n1, const StuEmployee& n2);
-StuEmployee operator-(const StuEmployee& n1, const StuEmployee& n2);
 
 #endif /* !__STUEMPLOYEE_H */
 

@@ -26,7 +26,7 @@ private:
 public:
 	// Constructors & Deconstructor
 	Employee();
-	Employee(string t_strDepartment, string t_strEmployeeID);
+	Employee(string t_strName, int t_nAge,string t_strDepartment, string t_strEmployeeID);
 	Employee(const Employee& source);
 	~Employee();
 
@@ -36,20 +36,7 @@ public:
 	string get_strEmployeeID();
 	void set_strEmployeeID(string t_strEmployeeID);
 
-	// ‘ÀÀ„∑˚÷ÿ‘ÿ
-	void operator=(const Employee& source);
-	void operator=(int n);
-	Employee& operator+=(int n);
-	Employee& operator++();
 };
-
-/* Exported functions ------------------------------------------------------- */
-ostream& operator<<(ostream& out, const Employee& source);
-bool operator>(const Employee& n1, const Employee& n2);
-bool operator==(const Employee& n1, const Employee& n2);
-Employee operator-(Employee n);
-Employee operator+(const Employee& n1, const Employee& n2);
-Employee operator-(const Employee& n1, const Employee& n2);
 
 #endif /* !__EMPLOYEE_H */
 
