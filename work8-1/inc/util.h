@@ -13,4 +13,4 @@
 double getLength(const Point& p1, const Point& p2);
 #endif // !__UTIL_H
 
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

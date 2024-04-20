@@ -59,4 +59,4 @@ void Rectangle::setLeftTop(const Point& t_pointLeftTop) {
 	m_pointRightBottom.m_dX = t_pointLeftTop.m_dX;
 	m_pointRightBottom.m_dY = t_pointLeftTop.m_dY;
 }
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

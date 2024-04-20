@@ -42,4 +42,4 @@ Huge_Int operator+(const Huge_Int& n1, const Huge_Int& n2);
 Huge_Int operator-(const Huge_Int& n1, const Huge_Int& n2);
 
 #endif // !__HUGE_INT_H
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

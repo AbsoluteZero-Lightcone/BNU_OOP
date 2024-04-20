@@ -36,4 +36,4 @@ Fraction operator+(const Fraction& n1, const Fraction& n2);
 
 #endif // !__FRACTION_H
 
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

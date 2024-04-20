@@ -143,4 +143,4 @@ void Huge_Int::Add(Sum* num) {
 	cout << *this + *dynamic_cast<Huge_Int*>(num);
 }
 
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

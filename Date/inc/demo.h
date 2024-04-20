@@ -7,7 +7,8 @@
   * @brief   A demonstration of the class Date.
   * @encode  UTF-8
   ******************************************************************************
-  */#ifndef __DEMO_H
+  */
+#ifndef __DEMO_H
 #define __DEMO_H
 
 void demo();

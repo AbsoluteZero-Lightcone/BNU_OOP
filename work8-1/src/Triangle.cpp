@@ -54,4 +54,4 @@ void Triangle::setP1(const Point& t_pointP1) { m_pointP1 = t_pointP1; }
 void Triangle::setP2(const Point& t_pointP2) { m_pointP2 = t_pointP2; }
 void Triangle::setP3(const Point& t_pointP3) { m_pointP3 = t_pointP3; }
 
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

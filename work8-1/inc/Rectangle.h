@@ -37,4 +37,4 @@ public:
 };
 #endif // !__RECTANGLE_H
 
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

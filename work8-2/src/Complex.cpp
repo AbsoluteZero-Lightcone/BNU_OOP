@@ -36,4 +36,4 @@ Complex operator+(const Complex& n1, const Complex& n2) {
 
 
 
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

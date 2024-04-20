@@ -30,4 +30,4 @@ Number operator+(const Number& n1, const Number& n2);
 
 #endif // !__NUMBER_H
 
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

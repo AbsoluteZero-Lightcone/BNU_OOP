@@ -21,4 +21,4 @@ double getLength(const Point& p1, const Point& p2) {
 	);
 }
 
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

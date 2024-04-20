@@ -33,4 +33,4 @@ double Point::Area()const {
 double Point::Perimeter()const {
 	return 0;
 }
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

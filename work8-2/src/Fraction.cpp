@@ -67,4 +67,4 @@ int GCD(int a, int b) {
 		c = a % b;
 	}
 }
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

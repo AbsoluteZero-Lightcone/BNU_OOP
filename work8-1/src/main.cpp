@@ -85,4 +85,4 @@ int main() {
 	infile.close();
 	return 0;
 }
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

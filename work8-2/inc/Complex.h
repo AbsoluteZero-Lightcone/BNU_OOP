@@ -32,4 +32,4 @@ Complex operator+(const Complex& n1, const Complex& n2);
 
 #endif // !__COMPLEX_H
 
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

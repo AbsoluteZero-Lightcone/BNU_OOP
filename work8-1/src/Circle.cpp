@@ -40,4 +40,4 @@ double Circle::Area() const {
 double Circle::Perimeter() const {
 	return 2 * PI * m_dRadius;
 }
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

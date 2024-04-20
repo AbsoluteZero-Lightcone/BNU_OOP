@@ -25,4 +25,4 @@ void data_format() {
 	infile.close();
 	outfile.close();
 }
-/******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
+/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
