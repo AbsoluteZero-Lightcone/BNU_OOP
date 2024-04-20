@@ -78,6 +78,24 @@ void Clock::setTime(int t_nHour, int t_nMinute, int t_nSecond) {
 	}
 }
 
+// 规定动作
+/**
+  * @brief 显示时间功能
+  * @param None
+  * @retval None
+  */
+void Clock::Show() const {
+	cout << *this;
+}
+/**
+  * @brief 计时功能，每一次Tick，时间向前走1秒
+  * @param None
+  * @retval None
+  */
+void Clock::Tick() {
+	(*this)++;
+}
+
 /* Exported functions ------------------------------------------------------- */
 
 bool isValid(int t_nHour, int t_nMinute, int t_nSecond) {

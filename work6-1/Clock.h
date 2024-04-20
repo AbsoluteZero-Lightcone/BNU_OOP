@@ -33,6 +33,11 @@ public:
 	Clock(const Clock& source);
 	~Clock();
 
+	// 规定动作
+	void Show() const;				//显示时间功能
+	void Tick();					//计时功能，每一次Tick，时间向前走1秒
+
+
 	// Getter & Setter
 	int get_nHour();
 	void set_nHour(int t_nHour);

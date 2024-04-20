@@ -19,8 +19,9 @@ using namespace std;
 int main() {
 	Clock c(1,2,3);
 	c.setTime(5, 6, 7);
-	cout << c;
-
+	cout << c << endl;
+	c.Tick();
+	c.Show();
 	return 0;
 }
 
