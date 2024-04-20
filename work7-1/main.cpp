@@ -22,7 +22,7 @@ int main() {
 	bool isOver = 0;
 	while (!isOver) {
 
-		cout << "Test p--Person s--Student e--Employee v--StudentEmployee o--Test Over: " ;
+		cout << "Test p--Person s--Student e--Employee v--StudentEmployee o--Test Over: ";
 		char mode;
 		cin >> mode;
 
@@ -57,7 +57,7 @@ int main() {
 
 			break;
 		}
-		case 'e':{
+		case 'e': {
 			cout << "Input employee name :" << endl;
 			cin >> t_strName;
 			cout << "Input employee age :" << endl;
@@ -78,7 +78,7 @@ int main() {
 
 			break;
 		}
-		case 'v':{
+		case 'v': {
 			cout << "Input stuEmployee name :" << endl;
 			cin >> t_strName;
 			cout << "Input stuEmployee age :" << endl;
@@ -112,9 +112,8 @@ int main() {
 		default:
 			break;
 		}
-
-		return 0;
 	}
+	return 0;
 }
 /*
 * ÑùÀý£º
