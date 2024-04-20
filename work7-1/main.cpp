@@ -1,16 +1,17 @@
 /**
   ******************************************************************************
-  * @file    util.h
+  * @file    main.cpp
   * @author  张亦法 202311998186
-  * @date    2024-04-19
-  * @brief   实用工具库
+  * @date    2024-04-20
+  * @brief   入口函数
   ******************************************************************************
   */
+#include <iostream>
+using namespace std;
 
-#ifndef __UTIL_H
-#define __UTIL_H
-#include "Point.h"
-double getLength(const Point& p1, const Point& p2);
-#endif // !__UTIL_H
+int main(){
+
+	return 0;
+}
 
 /******************* Absolute Zero Studio - Lightcone **********END OF FILE****/
