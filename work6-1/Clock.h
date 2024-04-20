@@ -45,11 +45,14 @@ public:
 
 	// ”—‘™
 	friend ostream& operator<<(ostream& out, const Clock& source);
-
+	friend bool operator>(const Clock& n1, const Clock& n2);
+	friend bool operator==(const Clock& n1, const Clock& n2);
+	friend Clock operator+(const Clock& n1, const Clock& n2);
+	friend Clock operator-(const Clock& n1, const Clock& n2);
 	// ‘ÀÀ„∑˚÷ÿ‘ÿ
 	void operator=(const Clock& source);
+	Clock& operator++(int);
 	Clock& operator+=(int n);
-	Clock& operator++();
 };
 
 /* Exported functions ------------------------------------------------------- */

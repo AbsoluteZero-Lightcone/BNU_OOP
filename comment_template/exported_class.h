@@ -52,6 +52,13 @@ public:
 	void operator=(int n);
 	exported_class& operator+=(int n);
 	exported_class& operator++();
+
+	friend ostream& operator<<(ostream& out, const exported_class& source);
+	friend bool operator>(const exported_class& n1, const exported_class& n2);
+	friend bool operator==(const exported_class& n1, const exported_class& n2);
+	friend exported_class operator-(exported_class n);
+	friend exported_class operator+(const exported_class& n1, const exported_class& n2);
+	friend exported_class operator-(const exported_class& n1, const exported_class& n2);
 };
 
 /* Exported functions ------------------------------------------------------- */

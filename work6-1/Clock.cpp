@@ -114,21 +114,11 @@ void Clock::operator=(const Clock& source) {
 }
 
 /**
-  * @brief 类内重载+=运算符
-  * @param n : 待加的值
-  * @retval 返回自身引用实现链式编程
-  */
-Clock& Clock::operator+=(int n) {
-	// todo
-	return *this;
-}
-
-/**
   * @brief 类内重载自增运算符
   * @param 无
   * @retval 返回自身引用实现链式编程
   */
-Clock& Clock::operator++() {
+Clock& Clock::operator++(int) {
 	m_nSecond++;
 	if (m_nSecond == 60) {
 		m_nSecond = 0;
@@ -146,13 +136,24 @@ Clock& Clock::operator++() {
 }
 
 /**
+  * @brief 类内重载+=运算符
+  * @param n : 待加的值
+  * @retval 返回自身引用实现链式编程
+  */
+Clock& Clock::operator+=(int n) {
+	for (int i = 0; i < n; i++)
+		(*this)++;
+	return *this;
+}
+
+/**
   * @brief 重载大于运算符
   * @param const Clock& n1 : 运算符左边的值
   * @param const Clock& n2 : 运算符右边的值
   * @retval bool, true for n1 > n2
   */
 bool operator>(const Clock& n1, const Clock& n2) {
-	// todo
+	
 	return false;
 }
 
