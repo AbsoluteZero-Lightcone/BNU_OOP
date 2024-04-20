@@ -12,22 +12,67 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+#include "Persons.h"
 int main() {
 	cout << "Test p--Person s--Student e--Employee v--StudentEmployee o--Test Over: " << endl;
+
 	char mode;
 	cin >> mode;
-	while (1);
+
+	string t_strName;        int t_nAge;
+	string t_strMajor;       string t_strStudentID;
+	string t_strDepartment;  string t_strEmployeeID;
+
+	bool isOver = 0;
+	while (!isOver)
 	switch (mode) {
-	case 'p':
+	case 'p': {// 花括号限制变量的作用域（cppreference: switch statement）
+		cout << "Input person name :" << endl;
+		cin >> t_strName;
+		cout << "Input person age :" << endl;
+		cin >> t_nAge;
+		Person p(t_strName, t_nAge);
+		cout << p.get_strName() << " " << p.get_nAge() << endl;
 		break;
-	case 's':
+	}
+	case 's': {
 		break;
+	}
 	case 'e':
+	{
 		break;
+	}
 	case 'v':
+	{
+		cout << "Input stuEmployee name :" << endl;
+		cin >> t_strName;
+		cout << "Input stuEmployee age :" << endl;
+		cin >> t_nAge;
+		cout << "Input stuEmployee major :" << endl;
+		cin >> t_strMajor;
+		cout << "Input stuEmployee student id :" << endl;
+		cin >> t_strStudentID;
+		cout << "Input stuEmployee department :" << endl;
+		cin >> t_strDepartment;
+		cout << "Input stuEmployee employee id :" << endl;
+		cin >> t_strEmployeeID;
+
+		StuEmployee p(t_strName, t_nAge, t_strMajor, t_strStudentID,t_strDepartment, t_strEmployeeID);
+
+		cout 
+			<< p.get_strName() << " " 
+			<< p.get_nAge() << " "
+			<< p.get_strMajor() << " "
+			<< p.get_strStudentID() << " "
+			<< p.get_strDepartment() << " "
+			<< p.get_strEmployeeID() 
+			<< endl;
+		
 		break;
+	}
 	case 'o':
+		cout << "Byebye~" << endl;
+		isOver = 1;
 		break;
 	default:
 		break;
