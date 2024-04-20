@@ -9,24 +9,24 @@
   ******************************************************************************
   */
 
-// 替换内容：
-// exported_class 类名
-// datatype 类型
-// dataname 变量名
-// 改文件名
-// 将宏定义改为大写
-// 删除临时使用的typedef
+  // 替换内容：
+  // exported_class 类名
+  // datatype 类型
+  // dataname 变量名
+  // 改文件名
+  // 将宏定义改为大写
+  // 删除临时使用的typedef
 typedef int datatype1;
 typedef int datatype2;
 
-
+/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __exported_class_H
 #define __exported_class_H
-
+/* Includes ------------------------------------------------------------------*/
 #include <iostream>
 using namespace std;
 
-
+/* Class ---------------------------------------------------------------------*/
 class exported_class {
 private:
 	datatype1 m_dataname1;
@@ -50,12 +50,14 @@ public:
 	exported_class& operator++();
 };
 
+/* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const exported_class& source);
 bool operator>(const exported_class& n1, const exported_class& n2);
 bool operator==(const exported_class& n1, const exported_class& n2);
 exported_class operator-(exported_class n);
 exported_class operator+(const exported_class& n1, const exported_class& n2);
 exported_class operator-(const exported_class& n1, const exported_class& n2);
+
 #endif /* !__exported_class_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
