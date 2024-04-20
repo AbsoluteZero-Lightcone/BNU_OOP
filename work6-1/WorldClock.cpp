@@ -40,9 +40,10 @@ string WorldClock::get_strCity() { return m_strCity; }
 void WorldClock::set_strCity(string t_strCity) { m_strCity = t_strCity; }
 
 /* Exported functions ------------------------------------------------------- */
+
 // 查找表，空的使用string()占位
 string LUT_code[21] = { "ha","ak","la",string(),"ch","ny","dxy","bz","dxyz",string(),"ld","bl","ca","mo",string(),"nd",string(),"bk","bj","tk","sy" };
-string LUT_name[21] = { "Hawaii","Alaska","LosAngeles",string(),"Chicago","NewYork","","Brazil",string(),"London","Berlin","Cario","Moscow",string(),"NewDelhi",string(),"Bangkok","Beijing","Tokyo","Sydney" };
+string LUT_name[21] = { "Hawaii","Alaska","LosAngeles",string(),"Chicago","NewYork","大西洋时间","Brazil","大西洋-中部",string(),"London","Berlin","Cario","Moscow",string(),"NewDelhi",string(),"Bangkok","Beijing","Tokyo","Sydney"};
 int WorldClock::CityToRelativeHour(string city) {
 	for (int i = 0; i < 21; i++) {
 		if (LUT_code[i] == city)
@@ -88,5 +89,12 @@ ostream& operator<<(ostream& out, const WorldClock& source) {
 	out << WorldClock::getCityName(source.m_strCity) << " " <<(Clock)source;
 	return out;
 }
-
+/**
+  * @brief 显示时间功能
+  * @param None
+  * @retval None
+  */
+void WorldClock::Show() const {
+	cout << *this;
+}
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

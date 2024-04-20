@@ -14,10 +14,10 @@
 #include <cmath>
 #include <cstdint>
 using namespace std;
-#include "Clock.h"
+#include "WorldClock.h"
 
 int main() {
-	Clock c(1,2,3);
+	WorldClock c(1,2,3);
 	c.setTime(5, 6, 7);
 	cout << c << endl;
 	c.Tick();

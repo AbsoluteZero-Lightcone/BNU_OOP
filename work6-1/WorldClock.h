@@ -39,7 +39,8 @@ public:
 	void set_strCity(string t_strCity);
 
 	// 规定动作
-	WorldClock Sub(const WorldClock& c) const;
+	WorldClock Sub(const WorldClock& c) const;  //求2个时间值的差函数
+	void Show() const;				            //显示时间功能
 
 	// 运算符重载
 	friend ostream& operator<<(ostream& out, const WorldClock& source);
