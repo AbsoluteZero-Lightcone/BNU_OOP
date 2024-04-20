@@ -37,6 +37,7 @@ public:
 	void Show() const;				//显示时间功能
 	void Tick();					//计时功能，每一次Tick，时间向前走1秒
 	Clock Sub(const Clock& c) const;//求2个时间值的差函数
+	Clock& addHour(int n);
 
 	// Getter & Setter
 	int get_nHour();
@@ -52,7 +53,6 @@ public:
 	// 运算符重载
 	void operator=(const Clock& source);
 	Clock& operator++(int);
-	Clock& operator+=(int n);
 	
 	friend ostream& operator<<(ostream& out, const Clock& source);
 	friend bool operator>(const Clock& n1, const Clock& n2);

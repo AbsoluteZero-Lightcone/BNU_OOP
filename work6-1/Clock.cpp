@@ -124,6 +124,15 @@ void Standarize(int& t_nHour, int& t_nMinute, int& t_nSecond) {
 
 /* Exported functions ------------------------------------------------------- */
 
+/**
+  * @brief 加上对应的小时数
+  * @param n : 待加的小时数
+  * @retval 返回自身引用实现链式编程
+  */
+Clock& Clock::addHour(int n) {
+	m_nHour = (m_nHour + n) % 24;
+	return *this;
+}
 bool isValid(int t_nHour, int t_nMinute, int t_nSecond) {
 	if (
 		t_nHour >= 24 || t_nHour < 0 ||
@@ -176,17 +185,6 @@ Clock& Clock::operator++(int) {
 			}
 		}
 	}
-	return *this;
-}
-
-/**
-  * @brief 类内重载+=运算符，加上对应的秒数
-  * @param n : 待加的秒数
-  * @retval 返回自身引用实现链式编程
-  */
-Clock& Clock::operator+=(int n) {
-	for (int i = 0; i < n; i++)
-		(*this)++;
 	return *this;
 }
 
