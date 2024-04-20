@@ -36,7 +36,7 @@ public:
 	// 规定动作
 	void Show() const;				//显示时间功能
 	void Tick();					//计时功能，每一次Tick，时间向前走1秒
-
+	Clock Sub(const Clock& c) const;//求2个时间值的差函数
 
 	// Getter & Setter
 	int get_nHour();
@@ -68,6 +68,7 @@ int operator-(const Clock& n1, const Clock& n2);
 Clock operator+(Clock c, int s);
 
 bool isValid(int t_nHour, int t_nMinute, int t_nSecond);
+void Standarize(int& t_nHour, int& t_nMinute, int& t_nSecond);
 
 #endif /* !__CLOCK_H */
 

@@ -22,6 +22,8 @@ int main() {
 	cout << c << endl;
 	c.Tick();
 	c.Show();
+	cout << endl;
+	cout << c.Sub(Clock(1, 2, 3)) << endl;
 	return 0;
 }
 

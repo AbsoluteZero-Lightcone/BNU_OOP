@@ -20,17 +20,7 @@ Clock::Clock() :
 {}
 
 Clock::Clock(int t_nHour, int t_nMinute, int t_nSecond) {
-	if (isValid(t_nHour, t_nMinute, t_nSecond)) {
-		m_nHour = t_nHour;
-		m_nMinute = t_nMinute;
-		m_nSecond = t_nSecond;
-	}
-	else {
-		m_nHour = 0;
-		m_nMinute = 0;
-		m_nSecond = 0;
-		cout << "Incorrect Time Format." << endl;
-	}
+	setTime(t_nHour, t_nMinute, t_nSecond);
 }
 
 Clock::Clock(const Clock& source) :
@@ -68,14 +58,12 @@ void Clock::set_nSecond(int t_nSecond) {
 }
 
 void Clock::setTime(int t_nHour, int t_nMinute, int t_nSecond) {
-	if (isValid(t_nHour, t_nMinute, t_nSecond)) {
+	if (!isValid(t_nHour, t_nMinute, t_nSecond))
+		Standarize(t_nHour, t_nMinute, t_nSecond);
 		m_nHour = t_nHour;
 		m_nMinute = t_nMinute;
 		m_nSecond = t_nSecond;
-	}
-	else {
-		cout << "Incorrect Time Format." << endl;
-	}
+	
 }
 
 // 规定动作
@@ -94,6 +82,40 @@ void Clock::Show() const {
   */
 void Clock::Tick() {
 	(*this)++;
+}
+/**
+  * @brief 求2个时间值的差函数
+  * @retval 注意时间流逝的方向：从*this时刻到c时刻所需要的时间，可为次日
+  */
+Clock Clock::Sub(const Clock& c) const {
+	return Clock(c.m_nHour - m_nHour,c.m_nMinute- m_nMinute,c.m_nSecond- m_nSecond);
+}
+/**
+  * @brief 将传入的引用标准化，可接受负数值
+  * @retval 使用引用参数返回
+  */
+void Standarize(int& t_nHour, int& t_nMinute, int& t_nSecond) {
+	int temp_h = t_nHour;
+	int temp_m = t_nMinute;
+	int temp_s = t_nSecond;
+	t_nSecond = temp_s % 60;
+	t_nMinute = (temp_m + temp_s / 60) % 60;
+	t_nHour = (temp_h + (temp_m + temp_s / 60) / 60) % 24;
+	// todo : 继承Date后 修改这部分（丢失了天的进位）
+	// 处理负数
+	// 极端情况验证： -23 -59 -59
+	// 下面的逻辑正确 
+	if (t_nSecond < 0) {
+		t_nSecond += 60;
+		t_nMinute--;
+	}
+	if (t_nMinute < 0) {
+		t_nMinute += 60;
+		t_nHour--;
+	}
+	if (t_nHour < 0) {
+		t_nHour += 24;
+	}
 }
 
 /* Exported functions ------------------------------------------------------- */
