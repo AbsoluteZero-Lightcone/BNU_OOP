@@ -68,9 +68,9 @@ string WorldClock::getCityName(string city) {
   * @brief 求2个时间值的差函数
   * @retval 注意时间流逝的方向：从*this时刻到c时刻所需要的时间，可为次日
   */
-WorldClock WorldClock::Sub(const WorldClock& c) const {
+Clock WorldClock::Sub(const WorldClock& c) const {
 	// 作业要求这里用WorldClock返回其实有两点不好：
-	// 1.时间的差值不应带有地点
+	// 1.时间的差值不应带有地点，这里改进为返回Clock而非WorldClock
 	// 2.WorldClock表征的是时刻，而非时间，强行用这种数据类型表示时间段就一定会造成超过24小时的部分溢出的问题，
 	// 改进的方法可以有两种：
 	// 1.继承Date，考虑不同日期

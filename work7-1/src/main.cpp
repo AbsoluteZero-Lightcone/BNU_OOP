@@ -28,22 +28,22 @@ int main() {
 
 		switch (mode) {
 		case 'p': {// 花括号限制变量的作用域（cppreference: switch statement）
-			cout << "Input person name :" << endl;
+			cout << "Input person name :" ;
 			cin >> t_strName;
-			cout << "Input person age :" << endl;
+			cout << "Input person age :" ;
 			cin >> t_nAge;
 			Person p(t_strName, t_nAge);
 			cout << p.get_strName() << " " << p.get_nAge() << endl;
 			break;
 		}
 		case 's': {
-			cout << "Input student name :" << endl;
+			cout << "Input student name :" ;
 			cin >> t_strName;
-			cout << "Input student age :" << endl;
+			cout << "Input student age :" ;
 			cin >> t_nAge;
-			cout << "Input student major :" << endl;
+			cout << "Input student major :";
 			cin >> t_strMajor;
-			cout << "Input student student id :" << endl;
+			cout << "Input student student id :" ;
 			cin >> t_strStudentID;
 
 			Student p(t_strName, t_nAge, t_strMajor, t_strStudentID);
@@ -58,13 +58,13 @@ int main() {
 			break;
 		}
 		case 'e': {
-			cout << "Input employee name :" << endl;
+			cout << "Input employee name :";
 			cin >> t_strName;
-			cout << "Input employee age :" << endl;
+			cout << "Input employee age :";
 			cin >> t_nAge;
-			cout << "Input employee department :" << endl;
+			cout << "Input employee department :";
 			cin >> t_strDepartment;
-			cout << "Input employee employee id :" << endl;
+			cout << "Input employee employee id :" ;
 			cin >> t_strEmployeeID;
 
 			Employee p(t_strName, t_nAge, t_strDepartment, t_strEmployeeID);
@@ -79,17 +79,17 @@ int main() {
 			break;
 		}
 		case 'v': {
-			cout << "Input stuEmployee name :" << endl;
+			cout << "Input stuEmployee name :";
 			cin >> t_strName;
-			cout << "Input stuEmployee age :" << endl;
+			cout << "Input stuEmployee age :";
 			cin >> t_nAge;
-			cout << "Input stuEmployee major :" << endl;
+			cout << "Input stuEmployee major :";
 			cin >> t_strMajor;
-			cout << "Input stuEmployee student id :" << endl;
+			cout << "Input stuEmployee student id :";
 			cin >> t_strStudentID;
-			cout << "Input stuEmployee department :" << endl;
+			cout << "Input stuEmployee department :";
 			cin >> t_strDepartment;
-			cout << "Input stuEmployee employee id :" << endl;
+			cout << "Input stuEmployee employee id :";
 			cin >> t_strEmployeeID;
 
 			StuEmployee p(t_strName, t_nAge, t_strMajor, t_strStudentID, t_strDepartment, t_strEmployeeID);
