@@ -17,9 +17,12 @@ using namespace std;
 
 typedef int datatype1;
 typedef int datatype2;
-// 替换内容：exported_class 类名
+// 替换内容：
+// exported_class 类名
 // datatype 类型
-// m_dataname 变量名
+// dataname 变量名
+// 改文件名
+// 将宏定义改为大写
 
 class exported_class {
 private:
@@ -36,7 +39,12 @@ public:
 	void set_dataname2(datatype2 t_dataname2);
 };
 
-
+ostream& operator<<(ostream& out, const exported_class& source);
+bool operator>(const exported_class& n1, const exported_class& n2);
+bool operator==(const exported_class& n1, const exported_class& n2);
+exported_class operator-(exported_class n);
+exported_class operator+(const exported_class& n1, const exported_class& n2);
+exported_class operator-(const exported_class& n1, const exported_class& n2);
 #endif /* !__exported_class_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
