@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "Clock.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
@@ -19,8 +19,8 @@ Clock::Clock() :
 	m_nSecond(0)
 {}
 
-Clock::Clock(int t_nHour, int t_nMinute, int t_nSecond):
-	m_nHour(t_nHour), 
+Clock::Clock(int t_nHour, int t_nMinute, int t_nSecond) :
+	m_nHour(t_nHour),
 	m_nMinute(t_nMinute),
 	m_nSecond(t_nSecond)
 {}
@@ -49,7 +49,6 @@ void Clock::setTime(int t_nHour, int t_nMinute, int t_nSecond) {
 
 /* Exported functions ------------------------------------------------------- */
 
-
 /**
   * @brief 重载标准输出流 <<运算符
   * @param ostream& out : 标准输出流对象
@@ -57,7 +56,9 @@ void Clock::setTime(int t_nHour, int t_nMinute, int t_nSecond) {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const Clock& source) {
-	out << source.m_nHour << ":" << source.m_nMinute << ":" << source.m_nSecond;
+	out << setw(2) << setfill('0') << source.m_nHour << ":"
+		<< setw(2) << setfill('0') << source.m_nMinute << ":"
+		<< setw(2) << setfill('0') << source.m_nSecond;
 	return out;
 }
 
@@ -67,7 +68,9 @@ ostream& operator<<(ostream& out, const Clock& source) {
   * @retval 无
   */
 void Clock::operator=(const Clock& source) {
-	// todo
+	m_nHour = source.m_nHour;
+	m_nMinute = source.m_nMinute;
+	m_nSecond = source.m_nSecond;
 }
 
 /**
