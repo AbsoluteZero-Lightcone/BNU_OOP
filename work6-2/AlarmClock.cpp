@@ -45,7 +45,7 @@ void AlarmClock::setAlarmTime(int t_nTargetHour, int t_nTargetMinute) {
   */
 void AlarmClock::Tick() {
 	(*this)++;
-	if ((*this) >= AlarmTime && AlarmTime.addSecond(5) >= (*this))
+	if ((*this) >= AlarmTime && AlarmTime.addSecond(5) > (*this))// ÏìÁåÎåÃë
 		Alarm();
 }
 

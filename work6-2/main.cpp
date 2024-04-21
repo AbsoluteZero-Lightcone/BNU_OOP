@@ -13,11 +13,32 @@
 #include <string>
 #include <Windows.h>
 using namespace std;
+#include "AlarmClock.h"
 
 int main() {
 	// 闹钟走多长时间封装在AlarmClock类里不是很合理，
 	// 因为没有那个闹钟需要设计一个 一到规定时间就不走了 的功能
-	// 这里把走多长时间实现在类外
+	// 如果要实现的话，也要把走多长时间实现在类外
+	// 
+	// 并且走多长时间这个需求，应该是为了避免程序一直响而采取的妥协的方法，
+	// 但实际上应该是响铃之后钟继续走才对，这里实现了这一功能（只响铃5秒）
+
+	int a, b, c, d, e;
+	cout << "请输入初始时间（时 分 秒）：";
+	cin >> a >> b >> c;
+	cout << "请输入闹铃时间（时 分）  ：";
+	cin >> d >> e;
+	AlarmClock alarm(a, b, c, d, e);
+	cout << "请输入计时时长（分 秒）  ：";
+	cin >> a >> b;
+	Clock current;
+	Clock target(0, a, b);
+	while (current < target) {
+
+	}
+
+
+
 	return 0;
 }
 

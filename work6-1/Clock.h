@@ -61,6 +61,9 @@ public:
 
 	friend ostream& operator<<(ostream& out, const Clock& source);
 	friend bool operator>(const Clock& n1, const Clock& n2);
+	friend bool operator<(const Clock& n1, const Clock& n2);
+	friend bool operator>=(const Clock& n1, const Clock& n2);
+	friend bool operator<=(const Clock& n1, const Clock& n2);
 	friend bool operator==(const Clock& n1, const Clock& n2);
 	friend Clock operator-(const Clock& n1, const Clock& n2);
 	// ÅÉÉúÀàÓÑÔª
@@ -70,7 +73,9 @@ public:
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Clock& source);
 bool operator>(const Clock& n1, const Clock& n2);
+bool operator<(const Clock& n1, const Clock& n2);
 bool operator>=(const Clock& n1, const Clock& n2);
+bool operator<=(const Clock& n1, const Clock& n2);
 bool operator==(const Clock& n1, const Clock& n2);
 Clock operator-(const Clock& n1, const Clock& n2);
 Clock operator+(Clock c, int s);
