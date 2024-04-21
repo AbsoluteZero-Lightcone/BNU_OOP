@@ -18,13 +18,21 @@
 #include <string>
 using namespace std;
 #include "Clock.h"
+
+/* Datas ---------------------------------------------------------------------*/
+
+#define REGION_COUNT 21
+extern string LUT_code[REGION_COUNT];
+extern string LUT_name[REGION_COUNT];
+
 /* Class ---------------------------------------------------------------------*/
 class WorldClock:public Clock{
 private:
 	string m_strCity;
 
 	static int CityToRelativeHour(string city);
-	static string getCityName(string city);
+	static string toRegionName(string city);
+	static string toRegionCode(string city);
 public:
 	// Constructors & Deconstructor
 	WorldClock();
@@ -49,6 +57,7 @@ public:
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const WorldClock& source);
+bool isInArray(string s, string* arr, int length);
 
 #endif /* !__WORLDCLOCK_H */
 

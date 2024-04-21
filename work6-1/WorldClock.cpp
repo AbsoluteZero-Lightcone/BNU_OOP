@@ -12,6 +12,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "WorldClock.h"
 
+/* Datas ---------------------------------------------------------------------*/
+// 查找表，空的使用string()占位
+// 这里没必要用enum
+// 也没必要写偏移量数组，用索引能表示出相对值就行
+string LUT_code[REGION_COUNT] = { "ha","ak","la",string(),"ch","ny","dxy","bz","dxyz",string(),"ld","bl","ca","mo",string(),"nd",string(),"bk","bj","tk","sy" };
+string LUT_name[REGION_COUNT] = { "Hawaii","Alaska","LosAngeles",string(),"Chicago","NewYork","大西洋时间","Brazil","大西洋-中部",string(),"London","Berlin","Cario","Moscow",string(),"NewDelhi",string(),"Bangkok","Beijing","Tokyo","Sydney" };
+
 /* Constructors & Deconstructor --------------------------------------------- */
 WorldClock::WorldClock() :
 	Clock(0, 0, 0),
@@ -37,26 +44,42 @@ WorldClock::~WorldClock() {}
 
 /* Getters & Setters -------------------------------------------------------- */
 string WorldClock::get_strCity() { return m_strCity; }
-void WorldClock::set_strCity(string t_strCity) { m_strCity = t_strCity; }
+void WorldClock::set_strCity(string t_strCity) {
+	if (t_strCity == string())return;// 合法性检查
+	else if (isInArray(t_strCity, LUT_code, REGION_COUNT))
+		m_strCity = t_strCity;
+	else if (isInArray(t_strCity, LUT_name, REGION_COUNT))
+		m_strCity = toRegionCode(t_strCity);
+	// toRegionCode(string)可以返回Error
+	// 但是已经检查过t_strCity存在于LUT中了，一定不会有Error的情况，此处不用写卫语句
+	else return;
+}
 
 /* Exported functions ------------------------------------------------------- */
 
-// 查找表，空的使用string()占位
-// 这里没必要用enum
-// 也没必要写偏移量数组，用索引能表示出相对值就行
-string LUT_code[21] = { "ha","ak","la",string(),"ch","ny","dxy","bz","dxyz",string(),"ld","bl","ca","mo",string(),"nd",string(),"bk","bj","tk","sy" };
-string LUT_name[21] = { "Hawaii","Alaska","LosAngeles",string(),"Chicago","NewYork","大西洋时间","Brazil","大西洋-中部",string(),"London","Berlin","Cario","Moscow",string(),"NewDelhi",string(),"Bangkok","Beijing","Tokyo","Sydney"};
 int WorldClock::CityToRelativeHour(string city) {
-	for (int i = 0; i < 21; i++) {
+	for (int i = 0; i < REGION_COUNT; i++) {
 		if (LUT_code[i] == city)
 			return i;
 	}
 	return -1;
 }
-
-string WorldClock::getCityName(string city) {
+/**
+  * @brief 判断元素在数组中是否存在
+  * @param string s : 待查找的元素
+  * @param string* arr : 数组
+  * @param int length : 数组长度
+  * @retval bool, 1 for 存在, 0 for 不存在
+  */
+bool isInArray(string s, string* arr,int length) {
+	for (int i = 0; i < length; i++) {
+		if (arr[i] == s)return 1;
+	}
+	return 0;
+}
+string WorldClock::toRegionName(string city) {
 	int index = -1;
-	for (int i = 0; i < 21; i++) {
+	for (int i = 0; i < REGION_COUNT; i++) {
 		if (LUT_code[i] == city) {
 			index = i;
 			break;
@@ -64,6 +87,17 @@ string WorldClock::getCityName(string city) {
 	}
 	if (index == -1)return "Error";
 	return LUT_name[index];
+}
+string WorldClock::toRegionCode(string city) {
+	int index = -1;
+	for (int i = 0; i < REGION_COUNT; i++) {
+		if (LUT_name[i] == city) {
+			index = i;
+			break;
+		}
+	}
+	if (index == -1)return "Error";
+	return LUT_code[index];
 }
 
 WorldClock WorldClock::toRegion(string target) {
@@ -99,7 +133,7 @@ Clock WorldClock::Sub(const WorldClock& c) const {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const WorldClock& source) {
-	out << WorldClock::getCityName(source.m_strCity) << " " <<(Clock)source;
+	out << WorldClock::toRegionName(source.m_strCity) << " " <<(Clock)source;
 	return out;
 }
 /**
