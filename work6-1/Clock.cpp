@@ -128,11 +128,26 @@ void Standarize(int& t_nHour, int& t_nMinute, int& t_nSecond) {
 /* Exported functions ------------------------------------------------------- */
 
 /**
+  * @brief 加上对应的秒数，不改变自身
+  * @param n : 待加的秒数，可接受负数
+  * @retval Clock
+  */
+Clock Clock::addSecond(int n)const{
+	Clock temp(*this);
+	if (n >= 0)
+		for (int i = 0; i < n; i++)
+			temp++;
+	else for (int i = 0; i < -n; i++)
+		temp--;
+	return temp;
+}
+
+/**
   * @brief 加上对应的小时数
-  * @param n : 待加的小时数，可接受负数
+  * @param n : 待加的小时数，可接受负数，可空，默认为下一小时
   * @retval 返回自身引用实现链式编程
   */
-Clock& Clock::addHour(int n) {
+Clock& Clock::toNextHour(int n) {
 	m_nHour = (m_nHour + n) % 24;
 	if (m_nHour < 0)m_nHour += 24;
 	return *this;
@@ -194,6 +209,28 @@ Clock& Clock::operator++(int) {
 			if (m_nHour == 24) {
 				m_nHour = 0;
 				// m_nDay++; //todo 从Date中继承
+			}
+		}
+	}
+	return *this;
+}
+
+/**
+  * @brief 类内重载自减运算符，到上一秒
+  * @param 无
+  * @retval 返回自身引用实现链式编程
+  */
+Clock& Clock::operator--(int) {
+	m_nSecond--;
+	if (m_nSecond == -1) {
+		m_nSecond = 59;
+		m_nMinute--;
+		if (m_nMinute == -1) {
+			m_nMinute = 59;
+			m_nHour--;
+			if (m_nHour == -1) {
+				m_nHour = 23;
+				// m_nDay--; //todo 从Date中继承
 			}
 		}
 	}

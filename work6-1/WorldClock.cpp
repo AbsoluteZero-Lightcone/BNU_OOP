@@ -124,7 +124,7 @@ string WorldClock::toRegionCode(string name) {
   */
 WorldClock WorldClock::toRegion(string target) {
 	WorldClock temp(*this);
-	temp.addHour(
+	temp.toNextHour(
 		WorldClock::CityToRelativeHour(target) -
 		WorldClock::CityToRelativeHour(this->m_strCity)
 	);

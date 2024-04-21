@@ -15,7 +15,9 @@
 using namespace std;
 
 int main() {
-
+	// 闹钟走多长时间封装在AlarmClock类里不是很合理，
+	// 因为没有那个闹钟需要设计一个 一到规定时间就不走了 的功能
+	// 这里把走多长时间实现在类外
 	return 0;
 }
 

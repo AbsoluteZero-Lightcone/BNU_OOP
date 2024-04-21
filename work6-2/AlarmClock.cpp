@@ -37,9 +37,15 @@ void AlarmClock::setAlarmTime(int t_nTargetHour, int t_nTargetMinute) {
 }
 
 /* Exported functions ------------------------------------------------------- */
+
+/**
+  * @brief ×ß×Ö¶ù
+  * @param None
+  * @retval None
+  */
 void AlarmClock::Tick() {
 	(*this)++;
-	if ((*this) >= AlarmTime)
+	if ((*this) >= AlarmTime && AlarmTime.addSecond(5) >= (*this))
 		Alarm();
 }
 
