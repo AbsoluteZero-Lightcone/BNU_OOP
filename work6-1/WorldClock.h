@@ -41,6 +41,7 @@ public:
 	// 规定动作
 	Clock Sub(const WorldClock& c) const;       //求2个时间值的差函数
 	void Show() const;				            //显示时间功能
+	WorldClock toRegion(string target);
 
 	// 运算符重载
 	friend ostream& operator<<(ostream& out, const WorldClock& source);

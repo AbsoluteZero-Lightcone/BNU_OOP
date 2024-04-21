@@ -42,6 +42,8 @@ void WorldClock::set_strCity(string t_strCity) { m_strCity = t_strCity; }
 /* Exported functions ------------------------------------------------------- */
 
 // 查找表，空的使用string()占位
+// 这里没必要用enum
+// 也没必要写偏移量数组，用索引能表示出相对值就行
 string LUT_code[21] = { "ha","ak","la",string(),"ch","ny","dxy","bz","dxyz",string(),"ld","bl","ca","mo",string(),"nd",string(),"bk","bj","tk","sy" };
 string LUT_name[21] = { "Hawaii","Alaska","LosAngeles",string(),"Chicago","NewYork","大西洋时间","Brazil","大西洋-中部",string(),"London","Berlin","Cario","Moscow",string(),"NewDelhi",string(),"Bangkok","Beijing","Tokyo","Sydney"};
 int WorldClock::CityToRelativeHour(string city) {
@@ -63,6 +65,17 @@ string WorldClock::getCityName(string city) {
 	if (index == -1)return "Error";
 	return LUT_name[index];
 }
+
+WorldClock WorldClock::toRegion(string target) {
+	WorldClock temp(*this);
+	temp.addHour(
+		WorldClock::CityToRelativeHour(target) -
+		WorldClock::CityToRelativeHour(this->m_strCity)
+	);
+	temp.set_strCity(target);
+	return temp;
+}
+
 
 /**
   * @brief 求2个时间值的差函数

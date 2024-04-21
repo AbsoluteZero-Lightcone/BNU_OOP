@@ -32,7 +32,7 @@ int main() {
 			cin >> h >> m >> s;
 			cout << "Input Conversion City:";
 			cin >> targetCity;
-			WorldClock(h, m, s, city);
+			WorldClock c(h, m, s, city);
 			
 			break;
 		}
