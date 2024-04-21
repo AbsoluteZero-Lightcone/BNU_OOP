@@ -72,7 +72,7 @@ bool operator==(const Clock& n1, const Clock& n2);
 Clock operator-(const Clock& n1, const Clock& n2);
 Clock operator+(Clock c, int s);
 
-bool isValid(int t_nHour, int t_nMinute, int t_nSecond);
+bool isValid(int t_nHour, int t_nMinute, int t_nSecond = 0);
 void Standarize(int& t_nHour, int& t_nMinute, int& t_nSecond);
 
 #endif /* !__CLOCK_H */

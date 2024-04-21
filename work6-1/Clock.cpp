@@ -142,7 +142,7 @@ Clock& Clock::addHour(int n) {
   * @brief 判断时间是否有效
   * @param int t_nHour : 时
   * @param int t_nMinute : 分
-  * @param int t_nSecond : 秒
+  * @param int t_nSecond : 秒，可省
   * @retval bool 1 for 有效
   */
 bool isValid(int t_nHour, int t_nMinute, int t_nSecond) {

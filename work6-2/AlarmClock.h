@@ -38,29 +38,14 @@ public:
 	int get_nTargetMinute()const;
 	void set_nTargetMinute(int t_nTargetMinute);
 
-	void setTargetTime();
+	void setTargetTime(int t_nTargetHour, int t_nTargetMinute);
 
 	// ‘ÀÀ„∑˚÷ÿ‘ÿ
-	void operator=(const AlarmClock& source);
-	void operator=(int n);
-	AlarmClock& operator+=(int n);
-	AlarmClock& operator++();
-
 	friend ostream& operator<<(ostream& out, const AlarmClock& source);
-	friend bool operator>(const AlarmClock& n1, const AlarmClock& n2);
-	friend bool operator==(const AlarmClock& n1, const AlarmClock& n2);
-	friend AlarmClock operator-(AlarmClock n);
-	friend AlarmClock operator+(const AlarmClock& n1, const AlarmClock& n2);
-	friend AlarmClock operator-(const AlarmClock& n1, const AlarmClock& n2);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const AlarmClock& source);
-bool operator>(const AlarmClock& n1, const AlarmClock& n2);
-bool operator==(const AlarmClock& n1, const AlarmClock& n2);
-AlarmClock operator-(AlarmClock n);
-AlarmClock operator+(const AlarmClock& n1, const AlarmClock& n2);
-AlarmClock operator-(const AlarmClock& n1, const AlarmClock& n2);
 
 #endif /* !__ALARMCLOCK_H */
 
