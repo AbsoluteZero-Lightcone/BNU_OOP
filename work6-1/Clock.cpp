@@ -244,10 +244,7 @@ Clock& Clock::operator--(int) {
   * @retval bool, true for n1 > n2
   */
 bool operator>(const Clock& n1, const Clock& n2) {
-	if (n1.m_nHour > n2.m_nHour)return true;
-	else if (n1.m_nMinute > n2.m_nMinute)return true;
-	else if (n1.m_nSecond > n2.m_nSecond)return true;
-	else return false;
+	return !(n1 <= n2);
 }
 /**
   * @brief 重载小于运算符
@@ -266,7 +263,10 @@ bool operator<(const Clock& n1, const Clock& n2) {
   * @retval bool, true for n1 >= n2
   */
 bool operator>=(const Clock& n1, const Clock& n2) {
-	return (n1 > n2) || (n1 == n2);
+	if (n1.m_nHour < n2.m_nHour)return false;
+	else if (n1.m_nMinute < n2.m_nMinute)return false;
+	else if (n1.m_nSecond < n2.m_nSecond)return false;
+	else return true;
 }
 /**
   * @brief 重载小于等于运算符

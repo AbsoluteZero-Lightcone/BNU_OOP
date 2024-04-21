@@ -45,7 +45,7 @@ void AlarmClock::setAlarmTime(int t_nTargetHour, int t_nTargetMinute) {
   */
 void AlarmClock::Tick() {
 	(*this)++;
-	if ((*this) >= AlarmTime &&  (*this) < AlarmTime.addSecond(5))// ÏìÁåÎåÃë
+	if ((*this) >= AlarmTime &&  (*this) < AlarmTime.addSecond(10))// ÏìÁå10Ãë
 		Alarm();
 }
 
@@ -55,7 +55,7 @@ void AlarmClock::Tick() {
   * @retval None
   */
 void AlarmClock::Alarm() {
-	cout << '\7' << '\7' << '\7';
+	cout << '\7' ;
 }
 
 /**

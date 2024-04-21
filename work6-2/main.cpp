@@ -23,7 +23,7 @@ int main() {
 	// 如果要实现的话，也要把走多长时间实现在类外
 	// 
 	// 并且走多长时间这个需求，应该是为了避免程序一直响而采取的妥协的方法，
-	// 但实际上应该是响铃之后钟继续走才对，这里实现了这一功能（只响铃5秒）
+	// 但实际上应该是响铃之后钟继续走才对，这里实现了这一功能（只响铃10秒）
 	do {
 		int a, b, c, d, e;
 		cout << "请输入初始时间（时 分 秒）：";
@@ -37,9 +37,9 @@ int main() {
 		Clock target(0, a, b);
 		while (current < target) {
 			current++;
-			alarm.Tick();
 			cout << alarm << "\r";
 			Sleep(1000);
+			alarm.Tick();
 		}
 	} while (isContinue());
 
