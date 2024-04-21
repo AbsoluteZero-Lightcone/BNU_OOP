@@ -33,12 +33,13 @@ int main() {
 		AlarmClock alarm(a, b, c, d, e);
 		cout << "请输入计时时长（分 秒）  ：";
 		cin >> a >> b;
-		Clock current(0,0,0);
+		Clock current(0, 0, 0);
 		Clock target(0, a, b);
 		while (current < target) {
 			current++;
 			cout << alarm << "\r";
 			Sleep(1000);
+			cout << "                         \r";
 			alarm.Tick();
 		}
 	} while (isContinue());
@@ -51,8 +52,8 @@ bool isContinue() {
 		cout << "计时结束，还要继续吗（Y/N）？";
 		char command;
 		cin >> command;
-		if (command == 'Y'|| command == 'y')return 1;
-		else if (command == 'N'|| command == 'n')return 0;
+		if (command == 'Y' || command == 'y')return 1;
+		else if (command == 'N' || command == 'n')return 0;
 		else cout << "Invalid Command" << endl;
 	}
 }

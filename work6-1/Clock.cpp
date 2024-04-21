@@ -132,7 +132,7 @@ void Standarize(int& t_nHour, int& t_nMinute, int& t_nSecond) {
   * @param n : 待加的秒数，可接受负数
   * @retval Clock
   */
-Clock Clock::addSecond(int n)const{
+Clock Clock::addSecond(int n)const {
 	Clock temp(*this);
 	if (n >= 0)
 		for (int i = 0; i < n; i++)

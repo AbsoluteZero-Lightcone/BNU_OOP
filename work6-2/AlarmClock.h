@@ -23,7 +23,7 @@ class AlarmClock :public Clock {
 private:
 	void Alarm();
 public:
-	
+
 	Clock AlarmTime;// Clock 内部已经经过封装，直接对外公开不会有安全问题
 
 	// Constructors & Deconstructor

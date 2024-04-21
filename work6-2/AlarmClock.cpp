@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-  /* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------*/
 #include "AlarmClock.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
@@ -19,8 +19,8 @@ AlarmClock::AlarmClock() :
 {}
 
 AlarmClock::AlarmClock(int t_nHour, int t_nMinute, int t_nSecond, int t_nTargetHour, int t_nTargetMinute) :
-	Clock(t_nHour, t_nMinute, t_nSecond), 
-	AlarmTime(t_nTargetHour, t_nTargetMinute,0)
+	Clock(t_nHour, t_nMinute, t_nSecond),
+	AlarmTime(t_nTargetHour, t_nTargetMinute, 0)
 {}
 
 AlarmClock::AlarmClock(const AlarmClock& source) :
@@ -45,7 +45,7 @@ void AlarmClock::setAlarmTime(int t_nTargetHour, int t_nTargetMinute) {
   */
 void AlarmClock::Tick() {
 	(*this)++;
-	if ((*this) >= AlarmTime &&  (*this) < AlarmTime.addSecond(10))// ÏìÁå10Ãë
+	if ((*this) >= AlarmTime && (*this) < AlarmTime.addSecond(10))// ÏìÁå10Ãë
 		Alarm();
 }
 
@@ -55,7 +55,8 @@ void AlarmClock::Tick() {
   * @retval None
   */
 void AlarmClock::Alarm() {
-	cout << '\7' ;
+	cout << '\a' << '\a' << '\a';
+	cout << "          * ÕýÔÚÏìÁå *\r";
 }
 
 /**
