@@ -75,6 +75,7 @@ void Clock::setTime(int t_nHour, int t_nMinute, int t_nSecond) {
 void Clock::Show() const {
 	cout << *this;
 }
+
 /**
   * @brief 计时功能，每一次Tick，时间向前走1秒
   * @param None
@@ -83,6 +84,7 @@ void Clock::Show() const {
 void Clock::Tick() {
 	(*this)++;
 }
+
 /**
   * @brief 求2个时间值的差函数
   * @retval 注意时间流逝的方向：从*this时刻到c时刻所需要的时间，可为次日
@@ -90,6 +92,7 @@ void Clock::Tick() {
 Clock Clock::Sub(const Clock& c) const {
 	return Clock(c.m_nHour - m_nHour,c.m_nMinute- m_nMinute,c.m_nSecond- m_nSecond);
 }
+
 /**
   * @brief 将传入的引用标准化，可接受负数值
   * @retval 使用引用参数返回
@@ -133,6 +136,14 @@ Clock& Clock::addHour(int n) {
 	m_nHour = (m_nHour + n) % 24;
 	return *this;
 }
+
+/**
+  * @brief 判断时间是否有效
+  * @param int t_nHour : 时
+  * @param int t_nMinute : 分
+  * @param int t_nSecond : 秒
+  * @retval bool 1 for 有效
+  */
 bool isValid(int t_nHour, int t_nMinute, int t_nSecond) {
 	if (
 		t_nHour >= 24 || t_nHour < 0 ||
@@ -228,6 +239,7 @@ int operator-(const Clock& n1, const Clock& n2) {
 		(n1.m_nMinute - n2.m_nMinute) * 60 +
 		(n1.m_nSecond - n2.m_nSecond);
 }
+
 /**
   * @brief 类内重载+=运算符，加上对应的秒数
   * @param c : Clock Object
