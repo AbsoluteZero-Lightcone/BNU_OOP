@@ -3,7 +3,7 @@
   * @file    AlarmClock.h
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
-  * @date    2024-04-20
+  * @date    2024-04-21
   * @brief   AlarmClock class
   * @encode  GB2312
   ******************************************************************************
@@ -23,6 +23,7 @@ class AlarmClock :public Clock {
 private:
 	int m_nTargetHour;
 	int m_nTargetMinute;
+	void Alarm();
 public:
 	// Constructors & Deconstructor
 	AlarmClock();
@@ -36,7 +37,10 @@ public:
 	int get_nTargetMinute()const;
 	void set_nTargetMinute(int t_nTargetMinute);
 
-	void setTargetTime(int t_nTargetHour, int t_nTargetMinute);
+	void setAlarmTime(int t_nTargetHour, int t_nTargetMinute);
+
+	// 规定动作
+	void Tick();
 
 	// 运算符重载
 	friend ostream& operator<<(ostream& out, const AlarmClock& source);
