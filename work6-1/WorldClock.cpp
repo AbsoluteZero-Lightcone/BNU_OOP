@@ -118,10 +118,9 @@ string WorldClock::toRegionCode(string name) {
 }
 
 /**
-  * @brief 重载标准输出流 <<运算符
-  * @param ostream& out : 标准输出流对象
-  * @param const WorldClock& source : 待输出的对象
-  * @retval ostream&
+  * @brief 时区转换
+  * @param string target : 目的时区，可接受时区名或时区代码
+  * @retval WorldClock对象
   */
 WorldClock WorldClock::toRegion(string target) {
 	WorldClock temp(*this);
@@ -132,7 +131,6 @@ WorldClock WorldClock::toRegion(string target) {
 	temp.set_strCity(target);
 	return temp;
 }
-
 
 /**
   * @brief 求2个时间值的差函数
