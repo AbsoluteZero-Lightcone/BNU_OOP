@@ -61,13 +61,14 @@ public:
 	friend bool operator>(const Clock& n1, const Clock& n2);
 	friend bool operator==(const Clock& n1, const Clock& n2);
 	friend Clock operator-(const Clock& n1, const Clock& n2);
-	// 派生类运算符重载
+	// 派生类友元
 	friend Clock operator-(const WorldClock& n1, const WorldClock& n2);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Clock& source);
 bool operator>(const Clock& n1, const Clock& n2);
+bool operator>=(const Clock& n1, const Clock& n2);
 bool operator==(const Clock& n1, const Clock& n2);
 Clock operator-(const Clock& n1, const Clock& n2);
 Clock operator+(Clock c, int s);

@@ -21,10 +21,11 @@ using namespace std;
 /* Class ---------------------------------------------------------------------*/
 class AlarmClock :public Clock {
 private:
-	int m_nTargetHour;
-	int m_nTargetMinute;
 	void Alarm();
 public:
+	
+	Clock AlarmTime;// Clock 内部已经经过封装，直接对外公开不会有安全问题
+
 	// Constructors & Deconstructor
 	AlarmClock();
 	AlarmClock(int t_nHour, int t_nMinute, int t_nSecond, int t_nTargetHour = 0, int t_nTargetMinute = 0);
@@ -32,11 +33,6 @@ public:
 	~AlarmClock();
 
 	// Getter & Setter
-	int get_nTargetHour()const;
-	void set_nTargetHour(int t_nTargetHour);
-	int get_nTargetMinute()const;
-	void set_nTargetMinute(int t_nTargetMinute);
-
 	void setAlarmTime(int t_nTargetHour, int t_nTargetMinute);
 
 	// 规定动作

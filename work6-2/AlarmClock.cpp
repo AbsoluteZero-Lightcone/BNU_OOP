@@ -15,62 +15,31 @@
 /* Constructors & Deconstructor --------------------------------------------- */
 AlarmClock::AlarmClock() :
 	Clock(),
-	m_nTargetHour(0),
-	m_nTargetMinute(0)
+	AlarmTime()
 {}
 
 AlarmClock::AlarmClock(int t_nHour, int t_nMinute, int t_nSecond, int t_nTargetHour, int t_nTargetMinute) :
-	Clock(t_nHour, t_nMinute, t_nSecond),
-	m_nTargetHour(t_nTargetHour),
-	m_nTargetMinute(t_nTargetMinute)
-{
-	try { setAlarmTime(t_nTargetHour, t_nTargetMinute); }
-	catch (string info) {
-		cout << info << endl;
-		// 当输入的值非法时使用默认值：
-		setAlarmTime(0, 0);
-	}
-}
+	Clock(t_nHour, t_nMinute, t_nSecond), 
+	AlarmTime(t_nTargetHour, t_nTargetMinute,0)
+{}
 
 AlarmClock::AlarmClock(const AlarmClock& source) :
-	Clock(source)
-{
-	setAlarmTime(source.m_nTargetHour, source.m_nTargetMinute);
-}
+	Clock(source),
+	AlarmTime(source.AlarmTime)
+{}
 
 AlarmClock::~AlarmClock() {}
 
 /* Getters & Setters -------------------------------------------------------- */
-int AlarmClock::get_nTargetHour()const { return m_nTargetHour; }
-void AlarmClock::set_nTargetHour(int t_nTargetHour) {
-	if (t_nTargetHour >= 24 || t_nTargetHour < 0) {
-		cout << "Incorrect Time Format." << endl;
-		return;
-	}
-	m_nTargetHour = t_nTargetHour;
-}
-int AlarmClock::get_nTargetMinute()const { return m_nTargetMinute; }
-void AlarmClock::set_nTargetMinute(int t_nTargetMinute) {
-	if (t_nTargetMinute >= 60 || t_nTargetMinute < 0) {
-		cout << "Incorrect Time Format." << endl;
-		return;
-	}
-	m_nTargetMinute = t_nTargetMinute;
-}
 
 void AlarmClock::setAlarmTime(int t_nTargetHour, int t_nTargetMinute) {
-	if (!isValid(t_nTargetHour, t_nTargetMinute)) {
-		throw("Incorrect Time Format.");
-		return;
-	}
-	m_nTargetHour=t_nTargetHour;
-	m_nTargetMinute=t_nTargetMinute;
+	AlarmTime.setTime(t_nTargetHour, t_nTargetMinute, 0);
 }
 
 /* Exported functions ------------------------------------------------------- */
 void AlarmClock::Tick() {
 	(*this)++;
-	if ((*this) > Clock(m_nTargetHour, m_nTargetMinute, 0))
+	if ((*this) >= AlarmTime)
 		Alarm();
 }
 

@@ -214,6 +214,16 @@ bool operator>(const Clock& n1, const Clock& n2) {
 }
 
 /**
+  * @brief 重载大于等于运算符
+  * @param const Clock& n1 : 运算符左边的值
+  * @param const Clock& n2 : 运算符右边的值
+  * @retval bool, true for n1 >= n2
+  */
+bool operator>=(const Clock& n1, const Clock& n2) {
+	return (n1 > n2) || (n1 == n2);
+}
+
+/**
   * @brief 重载等于运算符
   * @param const Clock& n1 : 运算符左边的值
   * @param const Clock& n2 : 运算符右边的值
