@@ -15,8 +15,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <string>
-#include <cmath>
-#include <cstdint>
 using namespace std;
 #include <Clock.h>
 

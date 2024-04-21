@@ -76,7 +76,7 @@ void AlarmClock::setTargetTime(int t_nTargetHour, int t_nTargetMinute) {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const AlarmClock& source) {
-	// todo
+	out << (Clock)source;
 	return out;
 }
 
