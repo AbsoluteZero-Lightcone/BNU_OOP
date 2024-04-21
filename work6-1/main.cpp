@@ -15,8 +15,7 @@
 #include <cstdint>
 using namespace std;
 #include "WorldClock.h"
-// ÑùÀıÊäÈë£º
-// cbj 20 30 45 sy sbj 20 30 45 ld 10 25 5 cca 8 12 50 ha sbk 15 26 30 ny 18 55 5 e
+
 int main() {
 	bool isOver = 0;
 	while (!isOver) {

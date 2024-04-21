@@ -129,11 +129,12 @@ void Standarize(int& t_nHour, int& t_nMinute, int& t_nSecond) {
 
 /**
   * @brief 加上对应的小时数
-  * @param n : 待加的小时数
+  * @param n : 待加的小时数，可接受负数
   * @retval 返回自身引用实现链式编程
   */
 Clock& Clock::addHour(int n) {
 	m_nHour = (m_nHour + n) % 24;
+	if (m_nHour < 0)m_nHour += 24;
 	return *this;
 }
 
