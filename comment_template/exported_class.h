@@ -42,9 +42,9 @@ public:
 	~exported_class();
 
 	// Getter & Setter
-	datatype1 get_dataname1();
+	datatype1 get_dataname1()const;
 	void set_dataname1(datatype1 t_dataname1);
-	datatype2 get_dataname2();
+	datatype2 get_dataname2()const;
 	void set_dataname2(datatype2 t_dataname2);
 
 	// ÔËËã·ûÖØÔØ

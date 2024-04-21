@@ -26,7 +26,7 @@ extern string LUT_code[REGION_COUNT];
 extern string LUT_name[REGION_COUNT];
 
 /* Class ---------------------------------------------------------------------*/
-class WorldClock:public Clock{
+class WorldClock :public Clock {
 private:
 	string m_strCity;
 
@@ -36,14 +36,14 @@ private:
 public:
 	// Constructors & Deconstructor
 	WorldClock();
-	WorldClock(int t_nHour, int t_nMinute, int t_nSecond,string t_strCity="bj");
+	WorldClock(int t_nHour, int t_nMinute, int t_nSecond, string t_strCity = "bj");
 	WorldClock(const WorldClock& source);
 	WorldClock(const Clock& source);
 
 	~WorldClock();
 
 	// Getter & Setter
-	string get_strCity();
+	string get_strCity()const;
 	void set_strCity(string t_strCity);
 
 	// 规定动作

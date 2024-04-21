@@ -43,7 +43,7 @@ WorldClock::WorldClock(const Clock& source) :
 WorldClock::~WorldClock() {}
 
 /* Getters & Setters -------------------------------------------------------- */
-string WorldClock::get_strCity() { return m_strCity; }
+string WorldClock::get_strCity() const { return m_strCity; }
 void WorldClock::set_strCity(string t_strCity) {
 	if (t_strCity == string())return;// 合法性检查
 	else if (isInArray(t_strCity, LUT_code, REGION_COUNT))

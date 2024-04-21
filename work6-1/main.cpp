@@ -24,9 +24,9 @@ int main() {
 		cin >> mode;
 		switch (mode) {
 		case 'c': {
-			string city,targetCity;
+			string city, targetCity;
 			int h, m, s;
-			cout << "Input City:" ;
+			cout << "Input City:";
 			cin >> city;
 			cout << "Input hour minute second:";
 			cin >> h >> m >> s;

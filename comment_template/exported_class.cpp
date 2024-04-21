@@ -18,8 +18,8 @@ exported_class::exported_class() :
 	m_dataname2(0)
 {}
 
-exported_class::exported_class(datatype1 t_dataname1, datatype2 t_dataname2):
-	m_dataname1(t_dataname1), 
+exported_class::exported_class(datatype1 t_dataname1, datatype2 t_dataname2) :
+	m_dataname1(t_dataname1),
 	m_dataname2(t_dataname2)
 {}
 
@@ -31,9 +31,9 @@ exported_class::exported_class(const exported_class& source) :
 exported_class::~exported_class() {}
 
 /* Getters & Setters -------------------------------------------------------- */
-datatype1 exported_class::get_dataname1() { return m_dataname1; }
+datatype1 exported_class::get_dataname1()const { return m_dataname1; }
 void exported_class::set_dataname1(datatype1 t_dataname1) { m_dataname1 = t_dataname1; }
-datatype2 exported_class::get_dataname2() { return m_dataname2; }
+datatype2 exported_class::get_dataname2()const { return m_dataname2; }
 void exported_class::set_dataname2(datatype2 t_dataname2) { m_dataname2 = t_dataname2; }
 
 /* Exported functions ------------------------------------------------------- */

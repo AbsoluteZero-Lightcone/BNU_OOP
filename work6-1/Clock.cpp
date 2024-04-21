@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-  /* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------*/
 #include "Clock.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
@@ -32,7 +32,7 @@ Clock::Clock(const Clock& source) :
 Clock::~Clock() {}
 
 /* Getters & Setters -------------------------------------------------------- */
-int Clock::get_nHour() { return m_nHour; }
+int Clock::get_nHour()const { return m_nHour; }
 void Clock::set_nHour(int t_nHour) {
 	if (t_nHour >= 24 || t_nHour < 0) {
 		cout << "Incorrect Time Format." << endl;
@@ -40,7 +40,7 @@ void Clock::set_nHour(int t_nHour) {
 	}
 	m_nHour = t_nHour;
 }
-int Clock::get_nMinute() { return m_nMinute; }
+int Clock::get_nMinute()const { return m_nMinute; }
 void Clock::set_nMinute(int t_nMinute) {
 	if (t_nMinute >= 60 || t_nMinute < 0) {
 		cout << "Incorrect Time Format." << endl;
@@ -48,7 +48,7 @@ void Clock::set_nMinute(int t_nMinute) {
 	}
 	m_nMinute = t_nMinute;
 }
-int Clock::get_nSecond() { return m_nSecond; }
+int Clock::get_nSecond()const { return m_nSecond; }
 void Clock::set_nSecond(int t_nSecond) {
 	if (t_nSecond >= 60 || t_nSecond < 0) {
 		cout << "Incorrect Time Format." << endl;
@@ -60,10 +60,10 @@ void Clock::set_nSecond(int t_nSecond) {
 void Clock::setTime(int t_nHour, int t_nMinute, int t_nSecond) {
 	if (!isValid(t_nHour, t_nMinute, t_nSecond))
 		Standarize(t_nHour, t_nMinute, t_nSecond);
-		m_nHour = t_nHour;
-		m_nMinute = t_nMinute;
-		m_nSecond = t_nSecond;
-	
+	m_nHour = t_nHour;
+	m_nMinute = t_nMinute;
+	m_nSecond = t_nSecond;
+
 }
 
 // 规定动作
@@ -90,7 +90,7 @@ void Clock::Tick() {
   * @retval 注意时间流逝的方向：从*this时刻到c时刻所需要的时间，可为次日
   */
 Clock Clock::Sub(const Clock& c) const {
-	return Clock(c.m_nHour - m_nHour,c.m_nMinute- m_nMinute,c.m_nSecond- m_nSecond);
+	return Clock(c.m_nHour - m_nHour, c.m_nMinute - m_nMinute, c.m_nSecond - m_nSecond);
 }
 
 /**

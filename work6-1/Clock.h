@@ -43,11 +43,11 @@ public:
 	Clock& addHour(int n);
 
 	// Getter & Setter
-	int get_nHour();
+	int get_nHour()const;
 	void set_nHour(int t_nHour);
-	int get_nMinute();
+	int get_nMinute()const;
 	void set_nMinute(int t_nMinute);
-	int get_nSecond();
+	int get_nSecond()const;
 	void set_nSecond(int t_nSecond);
 
 	void setTime(int t_nHour, int t_nMinute, int t_nSecond);
@@ -56,7 +56,7 @@ public:
 	// ÔËËã·ûÖØÔØ
 	void operator=(const Clock& source);
 	Clock& operator++(int);
-	
+
 	friend ostream& operator<<(ostream& out, const Clock& source);
 	friend bool operator>(const Clock& n1, const Clock& n2);
 	friend bool operator==(const Clock& n1, const Clock& n2);
