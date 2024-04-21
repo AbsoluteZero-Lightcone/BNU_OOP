@@ -53,10 +53,12 @@ public:
 
 	// ÔËËã·ûÖØÔØ
 	friend ostream& operator<<(ostream& out, const WorldClock& source);
+	friend Clock operator-(const WorldClock& n1, const WorldClock& n2);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const WorldClock& source);
+Clock operator-(const WorldClock& n1, const WorldClock& n2);
 bool isInArray(string s, string* arr, int length);
 
 #endif /* !__WORLDCLOCK_H */

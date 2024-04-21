@@ -226,18 +226,18 @@ bool operator==(const Clock& n1, const Clock& n2) {
 }
 
 /**
-  * @brief 重载减法运算符，返回相差的秒数
+  * @brief 重载减法运算符，时间差，超过24小时会溢出
   * @param const Clock& n1 : 被减数
   * @param const Clock& n2 : 减数
-  * @retval 相差的秒数
+  * @retval 时间差
   */
-int operator-(const Clock& n1, const Clock& n2) {
-	// todo : 继承Date后要修改这段，将不同日期考虑进来
-
-	return
-		(n1.m_nHour - n2.m_nHour) * 60 * 60 +
-		(n1.m_nMinute - n2.m_nMinute) * 60 +
-		(n1.m_nSecond - n2.m_nSecond);
+Clock operator-(const Clock& n1, const Clock& n2) {
+	// todo : 继承Date后要修改这段，将不同日期考虑进来，解决超过24小时会溢出问题
+	return Clock(
+		n1.m_nHour - n2.m_nHour,
+		n1.m_nMinute - n2.m_nMinute,
+		n1.m_nSecond - n2.m_nSecond
+	);
 }
 
 /**

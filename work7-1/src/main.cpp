@@ -110,6 +110,7 @@ int main() {
 			isOver = 1;
 			break;
 		default:
+			cout << "Invaild Command." << endl;
 			break;
 		}
 	}

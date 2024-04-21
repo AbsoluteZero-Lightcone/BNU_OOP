@@ -15,7 +15,8 @@
 #include <cstdint>
 using namespace std;
 #include "WorldClock.h"
-
+// 样例输入：
+// cbj 20 30 45 sy sbj 20 30 45 ld 10 25 5 cca 8 12 50 ha sbk 15 26 30 ny 18 55 5 e
 int main() {
 	bool isOver = 0;
 	while (!isOver) {
@@ -33,16 +34,33 @@ int main() {
 			cout << "Input Conversion City:";
 			cin >> targetCity;
 			WorldClock c(h, m, s, city);
-			
+			cout << "Time is  " << c << endl;
+			cout << "		 " << c.toRegion(targetCity) << endl;
 			break;
 		}
-		case 's':
+		case 's': {
+			string city;
+			int h, m, s;
+			cout << "Input City:";
+			cin >> city;
+			cout << "Input hour minute second:";
+			cin >> h >> m >> s;
+			WorldClock c1(h, m, s, city);
+			cout << "Input City:";
+			cin >> city;
+			cout << "Input hour minute second:";
+			cin >> h >> m >> s;
+			WorldClock c2(h, m, s, city);
+			cout << c1 << " – " << c2 << " = " << c1 - c2 << endl;
+			// 此处样例使用的是" – "符号而非" - "符号，这里按样例来
 			break;
+		}
 		case 'e':
 			cout << "Byebye~" << endl;
 			isOver = 1;
 			break;
 		default:
+			cout << "Invaild Command." << endl;
 			break;
 		}
 	}

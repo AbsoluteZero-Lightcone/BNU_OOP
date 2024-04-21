@@ -20,6 +20,9 @@
 #include <cstdint>
 using namespace std;
 
+/* Declarations --------------------------------------------------------------*/
+class WorldClock;
+
 /* Class ---------------------------------------------------------------------*/
 class Clock {
 private:
@@ -57,14 +60,16 @@ public:
 	friend ostream& operator<<(ostream& out, const Clock& source);
 	friend bool operator>(const Clock& n1, const Clock& n2);
 	friend bool operator==(const Clock& n1, const Clock& n2);
-	friend int operator-(const Clock& n1, const Clock& n2);
+	friend Clock operator-(const Clock& n1, const Clock& n2);
+	// 派生类运算符重载
+	friend Clock operator-(const WorldClock& n1, const WorldClock& n2);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Clock& source);
 bool operator>(const Clock& n1, const Clock& n2);
 bool operator==(const Clock& n1, const Clock& n2);
-int operator-(const Clock& n1, const Clock& n2);
+Clock operator-(const Clock& n1, const Clock& n2);
 Clock operator+(Clock c, int s);
 
 bool isValid(int t_nHour, int t_nMinute, int t_nSecond);

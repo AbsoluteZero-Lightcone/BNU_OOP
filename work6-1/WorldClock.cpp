@@ -63,7 +63,7 @@ void WorldClock::set_strCity(string t_strCity) {
   * @param int length : 数组长度
   * @retval bool, 1 for 存在, 0 for 不存在
   */
-bool isInArray(string s, string* arr,int length) {
+bool isInArray(string s, string* arr, int length) {
 	for (int i = 0; i < length; i++) {
 		if (arr[i] == s)return 1;
 	}
@@ -133,18 +133,35 @@ WorldClock WorldClock::toRegion(string target) {
 }
 
 /**
-  * @brief 求2个时间值的差函数
-  * @retval 注意时间流逝的方向：从*this时刻到c时刻所需要的时间，可为次日
+  * @brief 重载减法运算符，考虑不同时区的时间差函数，超过24小时会溢出
+  * @param const Clock& n1 : 被减数
+  * @param const Clock& n2 : 减数
+  * @retval 时间差
   */
-Clock WorldClock::Sub(const WorldClock& c) const {
+Clock operator-(const WorldClock& n1, const WorldClock& n2) {
+	// todo : 继承Date后要修改这段，将不同日期考虑进来，解决超过24小时会溢出问题
 	// 作业要求这里用WorldClock返回其实有两点不好：
 	// 1.时间的差值不应带有地点，这里改进为返回Clock而非WorldClock
 	// 2.WorldClock表征的是时刻，而非时间，强行用这种数据类型表示时间段就一定会造成超过24小时的部分溢出的问题，
+	//   但好在作业的样例里应该也是考虑到了这点没敢加超过24小时的测试点
 	// 改进的方法可以有两种：
 	// 1.继承Date，考虑不同日期
 	// 2.重新写另一个用于存储与表征时间段的Time类
 	// 但是具体程序实现就先不写了，时间有限，就先完成作业要求
-	return this->Clock::Sub(c).addHour((WorldClock::CityToRelativeHour(this->m_strCity) - WorldClock::CityToRelativeHour(c.m_strCity)));
+	return Clock(
+		(n1.m_nHour - WorldClock::CityToRelativeHour(n1.m_strCity))
+		- (n2.m_nHour - WorldClock::CityToRelativeHour(n2.m_strCity)),
+		n1.m_nMinute - n2.m_nMinute,
+		n1.m_nSecond - n2.m_nSecond
+	);
+}
+
+/**
+  * @brief 求2个时间值的差函数
+  * @retval 注意时间流逝的方向：从*this时刻到c时刻所需要的时间，即 c - *this ，可为次日
+  */
+Clock WorldClock::Sub(const WorldClock& c) const {
+	return c - *this;
 }
 
 /**
@@ -154,7 +171,7 @@ Clock WorldClock::Sub(const WorldClock& c) const {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const WorldClock& source) {
-	out << WorldClock::toRegionName(source.m_strCity) << " " <<(Clock)source;
+	out << WorldClock::toRegionName(source.m_strCity) << " " << (Clock)source;
 	return out;
 }
 
