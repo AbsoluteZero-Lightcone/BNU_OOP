@@ -56,14 +56,6 @@ void WorldClock::set_strCity(string t_strCity) {
 }
 
 /* Exported functions ------------------------------------------------------- */
-
-int WorldClock::CityToRelativeHour(string city) {
-	for (int i = 0; i < REGION_COUNT; i++) {
-		if (LUT_code[i] == city)
-			return i;
-	}
-	return -1;
-}
 /**
   * @brief 判断元素在数组中是否存在
   * @param string s : 待查找的元素
@@ -77,10 +69,29 @@ bool isInArray(string s, string* arr,int length) {
 	}
 	return 0;
 }
-string WorldClock::toRegionName(string city) {
+
+/**
+  * @brief 将时区转换成相对时间偏移量，非法输入返回-1
+  * @param string region : 时区，可接受时区名或时区代码
+  * @retval 相对时间偏移量
+  */
+int WorldClock::CityToRelativeHour(string region) {
+	for (int i = 0; i < REGION_COUNT; i++) {
+		if (LUT_code[i] == region || LUT_name[i] == region)
+			return i;
+	}
+	return -1;
+}
+
+/**
+  * @brief 将时区代码转换成时区名，非时区代码返回"Error"
+  * @param string code : 时区代码
+  * @retval 时区名
+  */
+string WorldClock::toRegionName(string code) {
 	int index = -1;
 	for (int i = 0; i < REGION_COUNT; i++) {
-		if (LUT_code[i] == city) {
+		if (LUT_code[i] == code) {
 			index = i;
 			break;
 		}
@@ -88,10 +99,16 @@ string WorldClock::toRegionName(string city) {
 	if (index == -1)return "Error";
 	return LUT_name[index];
 }
-string WorldClock::toRegionCode(string city) {
+
+/**
+  * @brief 将时区名转换成时区代码，非时区名返回"Error"
+  * @param string name : 时区名
+  * @retval 时区代码
+  */
+string WorldClock::toRegionCode(string name) {
 	int index = -1;
 	for (int i = 0; i < REGION_COUNT; i++) {
-		if (LUT_name[i] == city) {
+		if (LUT_name[i] == name) {
 			index = i;
 			break;
 		}
@@ -100,6 +117,12 @@ string WorldClock::toRegionCode(string city) {
 	return LUT_code[index];
 }
 
+/**
+  * @brief 重载标准输出流 <<运算符
+  * @param ostream& out : 标准输出流对象
+  * @param const WorldClock& source : 待输出的对象
+  * @retval ostream&
+  */
 WorldClock WorldClock::toRegion(string target) {
 	WorldClock temp(*this);
 	temp.addHour(
@@ -136,6 +159,7 @@ ostream& operator<<(ostream& out, const WorldClock& source) {
 	out << WorldClock::toRegionName(source.m_strCity) << " " <<(Clock)source;
 	return out;
 }
+
 /**
   * @brief 显示时间功能
   * @param None
