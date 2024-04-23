@@ -25,18 +25,18 @@ private:
 	int m_nAccount;
 	string m_strName;
 	string m_strPassword;
-	double m_dInterestRate;
+	double m_dDeposit;
 	Date m_dateDate;
 public:
 	static int s_nCount;
-	static double s_dDeposit;
+	static double s_dInterest;
 
 	// Constructors & Deconstructor
 	Deposit();
 	Deposit(
 		string t_strName,
 		string t_strPassword,
-		double t_dInterestRate,
+		double t_dDeposit,
 		Date t_dateDate
 	);
 	~Deposit();
@@ -46,15 +46,15 @@ public:
 	int get_nAccount()const;
 	string get_strName()const;
 	string get_strPassword()const;
+	double get_dInterest()const;
 	double get_dDeposit()const;
-	double get_dInterestRate()const;
 	Date get_dateDate()const;
 
 	void set_nAccount(int t_nAccount);
 	void set_strName(string t_strName);
 	void set_strPassword(string t_strPassword);
+	void set_dInterest(double t_dInterest);
 	void set_dDeposit(double t_dDeposit);
-	void set_dInterestRate(double t_dInterestRate);
 	void set_dateDate(Date t_dateDate);
 	
 	// ×èÖ¹¸´ÖÆ
