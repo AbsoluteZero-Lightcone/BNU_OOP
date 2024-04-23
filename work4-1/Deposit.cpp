@@ -9,8 +9,11 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
 #include "Deposit.h"
+
+/* Static Members ------------------------------------------------------------*/
+int Deposit::s_nCount = 0;
+double Deposit::s_dInterest = 0.005;
 
 /* Constructors & Deconstructor --------------------------------------------- */
 Deposit::Deposit() :
@@ -40,7 +43,7 @@ Deposit::~Deposit() {}
 int Deposit::get_nAccount()const { return m_nAccount; }
 string Deposit::get_strName()const { return m_strName; }
 string Deposit::get_strPassword()const { return m_strPassword; }
-double Deposit::get_dInterest()const { return s_dInterest; }
+double Deposit::get_dInterest() { return s_dInterest; }
 double Deposit::get_dDeposit()const { return m_dDeposit; }
 Date Deposit::get_dateDate()const { return m_dateDate; }
 void Deposit::set_nAccount(int t_nAccount) { m_nAccount = t_nAccount; }

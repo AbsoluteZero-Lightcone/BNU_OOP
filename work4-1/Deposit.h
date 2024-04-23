@@ -46,14 +46,14 @@ public:
 	int get_nAccount()const;
 	string get_strName()const;
 	string get_strPassword()const;
-	double get_dInterest()const;
+	static double get_dInterest();
 	double get_dDeposit()const;
 	Date get_dateDate()const;
 
 	void set_nAccount(int t_nAccount);
 	void set_strName(string t_strName);
 	void set_strPassword(string t_strPassword);
-	void set_dInterest(double t_dInterest);
+	static void set_dInterest(double t_dInterest);
 	void set_dDeposit(double t_dDeposit);
 	void set_dateDate(Date t_dateDate);
 	
