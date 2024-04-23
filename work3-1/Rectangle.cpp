@@ -36,6 +36,7 @@ void small_class::set_dataname1(datatype1 t_dataname1) { m_dataname1 = t_datanam
 datatype2 small_class::get_dataname2()const { return m_dataname2; }
 void small_class::set_dataname2(datatype2 t_dataname2) { m_dataname2 = t_dataname2; }
 
+/* Private functions -------------------------------------------------------- */
 /* Exported functions ------------------------------------------------------- */
 /**
   * @brief 类内重载通过对象赋值的赋值运算符
