@@ -120,8 +120,8 @@ int main() {
 			<< stuArr[i].get_nScore() << endl;
 	}
 
-	delete[] stuArr;
-	delete[] teaArr;
+	if (stuArr)delete[] stuArr;
+	if (stuArr)delete[] teaArr;
 	return 0;
 }
 
