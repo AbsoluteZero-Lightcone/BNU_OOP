@@ -28,7 +28,7 @@ public:
 	~Fraction();
 
 	// 规定动作
-	void Show();
+	void Show()const;
 	void Set(int, int);
 
 	// 运算符重载
@@ -37,6 +37,7 @@ public:
 	friend ostream& operator<<(ostream& out, const Fraction& source);
 	friend bool operator==(const Fraction& n1, const Fraction& n2);
 
+	friend Fraction operator-(Fraction n);
 	friend Fraction operator+(const Fraction& n1, const Fraction& n2);
 	friend Fraction operator-(const Fraction& n1, const Fraction& n2);
 	friend Fraction operator*(const Fraction& n1, const Fraction& n2);
@@ -45,6 +46,7 @@ public:
 
 ostream& operator<<(ostream& out, const Fraction& source);
 bool operator==(const Fraction& n1, const Fraction& n2);
+Fraction operator-(Fraction n);
 Fraction operator+(const Fraction& n1, const Fraction& n2);
 Fraction operator-(const Fraction& n1, const Fraction& n2);
 Fraction operator*(const Fraction& n1, const Fraction& n2);
