@@ -41,13 +41,12 @@ void Rectangle::set_dWidth(double t_dWidth) { m_dWidth = t_dWidth; }
 double Rectangle::get_dHeight()const { return m_dHeight; }
 void Rectangle::set_dHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 
-/* Private functions -------------------------------------------------------- */
 /**
   * @brief 返回矩形的主对角线
   * @param 无
   * @retval 矩形的主对角线
   */
-Line Rectangle::__get_Diagonal(){
+Line Rectangle::getDiagonal()const{
 	return Line(
 		Point(m_pointCenter.m_dCoordinateX-m_dWidth/2, m_pointCenter.m_dCoordinateY-m_dHeight/2),
 		Point(m_pointCenter.m_dCoordinateX+m_dWidth/2, m_pointCenter.m_dCoordinateY+m_dHeight/2)
@@ -59,7 +58,7 @@ Line Rectangle::__get_Diagonal(){
   * @param const Line& Diagonal : 矩形的主对角线
   * @retval 无
   */
-void Rectangle::__set_from_Diagonal(const Line& Diagonal){
+void Rectangle::setDiagonal(const Line& Diagonal){
 	m_dWidth = abs(Diagonal.m_pointP1.m_dCoordinateX - Diagonal.m_pointP2.m_dCoordinateX);
 	m_dHeight = abs(Diagonal.m_pointP1.m_dCoordinateY - Diagonal.m_pointP2.m_dCoordinateY);
 	m_pointCenter.setXY(

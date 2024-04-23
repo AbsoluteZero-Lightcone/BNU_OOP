@@ -14,9 +14,7 @@
 #define __Rectangle_H
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
-#include <string>
 #include <cmath>
-#include <cstdint>
 using namespace std;
 #include "Line.h"
 /* Class ---------------------------------------------------------------------*/
@@ -25,10 +23,7 @@ private:
 	Point m_pointCenter;
 	double m_dWidth;
 	double m_dHeight;
-private:
-	Line __get_Diagonal();
-	void __set_from_Diagonal(const Line& Diagonal);
-	void __set_from_Diagonal(const Point& LeftTop, const Point& RightBottom);
+
 public:
 	// Constructors & Deconstructor
 	Rectangle();
@@ -43,6 +38,13 @@ public:
 	void set_dWidth(double t_dWidth);
 	double get_dHeight()const;
 	void set_dHeight(double t_dHeight);
+	Line getDiagonal()const;
+	void setDiagonal(const Line& Diagonal);
+	void setDiagonal(const Point& LeftTop, const Point& RightBottom);
+
+	// Functions
+	void area()const;
+	void perimeter()const;
 
 	// ‘ÀÀ„∑˚÷ÿ‘ÿ
 	void operator=(const Rectangle& source);

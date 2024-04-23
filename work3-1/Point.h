@@ -14,9 +14,7 @@
 #define __POINT_H
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
-#include <string>
 #include <cmath>
-#include <cstdint>
 using namespace std;
 
 /* Class ---------------------------------------------------------------------*/
