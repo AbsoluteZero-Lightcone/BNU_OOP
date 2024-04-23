@@ -165,29 +165,29 @@ Fraction operator/(const Fraction& n1, const Fraction& n2) {
 
 /**
   * @brief 辗转相除法求出两数的最大公因数，可接受负数，其中任一不能为零
-  * @param a, b : 非零整数
+  * @param n1, n2 : 非零整数
   * @retval 最大公因数
   */
-int GCD(int a, int b) {
-	if (a == 0 || b == 0) {
+int GCD(int n1, int n2) {
+	if (n1 == 0 || n2 == 0) {
 		cerr << "Error: in file \"" << __FILE__ << "\", Line " << __LINE__ << ": "
 			<< "参与最大公因数计算的数值不能为0"
 			<< endl;
 		abort();
 	}
-	if (a < 0)a = -a;
-	if (b < 0)b = -b;
-	if (a > b)swap(a, b);// 保证  n1 < n2
-	int c = a % b;
+	if (n1 < 0)n1 = -n1;
+	if (n2 < 0)n2 = -n2;
+	if (n1 > n2)swap(n1, n2);// 保证  n1 < n2
+	int n0;
 	while (1) {
-		if (b % c == 0)return c;
+		if (n1 % n2 == 0)return n2;
 		// GCD 步骤 滚动数组： 
-		// 变量	a   b    c
-		//		a , b , a%b , a%(a%b) , ... , (n-2)%(n-1) , ... , GCD , 0
+		// 变量	n0	n1   n2   
+		//		    a1 , a2 , a3 = a1%a2 , a4 = a2%(a1%a2) , ... , an = a(n-2)%a(n-1) , ... , GCD , 0
 		// 数组向 <-- 方向移动
-		a = b;
-		b = c;
-		c = a % b;
+		n0 = n1;
+		n1 = n2;
+		n2 = n0 % n1;
 	}
 }
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

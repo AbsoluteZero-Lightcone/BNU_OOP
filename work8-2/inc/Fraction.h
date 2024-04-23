@@ -13,7 +13,6 @@
 using namespace std;
 #include "Sum.h"
 
-int GCD(int a, int b);
 class Fraction :public Sum {
 private:
 	int m_nNum;
@@ -34,6 +33,7 @@ public:
 };
 Fraction operator+(const Fraction& n1, const Fraction& n2);
 
+int GCD(int, int);
 #endif // !__FRACTION_H
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

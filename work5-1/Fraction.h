@@ -53,7 +53,7 @@ Fraction operator*(const Fraction& n1, const Fraction& n2);
 Fraction operator/(const Fraction& n1, const Fraction& n2);
 
 /* Exported functions ------------------------------------------------------- */
-int GCD(int a, int b);
+int GCD(int, int);
 
 #endif // !__FRACTION_H
 
