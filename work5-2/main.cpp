@@ -11,12 +11,33 @@
 
 #include <iostream>
 #include <string>
-#include <cmath>
-#include <cstdint>
 using namespace std;
 
-int main() {
+#include "Student.h"
+#include "Teacher.h"
 
+int main() {
+	Student* stuArr;
+	Teacher* teaArr;
+	cout << "您需要建立几位学生(M)和几位教师(N)：" ;
+	int m, n;
+	cin >> m >> n;
+	stuArr = new Student[m];
+	teaArr = new Teacher[n];
+	string name;
+	cout << "请输入5位学生的姓名：";
+	for (int i = 0; i < m; i++){
+		cin >> name;
+		stuArr[i].set_strName(name);
+	}
+	cout << "请输入3位教师的姓名：";
+	for (int i = 0; i < n; i++){
+		cin >> name;
+		teaArr[i].set_strName(name);
+	}
+
+	delete[] stuArr;
+	delete[] teaArr;
 	return 0;
 }
 

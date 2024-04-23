@@ -64,7 +64,7 @@ void demo() {
 		catch (const char* err) {
 			cerr << err << endl;
 			// abort();
-			return;// 作业要求除零时以正常方式结束
+			exit(3);// 作业要求
 		}
 	} while (isContinue());
 	cout << "Byebye~" << endl;
