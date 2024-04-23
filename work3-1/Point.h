@@ -48,6 +48,7 @@ public:
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Point& source);
 bool operator==(const Point& n1, const Point& n2);
+bool operator!=(const Point& n1, const Point& n2);
 
 #endif /* !__POINT_H */
 

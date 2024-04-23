@@ -74,5 +74,15 @@ bool operator==(const Point& n1, const Point& n2) {
 	return false;
 }
 
+/**
+  * @brief 重载不等于运算符
+  * @param const Point& n1 : 运算符左边的值
+  * @param const Point& n2 : 运算符右边的值
+  * @retval bool, true for n1 != n2
+  */
+bool operator!=(const Point& n1, const Point& n2) {
+	return !(n1 == n2);
+}
+
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

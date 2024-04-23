@@ -21,9 +21,21 @@
     <ClCompile Include="Point.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Point.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

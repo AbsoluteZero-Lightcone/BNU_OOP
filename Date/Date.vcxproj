@@ -139,12 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\work3-1\Line.h" />
     <ClInclude Include="inc\date.h" />
     <ClInclude Include="inc\demo.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\work3-1\Line.cpp" />
     <ClCompile Include="src\date.cpp" />
     <ClCompile Include="src\demo.cpp" />
     <ClCompile Include="src\main.cpp" />

@@ -1,73 +1,80 @@
 /**
   ******************************************************************************
-  * @file    small_class.cpp
+  * @file    Rectangle.cpp
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
   * @date    2024-04-23
-  * @brief   small_class class
+  * @brief   Rectangle class
   * @encode  GB2312
   ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "small_class.h"
+#include "Rectangle.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
-small_class::small_class() :
-	m_dataname1(0),
-	m_dataname2(0)
+Rectangle::Rectangle() :
+	m_pointCenter(0,0),
+	m_dWidth(1),
+	m_dHeight(1)
 {}
 
-small_class::small_class(datatype1 t_dataname1, datatype2 t_dataname2) :
-	m_dataname1(t_dataname1),
-	m_dataname2(t_dataname2)
+Rectangle::Rectangle(Point t_pointCenter, double t_dWidth,double t_dHeight) :
+	m_pointCenter(t_pointCenter),
+	m_dWidth(t_dWidth),
+	m_dHeight(t_dHeight)
 {}
 
-small_class::small_class(const small_class& source) :
-	m_dataname1(source.m_dataname1),
-	m_dataname2(source.m_dataname2)
+Rectangle::Rectangle(const Rectangle& source) :
+	m_pointCenter(source.m_pointCenter),
+	m_dWidth(source.m_dWidth),
+	m_dHeight(source.m_dHeight)
 {}
 
-small_class::~small_class() {}
+Rectangle::~Rectangle() {}
 
 /* Getters & Setters -------------------------------------------------------- */
-datatype1 small_class::get_dataname1()const { return m_dataname1; }
-void small_class::set_dataname1(datatype1 t_dataname1) { m_dataname1 = t_dataname1; }
-datatype2 small_class::get_dataname2()const { return m_dataname2; }
-void small_class::set_dataname2(datatype2 t_dataname2) { m_dataname2 = t_dataname2; }
+Point Rectangle::get_pointCenter()const { return m_pointCenter; }
+void Rectangle::set_pointCenter(Point t_pointCenter) { m_pointCenter = t_pointCenter; }
+double Rectangle::get_dWidth()const { return m_dWidth; }
+void Rectangle::set_dWidth(double t_dWidth) { m_dWidth = t_dWidth; }
+double Rectangle::get_dHeight()const { return m_dHeight; }
+void Rectangle::set_dHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 
 /* Private functions -------------------------------------------------------- */
 /* Exported functions ------------------------------------------------------- */
 /**
   * @brief 类内重载通过对象赋值的赋值运算符
-  * @param const small_class& source : 待赋的值
+  * @param const Rectangle& source : 待赋的值
   * @retval 无
   */
-void small_class::operator=(const small_class& source) {
-	m_dataname1 = source.m_dataname1;
-	m_dataname2 = source.m_dataname2;
+void Rectangle::operator=(const Rectangle& source) {
+	m_pointCenter = source.m_pointCenter;
+	m_dWidth = source.m_dWidth;
+	m_dHeight = source.m_dHeight;
 }
 
 /**
   * @brief 重载标准输出流 <<运算符
   * @param ostream& out : 标准输出流对象
-  * @param const small_class& source : 待输出的对象
+  * @param const Rectangle& source : 待输出的对象
   * @retval ostream&
   */
-ostream& operator<<(ostream& out, const small_class& source) {
+ostream& operator<<(ostream& out, const Rectangle& source) {
 	// todo
 	return out;
 }
 
 /**
   * @brief 重载等于运算符
-  * @param const small_class& n1 : 运算符左边的值
-  * @param const small_class& n2 : 运算符右边的值
+  * @param const Rectangle& n1 : 运算符左边的值
+  * @param const Rectangle& n2 : 运算符右边的值
   * @retval bool, true for n1 == n2
   */
-bool operator==(const small_class& n1, const small_class& n2) {
-	if (n1.m_dataname1 != n2.m_dataname1)return false;
-	if (n1.m_dataname2 != n2.m_dataname2)return false;
+bool operator==(const Rectangle& n1, const Rectangle& n2) {
+	if (n1.m_pointCenter != n2.m_pointCenter)return false;
+	if (n1.m_dWidth != n2.m_dWidth)return false;
+	if (n1.m_dHeight != n2.m_dHeight)return false;
 	return false;
 }
 
