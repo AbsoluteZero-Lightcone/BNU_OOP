@@ -63,8 +63,11 @@ void demo() {
 		}
 		catch (const char* err) {
 			cerr << err << endl;
+			// abort();
+			return;// 作业要求除零时以正常方式结束
 		}
 	} while (isContinue());
+	cout << "Byebye~" << endl;
 }
 
 int main() {
