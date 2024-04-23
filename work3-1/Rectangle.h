@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+  /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __Rectangle_H
 #define __Rectangle_H
 /* Includes ------------------------------------------------------------------*/
@@ -25,21 +25,10 @@ private:
 	Point m_pointCenter;
 	double m_dWidth;
 	double m_dHeight;
-public:
-	class Diagonal {
-		// ÄÚ²¿Àà
-	private:
-		Point m_pointLeftTop;
-		Point m_pointRightBottom;
-	public:
-
-	};
 private:
-	void __get_LeftTop_and_RightBottom();
-	void __set_from_LeftTop_and_RightBottom(
-		const Point& t_pointLeftTop, 
-		const  Point& t_pointRightBottom
-	);
+	Line __get_Diagonal();
+	void __set_from_Diagonal(const Line& Diagonal);
+	void __set_from_Diagonal(const Point& LeftTop, const Point& RightBottom);
 public:
 	// Constructors & Deconstructor
 	Rectangle();

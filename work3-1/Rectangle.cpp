@@ -42,6 +42,32 @@ double Rectangle::get_dHeight()const { return m_dHeight; }
 void Rectangle::set_dHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 
 /* Private functions -------------------------------------------------------- */
+/**
+  * @brief 返回矩形的主对角线
+  * @param 无
+  * @retval 矩形的主对角线
+  */
+Line Rectangle::__get_Diagonal(){
+	return Line(
+		Point(m_pointCenter.m_dCoordinateX-m_dWidth/2, m_pointCenter.m_dCoordinateY-m_dHeight/2),
+		Point(m_pointCenter.m_dCoordinateX+m_dWidth/2, m_pointCenter.m_dCoordinateY+m_dHeight/2)
+	);
+}
+
+/**
+  * @brief 通过主对角线给矩形对象赋值
+  * @param const Line& Diagonal : 矩形的主对角线
+  * @retval 无
+  */
+void Rectangle::__set_from_Diagonal(const Line& Diagonal){
+	m_dWidth = abs(Diagonal.m_pointP1.m_dCoordinateX - Diagonal.m_pointP2.m_dCoordinateX);
+	m_dHeight = abs(Diagonal.m_pointP1.m_dCoordinateY - Diagonal.m_pointP2.m_dCoordinateY);
+	m_pointCenter.setXY(
+		(Diagonal.m_pointP1.m_dCoordinateX + Diagonal.m_pointP2.m_dCoordinateX) / 2,
+		(Diagonal.m_pointP1.m_dCoordinateY + Diagonal.m_pointP2.m_dCoordinateY) / 2
+	);
+}
+
 /* Exported functions ------------------------------------------------------- */
 /**
   * @brief 类内重载通过对象赋值的赋值运算符

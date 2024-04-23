@@ -45,6 +45,9 @@ public:
 
 	friend ostream& operator<<(ostream& out, const Line& source);
 	friend bool operator==(const Line& n1, const Line& n2);
+
+	friend class Rectangle;
+
 };
 
 /* Exported functions ------------------------------------------------------- */
