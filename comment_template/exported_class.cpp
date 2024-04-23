@@ -35,6 +35,9 @@ datatype1 exported_class::get_dataname1()const { return m_dataname1; }
 void exported_class::set_dataname1(datatype1 t_dataname1) { m_dataname1 = t_dataname1; }
 datatype2 exported_class::get_dataname2()const { return m_dataname2; }
 void exported_class::set_dataname2(datatype2 t_dataname2) { m_dataname2 = t_dataname2; }
+void exported_class::set(datatype1 t_dataname1, datatype2 t_dataname2) {
+	m_dataname1 = t_dataname1; m_dataname2 = t_dataname2;
+}
 
 /* Private functions -------------------------------------------------------- */
 /* Exported functions ------------------------------------------------------- */
@@ -72,7 +75,27 @@ exported_class& exported_class::operator+=(int n) {
   * @param 无
   * @retval 返回自身引用实现链式编程
   */
-exported_class& exported_class::operator++() {
+exported_class& exported_class::operator++(int) {
+	// todo
+	return *this;
+}
+
+/**
+  * @brief 类内重载自减运算符
+  * @param 无
+  * @retval 返回自身引用实现链式编程
+  */
+exported_class& exported_class::operator--(int) {
+	// todo
+	return *this;
+}
+
+/**
+  * @brief 类内重载取反运算符
+  * @param 无
+  * @retval 返回自身引用实现链式编程
+  */
+exported_class& exported_class::operator!() {
 	// todo
 	return *this;
 }
@@ -100,6 +123,36 @@ bool operator>(const exported_class& n1, const exported_class& n2) {
 }
 
 /**
+  * @brief 重载大于等于运算符
+  * @param const exported_class& n1 : 运算符左边的值
+  * @param const exported_class& n2 : 运算符右边的值
+  * @retval bool, true for n1 >= n2
+  */
+bool operator>=(const exported_class& n1, const exported_class& n2) {
+	return (n1 == n2) || (n1 > n2);
+}
+
+/**
+  * @brief 重载小于运算符
+  * @param const exported_class& n1 : 运算符左边的值
+  * @param const exported_class& n2 : 运算符右边的值
+  * @retval bool, true for n1 < n2
+  */
+bool operator<(const exported_class& n1, const exported_class& n2) {
+	return !(n1 >= n2);
+}
+
+/**
+  * @brief 重载小于等于运算符
+  * @param const exported_class& n1 : 运算符左边的值
+  * @param const exported_class& n2 : 运算符右边的值
+  * @retval bool, true for n1 <= n2
+  */
+bool operator<=(const exported_class& n1, const exported_class& n2) {
+	return !(n1 > n2);
+}
+
+/**
   * @brief 重载等于运算符
   * @param const exported_class& n1 : 运算符左边的值
   * @param const exported_class& n2 : 运算符右边的值
@@ -108,6 +161,18 @@ bool operator>(const exported_class& n1, const exported_class& n2) {
 bool operator==(const exported_class& n1, const exported_class& n2) {
 	if (n1.m_dataname1 != n2.m_dataname1)return false;
 	if (n1.m_dataname2 != n2.m_dataname2)return false;
+	return true;
+}
+
+/**
+  * @brief 重载不等于运算符
+  * @param const exported_class& n1 : 运算符左边的值
+  * @param const exported_class& n2 : 运算符右边的值
+  * @retval bool, true for n1 != n2
+  */
+bool operator!=(const exported_class& n1, const exported_class& n2) {
+	if (n1.m_dataname1 == n2.m_dataname1)return false;
+	if (n1.m_dataname2 == n2.m_dataname2)return false;
 	return true;
 }
 
@@ -140,6 +205,30 @@ exported_class operator+(const exported_class& n1, const exported_class& n2) {
   * @retval n1 - n2
   */
 exported_class operator-(const exported_class& n1, const exported_class& n2) {
+	exported_class temp;
+	// todo
+	return temp;
+}
+
+/**
+  * @brief 重载乘法运算符
+  * @param const exported_class& n1 : 乘号左边的值
+  * @param const exported_class& n2 : 乘号右边的值
+  * @retval n1 * n2
+  */
+exported_class operator*(const exported_class& n1, const exported_class& n2) {
+	exported_class temp;
+	// todo
+	return temp;
+}
+
+/**
+  * @brief 重载除法运算符
+  * @param const exported_class& n1 : 被除数
+  * @param const exported_class& n2 : 除数
+  * @retval n1 / n2
+  */
+exported_class operator/(const exported_class& n1, const exported_class& n2) {
 	exported_class temp;
 	// todo
 	return temp;

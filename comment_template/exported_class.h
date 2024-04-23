@@ -46,28 +46,43 @@ public:
 	void set_dataname1(datatype1 t_dataname1);
 	datatype2 get_dataname2()const;
 	void set_dataname2(datatype2 t_dataname2);
+	void set(datatype1 t_dataname1,datatype2 t_dataname2);
 
 	// ‘ÀÀ„∑˚÷ÿ‘ÿ
 	void operator=(const exported_class& source);
 	void operator=(int n);
 	exported_class& operator+=(int n);
-	exported_class& operator++();
+	exported_class& operator++(int);
+	exported_class& operator--(int);
+	exported_class& operator!();
 
 	friend ostream& operator<<(ostream& out, const exported_class& source);
 	friend bool operator>(const exported_class& n1, const exported_class& n2);
+	friend bool operator<(const exported_class& n1, const exported_class& n2);
+	friend bool operator>=(const exported_class& n1, const exported_class& n2);
+	friend bool operator<=(const exported_class& n1, const exported_class& n2);
 	friend bool operator==(const exported_class& n1, const exported_class& n2);
+	friend bool operator!=(const exported_class& n1, const exported_class& n2);
 	friend exported_class operator-(exported_class n);
 	friend exported_class operator+(const exported_class& n1, const exported_class& n2);
 	friend exported_class operator-(const exported_class& n1, const exported_class& n2);
+	friend exported_class operator*(const exported_class& n1, const exported_class& n2);
+	friend exported_class operator/(const exported_class& n1, const exported_class& n2);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const exported_class& source);
 bool operator>(const exported_class& n1, const exported_class& n2);
+bool operator<(const exported_class& n1, const exported_class& n2);
+bool operator>=(const exported_class& n1, const exported_class& n2);
+bool operator<=(const exported_class& n1, const exported_class& n2);
 bool operator==(const exported_class& n1, const exported_class& n2);
+bool operator!=(const exported_class& n1, const exported_class& n2);
 exported_class operator-(exported_class n);
 exported_class operator+(const exported_class& n1, const exported_class& n2);
 exported_class operator-(const exported_class& n1, const exported_class& n2);
+exported_class operator*(const exported_class& n1, const exported_class& n2);
+exported_class operator/(const exported_class& n1, const exported_class& n2);
 
 #endif /* !__exported_class_H */
 

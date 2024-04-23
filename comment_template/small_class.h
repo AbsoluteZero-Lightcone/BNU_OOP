@@ -46,17 +46,20 @@ public:
 	void set_dataname1(datatype1 t_dataname1);
 	datatype2 get_dataname2()const;
 	void set_dataname2(datatype2 t_dataname2);
+	void set(datatype1 t_dataname1, datatype2 t_dataname2);
 
 	// ÔËËã·ûÖØÔØ
 	void operator=(const small_class& source);
 
 	friend ostream& operator<<(ostream& out, const small_class& source);
 	friend bool operator==(const small_class& n1, const small_class& n2);
+	friend bool operator!=(const small_class& n1, const small_class& n2);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const small_class& source);
 bool operator==(const small_class& n1, const small_class& n2);
+bool operator!=(const small_class& n1, const small_class& n2);
 
 #endif /* !__small_class_H */
 

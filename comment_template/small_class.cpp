@@ -35,6 +35,9 @@ datatype1 small_class::get_dataname1()const { return m_dataname1; }
 void small_class::set_dataname1(datatype1 t_dataname1) { m_dataname1 = t_dataname1; }
 datatype2 small_class::get_dataname2()const { return m_dataname2; }
 void small_class::set_dataname2(datatype2 t_dataname2) { m_dataname2 = t_dataname2; }
+void small_class::set(datatype1 t_dataname1, datatype2 t_dataname2) {
+	m_dataname1 = t_dataname1; m_dataname2 = t_dataname2;
+}
 
 /* Exported functions ------------------------------------------------------- */
 /**
@@ -67,7 +70,19 @@ ostream& operator<<(ostream& out, const small_class& source) {
 bool operator==(const small_class& n1, const small_class& n2) {
 	if (n1.m_dataname1 != n2.m_dataname1)return false;
 	if (n1.m_dataname2 != n2.m_dataname2)return false;
-	return false;
+	return true;
+}
+
+/**
+  * @brief 重载不等于运算符
+  * @param const small_class& n1 : 运算符左边的值
+  * @param const small_class& n2 : 运算符右边的值
+  * @retval bool, true for n1 != n2
+  */
+bool operator!=(const small_class& n1, const small_class& n2) {
+	if (n1.m_dataname1 == n2.m_dataname1)return false;
+	if (n1.m_dataname2 == n2.m_dataname2)return false;
+	return true;
 }
 
 
