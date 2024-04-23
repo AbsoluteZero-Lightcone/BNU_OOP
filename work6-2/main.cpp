@@ -43,7 +43,7 @@ int main() {
 			alarm.Tick();
 		}
 	} while (isContinue());
-
+	
 	return 0;
 }
 
@@ -54,7 +54,7 @@ bool isContinue() {
 		cin >> command;
 		if (command == 'Y' || command == 'y')return 1;
 		else if (command == 'N' || command == 'n')return 0;
-		else cout << "Invalid Command" << endl;
+		else cerr << "Invalid Command" << endl;
 	}
 }
 

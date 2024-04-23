@@ -10,6 +10,29 @@
 #include "Fraction.h"
 
 
+Fraction::Fraction(const Fraction& n) {
+	m_nNum = n.m_nNum;
+	m_nDen = n.m_nDen;
+}
+
+Fraction::Fraction(int n, int d) {
+	if (d == 0) {
+		cerr << "Error: in file \"" << __FILE__ << "\", Line " << __LINE__ << ": "
+			<< "分母不能为0"
+			<< endl;
+		abort();
+	}
+	m_nNum = n;
+	m_nDen = d;
+	Format();
+}
+Fraction::~Fraction() {}
+
+/**
+  * @brief 约分
+  * @param None
+  * @retval None
+  */
 void Fraction::Format() {
 	if (m_nNum == 0)m_nDen = 1;
 	else {
@@ -18,22 +41,13 @@ void Fraction::Format() {
 		m_nDen /= gcd;
 	}
 }
-Fraction::Fraction(const Fraction& n) {
-	m_nNum = n.m_nNum;
-	m_nDen = n.m_nDen;
-}
-Fraction::Fraction(int n, int d) {
-	m_nNum = n;
-	m_nDen = d;
-	Format();
-}
-Fraction::~Fraction() {}
 
 
 // 规定动作
 void Fraction::Show() {
 	cout << m_nNum << "/" << m_nDen;
 }
+
 void Fraction::Add(Sum* num) {
 	Fraction* n = dynamic_cast<Fraction*>(num);
 	if (n != NULL) {
@@ -49,16 +63,25 @@ Fraction operator+(const Fraction& n1, const Fraction& n2) {
 	return f;
 }
 
+/**
+  * @brief 辗转相除法求出两数的最大公因数，可接受负数，其中任一不能为零
+  * @param a, b : 非零整数
+  * @retval 最大公因数
+  */
 int GCD(int a, int b) {
+	if (a == 0 || b == 0) {
+		cerr << "Error: in file \"" << __FILE__ << "\", Line " << __LINE__ << ": "
+			<< "参与最大公因数计算的数值不能为0"
+			<< endl;
+		abort();
+	}
 	if (a < 0)a = -a;
 	if (b < 0)b = -b;
-	if (a == 0 || b == 0)
-		throw "参与最大公因数计算的数值不能为0";
 	if (a > b)swap(a, b);// 保证  n1 < n2
 	int c = a % b;
 	while (1) {
 		if (b % c == 0)return c;
-		// GCD 步骤数列： 
+		// GCD 步骤 滚动数组： 
 		// 变量	a   b    c
 		//		a , b , a%b , a%(a%b) , ... , (n-2)%(n-1) , ... , GCD , 0
 		// 数组向 <-- 方向移动

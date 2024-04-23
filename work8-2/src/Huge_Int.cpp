@@ -15,13 +15,21 @@ Huge_Int::Huge_Int(const char* str) {
 		m_cSign = str[0];
 		isSigned = 1;
 	}
-	else {
+	else if (str[0] >= '0' && str[0] <= '9') {
 		m_cSign = '+';
 		isSigned = 0;
 	}
-	int unsignedLength = getStringLength(str) - isSigned;
-	for (int i = 0; i < unsignedLength; i++) {
-		m_nUnsignedData[unsignedLength - i - 1] = str[i + isSigned] - '0';
+	else {
+		throw "无效的正负号";
+	}
+	int numLength = getStringLength(str) - isSigned;
+	for (int i = 0; i < numLength; i++) {
+		int index_of_str = i + isSigned;
+		if (str[index_of_str] >= '0' && str[index_of_str] <= '9')
+			m_nUnsignedData[(numLength - 1) - i] = str[index_of_str] - '0';
+		else {
+			throw "无效的数值";// main里若从键盘输入的话要捕获异常
+		}
 	}
 }
 Huge_Int::~Huge_Int() {}
@@ -74,8 +82,10 @@ bool operator>(const Huge_Int& n1, const Huge_Int& n2) {
 		return 1;
 	}
 	else {
-		//throw "非法正负符号";
-		return 0;
+		cerr << "Error: in file \"" << __FILE__ << "\",Line " << __LINE__ << ": "
+			<< "非法正负符号"
+			<< endl;
+		abort();
 	}
 }
 Huge_Int operator-(Huge_Int n) {
