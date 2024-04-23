@@ -46,10 +46,11 @@ void Fraction::Show()const {
 
 void Fraction::Set(int n, int d) {
 	if (d == 0) {
-		cerr << "Error: in file \"" << __FILE__ << "\", Line " << __LINE__ << ": "
-			<< "分母不能为0"
-			<< endl;
-		abort();
+		//cerr << "Error: in file \"" << __FILE__ << "\", Line " << __LINE__ << ": "
+		//	<< "分母不能为0"
+		//	<< endl;
+		//abort();
+		throw "Den can’t be 0.";
 	}
 	m_nNum = n;
 	m_nDen = d;
@@ -149,10 +150,11 @@ Fraction operator*(const Fraction& n1, const Fraction& n2) {
   */
 Fraction operator/(const Fraction& n1, const Fraction& n2) {
 	if (n2.m_nNum == 0) {
-		cerr << "Error: in file \"" << __FILE__ << "\", Line " << __LINE__ << ": "
-			<< "除数不能为0"
-			<< endl;
-		abort();
+		//cerr << "Error: in file \"" << __FILE__ << "\", Line " << __LINE__ << ": "
+		//	<< "除数不能为0"
+		//	<< endl;
+		//abort();
+		throw "Can’t divide by 0 .";
 	}
 	Fraction f;
 	f.m_nNum = n1.m_nNum * n2.m_nDen;
