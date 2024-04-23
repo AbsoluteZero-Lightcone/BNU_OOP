@@ -3,7 +3,7 @@
   * @file    exported_class.h
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
-  * @date    2024-04-20
+  * @date    2024-04-23
   * @brief   exported_class class
   * @encode  GB2312
   ******************************************************************************

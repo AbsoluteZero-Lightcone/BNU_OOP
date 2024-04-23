@@ -3,7 +3,7 @@
   * @file    exported_class.cpp
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
-  * @date    2024-04-20
+  * @date    2024-04-23
   * @brief   exported_class class
   * @encode  GB2312
   ******************************************************************************
@@ -43,7 +43,8 @@ void exported_class::set_dataname2(datatype2 t_dataname2) { m_dataname2 = t_data
   * @retval нч
   */
 void exported_class::operator=(const exported_class& source) {
-	// todo
+	m_dataname1 = source.m_dataname1;
+	m_dataname2 = source.m_dataname2;
 }
 
 /**
@@ -104,8 +105,9 @@ bool operator>(const exported_class& n1, const exported_class& n2) {
   * @retval bool, true for n1 == n2
   */
 bool operator==(const exported_class& n1, const exported_class& n2) {
-	// todo
-	return false;
+	if (n1.m_dataname1 != n2.m_dataname1)return false;
+	if (n1.m_dataname2 != n2.m_dataname2)return false;
+	return true;
 }
 
 /**
