@@ -9,7 +9,7 @@
 
 #include "Fraction.h"
 
-
+/* Constructors & Deconstructor --------------------------------------------- */
 Fraction::Fraction(const Fraction& n) {
 	m_nNum = n.m_nNum;
 	m_nDen = n.m_nDen;
@@ -28,6 +28,7 @@ Fraction::Fraction(int n, int d) {
 }
 Fraction::~Fraction() {}
 
+/* Private functions -------------------------------------------------------- */
 /**
   * @brief 约分
   * @param None
@@ -42,16 +43,33 @@ void Fraction::Format() {
 	}
 }
 
-
+/* Exported functions ------------------------------------------------------- */
 // 规定动作
 void Fraction::Show() {
-	cout << m_nNum << "/" << m_nDen;
+	cout << *this;
 }
 
 void Fraction::Add(Sum* num) {
 	Fraction* n = dynamic_cast<Fraction*>(num);
 	if (n != NULL) {
 		Fraction(*n + *this).Show();
+	}
+}
+
+/**
+  * @brief 重载标准输出流 <<运算符
+  * @param ostream& out : 标准输出流对象
+  * @param const Fraction& source : 待输出的对象
+  * @retval ostream&
+  */
+ostream& operator<<(ostream& out, const Fraction& source) {
+	if (source.m_nDen == 1) {
+		out << source.m_nNum;
+		return out;
+	}
+	else {
+		out << source.m_nNum << "/" << source.m_nDen;
+		return out;
 	}
 }
 

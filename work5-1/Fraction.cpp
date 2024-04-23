@@ -74,8 +74,14 @@ void Fraction::operator=(const Fraction& source) {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const Fraction& source) {
-	out << source.m_nNum << "/" << source.m_nDen;
-	return out;
+	if (source.m_nDen == 1) {
+		out << source.m_nNum;
+		return out;
+	}
+	else {
+		out << source.m_nNum << "/" << source.m_nDen;
+		return out;
+	}
 }
 
 /**
