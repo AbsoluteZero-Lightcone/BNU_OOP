@@ -132,14 +132,14 @@ bool Date::isValid(Year year, Month month, Day day) {
   */
 void Date::setDate(Year year, Month month, Day day) {
 	if (!isValid(year, month, day)) {
-		std::cerr << "Invalid Date" << std::endl;
+		throw "Invalid Date";
 		return;
 	}
-	std::cerr << "Valid Date" << std::endl;
+	//std::cerr << "Valid Date" << std::endl;
 	_year = year;
 	_month = month;
 	_day = day;
-	std::cerr << "Update Successfully" << std::endl;
+	//std::cerr << "Update Successfully" << std::endl;
 }
 /**
   * @brief  日期+1
@@ -464,7 +464,7 @@ Month Date::getMonth()const { return _month; }
 Day Date::getDay()const { return _day; }
 
 std::ostream& operator<<(std::ostream& out, const Date& source) {
-	out << source._year << "-" << source._month << "-" << source._day;
+	out << (int)source._year << "-" << (int)source._month << "-" << (int)source._day;
 	return out;
 }
 
@@ -476,7 +476,7 @@ void Date::showDate() {
 	std::cout << *this;
 }
 
-Date::Date(Year year, Month month, Day day){
+Date::Date(Year year, Month month, Day day) {
 	setDate(year, month, day);
 }
 

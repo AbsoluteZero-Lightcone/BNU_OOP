@@ -11,7 +11,7 @@
 
 #include "Deposit.h"
 
-/* Static Members ------------------------------------------------------------*/
+  /* Static Members ------------------------------------------------------------*/
 int Deposit::s_nCount = 0;
 double Deposit::s_dInterest = 0.005;
 
@@ -36,7 +36,7 @@ Deposit::Deposit(
 	m_dateDate(t_dateDate)
 {
 	// µ½2022.1µÄ½ð¶î
-	m_dDeposit = t_dDeposit * pow(s_dInterest+1,(Date(2022, 7, 1) - t_dateDate));
+	m_dDeposit = t_dDeposit * pow(s_dInterest + 1, t_dateDate.diffMonth(Date(2022, 7, 1)));
 }
 
 Deposit::~Deposit() {}
@@ -71,7 +71,8 @@ ostream& operator<<(ostream& out, const Deposit& source) {
 	out << source.m_nAccount << "\t"
 		<< source.m_strName << "\t"
 		<< source.m_strPassword << "\t"
-		<< source.m_dDeposit * 100.0 << "%" << "\t"
+		<< source.m_dDeposit << "\t"
+		<< Deposit::s_dInterest * 100.0 << "%" << "\t"
 		<< source.m_dateDate;
 	return out;
 }

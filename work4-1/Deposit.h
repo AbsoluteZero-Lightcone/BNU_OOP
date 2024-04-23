@@ -58,7 +58,7 @@ public:
 	void set_dateDate(Date t_dateDate);
 	
 	// ×èÖ¹¸´ÖÆ
-	Deposit(const Deposit& source) = delete;
+	//Deposit(const Deposit& source) = delete;
 	void operator=(const Deposit& source) = delete;
 
 	friend ostream& operator<<(ostream& out, const Deposit& source);
