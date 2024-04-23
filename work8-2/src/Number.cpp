@@ -23,6 +23,7 @@ void Number::Add(Sum* num) {
 	if (n != NULL) {
 		Number(*n + *this).Show();
 	}
+
 }
 Number operator+(const Number& n1, const Number& n2) {
 	return Number(n1.m_dData + n2.m_dData);

@@ -9,7 +9,7 @@
 
 #include "Fraction.h"
 
-/* Constructors & Deconstructor --------------------------------------------- */
+  /* Constructors & Deconstructor --------------------------------------------- */
 Fraction::Fraction(const Fraction& n) {
 	m_nNum = n.m_nNum;
 	m_nDen = n.m_nDen;

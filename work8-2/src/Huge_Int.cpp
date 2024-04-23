@@ -150,7 +150,9 @@ void Huge_Int::Show() {
 }
 
 void Huge_Int::Add(Sum* num) {
-	cout << *this + *dynamic_cast<Huge_Int*>(num);
+	Huge_Int* n = dynamic_cast<Huge_Int*>(num);
+	if (n != NULL)
+		cout << *this + *n;
 }
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
