@@ -33,9 +33,11 @@ Deposit::Deposit(
 	m_nAccount(++s_nCount),
 	m_strName(t_strName),
 	m_strPassword(t_strPassword),
-	m_dDeposit(t_dDeposit),
 	m_dateDate(t_dateDate)
-{}
+{
+	// 到2022.1的金额
+	m_dDeposit = t_dDeposit * pow(s_dInterest+1,(Date(2022, 7, 1) - t_dateDate));
+}
 
 Deposit::~Deposit() {}
 
@@ -53,7 +55,12 @@ void Deposit::set_dInterest(double t_dInterest) { s_dInterest = t_dInterest; }
 void Deposit::set_dDeposit(double t_dDeposit) { m_dDeposit = t_dDeposit; }
 void Deposit::set_dateDate(Date t_dateDate) { m_dateDate = t_dateDate; }
 
+
 /* Exported functions ------------------------------------------------------- */
+void Deposit::update() {
+	m_dDeposit *= s_dInterest + 1.0;
+}
+
 /**
   * @brief 重载标准输出流 <<运算符
   * @param ostream& out : 标准输出流对象
@@ -68,6 +75,5 @@ ostream& operator<<(ostream& out, const Deposit& source) {
 		<< source.m_dateDate;
 	return out;
 }
-
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
