@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "Line.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
@@ -36,8 +36,17 @@ void Line::set_pointP1(Point t_pointP1) { m_pointP1 = t_pointP1; }
 Point Line::get_pointP2()const { return m_pointP2; }
 void Line::set_pointP2(Point t_pointP2) { m_pointP2 = t_pointP2; }
 
-/* Private functions -------------------------------------------------------- */
 /* Exported functions ------------------------------------------------------- */
+
+double Line::length()const {
+	return sqrt(
+		(m_pointP1.m_dCoordinateX - m_pointP2.m_dCoordinateX) *
+		(m_pointP1.m_dCoordinateX - m_pointP2.m_dCoordinateX) +
+		(m_pointP1.m_dCoordinateY - m_pointP2.m_dCoordinateY) *
+		(m_pointP1.m_dCoordinateY - m_pointP2.m_dCoordinateY)
+	);
+}
+
 /**
   * @brief 类内重载通过对象赋值的赋值运算符
   * @param const Line& source : 待赋的值

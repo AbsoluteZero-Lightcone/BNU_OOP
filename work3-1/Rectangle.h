@@ -40,11 +40,10 @@ public:
 	void set_dHeight(double t_dHeight);
 	Line getDiagonal()const;
 	void setDiagonal(const Line& Diagonal);
-	void setDiagonal(const Point& LeftTop, const Point& RightBottom);
 
 	// Functions
-	void area()const;
-	void perimeter()const;
+	double area()const;
+	double perimeter()const;
 
 	// ‘ÀÀ„∑˚÷ÿ‘ÿ
 	void operator=(const Rectangle& source);

@@ -42,6 +42,7 @@ public:
 	friend ostream& operator<<(ostream& out, const Point& source);
 	friend bool operator==(const Point& n1, const Point& n2);
 
+	friend class Line;
 	friend class Rectangle;
 };
 

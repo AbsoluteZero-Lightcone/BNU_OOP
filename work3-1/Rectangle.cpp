@@ -68,6 +68,14 @@ void Rectangle::setDiagonal(const Line& Diagonal){
 }
 
 /* Exported functions ------------------------------------------------------- */
+
+double Rectangle::area()const {
+	return m_dWidth * m_dHeight;
+}
+double Rectangle::perimeter()const {
+	return (m_dWidth + m_dHeight) * 2;
+}
+
 /**
   * @brief 类内重载通过对象赋值的赋值运算符
   * @param const Rectangle& source : 待赋的值
