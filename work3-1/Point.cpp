@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "Point.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
@@ -58,7 +58,8 @@ void Point::operator=(const Point& source) {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const Point& source) {
-	out << "(" << source.m_dCoordinateX << "," << source.m_dCoordinateY << ")";
+	//out << "(" << source.m_dCoordinateX << "," << source.m_dCoordinateY << ")";
+	out << source.m_dCoordinateX << " " << source.m_dCoordinateY;
 	return out;
 }
 

@@ -64,7 +64,7 @@ void Line::operator=(const Line& source) {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const Line& source) {
-	// todo
+	out << source.get_pointP1() << " " << source.get_pointP2();
 	return out;
 }
 

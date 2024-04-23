@@ -9,17 +9,17 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "Rectangle.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
 Rectangle::Rectangle() :
-	m_pointCenter(0,0),
+	m_pointCenter(0, 0),
 	m_dWidth(1),
 	m_dHeight(1)
 {}
 
-Rectangle::Rectangle(Point t_pointCenter, double t_dWidth,double t_dHeight) :
+Rectangle::Rectangle(Point t_pointCenter, double t_dWidth, double t_dHeight) :
 	m_pointCenter(t_pointCenter),
 	m_dWidth(t_dWidth),
 	m_dHeight(t_dHeight)
@@ -46,10 +46,10 @@ void Rectangle::set_dHeight(double t_dHeight) { m_dHeight = t_dHeight; }
   * @param 无
   * @retval 矩形的主对角线
   */
-Line Rectangle::getDiagonal()const{
+Line Rectangle::getDiagonal()const {
 	return Line(
-		Point(m_pointCenter.m_dCoordinateX-m_dWidth/2, m_pointCenter.m_dCoordinateY-m_dHeight/2),
-		Point(m_pointCenter.m_dCoordinateX+m_dWidth/2, m_pointCenter.m_dCoordinateY+m_dHeight/2)
+		Point(m_pointCenter.m_dCoordinateX - m_dWidth / 2, m_pointCenter.m_dCoordinateY - m_dHeight / 2),
+		Point(m_pointCenter.m_dCoordinateX + m_dWidth / 2, m_pointCenter.m_dCoordinateY + m_dHeight / 2)
 	);
 }
 
@@ -58,7 +58,7 @@ Line Rectangle::getDiagonal()const{
   * @param const Line& Diagonal : 矩形的主对角线
   * @retval 无
   */
-void Rectangle::setDiagonal(const Line& Diagonal){
+void Rectangle::setDiagonal(const Line& Diagonal) {
 	m_dWidth = abs(Diagonal.m_pointP1.m_dCoordinateX - Diagonal.m_pointP2.m_dCoordinateX);
 	m_dHeight = abs(Diagonal.m_pointP1.m_dCoordinateY - Diagonal.m_pointP2.m_dCoordinateY);
 	m_pointCenter.setXY(
@@ -69,11 +69,32 @@ void Rectangle::setDiagonal(const Line& Diagonal){
 
 /* Exported functions ------------------------------------------------------- */
 
+/**
+  * @brief 求面积
+  * @param 无
+  * @retval 面积
+  */
 double Rectangle::area()const {
 	return m_dWidth * m_dHeight;
 }
+
+/**
+  * @brief 求周长
+  * @param 无
+  * @retval 周长
+  */
 double Rectangle::perimeter()const {
 	return (m_dWidth + m_dHeight) * 2;
+}
+
+/**
+  * @brief 长宽可以为0，但为零时不构成矩形，用此函数判断是否能构成矩形
+  * @param 无
+  * @retval bool, 1 for 能构成矩形
+  */
+bool Rectangle::isRectangle()const {
+	if (m_dWidth == 0 || m_dHeight == 0)return false;
+	return true;
 }
 
 /**
@@ -94,7 +115,7 @@ void Rectangle::operator=(const Rectangle& source) {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const Rectangle& source) {
-	// todo
+	out << "Rect(" << source.getDiagonal() << ")";
 	return out;
 }
 

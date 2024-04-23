@@ -44,6 +44,7 @@ public:
 	// Functions
 	double area()const;
 	double perimeter()const;
+	bool isRectangle()const;
 
 	// ÔËËã·ûÖØÔØ
 	void operator=(const Rectangle& source);
