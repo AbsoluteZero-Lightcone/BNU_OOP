@@ -165,9 +165,9 @@ void Rectangle::info() {
 // 每种情况需要判断矩形的相对位置（8种情况）
 // 合计 200 种情况
 #define f1(distance_center, sum, sub) ((distance_center>sum)?true:false)
-#define f2(distance_center, sum, sub) ((distance_center==sum)?true:false)
+#define f2(distance_center, sum, sub) ((fabs(distance_center-sum)<DBL_EPSILON) ?true:false)
 #define f3(distance_center, sum, sub) ((distance_center<sum&&distance_center>sub)?true:false)
-#define f4(distance_center, sum, sub) ((distance_center==sub)?true:false)
+#define f4(distance_center, sum, sub) ((fabs(distance_center-sub)<DBL_EPSILON)?true:false)
 #define f5(distance_center, sum, sub) ((distance_center<sub)?true:false)
 
 #define F1X f1(fabs(center_dx), sum_x, sub_x)
