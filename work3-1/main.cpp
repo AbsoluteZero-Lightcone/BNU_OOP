@@ -15,20 +15,31 @@
 using namespace std;
 #include "Rectangle.h"
 
-int input_index(int length){
-	int n;
+int input_index(int length, int n) {
+	int i;
+	cout << "Input no. of rectangle" << n << ": ";
+	cin >> i;
+	i--;
+	if (i >= 0 && i < length)
+		return i;
+	else {
+		cerr << "Invalid Index." << endl;
+		input_index(length, n);
+	}
+}
+int input_index(int length) {
+	int i;
 	cout << "Input no. of rectangle: ";
-	cin >> n;
-	n--;
-	if (n >= 0 && n < length)
-		return n;
+	cin >> i;
+	i--;
+	if (i >= 0 && i < length)
+		return i;
 	else {
 		cerr << "Invalid Index." << endl;
 		input_index(length);
 	}
 }
-
-void Move_demo(Rectangle* rectangles,int length) {
+void Move_demo(Rectangle* rectangles, int length) {
 	Rectangle& selected_rectangle = rectangles[input_index(length)];
 	try {
 		selected_rectangle.info();
@@ -43,13 +54,33 @@ void Move_demo(Rectangle* rectangles,int length) {
 	}
 	catch (const char* err) {
 		cerr << selected_rectangle.getDiagonal() << " " << err << endl;
-		Move_demo(rectangles,length);
+		Move_demo(rectangles, length);
 	}
 }
-void intersect_demo(Rectangle* rectangles, int length) {
-	Rectangle& selected_rectangle1 = rectangles[input_index(length)];
-	Rectangle& selected_rectangle2 = rectangles[input_index(length)];
+void Intersect_demo(Rectangle* rectangles, int length) {
+	Rectangle *selected_rectangle1, *selected_rectangle2;
+	while (1) {
+			selected_rectangle1 = &rectangles[input_index(length,1)];
+		try {
+			selected_rectangle1->info();
+			break;
+		}
+		catch (const char* err) {
+			cerr << selected_rectangle1->getDiagonal() << " " << err << endl;
+		}
+	}
+	while (1) {
+			selected_rectangle2 = &rectangles[input_index(length,2)];
+		try {
+			selected_rectangle2->info();
+			break;
+		}
+		catch (const char* err) {
+			cerr << selected_rectangle2->getDiagonal() << " " << err << endl;
+		}
+	}
 }
+
 #define LENGTH 10
 int main() {
 	ifstream infile("rect.txt", ios::in);
@@ -73,7 +104,7 @@ int main() {
 	cout << endl;
 	cout << "Move a rectangle :" << endl;
 	Move_demo(rectangles, LENGTH);
-
+	Intersect_demo(rectangles, LENGTH);
 
 
 	return 0;
