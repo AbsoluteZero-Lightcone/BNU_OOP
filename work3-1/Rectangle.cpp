@@ -72,10 +72,15 @@ Point Rectangle::getLeftBottom()const	{ return Point(DIRECT_L(m_pointCenter.m_dC
 Point Rectangle::getRightBottom()const	{ return Point(DIRECT_R(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_D(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
 Point Rectangle::getRightTop()const		{ return Point(DIRECT_R(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_U(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
 
-Line Rectangle::getLeft()const			{ return Line(getLeftTop(), getLeftBottom()); }
-Line Rectangle::getRight()const			{ return Line(getRightTop(), getRightBottom()); }
-Line Rectangle::getTop()const			{ return Line(getLeftTop(), getRightTop()); }
-Line Rectangle::getBottom()const		{ return Line(getLeftBottom(), getRightBottom()); }
+Line Rectangle::getLeftLine()const			{ return Line(getLeftTop(), getLeftBottom()); }
+Line Rectangle::getRightLine()const			{ return Line(getRightTop(), getRightBottom()); }
+Line Rectangle::getTopLine()const			{ return Line(getLeftTop(), getRightTop()); }
+Line Rectangle::getBottomLine()const		{ return Line(getLeftBottom(), getRightBottom()); }
+
+double Rectangle::getLeft()const   { return DIRECT_L(m_pointCenter.m_dCoordinateX,m_dWidth / 2);}
+double Rectangle::getRight()const  { return DIRECT_R(m_pointCenter.m_dCoordinateX,m_dWidth / 2);}
+double Rectangle::getTop()const    { return DIRECT_U(m_pointCenter.m_dCoordinateY,m_dHeight / 2);}
+double Rectangle::getBottom()const { return DIRECT_D(m_pointCenter.m_dCoordinateY,m_dHeight / 2);}
 
 /**
   * @brief 返回矩形的主对角线
@@ -207,23 +212,23 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	else if (F2X && F5Y) {// 1种情况 竖线
 		if (n1.m_dHeight < n2.m_dHeight) {
 			if (IS_INCREMENT_R(center_dx)){// 矩形相对位置：n1左->n2右
-				if (n1.m_dHeight < n2.m_dHeight)return n1.getRight();
-				return n2.getLeft();
+				if (n1.m_dHeight < n2.m_dHeight)return n1.getRightLine();
+				return n2.getLeftLine();
 			}
 			if (IS_INCREMENT_L(center_dx)) {// 矩形相对位置：n1右->n2左
-				if (n1.m_dHeight < n2.m_dHeight)return n1.getLeft();
-				return n2.getRight();
+				if (n1.m_dHeight < n2.m_dHeight)return n1.getLeftLine();
+				return n2.getRightLine();
 			}
 		}
 	}
 	else if (F2Y && F5X) {// 1种情况 横线
 		if (IS_INCREMENT_U(center_dy)) {// 矩形相对位置：n1下->n2上
-			if (n1.m_dWidth < n2.m_dWidth)return n1.getTop();
-			return n2.getBottom();
+			if (n1.m_dWidth < n2.m_dWidth)return n1.getTopLine();
+			return n2.getBottomLine();
 		}
 		if (IS_INCREMENT_D(center_dy)) {// 矩形相对位置：n1上->n2下
-			if (n1.m_dWidth < n2.m_dWidth)return n1.getBottom();
-			return n2.getTop();
+			if (n1.m_dWidth < n2.m_dWidth)return n1.getBottomLine();
+			return n2.getTopLine();
 		}
 	}
 	else if((F3X||F4X)&&(F3Y||F4Y)){ // 4种情况 两角相交/取等时相切
@@ -234,22 +239,22 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	}
 	else if ((F3X || F4X) && F5Y) { // 2种情况 一个竖边镶嵌在另一个上
 		if (IS_INCREMENT_R(center_dx)) {// 矩形相对位置：n1左->n2右
-			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n1.getRight(),);
-			return Rectangle(n2.getLeft(),);
+			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n2.);
+			return Rectangle(n2.getLeftLine(),);
 		}
 		if (IS_INCREMENT_L(center_dx)) {// 矩形相对位置：n1右->n2左
-			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n1.getLeft(),);
-			return Rectangle(n2.getRight(),);
+			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n1.getLeftLine(),);
+			return Rectangle(n2.getRightLine(),);
 		}		
 	}
 	else if ((F3Y || F4Y) && F5X) { // 2种情况 一个横边镶嵌在另一个上
 		if (IS_INCREMENT_U(center_dy)) {// 矩形相对位置：n1下->n2上
-			if (n1.m_dWidth < n2.m_dWidth)return Rectangle(n1.getTop(),);
-			return Rectangle(n2.getBottom(),);
+			if (n1.m_dWidth < n2.m_dWidth)return Rectangle(n1.getTopLine(),);
+			return Rectangle(n2.getBottomLine(),);
 		}
 		if (IS_INCREMENT_D(center_dy)) {// 矩形相对位置：n1上->n2下
-			if (n1.m_dWidth < n2.m_dWidth)return Rectangle(n1.getBottom(),);
-			return Rectangle(n2.getTop(),);
+			if (n1.m_dWidth < n2.m_dWidth)return Rectangle(n1.getBottomLine(),);
+			return Rectangle(n2.getTopLine(),);
 		}
 	}
 	else if (F5X && F5Y) {// 1种情况

@@ -13,10 +13,6 @@
 #include <string>
 #include <fstream>
 using namespace std;
-
-#include "Point.h"
-#include "Line.h"
-#include "Rectangle.h"
 #include "Shape.h"
 
 int input_index(int length, int n) {

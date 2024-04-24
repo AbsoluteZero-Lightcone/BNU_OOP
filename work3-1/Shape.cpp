@@ -15,6 +15,11 @@
 /* Exported functions ------------------------------------------------------- */
 
 ostream& operator<<(ostream& out, const Shape& source) {
+	if (typeid(source) == typeid(Empty)) {
+		const Empty& temp = dynamic_cast<Empty&>(const_cast<Shape&>(source));
+		cout << "²»Ïà½»";
+		return out;
+	}
 	if (typeid(source) == typeid(Point)) {
 		const Point& temp = dynamic_cast<Point&>(const_cast<Shape&>(source));
 		cout << "Point(" << temp.getX() << "," << temp.getY();

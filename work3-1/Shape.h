@@ -17,9 +17,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 using namespace std;
-#include "Point.h"
-#include "Line.h"
-#include "Rectangle.h"
 
 /* Class ---------------------------------------------------------------------*/
 class Shape {
@@ -31,6 +28,11 @@ public:
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Shape& source);
 
+
+#include "Empty.h"
+#include "Point.h"
+#include "Line.h"
+#include "Rectangle.h"
 #endif /* !__SHAPE_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

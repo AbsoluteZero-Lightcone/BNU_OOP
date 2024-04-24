@@ -56,10 +56,15 @@ public:
 	Point getRightBottom()const;
 	Point getRightTop()const;
 
-	Line getLeft()const;
-	Line getRight()const;
-	Line getTop()const;
-	Line getBottom()const;
+	Line getLeftLine()const;
+	Line getRightLine()const;
+	Line getTopLine()const;
+	Line getBottomLine()const;
+
+	double getLeft()const;
+	double getRight()const;
+	double getTop()const;
+	double getBottom()const;
 
 	// Functions
 	double area()const;
