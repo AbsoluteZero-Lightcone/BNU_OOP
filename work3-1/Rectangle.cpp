@@ -239,7 +239,9 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	}
 	else if ((F3X || F4X) && F5Y) { // 2种情况 一个竖边镶嵌在另一个上
 		if (IS_INCREMENT_R(center_dx)) { // 矩形相对位置：n1左->n2右
-			if (n1.m_dHeight < n2.m_dHeight) // n1小 n2大
+			if (n1.m_dHeight < n2.m_dHeight) // n1小 n2大 
+				// 小的一侧 在 另一个矩形 内部，成为交集的一个边
+				// 交集的另一边由 小的侧边 和 大的靠近小的的一边 相交得到
 				return Rectangle(Diagonal(Point(n2.getLeft(),n1.getTop()), n1.getRightBottom()));
 			else return Rectangle(Diagonal(n2.getLeftTop(), Point(n1.getRight(),n2.getBottom())));
 		}
@@ -250,14 +252,18 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 		}		
 	}
 	else if ((F3Y || F4Y) && F5X) { // 2种情况 一个横边镶嵌在另一个上
-		if (IS_INCREMENT_U(center_dy)) {// 矩形相对位置：n1下->n2上
-			if (n1.m_dWidth < n2.m_dWidth)return Rectangle(n1.getTopLine(),);
-			return Rectangle(n2.getBottomLine(),);
+		if (IS_INCREMENT_U(center_dy)) {// 矩形相对位置：n2上<-n1下
+			if (n1.m_dWidth > n2.m_dWidth) // n2小 n1大
+				return Rectangle(Diagonal(Point(n2.getLeft(), n1.getTop()), n2.getRightBottom()));
+			else return Rectangle(Diagonal(n1.getLeftTop(), Point(n1.getRight(), n2.getBottom())));
 		}
+
 		if (IS_INCREMENT_D(center_dy)) {// 矩形相对位置：n1上->n2下
-			if (n1.m_dWidth < n2.m_dWidth)return Rectangle(n1.getBottomLine(),);
-			return Rectangle(n2.getTopLine(),);
+			if (n2.m_dWidth > n1.m_dWidth) // n1小 n2大
+				return Rectangle(Diagonal(Point(n1.getLeft(), n2.getTop()), n1.getRightBottom()));
+			else return Rectangle(Diagonal(n2.getLeftTop(), Point(n2.getRight(), n1.getBottom())));
 		}
+
 	}
 	else if (F5X && F5Y) {// 1种情况
 		if (n1.m_dHeight <= n2.m_dHeight && n1.m_dWidth <= n2.m_dWidth) { // 包含
