@@ -58,9 +58,9 @@ void Move_demo(Rectangle* rectangles, int length) {
 	}
 }
 void Intersect_demo(Rectangle* rectangles, int length) {
-	Rectangle *selected_rectangle1, *selected_rectangle2;
+	Rectangle* selected_rectangle1, * selected_rectangle2;
 	while (1) {
-			selected_rectangle1 = &rectangles[input_index(length,1)];
+		selected_rectangle1 = &rectangles[input_index(length, 1)];
 		try {
 			selected_rectangle1->info();
 			break;
@@ -70,7 +70,7 @@ void Intersect_demo(Rectangle* rectangles, int length) {
 		}
 	}
 	while (1) {
-			selected_rectangle2 = &rectangles[input_index(length,2)];
+		selected_rectangle2 = &rectangles[input_index(length, 2)];
 		try {
 			selected_rectangle2->info();
 			break;
@@ -79,6 +79,7 @@ void Intersect_demo(Rectangle* rectangles, int length) {
 			cerr << selected_rectangle2->getDiagonal() << " " << err << endl;
 		}
 	}
+	InterSectRect(*selected_rectangle1, *selected_rectangle2);
 }
 
 #define LENGTH 10

@@ -170,6 +170,12 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return Line(n2.getRightBottom(), n1.getLeftTop());// 矩形相对位置：n1右下->n2左上
 		}
 	else {
+		// 中心距等于零且交集形状为矩形的情况会进入矩形情况分支
+		// 宏函数中没有等于的判定，这里需要单独判零
+		// 没考虑包含的情况
+		if(center_dx == 0&& center_dy == 0)
+		if (center_dx == 0)return();
+		if (center_dy == 0);
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Line(n2.getLeftTop(),n1.getRightBottom()));// 矩形相对位置：n1左上->n2右下
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Line(n2.getLeftBottom(), n1.getRightTop()));// 矩形相对位置：n1左下->n2右上
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Line(n2.getRightTop(), n1.getLeftBottom()));// 矩形相对位置：n1右上->n2左下
