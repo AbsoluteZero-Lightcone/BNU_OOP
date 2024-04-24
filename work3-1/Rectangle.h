@@ -79,7 +79,7 @@ public:
 	friend ostream& operator<<(ostream& out, const Rectangle& source);
 	friend bool operator==(const Rectangle& n1, const Rectangle& n2);
 
-	friend Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
+	friend Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2);
 
 };
 
@@ -87,7 +87,7 @@ public:
 ostream& operator<<(ostream& out, const Rectangle& source);
 bool operator==(const Rectangle& n1, const Rectangle& n2);
 
-Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
+Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2);
 
 #endif /* !__RECTANGLE_H */
 

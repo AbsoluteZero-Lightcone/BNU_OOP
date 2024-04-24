@@ -182,7 +182,12 @@ void Rectangle::info() {
 #define F4Y f4(fabs(center_dy), sum_y, sub_y)
 #define F5Y f5(fabs(center_dy), sum_y, sub_y)
 
-Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
+/**
+  * @brief 两矩形相交
+  * @param const Rectangle& n1, const Rectangle& n2 : 两个矩形
+  * @retval 交集的图形，多态，返回基类引用
+  */
+Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	double center_dx, center_dy; // 增量向量 n1->n2
 	center_dx = n2.m_pointCenter.getX() - n1.m_pointCenter.getX();
 	center_dy = n2.m_pointCenter.getY() - n1.m_pointCenter.getY();
