@@ -161,16 +161,17 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	sub_x = abs(n1.m_dWidth / 2 - n2.m_dWidth / 2);
 	sub_y = abs(n1.m_dHeight / 2 - n2.m_dHeight / 2);
 	// 所有情况：
-	// 相离 外切 相交 内切 内含
-	// 无   点线 矩形 矩形 矩形
-	if (sum_x  > abs(center_dx) || sum_y > abs(center_dy))return Empty();
-	else if (sum_x == abs(center_dx) && sum_y == abs(center_dy)) { 
+	// 横向： 相离 外切 相交 内切 内含
+	// 纵向： 相离 外切 相交 内切 内含
+	// 共 25 种情况
+	if (sum_x  > abs(center_dx) || sum_y > abs(center_dy))return Empty(); //  相离 | 相离 9种情况 空
+	else if (sum_x == abs(center_dx) && sum_y == abs(center_dy)) { // 外切 & 外切 1种情况 点 
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return n1.getRightBottom();// 矩形相对位置：n1左上->n2右下
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return n1.getRightTop();// 矩形相对位置：n1左下->n2右上
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return n1.getLeftBottom();// 矩形相对位置：n1右上->n2左下
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return n1.getLeftTop();// 矩形相对位置：n1右下->n2左上	
 	}
-	else if (sum_x == abs(center_dx) || sum_y == abs(center_dy)){// 竖线和横线
+	else if (sum_x == abs(center_dx) || sum_y == abs(center_dy)){// 外切 ^ 外切 6种情况 线 有错误
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return Line(n2.getLeftTop(),n1.getRightBottom()); // 矩形相对位置：n1左上->n2右下
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return Line(n2.getLeftBottom(), n1.getRightTop());// 矩形相对位置：n1左下->n2右上
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return Line(n2.getRightTop(), n1.getLeftBottom());// 矩形相对位置：n1右上->n2左下
@@ -182,20 +183,26 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 		// 3.先与后或可以覆盖所有情况
 	// 下文 sum_x, sum_y < 0 
 	else if(sub_x>= abs(center_dx)&& sub_y >= abs(center_dy)){ // 两角相交/取等时相切
+		if (center_dx == 0 && center_dy == 0);
+		if (center_dx == 0);
+		if (center_dy == 0);
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Line(n2.getLeftTop(), n1.getRightBottom()));// 矩形相对位置：n1左上->n2右下
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Line(n2.getLeftBottom(), n1.getRightTop()));// 矩形相对位置：n1左下->n2右上
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Line(n2.getRightTop(), n1.getLeftBottom()));// 矩形相对位置：n1右上->n2左下
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Line(n2.getRightBottom(), n1.getLeftTop()));// 矩形相对位置：n1右下->n2左上
 	}
 	else if (sub_x >= abs(center_dx) || sub_y >= abs(center_dy)) { // 两边相交/取等时相切
+		if (center_dx == 0 && center_dy == 0);
+		if (center_dx == 0);
+		if (center_dy == 0);
+		if()return 
 	}
 	else/*sub_x < abs(center_dx) || sub_y < abs(center_dy)*/ { // 内含
+		if (n1.m_dWidth >= n2.m_dWidth && n1.m_dHeight >= n2.m_dHeight)return n2;
+		else return n1;
 	}
-		if(center_dx == 0&& center_dy == 0)
-		if (center_dx == 0)return();
-		if (center_dy == 0);
 
-	// 中心距等于零且交集形状为矩形的情况会进入矩形情况分支
+	// 中心距等于零会进入小于一侧的情况分支
 	// 宏函数中没有等于的判定，这里需要单独判零
 	// 没考虑包含的情况
 		{
