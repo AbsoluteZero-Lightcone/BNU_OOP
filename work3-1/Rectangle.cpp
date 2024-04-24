@@ -151,6 +151,30 @@ void Rectangle::info() {
 		throw "Can’t construct rectangle.";
 	}
 }
+
+// 所有情况：
+//       f1  f2   f3  f4  f5
+// 横向： 相离 外切 相交 内切 内含
+// 纵向： 相离 外切 相交 内切 内含
+// 共 25 种情况
+#define f1(distance_center, sum, sub) ((distance_center>sum)?true:false)
+#define f2(distance_center, sum, sub) ((distance_center==sum)?true:false)
+#define f3(distance_center, sum, sub) ((distance_center<sum&&distance_center>sub)?true:false)
+#define f4(distance_center, sum, sub) ((distance_center==sub)?true:false)
+#define f5(distance_center, sum, sub) ((distance_center<sub)?true:false)
+
+#define F1X f1(abs(center_dx), sum_x, sub_x)
+#define F2X f2(abs(center_dx), sum_x, sub_x)
+#define F3X f3(abs(center_dx), sum_x, sub_x)
+#define F4X f4(abs(center_dx), sum_x, sub_x)
+#define F5X f5(abs(center_dx), sum_x, sub_x)
+
+#define F1Y f1(abs(center_dy), sum_y, sub_y)
+#define F2Y f2(abs(center_dy), sum_y, sub_y)
+#define F3Y f3(abs(center_dy), sum_y, sub_y)
+#define F4Y f4(abs(center_dy), sum_y, sub_y)
+#define F5Y f5(abs(center_dy), sum_y, sub_y)
+
 Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	double center_dx, center_dy; // 增量向量 n1->n2
 	center_dx = n2.m_pointCenter.getX() - n1.m_pointCenter.getX();
@@ -160,29 +184,45 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	sum_y = n1.m_dHeight / 2 + n2.m_dHeight /2;
 	sub_x = abs(n1.m_dWidth / 2 - n2.m_dWidth / 2);
 	sub_y = abs(n1.m_dHeight / 2 - n2.m_dHeight / 2);
-	// 所有情况：
-	// 横向： 相离 外切 相交 内切 内含
-	// 纵向： 相离 外切 相交 内切 内含
-	// 共 25 种情况
-	if (sum_x  > abs(center_dx) || sum_y > abs(center_dy))return Empty(); //  相离 | 相离 9种情况 空
-	else if (sum_x == abs(center_dx) && sum_y == abs(center_dy)) { // 外切 & 外切 1种情况 点 
+	if (F1X || F1Y)return Empty(); // 9种情况 空
+	else if (F2X && F2Y) { // 1种情况 点 
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return n1.getRightBottom();// 矩形相对位置：n1左上->n2右下
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return n1.getRightTop();// 矩形相对位置：n1左下->n2右上
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return n1.getLeftBottom();// 矩形相对位置：n1右上->n2左下
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return n1.getLeftTop();// 矩形相对位置：n1右下->n2左上	
 	}
-	else if (sum_x == abs(center_dx) || sum_y == abs(center_dy)){// 外切 ^ 外切 6种情况 线 有错误
-		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return Line(n2.getLeftTop(),n1.getRightBottom()); // 矩形相对位置：n1左上->n2右下
+	else if (F2X && !F5Y || F2Y && !F5X) {// 4种情况 线
+		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return Line(n2.getLeftTop(), n1.getRightBottom()); // 矩形相对位置：n1左上->n2右下
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return Line(n2.getLeftBottom(), n1.getRightTop());// 矩形相对位置：n1左下->n2右上
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return Line(n2.getRightTop(), n1.getLeftBottom());// 矩形相对位置：n1右上->n2左下
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return Line(n2.getRightBottom(), n1.getLeftTop());// 矩形相对位置：n1右下->n2左上
+	}
+	//       f1  f2   f3  f4  f5
+	// 横向： 相离 外切 相交 内切 内含
+	// 纵向： 相离 外切 相交 内切 内含
+	else if (F2X && F5Y) {// 1种情况 竖线
+		if (n1.m_dHeight < n2.m_dHeight) {
+			if (IS_INCREMENT_R(center_dx)){// 矩形相对位置：n1左->n2右
+				if (n1.m_dHeight < n2.m_dHeight)return n1.getRight();
+				return n2.getLeft();
+			}
+			if (IS_INCREMENT_L(center_dx)) {// 矩形相对位置：n1右->n2左
+				if (n1.m_dHeight < n2.m_dHeight)return n1.getLeft();
+				return n2.getRight();
+			}
 		}
-		// 规律总结：
-		// 1.指向对方的顶点组成新的图形
-		// 2.作业中两点的顺序没有要求，但在Line构造函数中已经把线段标准化为由负方向指向正方向
-		// 3.先与后或可以覆盖所有情况
-	// 下文 sum_x, sum_y < 0 
-	else if(sub_x>= abs(center_dx)&& sub_y >= abs(center_dy)){ // 两角相交/取等时相切
+	}
+	else if (F2Y && F5X) {// 1种情况 横线
+		if (IS_INCREMENT_R(center_dx)) {// 矩形相对位置：n1下->n2上
+			if (n1.m_dHeight < n2.m_dHeight)return n1.getRight();
+			return n2.getLeft();
+		}
+		if (IS_INCREMENT_L(center_dx)) {// 矩形相对位置：n1上->n2下
+			if (n1.m_dHeight < n2.m_dHeight)return n1.getLeft();
+			return n2.getRight();
+		}
+	}
+	else if((F3X||F4X)&&(F3Y||F4Y)){ // 两角相交/取等时相切 4种情况
 		if (center_dx == 0 && center_dy == 0);
 		if (center_dx == 0);
 		if (center_dy == 0);
