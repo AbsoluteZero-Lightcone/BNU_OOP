@@ -17,6 +17,7 @@
 #include <cmath>
 using namespace std;
 #include "Point.h"
+#include "Rectangle.h"
 #include "Shape.h"
 /* Class ---------------------------------------------------------------------*/
 class Line:public Shape {
