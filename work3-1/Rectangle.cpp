@@ -236,8 +236,24 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	// 横向： 相离 外切 相交 内切 内含
 	// 纵向： 相离 外切 相交 内切 内含
 	else if ((F3X || F4X) && F5Y) { // 2种情况 一个竖边镶嵌在另一个上
+		if (IS_INCREMENT_R(center_dx)) {// 矩形相对位置：n1左->n2右
+			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n1.getRight(),);
+			return Rectangle(n2.getLeft(),)
+		}
+		if (IS_INCREMENT_L(center_dx)) {// 矩形相对位置：n1右->n2左
+			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n1.getLeft(),);
+			return Rectangle(n2.getRight(),);
+		}		
 	}
 	else if ((F3Y || F4Y) && F5X) { // 2种情况 一个横边镶嵌在另一个上
+		if (IS_INCREMENT_U(center_dy)) {// 矩形相对位置：n1下->n2上
+			if (n1.m_dWidth < n2.m_dWidth)return Rectangle(n1.getTop(),);
+			return Rectangle(n2.getBottom(),);
+		}
+		if (IS_INCREMENT_D(center_dy)) {// 矩形相对位置：n1上->n2下
+			if (n1.m_dWidth < n2.m_dWidth)return Rectangle(n1.getBottom(),);
+			return Rectangle(n2.getTop(),);
+		}
 	}
 	else if (F5X && F5Y) {// 1种情况
 		if (n1.m_dHeight <= n2.m_dHeight && n1.m_dWidth <= n2.m_dWidth) { // 包含
@@ -251,13 +267,6 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 		}
 		else /*if (n1.m_dHeight < n2.m_dHeight && n1.m_dWidth > n2.m_dWidth) {*/ // 穿插
 			return Rectangle(Point(n2.m_pointCenter.getX(), n1.m_pointCenter.getY()), n2.m_dWidth, n1.m_dHeight);
-		}
-	}
-		{
-		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Line(n2.getLeftTop(),n1.getRightBottom()));// 矩形相对位置：n1左上->n2右下
-		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Line(n2.getLeftBottom(), n1.getRightTop()));// 矩形相对位置：n1左下->n2右上
-		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Line(n2.getRightTop(), n1.getLeftBottom()));// 矩形相对位置：n1右上->n2左下
-		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Line(n2.getRightBottom(), n1.getLeftTop()));// 矩形相对位置：n1右下->n2左上
 		}
 }
 
