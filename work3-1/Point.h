@@ -16,9 +16,10 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
+#include "Shape.h"
 
 /* Class ---------------------------------------------------------------------*/
-class Point {
+class Point:public Shape {
 private:
 	double m_dCoordinateX;
 	double m_dCoordinateY;
@@ -44,6 +45,8 @@ public:
 
 	friend class Line;
 	friend class Rectangle;
+	friend Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
+
 };
 
 /* Exported functions ------------------------------------------------------- */

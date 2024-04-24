@@ -17,9 +17,9 @@
 #include <cmath>
 using namespace std;
 #include "Point.h"
-
+#include "Shape.h"
 /* Class ---------------------------------------------------------------------*/
-class Line {
+class Line:public Shape {
 private:
 	Point m_pointP1;
 	Point m_pointP2;
@@ -45,6 +45,7 @@ public:
 	friend bool operator==(const Line& n1, const Line& n2);
 
 	friend class Rectangle;
+	friend Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
 
 };
 

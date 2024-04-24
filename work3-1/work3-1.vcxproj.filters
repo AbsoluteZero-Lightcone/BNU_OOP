@@ -38,5 +38,8 @@
     <ClInclude Include="Line.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
   * @file    Rectangle.cpp
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
-  * @date    2024-04-23
+  * @date    2024-04-24
   * @brief   Rectangle class
   * @encode  GB2312
   ******************************************************************************
@@ -34,12 +34,12 @@ Rectangle::Rectangle(const Rectangle& source) :
 Rectangle::~Rectangle() {}
 
 /* Getters & Setters -------------------------------------------------------- */
-Point Rectangle::get_pointCenter()const { return m_pointCenter; }
-void Rectangle::set_pointCenter(Point t_pointCenter) { m_pointCenter = t_pointCenter; }
-double Rectangle::get_dWidth()const { return m_dWidth; }
-void Rectangle::set_dWidth(double t_dWidth) { m_dWidth = t_dWidth; }
-double Rectangle::get_dHeight()const { return m_dHeight; }
-void Rectangle::set_dHeight(double t_dHeight) { m_dHeight = t_dHeight; }
+Point Rectangle::getCenter()const { return m_pointCenter; }
+void Rectangle::setCenter(Point t_pointCenter) { m_pointCenter = t_pointCenter; }
+double Rectangle::getWidth()const { return m_dWidth; }
+void Rectangle::setWidth(double t_dWidth) { m_dWidth = t_dWidth; }
+double Rectangle::getHeight()const { return m_dHeight; }
+void Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 
 /**
   * @brief 返回矩形的主对角线
@@ -95,6 +95,27 @@ double Rectangle::perimeter()const {
 bool Rectangle::isRectangle()const {
 	if (m_dWidth == 0 || m_dHeight == 0)return false;
 	return true;
+}
+
+/**
+  * @brief 移动矩形
+  * @param double dx, double dy : 偏移量
+  * @retval 无
+  */
+void Rectangle::offset(double dx, double dy) {
+	m_pointCenter.m_dCoordinateX += dx;
+	m_pointCenter.m_dCoordinateY += dy;
+}
+
+Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
+	double center_dx, center_dy;
+	center_dx = abs(n1.m_pointCenter.m_dCoordinateX - n2.m_pointCenter.m_dCoordinateX);
+	center_dy = abs(n1.m_pointCenter.m_dCoordinateY - n2.m_pointCenter.m_dCoordinateY);
+	if (n1.m_dWidth / 2 + n2.m_dWidth / 2 > center_dx || n1.m_dHeight / 2 + n2.m_dHeight / 2 > center_dy)return Empty();
+	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == center_dx && n1.m_dHeight / 2 + n2.m_dHeight / 2 == center_dy)return Point();
+	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == center_dx)return Line();
+	else if (n1.m_dHeight / 2 + n2.m_dHeight / 2 == center_dy)return Line();
+	else return Rectangle();
 }
 
 /**

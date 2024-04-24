@@ -3,7 +3,7 @@
   * @file    Rectangle.h
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
-  * @date    2024-04-23
+  * @date    2024-04-24
   * @brief   Rectangle class
   * @encode  GB2312
   ******************************************************************************
@@ -17,8 +17,10 @@
 #include <cmath>
 using namespace std;
 #include "Line.h"
+#include "Shape.h"
+
 /* Class ---------------------------------------------------------------------*/
-class Rectangle {
+class Rectangle:public Shape {
 private:
 	Point m_pointCenter;
 	double m_dWidth;
@@ -29,33 +31,52 @@ public:
 	Rectangle();
 	Rectangle(Point t_pointCenter, double t_dWidth, double m_dHeight);
 	Rectangle(const Rectangle& source);
+	Rectangle(const Line& Diagonal);
 	~Rectangle();
 
 	// Getter & Setter
-	Point get_pointCenter()const;
-	void set_pointCenter(Point t_pointCenter);
-	double get_dWidth()const;
-	void set_dWidth(double t_dWidth);
-	double get_dHeight()const;
-	void set_dHeight(double t_dHeight);
+	double getWidth()const;
+	void setWidth(double t_dWidth);
+	double getHeight()const;
+	void setHeight(double t_dHeight);
+
 	Line getDiagonal()const;
 	void setDiagonal(const Line& Diagonal);
+
+	void setCenter(Point t_pointCenter);
+
+	Point getCenter()const;
+
+	Point getLeftTop()const;
+	Point getLeftBottom()const;
+	Point getRightBottom()const;
+	Point getRightTop()const;
+
+	Point getLeft()const;
+	Point getRight()const;
+	Point getTop()const;
+	Point getBottom()const;
 
 	// Functions
 	double area()const;
 	double perimeter()const;
 	bool isRectangle()const;
+	void offset(double x, double y);
 
 	// ‘ÀÀ„∑˚÷ÿ‘ÿ
 	void operator=(const Rectangle& source);
 
 	friend ostream& operator<<(ostream& out, const Rectangle& source);
 	friend bool operator==(const Rectangle& n1, const Rectangle& n2);
+
+	friend Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Rectangle& source);
 bool operator==(const Rectangle& n1, const Rectangle& n2);
+
+Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
 
 #endif /* !__Rectangle_H */
 
