@@ -45,9 +45,12 @@ void   Rectangle::setWidth(double t_dWidth) { m_dWidth = t_dWidth; }
 double Rectangle::getHeight()const { return m_dHeight; }
 void   Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 
-// 坐标系方向宏定义
-#define __UR
-#ifdef __UR // 平面直角坐标方向 向上为正
+/* 坐标系方向定义 ------------------------------------------------------------- */
+#if !defined(DIRECTION_UR) && !defined(DIRECTION_DR)
+#define DIRECTION_UR // 坐标系方向默认值
+#endif
+
+#ifdef DIRECTION_UR // 平面直角坐标方向 向上为正
 #define DIRECT_R(x,distance) (x+distance)// 向右移动一段距离，可为负值
 #define DIRECT_L(x,distance) (x-distance)// 向左移动一段距离，可为负值
 #define DIRECT_U(y,distance) (y+distance)// 向上移动一段距离，可为负值
@@ -56,8 +59,8 @@ void   Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 #define IS_INCREMENT_L(increment_x) ((increment_x<=0)?true:false)// x增量朝左
 #define IS_INCREMENT_U(increment_y) ((increment_y>=0)?true:false)// y增量朝上
 #define IS_INCREMENT_D(increment_y) ((increment_y<=0)?true:false)// y增量朝下
-#endif	/* __UR */
-#ifdef __DR // 左上角为原点，制图软件坐标方向 向下为正
+#endif	/* DIRECTION_UR */
+#ifdef DIRECTION_DR // 左上角为原点，制图软件坐标方向 向下为正
 #define DIRECT_R(x,distance) (x+distance)// 向右移动一段距离，可为负值
 #define DIRECT_L(x,distance) (x-distance)// 向左移动一段距离，可为负值
 #define DIRECT_U(y,distance) (y-distance)// 向上移动一段距离，可为负值
@@ -66,7 +69,9 @@ void   Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 #define IS_INCREMENT_L(increment_x) ((increment_x<=0)?true:false)// x增量朝左
 #define IS_INCREMENT_U(increment_y) ((increment_y<=0)?true:false)// y增量朝上
 #define IS_INCREMENT_D(increment_y) ((increment_y>=0)?true:false)// y增量朝下
-#endif	/* __DR */
+#endif	/* DIRECTION_DR */
+/* ------------------------------------------------------------- 坐标系方向定义 */
+
 Point Rectangle::getLeftTop()const		{ return Point(DIRECT_L(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_U(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
 Point Rectangle::getLeftBottom()const	{ return Point(DIRECT_L(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_D(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
 Point Rectangle::getRightBottom()const	{ return Point(DIRECT_R(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_D(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
@@ -157,13 +162,49 @@ void Rectangle::info() {
 	}
 }
 
+/**
+  * @brief 类内重载通过对象赋值的赋值运算符
+  * @param const Rectangle& source : 待赋的值
+  * @retval 无
+  */
+void Rectangle::operator=(const Rectangle& source) {
+	m_pointCenter = source.m_pointCenter;
+	m_dWidth = source.m_dWidth;
+	m_dHeight = source.m_dHeight;
+}
+
+/**
+  * @brief 重载标准输出流 <<运算符
+  * @param ostream& out : 标准输出流对象
+  * @param const Rectangle& source : 待输出的对象
+  * @retval ostream&
+  */
+ostream& operator<<(ostream& out, const Rectangle& source) {
+	out << "Rect(" << source.getDiagonal() << ")";
+	return out;
+}
+
+/**
+  * @brief 重载等于运算符
+  * @param const Rectangle& n1 : 运算符左边的值
+  * @param const Rectangle& n2 : 运算符右边的值
+  * @retval bool, true for n1 == n2
+  */
+bool operator==(const Rectangle& n1, const Rectangle& n2) {
+	if (n1.m_pointCenter != n2.m_pointCenter)return false;
+	if (n1.m_dWidth != n2.m_dWidth)return false;
+	if (n1.m_dHeight != n2.m_dHeight)return false;
+	return false;
+}
+
+/* 两矩形相交 ---------------------------------------------------------------- */
 // 所有情况：
 //       f1  f2   f3  f4  f5
 // 横向： 相离 外切 相交 内切 内含
 // 纵向： 相离 外切 相交 内切 内含
 // 共 25 种情况
 // 每种情况需要判断矩形的相对位置（4种情况）
-// 合计 100 种情况
+// 自由组合，合计 100 种情况
 #define f1(distance_center, sum, sub) (( distance_center > sum                          )?true:false)
 #define f2(distance_center, sum, sub) (( fabs(distance_center - sum) < DBL_EPSILON      )?true:false)
 #define f3(distance_center, sum, sub) (( distance_center < sum && distance_center > sub )?true:false)
@@ -299,41 +340,6 @@ Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 		}
 	}
 }
-
-/**
-  * @brief 类内重载通过对象赋值的赋值运算符
-  * @param const Rectangle& source : 待赋的值
-  * @retval 无
-  */
-void Rectangle::operator=(const Rectangle& source) {
-	m_pointCenter = source.m_pointCenter;
-	m_dWidth = source.m_dWidth;
-	m_dHeight = source.m_dHeight;
-}
-
-/**
-  * @brief 重载标准输出流 <<运算符
-  * @param ostream& out : 标准输出流对象
-  * @param const Rectangle& source : 待输出的对象
-  * @retval ostream&
-  */
-ostream& operator<<(ostream& out, const Rectangle& source) {
-	out << "Rect(" << source.getDiagonal() << ")";
-	return out;
-}
-
-/**
-  * @brief 重载等于运算符
-  * @param const Rectangle& n1 : 运算符左边的值
-  * @param const Rectangle& n2 : 运算符右边的值
-  * @retval bool, true for n1 == n2
-  */
-bool operator==(const Rectangle& n1, const Rectangle& n2) {
-	if (n1.m_pointCenter != n2.m_pointCenter)return false;
-	if (n1.m_dWidth != n2.m_dWidth)return false;
-	if (n1.m_dHeight != n2.m_dHeight)return false;
-	return false;
-}
-
+/* ---------------------------------------------------------------- 两矩形相交 */
 
 /********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/
