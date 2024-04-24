@@ -12,13 +12,14 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __LINE_H
 #define __LINE_H
+
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <cmath>
 using namespace std;
+#include "Shape.h"
 #include "Point.h"
 #include "Rectangle.h"
-#include "Shape.h"
 /* Class ---------------------------------------------------------------------*/
 class Line:public Shape {
 private:

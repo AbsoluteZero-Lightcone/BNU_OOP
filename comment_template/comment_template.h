@@ -1,33 +1,33 @@
 /**
   ******************************************************************************
-  * @file    Shape.h
+  * @file    comment_template.h
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
   * @date    2024-04-24
-  * @brief   Shape class
+  * @brief   comment_template
   * @encode  GB2312
   ******************************************************************************
   */
 
+  // 替换内容：
+  // comment_template 类名
+  // 改文件名
+  // 将宏定义改为大写
+
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __Shape_H
-#define __Shape_H
+#ifndef __comment_template_H
+#define __comment_template_H
 
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
+#include <string>
+#include <cmath>
 using namespace std;
 
 /* Class ---------------------------------------------------------------------*/
-class Shape {
-public:
-	virtual ~Shape() {}
-	friend ostream& operator<<(ostream& out, const Shape& source);
-
-};
-
 /* Exported functions ------------------------------------------------------- */
-ostream& operator<<(ostream& out, const Shape& source);
-#endif /* !__Shape_H */
+
+#endif /* !__comment_template_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

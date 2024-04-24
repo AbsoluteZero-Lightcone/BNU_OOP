@@ -235,7 +235,7 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	else if ((F3X || F4X) && F5Y) { // 2种情况 一个竖边镶嵌在另一个上
 		if (IS_INCREMENT_R(center_dx)) {// 矩形相对位置：n1左->n2右
 			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n1.getRight(),);
-			return Rectangle(n2.getLeft(),)
+			return Rectangle(n2.getLeft(),);
 		}
 		if (IS_INCREMENT_L(center_dx)) {// 矩形相对位置：n1右->n2左
 			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n1.getLeft(),);
@@ -262,7 +262,7 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 		else if (n1.m_dHeight > n2.m_dHeight && n1.m_dWidth < n2.m_dWidth) { // 穿插
 			return Rectangle(Point(n1.m_pointCenter.getX(),n2.m_pointCenter.getY()), n1.m_dWidth, n2.m_dHeight);
 		}
-		else /*if (n1.m_dHeight < n2.m_dHeight && n1.m_dWidth > n2.m_dWidth) {*/ // 穿插
+		else /*if (n1.m_dHeight < n2.m_dHeight && n1.m_dWidth > n2.m_dWidth)*/ { // 穿插
 			return Rectangle(Point(n2.m_pointCenter.getX(), n1.m_pointCenter.getY()), n2.m_dWidth, n1.m_dHeight);
 		}
 }

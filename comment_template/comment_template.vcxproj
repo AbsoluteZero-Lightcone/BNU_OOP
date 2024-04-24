@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="comment_template.h" />
     <ClInclude Include="exported_class.h" />
     <ClInclude Include="multi_candidate_class.h" />
     <ClInclude Include="small_class.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="comment_template.cpp" />
     <ClCompile Include="exported_class.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="multi_candidate_class.cpp" />

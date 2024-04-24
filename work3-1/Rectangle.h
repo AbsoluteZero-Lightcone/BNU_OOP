@@ -16,9 +16,9 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
+#include "Shape.h"
 #include "Point.h"
 #include "Line.h"
-#include "Shape.h"
 
 /* Typedefs ------------------------------------------------------------------*/
 typedef Line Diagonal;

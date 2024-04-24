@@ -30,7 +30,6 @@ typedef int datatype6;
 #include <iostream>
 #include <string>
 #include <cmath>
-#include <cstdint>
 using namespace std;
 
 /* Class ---------------------------------------------------------------------*/
