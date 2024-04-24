@@ -15,6 +15,12 @@ using namespace std;
 #include "Student.h"
 
 int main() {
+	Student stu1[10];
+	cout << "stu1的10名同学的信息：" << endl;
+	for (int i = 0; i < 10; i++) {
+		cout << stu1[i];
+	}
+
 	Student stu2[10] = {
 		Student("张三","202010000005",'m',90),
 		Student("李四","201810200012",'m',85),
@@ -27,7 +33,6 @@ int main() {
 		Student("刘燕","202010000023",'f',90),
 		Student("何平平","202010000007",'f',93)
 	};
-
 	cout << "stu2的10名同学的信息：" << endl;
 	for (int i = 0; i < 10; i++) {
 		cout << stu2[i];

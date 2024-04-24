@@ -28,7 +28,7 @@ private:
 public:
 	// Constructors & Deconstructor
 	Student(
-		string t_strName = "xxx",
+		string t_strName = "XXX",
 		string t_strNumber = "200010000001",
 		char t_cGender = 'm',
 		double t_dScore = 0
