@@ -14,8 +14,7 @@
 #define __SCHOOL_H
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
-#include <string>
-#include <cmath>
+#include <cstring>
 using namespace std;
 
 /* Class ---------------------------------------------------------------------*/
@@ -25,8 +24,7 @@ private:
 	char* m_strAddr;
 public:
 	// Constructors & Deconstructor
-	School();
-	School(const char* t_strName,const char* t_strAddr);
+	School(const char* name, const char* addr);
 	School(const School& source);
 	~School();
 

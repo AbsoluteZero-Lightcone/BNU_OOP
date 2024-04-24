@@ -8,27 +8,31 @@
   * @encode  GB2312
   ******************************************************************************
   */
-
+#define _CRT_SECURE_NO_WARNINGS
 /* Includes ------------------------------------------------------------------*/
 #include "School.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
-School::School() :
-	m_strName(0),
-	m_strAddr(0)
-{}
+School::School(const char* name, const char* addr) {
+	m_strName = new char[80];
+	m_strAddr = new char[80];
+	strcpy(m_strName, name);
+	strcpy(m_strAddr, addr);
+	cout << "school constructed." << endl;
+}
+School::School(const School& source)
+{
+	m_strName = new char[80];
+	m_strAddr = new char[80];
+	strcpy(m_strName, source.m_strName);
+	strcpy(m_strAddr, source.m_strAddr);
+	cout << "school copy constructed." << endl;
+}
 
-School::School(const char* t_strName,const char* t_strAddr) :
-	m_strName(t_strName),
-	m_strAddr(t_strAddr)
-{}
-
-School::School(const School& source) :
-	m_strName(source.m_strName),
-	m_strAddr(source.m_strAddr)
-{}
-
-School::~School() {}
+School::~School() {
+	if(m_strName)delete[] m_strName;
+	if(m_strAddr)delete[] m_strAddr;
+}
 
 /* Getters & Setters -------------------------------------------------------- */
 char* School::get_strName()const { return m_strName; }
@@ -42,6 +46,7 @@ void School::set(char* t_strName, char* t_strAddr) {
 /* Exported functions ------------------------------------------------------- */
 
 
+void School::Show() const { cout << *this; }
 /**
   * @brief 重载标准输出流 <<运算符
   * @param ostream& out : 标准输出流对象
