@@ -12,8 +12,8 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-#include <cstdint>
 using namespace std;
+#include "Triangle.h"
 
 int main() {
 

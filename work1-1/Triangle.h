@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+  /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __Triangle_H
 #define __Triangle_H
 /* Includes ------------------------------------------------------------------*/
@@ -41,12 +41,17 @@ public:
 	void set_dSide1(double t_dSide1);
 	void set_dSide2(double t_dSide2);
 	void set_dSide3(double t_dSide3);
-	
-	friend ostream& operator<<(ostream& out, const Triangle& source);
-};
 
-/* Exported functions ------------------------------------------------------- */
-ostream& operator<<(ostream& out, const Triangle& source);
+	void SetLen(double t_dSide1, double t_dSide2, double t_dSide3);
+
+	bool IsTriangle();
+	bool Equilateral();
+	bool Isosceles();
+	bool RightTriangle();
+	double Area();
+	double Perimeter();
+
+};
 
 #endif /* !__Triangle_H */
 
