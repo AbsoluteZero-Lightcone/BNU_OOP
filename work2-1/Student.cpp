@@ -28,16 +28,33 @@ Student::Student(
 Student::~Student() {}
 
 /* Getters & Setters -------------------------------------------------------- */
-string Student::get_strName()const { return m_strName; }
-string Student::get_strNumber()const { return m_strNumber; }
-char Student::get_cGender()const { return m_cGender; }
-double Student::get_dScore()const { return m_dScore; }
-void Student::set_strName(string t_strName) { m_strName = t_strName; }
-void Student::set_strNumber(string t_strNumber) { m_strNumber = t_strNumber; }
-void Student::set_cGender(char t_cGender) { m_cGender = t_cGender; }
-void Student::set_dScore(double t_dScore) { m_dScore = t_dScore; }
+string Student::getName()const { return m_strName; }
+string Student::getNumber()const { return m_strNumber; }
+char Student::getGender()const { return m_cGender; }
+double Student::getScore()const { return m_dScore; }
+void Student::setName(string t_strName) { m_strName = t_strName; }
+void Student::setNumber(string t_strNumber) { m_strNumber = t_strNumber; }
+void Student::setGender(char t_cGender) { m_cGender = t_cGender; }
+void Student::setScore(double t_dScore) { m_dScore = t_dScore; }
 
 /* Exported functions ------------------------------------------------------- */
+
+void Student::Show() const{
+	cout << *this;
+}
+
+Student MaxScore(Student* s,int length) {
+	int index;
+	double max = 0;
+	for (int i = 0; i < length; i++)	{
+		if (s[i].m_dScore > max) {
+			index = i;
+			max = s[i].m_dScore;
+		}
+	}
+	return s[index];
+}
+
 /**
   * @brief 重载标准输出流 <<运算符
   * @param ostream& out : 标准输出流对象
@@ -45,7 +62,10 @@ void Student::set_dScore(double t_dScore) { m_dScore = t_dScore; }
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const Student& source) {
-	// todo
+	out << "name:\t" << source.m_strName << endl
+		<< "number:\t" << source.m_strNumber << endl
+		<< "gender:\t" << source.m_cGender << endl
+		<< "score:\t"  << source.m_dScore << endl;
 	return out;
 }
 

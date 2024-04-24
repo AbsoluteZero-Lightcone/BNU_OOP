@@ -35,26 +35,25 @@ public:
 	);
 	~Student();
 
-	double GetScore() const;
 	void Show() const;
 
 	// Getter & Setter
-	string get_strName()const;
-	string get_strNumber()const;
-	char get_cGender()const;
-	double get_dScore()const;
-	void set_strName(string t_strName);
-	void set_strNumber(string t_strNumber);
-	void set_cGender(char t_cGender);
-	void set_dScore(double t_dScore);
+	string getName()const;
+	string getNumber()const;
+	char getGender()const;
+	double getScore()const;
+	void setName(string t_strName);
+	void setNumber(string t_strNumber);
+	void setGender(char t_cGender);
+	void setScore(double t_dScore);
 	
 	friend ostream& operator<<(ostream& out, const Student& source);
-	friend Student MaxScore(Student* s);
+	friend Student MaxScore(Student* s, int length);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Student& source);
-Student MaxScore(Student* s);
+Student MaxScore(Student* s, int length);
 #endif /* !__STUDENT_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

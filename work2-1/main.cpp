@@ -28,7 +28,12 @@ int main() {
 		Student("何平平","202010000007",'f',93)
 	};
 
-
+	cout << "stu2的10名同学的信息：" << endl;
+	for (int i = 0; i < 10; i++) {
+		cout << stu2[i];
+	}
+	cout << "分数最高的同学信息：" << endl;
+	cout << MaxScore(stu2,10);
 	return 0;
 }
 
