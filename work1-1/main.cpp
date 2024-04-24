@@ -17,6 +17,18 @@ using namespace std;
 
 int main() {
 
+	/*input 3 lengths: 5 4 3
+It isn't an equilateral triangle.
+It isn't an isosceles triangle.
+It is a right triangle.
+area = 6
+perimeter = 12
+*/
+	cout << "input 3 lengths: ";
+	int a, b, c;
+	cin >> a >> b >> c;
+	cout << 
+
 	return 0;
 }
 

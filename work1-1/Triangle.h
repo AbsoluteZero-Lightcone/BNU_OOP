@@ -25,14 +25,8 @@ private:
 	double m_dSide2;
 	double m_dSide3;
 public:
-	// Constructors & Deconstructor
+
 	Triangle();
-	Triangle(
-		double t_dSide1,
-		double t_dSide2,
-		double t_dSide3
-	);
-	~Triangle();
 
 	// Getter & Setter
 	double get_dSide1()const;
@@ -44,14 +38,17 @@ public:
 
 	void SetLen(double t_dSide1, double t_dSide2, double t_dSide3);
 
-	bool IsTriangle();
-	bool Equilateral();
-	bool Isosceles();
-	bool RightTriangle();
-	double Area();
-	double Perimeter();
+	bool IsTriangle()const;
+	bool Equilateral()const;
+	bool Isosceles()const;
+	bool RightTriangle()const;
+	double Area()const;
+	double Perimeter()const;
 
+	friend ostream& operator<<(ostream& out, const Triangle& source);
 };
+
+ostream& operator<<(ostream& out, const Triangle& source);
 
 #endif /* !__Triangle_H */
 
