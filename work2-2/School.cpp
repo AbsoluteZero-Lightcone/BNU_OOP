@@ -32,7 +32,7 @@ School::School(const School& source)
 School::~School() {
 	if(m_strName)delete[] m_strName;
 	if(m_strAddr)delete[] m_strAddr;
-	cout << "school 	deconstructed. delete space of name and address." << endl;
+	cout << "school deconstructed. delete space of name and address." << endl;
 }
 
 /* Exported functions ------------------------------------------------------- */
@@ -44,7 +44,8 @@ void School::Show() const { cout << *this; }
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const School& source) {
-	out <<
+	out << "name:\t\t" << source.m_strName << endl;
+	out << "address:\t" << source.m_strAddr << endl;
 	return out;
 }
 
