@@ -17,7 +17,7 @@
 #include <cmath>
 using namespace std;
 #include "Shape.h"
-#include "Point.h"
+#include "Empty.h"
 #include "Line.h"
 
 /* Typedefs ------------------------------------------------------------------*/

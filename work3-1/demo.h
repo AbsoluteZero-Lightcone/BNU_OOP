@@ -18,7 +18,8 @@
 #include <string>
 #include <fstream>
 using namespace std;
-#include "Shape.h"
+
+#include "Shapes.h"
 
 /* Exported functions ------------------------------------------------------- */
 int input_index(int length, int n);

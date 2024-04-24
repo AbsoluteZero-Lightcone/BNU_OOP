@@ -13,7 +13,6 @@
 #include <string>
 #include <fstream>
 using namespace std;
-#include "Shape.h"
 #include "demo.h"
 
 #define LENGTH 10

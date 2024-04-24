@@ -19,7 +19,7 @@
 using namespace std;
 #include "Shape.h"
 #include "Point.h"
-#include "Rectangle.h"
+
 /* Class ---------------------------------------------------------------------*/
 class Line:public Shape {
 private:
@@ -47,6 +47,7 @@ public:
 	friend bool operator==(const Line& n1, const Line& n2);
 
 	friend class Point;
+	friend class Rectangle;
 	friend Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
 
 };
