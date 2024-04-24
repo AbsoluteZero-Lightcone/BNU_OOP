@@ -34,12 +34,36 @@ Rectangle::Rectangle(const Rectangle& source) :
 Rectangle::~Rectangle() {}
 
 /* Getters & Setters -------------------------------------------------------- */
-Point Rectangle::getCenter()const { return m_pointCenter; }
-void Rectangle::setCenter(Point t_pointCenter) { m_pointCenter = t_pointCenter; }
+Point  Rectangle::getCenter()const { return m_pointCenter; }
+void   Rectangle::setCenter(Point t_pointCenter) { m_pointCenter = t_pointCenter; }
 double Rectangle::getWidth()const { return m_dWidth; }
-void Rectangle::setWidth(double t_dWidth) { m_dWidth = t_dWidth; }
+void   Rectangle::setWidth(double t_dWidth) { m_dWidth = t_dWidth; }
 double Rectangle::getHeight()const { return m_dHeight; }
-void Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
+void   Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
+
+// 坐标系方向宏定义
+#define __DR
+#ifdef __UR // 平面直角坐标方向 向上为正
+#define DIRECT_R(x,increment) (x+increment)// 向右
+#define DIRECT_L(x,increment) (x-increment)// 向左
+#define DIRECT_U(y,increment) (y+increment)// 向上
+#define DIRECT_D(y,increment) (y-increment)// 向下
+#endif	/* __UR */
+#ifdef __DR // 左上角为原点，制图软件坐标方向 向下为正
+#define DIRECT_R(x,increment) (x+increment)// 向右
+#define DIRECT_L(x,increment) (x-increment)// 向左
+#define DIRECT_U(y,increment) (y-increment)// 向上
+#define DIRECT_D(y,increment) (y+increment)// 向下
+#endif	/* __DR */
+Point Rectangle::getLeftTop()const		{ return Point(DIRECT_L(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_U(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
+Point Rectangle::getLeftBottom()const	{ return Point(DIRECT_L(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_D(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
+Point Rectangle::getRightBottom()const	{ return Point(DIRECT_R(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_D(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
+Point Rectangle::getRightTop()const		{ return Point(DIRECT_R(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_U(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
+
+Line Rectangle::getLeft()const   {}
+Line Rectangle::getRight()const  {}
+Line Rectangle::getTop()const    {}
+Line Rectangle::getBottom()const {}
 
 /**
   * @brief 返回矩形的主对角线
@@ -47,10 +71,7 @@ void Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
   * @retval 矩形的主对角线
   */
 Line Rectangle::getDiagonal()const {
-	return Line(
-		Point(m_pointCenter.m_dCoordinateX - m_dWidth / 2, m_pointCenter.m_dCoordinateY - m_dHeight / 2),
-		Point(m_pointCenter.m_dCoordinateX + m_dWidth / 2, m_pointCenter.m_dCoordinateY + m_dHeight / 2)
-	);
+	return Line(getLeftTop(),getRightBottom());
 }
 
 /**
