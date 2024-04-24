@@ -238,13 +238,15 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Diagonal(n2.getRightBottom(), n1.getLeftTop()));// 矩形相对位置：n1右下->n2左上
 	}
 	else if ((F3X || F4X) && F5Y) { // 2种情况 一个竖边镶嵌在另一个上
-		if (IS_INCREMENT_R(center_dx)) {// 矩形相对位置：n1左->n2右
-			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n2.);
-			return Rectangle(n2.getLeftLine(),);
+		if (IS_INCREMENT_R(center_dx)) { // 矩形相对位置：n1左->n2右
+			if (n1.m_dHeight < n2.m_dHeight) // n1小 n2大
+				return Rectangle(Diagonal(Point(n2.getLeft(),n1.getTop()), n1.getRightBottom()));
+			else return Rectangle(Diagonal(n2.getLeftTop(), Point(n1.getRight(),n2.getBottom())));
 		}
-		if (IS_INCREMENT_L(center_dx)) {// 矩形相对位置：n1右->n2左
-			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n1.getLeftLine(),);
-			return Rectangle(n2.getRightLine(),);
+		if (IS_INCREMENT_L(center_dx)) { // 矩形相对位置：n2左<-n1右
+			if (n2.m_dHeight < n1.m_dHeight) // n2小 n1大
+				return Rectangle(Diagonal(Point(n1.getLeft(), n2.getTop()), n2.getRightBottom()));
+			else return Rectangle(Diagonal(n1.getLeftTop(), Point(n2.getRight(), n1.getBottom())));
 		}		
 	}
 	else if ((F3Y || F4Y) && F5X) { // 2种情况 一个横边镶嵌在另一个上
