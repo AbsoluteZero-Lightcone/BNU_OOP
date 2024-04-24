@@ -28,13 +28,6 @@ public:
 	School(const School& source);
 	~School();
 
-	// Getter & Setter
-	char* get_strName()const;
-	void set_strName(char* t_strName);
-	char* get_strAddr()const;
-	void set_strAddr(char* t_strAddr);
-	void set(char* t_strName, char* t_strAddr);
-
 	void Show() const;
 
 	// ÔËËã·ûÖØÔØ
