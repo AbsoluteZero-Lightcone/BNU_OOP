@@ -89,7 +89,7 @@ int main() {
 	double a, b, c, d;
 	for (int i = 0; i < LENGTH; i++) {
 		infile >> a >> b >> c >> d;
-		rectangles[i].setDiagonal(Line(Point(a, b), Point(c, d)));
+		rectangles[i].setDiagonal(Diagonal(Point(a, b), Point(c, d)));
 	}
 	/*--------------------------------------*/
 	cout << "10 rectangles in arrRect£º" << endl;
@@ -105,6 +105,7 @@ int main() {
 	cout << endl;
 	cout << "Move a rectangle :" << endl;
 	Move_demo(rectangles, LENGTH);
+	cout << ""
 	Intersect_demo(rectangles, LENGTH);
 
 

@@ -20,6 +20,9 @@ using namespace std;
 #include "Line.h"
 #include "Shape.h"
 
+/* Typedefs ------------------------------------------------------------------*/
+typedef Line Diagonal;
+
 /* Class ---------------------------------------------------------------------*/
 class Rectangle:public Shape {
 private:
@@ -32,7 +35,7 @@ public:
 	Rectangle();
 	Rectangle(Point t_pointCenter, double t_dWidth, double m_dHeight);
 	Rectangle(const Rectangle& source);
-	Rectangle(const Line& Diagonal);
+	Rectangle(const Diagonal& diagonal);
 	~Rectangle();
 
 	// Getter & Setter
@@ -41,8 +44,8 @@ public:
 	double getHeight()const;
 	void setHeight(double t_dHeight);
 
-	Line getDiagonal()const;
-	void setDiagonal(const Line& Diagonal);
+	Diagonal getDiagonal()const;
+	void setDiagonal(const Diagonal& diagonal);
 
 	void setCenter(Point t_pointCenter);
 

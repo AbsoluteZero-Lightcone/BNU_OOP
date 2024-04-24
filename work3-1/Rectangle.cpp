@@ -31,8 +31,8 @@ Rectangle::Rectangle(const Rectangle& source) :
 	m_dHeight(source.m_dHeight)
 {}
 
-Rectangle::Rectangle(const Line& Diagonal) {
-	setDiagonal(Diagonal);
+Rectangle::Rectangle(const Diagonal& diagonal) {
+	setDiagonal(diagonal);
 }
 
 Rectangle::~Rectangle() {}
@@ -82,8 +82,8 @@ Line Rectangle::getBottom()const		{ return Line(getLeftBottom(), getRightBottom(
   * @param 无
   * @retval 矩形的主对角线
   */
-Line Rectangle::getDiagonal()const {
-	return Line(getLeftTop(),getRightBottom());
+Diagonal Rectangle::getDiagonal()const {
+	return Diagonal(getLeftTop(),getRightBottom());
 }
 
 /**
@@ -91,12 +91,12 @@ Line Rectangle::getDiagonal()const {
   * @param const Line& Diagonal : 矩形的主对角线
   * @retval 无
   */
-void Rectangle::setDiagonal(const Line& Diagonal) {
-	m_dWidth = abs(Diagonal.m_pointP1.m_dCoordinateX - Diagonal.m_pointP2.m_dCoordinateX);
-	m_dHeight = abs(Diagonal.m_pointP1.m_dCoordinateY - Diagonal.m_pointP2.m_dCoordinateY);
+void Rectangle::setDiagonal(const Diagonal& diagonal) {
+	m_dWidth = abs(diagonal.m_pointP1.m_dCoordinateX - diagonal.m_pointP2.m_dCoordinateX);
+	m_dHeight = abs(diagonal.m_pointP1.m_dCoordinateY - diagonal.m_pointP2.m_dCoordinateY);
 	m_pointCenter.setXY(
-		(Diagonal.m_pointP1.m_dCoordinateX + Diagonal.m_pointP2.m_dCoordinateX) / 2,
-		(Diagonal.m_pointP1.m_dCoordinateY + Diagonal.m_pointP2.m_dCoordinateY) / 2
+		(diagonal.m_pointP1.m_dCoordinateX + diagonal.m_pointP2.m_dCoordinateX) / 2,
+		(diagonal.m_pointP1.m_dCoordinateY + diagonal.m_pointP2.m_dCoordinateY) / 2
 	);
 }
 
@@ -227,14 +227,11 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 		}
 	}
 	else if((F3X||F4X)&&(F3Y||F4Y)){ // 4种情况 两角相交/取等时相切
-		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Line(n2.getLeftTop(), n1.getRightBottom()));// 矩形相对位置：n1左上->n2右下
-		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Line(n2.getLeftBottom(), n1.getRightTop()));// 矩形相对位置：n1左下->n2右上
-		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Line(n2.getRightTop(), n1.getLeftBottom()));// 矩形相对位置：n1右上->n2左下
-		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Line(n2.getRightBottom(), n1.getLeftTop()));// 矩形相对位置：n1右下->n2左上
+		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Diagonal(n2.getLeftTop(), n1.getRightBottom()));// 矩形相对位置：n1左上->n2右下
+		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Diagonal(n2.getLeftBottom(), n1.getRightTop()));// 矩形相对位置：n1左下->n2右上
+		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return Rectangle(Diagonal(n2.getRightTop(), n1.getLeftBottom()));// 矩形相对位置：n1右上->n2左下
+		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return Rectangle(Diagonal(n2.getRightBottom(), n1.getLeftTop()));// 矩形相对位置：n1右下->n2左上
 	}
-	//       f1  f2   f3  f4  f5
-	// 横向： 相离 外切 相交 内切 内含
-	// 纵向： 相离 外切 相交 内切 内含
 	else if ((F3X || F4X) && F5Y) { // 2种情况 一个竖边镶嵌在另一个上
 		if (IS_INCREMENT_R(center_dx)) {// 矩形相对位置：n1左->n2右
 			if (n1.m_dHeight < n2.m_dHeight)return Rectangle(n1.getRight(),);
