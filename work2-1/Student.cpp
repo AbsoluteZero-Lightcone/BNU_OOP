@@ -13,13 +13,6 @@
 #include "Student.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
-Student::Student() :
-	m_strName(0),
-	m_strNumber(0),
-	m_cGender(0),
-	m_dScore(0)
-{}
-
 Student::Student(
 	string t_strName,
 	string t_strNumber,
