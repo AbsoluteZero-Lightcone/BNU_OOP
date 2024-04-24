@@ -155,21 +155,30 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	double center_dx, center_dy; // 增量向量 n1->n2
 	center_dx = n2.m_pointCenter.getX() - n1.m_pointCenter.getX();
 	center_dy = n2.m_pointCenter.getY() - n1.m_pointCenter.getY();
-	if (n1.m_dWidth / 2 + n2.m_dWidth / 2 > abs(center_dx) || n1.m_dHeight / 2 + n2.m_dHeight / 2 > abs(center_dy))return Empty();
-	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx) && n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy)) { 
+	double sum_x, sum_y, sub_x, sub_y;
+	sum_x = n1.m_dWidth / 2 + n2.m_dWidth/ 2;
+	sum_y = n1.m_dHeight / 2 + n2.m_dHeight /2;
+	sub_x = n1.m_dWidth / 2 - n2.m_dWidth / 2;
+	sub_y = n1.m_dHeight / 2 - n2.m_dHeight / 2;
+	// 所有情况：
+	// 相离 外切 相交 内切 内含
+	// 无   点线 矩形 矩形 矩形
+	if (sum_x  > abs(center_dx) || sum_y > abs(center_dy))return Empty();
+	else if (sum_x == abs(center_dx) && sum_y == abs(center_dy)) { 
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return n1.getRightBottom();// 矩形相对位置：n1左上->n2右下
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return n1.getRightTop();// 矩形相对位置：n1左下->n2右上
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return n1.getLeftBottom();// 矩形相对位置：n1右上->n2左下
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return n1.getLeftTop();// 矩形相对位置：n1右下->n2左上	
 	}
-	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx) || n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy)){
+	else if (sum_x == abs(center_dx) || sum_y == abs(center_dy)){
 		// 竖线和横线 规律总结：1.指向对方的顶点组成新的图形 2.作业中两点的顺序没有要求，但在Line构造函数中已经把线段标准化为由负方向指向正方向
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return Line(n2.getLeftTop(),n1.getRightBottom()); // 矩形相对位置：n1左上->n2右下
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return Line(n2.getLeftBottom(), n1.getRightTop());// 矩形相对位置：n1左下->n2右上
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return Line(n2.getRightTop(), n1.getLeftBottom());// 矩形相对位置：n1右上->n2左下
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return Line(n2.getRightBottom(), n1.getLeftTop());// 矩形相对位置：n1右下->n2左上
 		}
-	else {
+	// 下文 sum_x sum_y < 0 
+	else if(){
 		// 中心距等于零且交集形状为矩形的情况会进入矩形情况分支
 		// 宏函数中没有等于的判定，这里需要单独判零
 		// 没考虑包含的情况
