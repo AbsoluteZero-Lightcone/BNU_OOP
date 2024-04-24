@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "Student.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
@@ -20,10 +20,11 @@ Student::Student(
 	double t_dScore
 ) :
 	m_strName(t_strName),
-	m_strNumber(t_strNumber),
-	m_cGender(t_cGender),
-	m_dScore(t_dScore)
-{}
+	m_strNumber(t_strNumber)
+{
+	setGender(t_cGender);
+	setScore(t_dScore);
+}
 
 Student::~Student() {}
 
@@ -34,19 +35,30 @@ char Student::getGender()const { return m_cGender; }
 double Student::getScore()const { return m_dScore; }
 void Student::setName(string t_strName) { m_strName = t_strName; }
 void Student::setNumber(string t_strNumber) { m_strNumber = t_strNumber; }
-void Student::setGender(char t_cGender) { m_cGender = t_cGender; }
-void Student::setScore(double t_dScore) { m_dScore = t_dScore; }
+void Student::setGender(char t_cGender) {
+	if (t_cGender == 'f' || t_cGender == 'm')
+		m_cGender = t_cGender;
+	else cerr << "Invaild Gender." << endl;
+}
+void Student::setScore(double t_dScore) {
+	if (t_dScore >= 0 && t_dScore <= 100)
+		m_dScore = t_dScore;
+	else cerr << "Invalid Score." << endl;
+}
 
 /* Exported functions ------------------------------------------------------- */
 
-void Student::Show() const{
+void Student::Show() const {
 	cout << *this;
 }
 
-Student MaxScore(Student* s,int length) {
+/**
+  * @brief 找出分数最高的学生的函数
+  */
+Student& MaxScore(Student* s, int length) {
 	int index;
 	double max = 0;
-	for (int i = 0; i < length; i++)	{
+	for (int i = 0; i < length; i++) {
 		if (s[i].m_dScore > max) {
 			index = i;
 			max = s[i].m_dScore;
@@ -65,7 +77,7 @@ ostream& operator<<(ostream& out, const Student& source) {
 	out << "name:\t" << source.m_strName << endl
 		<< "number:\t" << source.m_strNumber << endl
 		<< "gender:\t" << source.m_cGender << endl
-		<< "score:\t"  << source.m_dScore << endl;
+		<< "score:\t" << source.m_dScore << endl;
 	return out;
 }
 

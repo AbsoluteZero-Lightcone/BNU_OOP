@@ -48,12 +48,12 @@ public:
 	void setScore(double t_dScore);
 	
 	friend ostream& operator<<(ostream& out, const Student& source);
-	friend Student MaxScore(Student* s, int length);
+	friend Student& MaxScore(Student* s, int length);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Student& source);
-Student MaxScore(Student* s, int length);
+Student& MaxScore(Student* s, int length);
 #endif /* !__STUDENT_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
