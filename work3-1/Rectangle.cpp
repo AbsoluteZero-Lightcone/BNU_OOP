@@ -213,13 +213,13 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 		}
 	}
 	else if (F2Y && F5X) {// 1种情况 横线
-		if (IS_INCREMENT_R(center_dx)) {// 矩形相对位置：n1下->n2上
-			if (n1.m_dHeight < n2.m_dHeight)return n1.getRight();
-			return n2.getLeft();
+		if (IS_INCREMENT_U(center_dy)) {// 矩形相对位置：n1下->n2上
+			if (n1.m_dWidth < n2.m_dWidth)return n1.getTop();
+			return n2.getBottom();
 		}
-		if (IS_INCREMENT_L(center_dx)) {// 矩形相对位置：n1上->n2下
-			if (n1.m_dHeight < n2.m_dHeight)return n1.getLeft();
-			return n2.getRight();
+		if (IS_INCREMENT_D(center_dy)) {// 矩形相对位置：n1上->n2下
+			if (n1.m_dWidth < n2.m_dWidth)return n1.getBottom();
+			return n2.getTop();
 		}
 	}
 	else if((F3X||F4X)&&(F3Y||F4Y)){ // 两角相交/取等时相切 4种情况
