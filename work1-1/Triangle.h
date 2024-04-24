@@ -10,8 +10,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __Triangle_H
-#define __Triangle_H
+#ifndef __TRIANGLE_H
+#define __TRIANGLE_H
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <cmath>
@@ -47,6 +47,6 @@ public:
 
 ostream& operator<<(ostream& out, const Triangle& source);
 
-#endif /* !__Triangle_H */
+#endif /* !__TRIANGLE_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
