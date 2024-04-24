@@ -142,14 +142,30 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	center_dy = n2.m_pointCenter.getY() - n1.m_pointCenter.getY();
 	if      (n1.m_dWidth / 2 + n2.m_dWidth / 2 > abs(center_dx) || n1.m_dHeight / 2 + n2.m_dHeight / 2 > abs(center_dy))return Empty();
 	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx) && n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy)) { 
+		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return n1.getRightBottom();// 矩形相对位置：n1左上->n2右下
+		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return n1.getRightTop();// 矩形相对位置：n1左下->n2右上
+		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return n1.getLeftBottom();// 矩形相对位置：n1右上->n2左下
+		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return n1.getLeftTop();// 矩形相对位置：n1右下->n2左上
+		
+	}
+	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx)) {
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return;// 矩形相对位置：n1左上->n2右下
 		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return;// 矩形相对位置：n1左下->n2右上
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return;// 矩形相对位置：n1右上->n2左下
 		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return;// 矩形相对位置：n1右下->n2左上
-	}
-	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx)) { return Line(); }
-	else if (n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy)) { return Line(); }
-	else { return Rectangle(); }
+		return Line(); }
+	else if (n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy)) {
+		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return;// 矩形相对位置：n1左上->n2右下
+		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return;// 矩形相对位置：n1左下->n2右上
+		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return;// 矩形相对位置：n1右上->n2左下
+		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return;// 矩形相对位置：n1右下->n2左上
+		return Line(); }
+	else {
+		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_D(center_dy))return;// 矩形相对位置：n1左上->n2右下
+		if (IS_INCREMENT_R(center_dx) && IS_INCREMENT_U(center_dy))return;// 矩形相对位置：n1左下->n2右上
+		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_D(center_dy))return;// 矩形相对位置：n1右上->n2左下
+		if (IS_INCREMENT_L(center_dx) && IS_INCREMENT_U(center_dy))return;// 矩形相对位置：n1右下->n2左上
+		return Rectangle(); }
 }
 
 /**
