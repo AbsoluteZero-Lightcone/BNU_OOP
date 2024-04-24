@@ -60,10 +60,10 @@ Point Rectangle::getLeftBottom()const	{ return Point(DIRECT_L(m_pointCenter.m_dC
 Point Rectangle::getRightBottom()const	{ return Point(DIRECT_R(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_D(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
 Point Rectangle::getRightTop()const		{ return Point(DIRECT_R(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_U(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
 
-Line Rectangle::getLeft()const   {}
-Line Rectangle::getRight()const  {}
-Line Rectangle::getTop()const    {}
-Line Rectangle::getBottom()const {}
+Line Rectangle::getLeft()const			{ return Line(getLeftTop(), getLeftBottom()); }
+Line Rectangle::getRight()const			{ return Line(getRightTop(), getRightBottom()); }
+Line Rectangle::getTop()const			{ return Line(getLeftTop(), getRightTop()); }
+Line Rectangle::getBottom()const		{ return Line(getLeftBottom(), getRightBottom()); }
 
 /**
   * @brief 返回矩形的主对角线
@@ -130,12 +130,12 @@ void Rectangle::offset(double dx, double dy) {
 
 Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	double center_dx, center_dy;
-	center_dx = abs(n1.m_pointCenter.m_dCoordinateX - n2.m_pointCenter.m_dCoordinateX);
-	center_dy = abs(n1.m_pointCenter.m_dCoordinateY - n2.m_pointCenter.m_dCoordinateY);
-	if (n1.m_dWidth / 2 + n2.m_dWidth / 2 > center_dx || n1.m_dHeight / 2 + n2.m_dHeight / 2 > center_dy)return Empty();
-	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == center_dx && n1.m_dHeight / 2 + n2.m_dHeight / 2 == center_dy)return Point();
-	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == center_dx)return Line();
-	else if (n1.m_dHeight / 2 + n2.m_dHeight / 2 == center_dy)return Line();
+	center_dx = n1.m_pointCenter.m_dCoordinateX - n2.m_pointCenter.m_dCoordinateX;
+	center_dy = n1.m_pointCenter.m_dCoordinateY - n2.m_pointCenter.m_dCoordinateY;
+	if (n1.m_dWidth / 2 + n2.m_dWidth / 2 > abs(center_dx) || n1.m_dHeight / 2 + n2.m_dHeight / 2 > abs(center_dy))return Empty();
+	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx) && n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy))return Point();
+	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx))return Line();
+	else if (n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy))return Line();
 	else return Rectangle();
 }
 

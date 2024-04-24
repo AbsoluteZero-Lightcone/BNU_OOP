@@ -17,6 +17,7 @@
 #include <cmath>
 using namespace std;
 #include "Shape.h"
+#include "Rectangle.h" // 友元声明需要
 
 /* Class ---------------------------------------------------------------------*/
 class Point:public Shape {
