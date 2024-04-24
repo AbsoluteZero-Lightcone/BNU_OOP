@@ -24,12 +24,13 @@ private:
 	string m_strName;
 	string m_strColor;
 	int m_nWeight;
+	bool m_bAlive;
 public:
-	static int s_nCnt;
+	static int s_nTotal;
+	static int s_nAlive;
 	// Constructors & Deconstructor
 	Fish();
 	Fish(string t_strName, string t_strColor);
-	Fish(const Fish& source);
 	~Fish();
 
 	void day(bool isfed);
