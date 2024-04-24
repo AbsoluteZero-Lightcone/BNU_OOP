@@ -1,36 +1,26 @@
 /**
   ******************************************************************************
-  * @file    Shape.h
+  * @file    Empty.h
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
   * @date    2024-04-24
-  * @brief   Shape class
+  * @brief   Empty
   * @encode  GB2312
   ******************************************************************************
   */
 
-
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __SHAPE_H
-#define __SHAPE_H
+#ifndef __EMPTY_H
+#define __EMPTY_H
 
 /* Includes ------------------------------------------------------------------*/
-#include <iostream>
-using namespace std;
-#include "Point.h"
-#include "Line.h"
-#include "Rectangle.h"
+#include "Shape.h"
 
 /* Class ---------------------------------------------------------------------*/
-class Shape {
-public:
-	virtual ~Shape() {}
-	friend ostream& operator<<(ostream& out, const Shape& source);
-};
+class Empty :public Shape {};
 
 /* Exported functions ------------------------------------------------------- */
-ostream& operator<<(ostream& out, const Shape& source);
 
-#endif /* !__SHAPE_H */
+#endif /* !__EMPTY_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

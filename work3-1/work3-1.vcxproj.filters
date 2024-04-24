@@ -47,7 +47,7 @@
     <ClInclude Include="Shape.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="Shape1.h">
+    <ClInclude Include="Empty.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
