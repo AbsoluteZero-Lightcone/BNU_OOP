@@ -10,12 +10,13 @@
   */
 
   /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __Rectangle_H
-#define __Rectangle_H
+#ifndef __RECTANGLE_H
+#define __RECTANGLE_H
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <cmath>
 using namespace std;
+#include "Point.h"
 #include "Line.h"
 #include "Shape.h"
 
@@ -78,6 +79,6 @@ bool operator==(const Rectangle& n1, const Rectangle& n2);
 
 Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
 
-#endif /* !__Rectangle_H */
+#endif /* !__RECTANGLE_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

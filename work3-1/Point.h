@@ -17,7 +17,6 @@
 #include <cmath>
 using namespace std;
 #include "Shape.h"
-#include "Rectangle.h" // 友元声明需要
 
 /* Class ---------------------------------------------------------------------*/
 class Point:public Shape {
@@ -46,8 +45,6 @@ public:
 
 	friend class Line;
 	friend class Rectangle;
-	friend Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
-
 };
 
 /* Exported functions ------------------------------------------------------- */

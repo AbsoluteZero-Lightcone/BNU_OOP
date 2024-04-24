@@ -42,18 +42,26 @@ double Rectangle::getHeight()const { return m_dHeight; }
 void   Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 
 // 坐标系方向宏定义
-#define __DR
+#define __UR
 #ifdef __UR // 平面直角坐标方向 向上为正
-#define DIRECT_R(x,increment) (x+increment)// 向右
-#define DIRECT_L(x,increment) (x-increment)// 向左
-#define DIRECT_U(y,increment) (y+increment)// 向上
-#define DIRECT_D(y,increment) (y-increment)// 向下
+#define DIRECT_R(x,distance) (x+distance)// 向右移动一段距离，可为负值
+#define DIRECT_L(x,distance) (x-distance)// 向左移动一段距离，可为负值
+#define DIRECT_U(y,distance) (y+distance)// 向上移动一段距离，可为负值
+#define DIRECT_D(y,distance) (y-distance)// 向下移动一段距离，可为负值
+#define IS_INCREMENT_R(increment_x) ((increment_x>0)?true:false)// x增量朝右
+#define IS_INCREMENT_L(increment_x) ((increment_x<0)?true:false)// x增量朝左
+#define IS_INCREMENT_U(increment_y) ((increment_y>0)?true:false)// y增量朝上
+#define IS_INCREMENT_D(increment_y) ((increment_y<0)?true:false)// y增量朝下
 #endif	/* __UR */
 #ifdef __DR // 左上角为原点，制图软件坐标方向 向下为正
-#define DIRECT_R(x,increment) (x+increment)// 向右
-#define DIRECT_L(x,increment) (x-increment)// 向左
-#define DIRECT_U(y,increment) (y-increment)// 向上
-#define DIRECT_D(y,increment) (y+increment)// 向下
+#define DIRECT_R(x,distance) (x+distance)// 向右移动一段距离，可为负值
+#define DIRECT_L(x,distance) (x-distance)// 向左移动一段距离，可为负值
+#define DIRECT_U(y,distance) (y-distance)// 向上移动一段距离，可为负值
+#define DIRECT_D(y,distance) (y+distance)// 向下移动一段距离，可为负值
+#define IS_INCREMENT_R(increment_x) ((increment_x>0)?true:false)// x增量朝右
+#define IS_INCREMENT_L(increment_x) ((increment_x<0)?true:false)// x增量朝左
+#define IS_INCREMENT_U(increment_y) ((increment_y<0)?true:false)// y增量朝上
+#define IS_INCREMENT_D(increment_y) ((increment_y>0)?true:false)// y增量朝下
 #endif	/* __DR */
 Point Rectangle::getLeftTop()const		{ return Point(DIRECT_L(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_U(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
 Point Rectangle::getLeftBottom()const	{ return Point(DIRECT_L(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_D(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
@@ -129,14 +137,16 @@ void Rectangle::offset(double dx, double dy) {
 }
 
 Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
-	double center_dx, center_dy;
-	center_dx = n1.m_pointCenter.m_dCoordinateX - n2.m_pointCenter.m_dCoordinateX;
-	center_dy = n1.m_pointCenter.m_dCoordinateY - n2.m_pointCenter.m_dCoordinateY;
-	if (n1.m_dWidth / 2 + n2.m_dWidth / 2 > abs(center_dx) || n1.m_dHeight / 2 + n2.m_dHeight / 2 > abs(center_dy))return Empty();
-	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx) && n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy))return Point();
-	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx))return Line();
-	else if (n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy))return Line();
-	else return Rectangle();
+	double center_dx, center_dy; // 增量向量 n1->n2
+	center_dx = n2.m_pointCenter.getX() - n1.m_pointCenter.getX();
+	center_dy = n2.m_pointCenter.getY() - n1.m_pointCenter.getY();
+	if      (n1.m_dWidth / 2 + n2.m_dWidth / 2 > abs(center_dx) || n1.m_dHeight / 2 + n2.m_dHeight / 2 > abs(center_dy))return Empty();
+	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx) && n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy)) { 
+		if(IS_INCREMENT_R(center_dx)&& IS_INCREMENT_D(center_dy))return Point();// 左上右下
+	}
+	else if (n1.m_dWidth / 2 + n2.m_dWidth / 2 == abs(center_dx)) { return Line(); }
+	else if (n1.m_dHeight / 2 + n2.m_dHeight / 2 == abs(center_dy)) { return Line(); }
+	else { return Rectangle(); }
 }
 
 /**
