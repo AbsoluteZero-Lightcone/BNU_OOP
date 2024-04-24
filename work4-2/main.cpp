@@ -12,8 +12,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
-class Fish{};
+#include "Fish.h"
 
 int random() {
     time_t now;
@@ -27,9 +26,9 @@ bool isContinue() {
     cout << "您要结束养鱼吗？(Y/N) : ";
     cin >> command;
     if (command == "y" || command == "Y")
-        return 1;
-    else if (command == "n" || command == "N")
         return 0;
+    else if (command == "n" || command == "N")
+        return 1;
     else {
         cerr << "Invalid command." << endl;
         return isContinue();
@@ -51,7 +50,7 @@ int main(){
         cout << "开始养鱼了！" << endl;
         int day = 1;
         cout << "第" << day << "天：";
-        fish[random() % N]->eat();
+        fish[random() % N]->day(1);
     } while (isContinue());
     return 0;
 }

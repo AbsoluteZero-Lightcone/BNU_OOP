@@ -130,6 +130,7 @@
     <ClInclude Include="comment_template.h" />
     <ClInclude Include="exported_class.h" />
     <ClInclude Include="multi_candidate_class.h" />
+    <ClInclude Include="small_3_class.h" />
     <ClInclude Include="small_class.h" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +138,7 @@
     <ClCompile Include="exported_class.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="multi_candidate_class.cpp" />
+    <ClCompile Include="small_3_class.cpp" />
     <ClCompile Include="small_class.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
