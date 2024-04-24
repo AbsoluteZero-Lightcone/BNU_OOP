@@ -140,6 +140,17 @@ void Rectangle::offset(double dx, double dy) {
 	m_pointCenter.m_dCoordinateY += dy;
 }
 
+void Rectangle::info() {
+	if (isRectangle()) {
+		cout << *this
+			<< " area=" << area()
+			<< " perimeter=" << perimeter()
+			<< endl;
+	}
+	else {
+		throw "Can’t construct rectangle.";
+	}
+}
 Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	double center_dx, center_dy; // 增量向量 n1->n2
 	center_dx = n2.m_pointCenter.getX() - n1.m_pointCenter.getX();

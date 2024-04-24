@@ -63,6 +63,7 @@ public:
 	double perimeter()const;
 	bool isRectangle()const;
 	void offset(double x, double y);
+	void info();
 
 	// ÔËËã·ûÖØÔØ
 	void operator=(const Rectangle& source);

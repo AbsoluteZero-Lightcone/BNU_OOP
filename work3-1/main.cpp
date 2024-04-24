@@ -15,25 +15,67 @@
 using namespace std;
 #include "Rectangle.h"
 
+int input_index(int length){
+	int n;
+	cout << "Input no. of rectangle: ";
+	cin >> n;
+	n--;
+	if (n >= 0 && n < length)
+		return n;
+	else {
+		cerr << "Invalid Index." << endl;
+		input_index(length);
+	}
+}
+
+void Move_demo(Rectangle* rectangles,int length) {
+	Rectangle& selected_rectangle = rectangles[input_index(length)];
+	try {
+		selected_rectangle.info();
+		double offset_x, offset_y;
+		cout << "Input the offset:" << endl;
+		cout << "offset x : ";
+		cin >> offset_x;
+		cout << "offset y : ";
+		cin >> offset_y;
+		selected_rectangle.offset(offset_x, offset_y);
+		selected_rectangle.info();
+	}
+	catch (const char* err) {
+		cerr << selected_rectangle.getDiagonal() << " " << err << endl;
+		Move_demo(rectangles,length);
+	}
+}
+void intersect_demo(Rectangle* rectangles, int length) {
+	Rectangle& selected_rectangle1 = rectangles[input_index(length)];
+	Rectangle& selected_rectangle2 = rectangles[input_index(length)];
+}
+#define LENGTH 10
 int main() {
 	ifstream infile("rect.txt", ios::in);
-	Rectangle rectangles[10];
+	Rectangle rectangles[LENGTH];
 	double a, b, c, d;
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < LENGTH; i++) {
 		infile >> a >> b >> c >> d;
 		rectangles[i].setDiagonal(Line(Point(a, b), Point(c, d)));
 	}
-	for (int i = 0; i < 10; i++) {
-		if (rectangles[i].isRectangle()) {
-			cout << rectangles[i]
-				<< " area=" << rectangles[i].area()
-				<< " perimeter=" << rectangles[i].perimeter()
-				<< endl;
+	/*--------------------------------------*/
+	cout << "10 rectangles in arrRect£º" << endl;
+	for (int i = 0; i < LENGTH; i++) {
+		try {
+			rectangles[i].info();
 		}
-		else {
-			cerr << rectangles[i].getDiagonal() << " Can¡®t construct rectangle." << endl;
+		catch (const char* err) {
+			cerr << rectangles[i].getDiagonal() << " " << err << endl;
 		}
 	}
+	/*--------------------------------------*/
+	cout << endl;
+	cout << "Move a rectangle :" << endl;
+	Move_demo(rectangles, LENGTH);
+
+
+
 	return 0;
 }
 
