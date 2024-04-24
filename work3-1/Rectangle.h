@@ -75,6 +75,7 @@ public:
 	friend bool operator==(const Rectangle& n1, const Rectangle& n2);
 
 	friend Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
+
 };
 
 /* Exported functions ------------------------------------------------------- */

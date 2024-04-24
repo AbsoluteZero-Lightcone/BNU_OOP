@@ -79,7 +79,8 @@ void Intersect_demo(Rectangle* rectangles, int length) {
 			cerr << selected_rectangle2->getDiagonal() << " " << err << endl;
 		}
 	}
-	InterSectRect(*selected_rectangle1, *selected_rectangle2);
+	cout << *selected_rectangle1 << " intersect with " << *selected_rectangle2 <<" at "
+		<< InterSectRect(*selected_rectangle1, *selected_rectangle2);
 }
 
 #define LENGTH 10
@@ -102,10 +103,9 @@ int main() {
 		}
 	}
 	/*--------------------------------------*/
-	cout << endl;
-	cout << "Move a rectangle :" << endl;
+	cout << endl << "Move a rectangle :" << endl;
 	Move_demo(rectangles, LENGTH);
-	cout << ""
+	cout << endl << "Judge 2 rectangles intersect:" << endl;
 	Intersect_demo(rectangles, LENGTH);
 
 
