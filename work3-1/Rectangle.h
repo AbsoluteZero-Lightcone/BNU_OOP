@@ -91,4 +91,4 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2);
 
 #endif /* !__RECTANGLE_H */
 
-/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
+/********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/

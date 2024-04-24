@@ -13,7 +13,6 @@
 #include "Shapes.h"
 
 /* Exported functions ------------------------------------------------------- */
-
 ostream& operator<<(ostream& out, const Shape& source) {
 	if (typeid(source) == typeid(Empty)) {
 		const Empty& temp = dynamic_cast<Empty&>(const_cast<Shape&>(source));
@@ -36,4 +35,4 @@ ostream& operator<<(ostream& out, const Shape& source) {
 		return out;
 	}
 }
-/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
+/********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/

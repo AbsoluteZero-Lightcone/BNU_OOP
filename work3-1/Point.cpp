@@ -86,4 +86,4 @@ bool operator!=(const Point& n1, const Point& n2) {
 }
 
 
-/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
+/********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/

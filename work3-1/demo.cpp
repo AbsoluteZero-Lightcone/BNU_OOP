@@ -83,4 +83,4 @@ void Intersect_demo(Rectangle* rectangles, int length) {
 	cout << *selected_rectangle1 << " intersect with " << *selected_rectangle2 << " at "
 		<< InterSectRect(*selected_rectangle1, *selected_rectangle2);
 }
-/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
+/********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/

@@ -29,4 +29,4 @@ void Intersect_demo(Rectangle* rectangles, int length);
 
 #endif /* !__DEMO_H */
 
-/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
+/********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/

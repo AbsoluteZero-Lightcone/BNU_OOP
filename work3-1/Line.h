@@ -58,4 +58,4 @@ bool operator==(const Line& n1, const Line& n2);
 
 #endif /* !__LINE_H */
 
-/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
+/********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/

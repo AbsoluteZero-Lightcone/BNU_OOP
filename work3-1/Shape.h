@@ -30,4 +30,4 @@ ostream& operator<<(ostream& out, const Shape& source);
 
 #endif /* !__SHAPE_H */
 
-/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
+/********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/

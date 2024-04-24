@@ -97,8 +97,8 @@ Diagonal Rectangle::getDiagonal()const {
   * @retval 无
   */
 void Rectangle::setDiagonal(const Diagonal& diagonal) {
-	m_dWidth = abs(diagonal.m_pointP1.m_dCoordinateX - diagonal.m_pointP2.m_dCoordinateX);
-	m_dHeight = abs(diagonal.m_pointP1.m_dCoordinateY - diagonal.m_pointP2.m_dCoordinateY);
+	m_dWidth = fabs(diagonal.m_pointP1.m_dCoordinateX - diagonal.m_pointP2.m_dCoordinateX);
+	m_dHeight = fabs(diagonal.m_pointP1.m_dCoordinateY - diagonal.m_pointP2.m_dCoordinateY);
 	m_pointCenter.setXY(
 		(diagonal.m_pointP1.m_dCoordinateX + diagonal.m_pointP2.m_dCoordinateX) / 2,
 		(diagonal.m_pointP1.m_dCoordinateY + diagonal.m_pointP2.m_dCoordinateY) / 2
@@ -170,17 +170,17 @@ void Rectangle::info() {
 #define f4(distance_center, sum, sub) ((distance_center==sub)?true:false)
 #define f5(distance_center, sum, sub) ((distance_center<sub)?true:false)
 
-#define F1X f1(abs(center_dx), sum_x, sub_x)
-#define F2X f2(abs(center_dx), sum_x, sub_x)
-#define F3X f3(abs(center_dx), sum_x, sub_x)
-#define F4X f4(abs(center_dx), sum_x, sub_x)
-#define F5X f5(abs(center_dx), sum_x, sub_x)
+#define F1X f1(fabs(center_dx), sum_x, sub_x)
+#define F2X f2(fabs(center_dx), sum_x, sub_x)
+#define F3X f3(fabs(center_dx), sum_x, sub_x)
+#define F4X f4(fabs(center_dx), sum_x, sub_x)
+#define F5X f5(fabs(center_dx), sum_x, sub_x)
 
-#define F1Y f1(abs(center_dy), sum_y, sub_y)
-#define F2Y f2(abs(center_dy), sum_y, sub_y)
-#define F3Y f3(abs(center_dy), sum_y, sub_y)
-#define F4Y f4(abs(center_dy), sum_y, sub_y)
-#define F5Y f5(abs(center_dy), sum_y, sub_y)
+#define F1Y f1(fabs(center_dy), sum_y, sub_y)
+#define F2Y f2(fabs(center_dy), sum_y, sub_y)
+#define F3Y f3(fabs(center_dy), sum_y, sub_y)
+#define F4Y f4(fabs(center_dy), sum_y, sub_y)
+#define F5Y f5(fabs(center_dy), sum_y, sub_y)
 
 Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	double center_dx, center_dy; // 增量向量 n1->n2
@@ -189,8 +189,8 @@ Shape InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	double sum_x, sum_y, sub_x, sub_y;
 	sum_x = n1.m_dWidth / 2 + n2.m_dWidth / 2;
 	sum_y = n1.m_dHeight / 2 + n2.m_dHeight / 2;
-	sub_x = abs(n1.m_dWidth / 2 - n2.m_dWidth / 2);
-	sub_y = abs(n1.m_dHeight / 2 - n2.m_dHeight / 2);
+	sub_x = fabs(n1.m_dWidth / 2 - n2.m_dWidth / 2);
+	sub_y = fabs(n1.m_dHeight / 2 - n2.m_dHeight / 2);
 
 	if (center_dx == 0 && center_dy == 0);
 	if (center_dx == 0);
@@ -317,4 +317,4 @@ bool operator==(const Rectangle& n1, const Rectangle& n2) {
 }
 
 
-/********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
+/********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/
