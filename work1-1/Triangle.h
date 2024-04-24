@@ -9,12 +9,11 @@
   ******************************************************************************
   */
 
-  /* Define to prevent recursive inclusion -------------------------------------*/
+/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __Triangle_H
 #define __Triangle_H
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
-#include <string>
 #include <cmath>
 using namespace std;
 
@@ -32,13 +31,11 @@ public:
 	double get_dSide1()const;
 	double get_dSide2()const;
 	double get_dSide3()const;
-	void set_dSide1(double t_dSide1);
-	void set_dSide2(double t_dSide2);
-	void set_dSide3(double t_dSide3);
 
 	void SetLen(double t_dSide1, double t_dSide2, double t_dSide3);
 
-	bool IsTriangle()const;
+	static bool IsTriangle(double t_dSide1, double t_dSide2, double t_dSide3);
+
 	bool Equilateral()const;
 	bool Isosceles()const;
 	bool RightTriangle()const;
