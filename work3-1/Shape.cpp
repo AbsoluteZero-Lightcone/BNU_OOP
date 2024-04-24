@@ -35,6 +35,5 @@ ostream& operator<<(ostream& out, const Shape& source) {
 		cout << temp;
 		return out;
 	}
-
 }
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

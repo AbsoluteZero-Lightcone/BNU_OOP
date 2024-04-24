@@ -27,10 +27,10 @@
     <ClCompile Include="Line.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="util.cpp">
+    <ClCompile Include="Shape.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Shape.cpp">
+    <ClCompile Include="demo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="Empty.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="demo.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
