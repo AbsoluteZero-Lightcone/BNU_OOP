@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "MySet.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
@@ -18,8 +18,8 @@
   * @param None
   */
 MySet::MySet() :_count(0) {}
-MySet::MySet(const MySet & source) :_count(source._count) {
-	for (int  i = 0; i < _count; i++){
+MySet::MySet(const MySet& source) :_count(source._count) {
+	for (int i = 0; i < _count; i++) {
 		_array[i] = source._array[i];
 	}
 }
@@ -44,7 +44,7 @@ const int& MySet::operator[](unsigned i)const {
   * @param int x
   * @retval bool
   */
-bool MySet::IsInSet(int x) const{
+bool MySet::IsInSet(int x) const {
 	for (int i = 0; i < _count; i++)
 		if (x == _array[i])
 			return true;
@@ -61,47 +61,71 @@ void MySet::append(int n) {
 /**
   * @brief 两个集合对象的加法运算”+”，含义是合并两个集合
   */
-MySet MySet::operator+(const MySet& n2) const{
+MySet MySet::operator+(const MySet& n2) const {
+	MySet temp(*this);
 	// n2 用值传递更方便一些，不用创建临时对象
 	// 但是作业要求是传常引用，多比值传递多一步引用，也大差不差
-	MySet temp(*this);
 	for (int i = 0; i < n2._count; i++)
-		if (!temp.IsInSet(n2[i])) {
-			temp.append(n2[i]);
-		}
-	return temp;	
+		if (!temp.IsInSet(n2._array[i]))
+			temp.append(n2._array[i]);
+	return temp;
 }
 
 /**
   * @brief 两个集合对象的减法运算”-”，含义是求出集合1中的不属于集合2的元素
 	各操作的要求请参看程序注释。
   */
-MySet MySet::operator-(const MySet& n2) const{}
+MySet MySet::operator-(const MySet& n2) const {
+	MySet temp;
+	for (int i = 0; i < _count; i++)
+		if (!n2.IsInSet(_array[i]))
+			temp.append(_array[i]);
+	return temp;
+}
 
 /**
   * @brief 集合的“前置++”运算，含义是将集合中的每一个元素自增1（前置自增）
   * @param
   * @retval
   */
-MySet& MySet::operator++(){}
+MySet& MySet::operator++() {
+	for (int i = 0; i < _count; i++)
+		_array[i]++;
+	return *this;
+}
+
 /**
   * @brief 集合的“后置++”运算，含义是将集合中的每一个元素自增1（后置自增）
   * @param
   * @retval
   */
-MySet MySet::operator++(int){}
+MySet MySet::operator++(int) {
+	MySet temp(*this);
+	++*this;
+	return temp;
+}
+
 /**
   * @brief 友元：集合的“前置--”运算，含义是将集合中的每一个元素自减1（前置自减）
   * @param
   * @retval
   */
-MySet& operator--(MySet& source){}
+MySet& operator--(MySet& source) {
+	for (int i = 0; i < source._count; i++)
+		source._array[i]--;
+	return source;
+}
+
 /**
   * @brief 友元：集合的“后置--”运算，含义是将集合中的每一个元素自减1（后置自减）
   * @param
   * @retval
   */
-MySet operator--(MySet& source, int){}
+MySet operator--(MySet& source, int) {
+	MySet temp(source);
+	--source;
+	return temp;
+}
 
 /**
   * @brief 重载标准输出流 <<运算符
@@ -109,7 +133,8 @@ MySet operator--(MySet& source, int){}
   * @param const MySet& source : 待输出的对象
   * @retval ostream&
   */
-ostream& operator<<(ostream& out, const MySet& source){
+ostream& operator<<(ostream& out, const MySet& source) {
+
 }
 /**
   * @brief 重载标准输入流 >>运算符
@@ -117,6 +142,7 @@ ostream& operator<<(ostream& out, const MySet& source){
   * @param MySet& target : 接受输入数据的对象
   * @retval istream& 实现链式编程
   */
-istream& operator>>(istream& input, MySet& target){
+istream& operator>>(istream& input, MySet& target) {
+
 }
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
