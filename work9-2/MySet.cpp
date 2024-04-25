@@ -17,7 +17,7 @@
   * @brief 无参构造函数，创建集合，将元素个数设为0.
   * @param None
   */
-MySet::MySet() :_count(0) {}
+MySet::MySet() :_array{}, _count(0) {}
 MySet::MySet(const MySet& source) :_count(source._count) {
 	for (unsigned int i = 0; i < _count; i++) {
 		_array[i] = source._array[i];
@@ -56,7 +56,8 @@ void MySet::append(int n) {
 		_array[_count] = n;
 		_count++;
 		return;
-	}else throw "有重复的元素";
+	}
+	else throw "有重复的元素";
 }
 
 /**
