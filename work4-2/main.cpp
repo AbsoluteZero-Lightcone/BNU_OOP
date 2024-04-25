@@ -39,9 +39,13 @@ bool isContinue() {
 }
 
 int main() {
-	cout << "您要养几条鱼（N>=5）: ";
 	int N;
-	cin >> N;
+	while (1) {
+		cout << "您要养几条鱼（N>=5）: ";
+		cin >> N;
+		if (N >= 5)break;
+		cerr << "请输入大于5的整数" << endl;
+	}
 	Fish** fish = new Fish * [N];
 	string name, color;
 	for (int i = 0; i < N; i++) {
