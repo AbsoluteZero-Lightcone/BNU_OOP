@@ -13,10 +13,18 @@
 #include "MySet.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
-
-/* Getters & Setters -------------------------------------------------------- */
+MySet::MySet():_count(0){}
 
 /* Exported functions ------------------------------------------------------- */
+int& MySet::operator[](unsigned i){}
+bool MySet::IsInSet(int x) const{}
+MySet MySet::operator+(const MySet&) const{}
+MySet MySet::operator-(const MySet&) const{}
+MySet& MySet::operator++(){}
+MySet MySet::operator++(int){}
 
-
+MySet& operator--(MySet&){}
+MySet operator--(MySet&, int){}
+istream& operator>>(istream&, MySet&){}
+ostream& operator<<(ostream&, const MySet&){}
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
