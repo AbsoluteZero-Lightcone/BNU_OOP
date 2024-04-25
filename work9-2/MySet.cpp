@@ -55,7 +55,18 @@ void MySet::append(int n) {
 	if (!IsInSet(n)) {
 		_array[_count] = n;
 		_count++;
-	}throw "is already in the set.";
+		return;
+	}else throw "有重复的元素";
+}
+
+/**
+  * @brief 类内重载赋值运算符
+  */
+void MySet::operator=(const MySet& source) {
+	_count = source._count;
+	for (int i = 0; i < _count; i++) {
+		_array[i] = source._array[i];
+	}
 }
 
 /**
@@ -85,8 +96,6 @@ MySet MySet::operator-(const MySet& n2) const {
 
 /**
   * @brief 集合的“前置++”运算，含义是将集合中的每一个元素自增1（前置自增）
-  * @param
-  * @retval
   */
 MySet& MySet::operator++() {
 	for (int i = 0; i < _count; i++)
@@ -96,8 +105,6 @@ MySet& MySet::operator++() {
 
 /**
   * @brief 集合的“后置++”运算，含义是将集合中的每一个元素自增1（后置自增）
-  * @param
-  * @retval
   */
 MySet MySet::operator++(int) {
 	MySet temp(*this);
@@ -107,8 +114,6 @@ MySet MySet::operator++(int) {
 
 /**
   * @brief 友元：集合的“前置--”运算，含义是将集合中的每一个元素自减1（前置自减）
-  * @param
-  * @retval
   */
 MySet& operator--(MySet& source) {
 	for (int i = 0; i < source._count; i++)
@@ -118,14 +123,13 @@ MySet& operator--(MySet& source) {
 
 /**
   * @brief 友元：集合的“后置--”运算，含义是将集合中的每一个元素自减1（后置自减）
-  * @param
-  * @retval
   */
 MySet operator--(MySet& source, int) {
 	MySet temp(source);
 	--source;
 	return temp;
 }
+
 
 /**
   * @brief 重载标准输出流 <<运算符
@@ -135,6 +139,7 @@ MySet operator--(MySet& source, int) {
   */
 ostream& operator<<(ostream& out, const MySet& source) {
 
+	return out;
 }
 /**
   * @brief 重载标准输入流 >>运算符
@@ -143,6 +148,26 @@ ostream& operator<<(ostream& out, const MySet& source) {
   * @retval istream& 实现链式编程
   */
 istream& operator>>(istream& input, MySet& target) {
-
+	cout << "请输入集合中元素的个数n(n>0)：";
+	int n;
+	input >> n;
+	cout << "请输入这" << n << "个元素（不要重复）：";
+	MySet buffer;
+	while (1) {
+		try {
+			buffer = target;
+			for (int i = 0; i < n; i++) {
+				int num;
+				cin >> num;
+				buffer.append(num);
+			}
+			break;
+		}
+		catch (const char* err) {
+			cerr << err << "，请重新输入" << endl;
+		}
+	}
+	target = buffer; // 全输对了才覆盖原来的对象
+	return input;
 }
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

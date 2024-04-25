@@ -27,6 +27,7 @@ class MySet
 public:
 	MySet(const MySet& source);
 	void append(int n);
+	void operator=(const MySet & source);
 
 	MySet();												//(1)无参构造函数
 	friend istream& operator>>(istream&, MySet&);			//(2)输入形式举例：
