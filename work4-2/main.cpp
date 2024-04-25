@@ -58,7 +58,8 @@ int main() {
 			cout << "还有" << Fish::s_nAlive << "条活着的鱼，它们的情况是：" << endl;
 			cout << "名字		颜色		体重		上次吃食时间" << endl;
 			for (int i = 0; i < N; i++)
-				cout << *fish[i];
+				if (fish[i]->isAlive())
+					cout << *fish[i];
 		}
 		else {
 			cout << "第" << Fish::s_nCurrentDay << "天：" << fish[feed]->getName() << " 吃到了食物" << endl;
