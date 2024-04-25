@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Date.h
   * @author  Zhang Yifa
-  * @version V2.0.0
+  * @version V2.1.0
   * @date    2024-04-23
   * @brief   Abstract a class for handling date data.
   * @encode  UTF-8
@@ -55,8 +55,8 @@ public:
 
     Date& operator++();
     Date& operator--();
-    Date& operator++(int);
-    Date& operator--(int);
+    Date operator++(int);
+    Date operator--(int);
 
     Date getNextDay()const;
     Date getPreviousDay()const;

@@ -234,17 +234,19 @@ Date& Date::operator--() {
 }
 /**
   * @brief  重载后置自增运算符
-  * @retval *this 可用于链式编程
   */
-Date& Date::operator++(int) {
-	return toNextDay();
+Date Date::operator++(int) {
+	Date temp(*this);
+	(*this)++;
+	return temp;
 }
 /**
   * @brief  重载后置自减运算符
-  * @retval *this 可用于链式编程
   */
-Date& Date::operator--(int) {
-	return toPreviousDay();
+Date Date::operator--(int) {
+	Date temp(*this);
+	(*this)--;
+	return temp;
 }
 Date Date::getNextDay()const {
 	return Date(*this)++;

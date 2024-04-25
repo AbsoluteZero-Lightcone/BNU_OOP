@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Clock.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-20
   * @brief   Clock class
   * @encode  GB2312
@@ -56,8 +56,10 @@ public:
 
 	// ‘ÀÀ„∑˚÷ÿ‘ÿ
 	void operator=(const Clock& source);
-	Clock& operator++(int);
-	Clock& operator--(int);
+	Clock& operator++();
+	Clock& operator--();
+	Clock operator++(int);
+	Clock operator--(int);
 
 	friend ostream& operator<<(ostream& out, const Clock& source);
 	friend bool operator>(const Clock& n1, const Clock& n2);

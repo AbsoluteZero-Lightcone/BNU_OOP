@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    demo.cpp
   * @author  Zhang Yifa
-  * @version V1.3.3
+  * @version V1.3.4
   * @date    2024-03-06
   * @brief   A demonstration of the class Date.
   * @encode  UTF-8
@@ -62,7 +62,7 @@ void demo(){
 	today.setDate(0, 0, 0); today.showDate();// 带有合法性检查的set函数
 
 	// 重载了运算符并可以链式调用
-	today++++++++; today.showDate();
+	++(++today); today.showDate();
 	((today += 6)+=3)+=7; today.showDate();
 	//((today+6)-9).showDate();
 	

@@ -51,8 +51,10 @@ public:
 	void operator=(const exported_class& source);
 	void operator=(int n);
 	exported_class& operator+=(int n);
-	exported_class& operator++(int);
-	exported_class& operator--(int);
+	exported_class& operator++();
+	exported_class& operator--();
+	exported_class operator++(int);
+	exported_class operator--(int);
 	exported_class& operator!();
 
 	friend ostream& operator<<(ostream& out, const exported_class& source);

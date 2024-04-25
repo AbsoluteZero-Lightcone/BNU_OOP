@@ -75,7 +75,7 @@ exported_class& exported_class::operator+=(int n) {
   * @param 无
   * @retval 返回自身引用实现链式编程
   */
-exported_class& exported_class::operator++(int) {
+exported_class& exported_class::operator++() {
 	// todo
 	return *this;
 }
@@ -85,9 +85,31 @@ exported_class& exported_class::operator++(int) {
   * @param 无
   * @retval 返回自身引用实现链式编程
   */
-exported_class& exported_class::operator--(int) {
+exported_class& exported_class::operator--() {
 	// todo
 	return *this;
+}
+
+/**
+  * @brief 类内重载后自增运算符
+  * @param 无
+  * @retval 值返回，不支持链式调用
+  */
+exported_class exported_class::operator++(int) {
+	exported_class temp(*this);
+	++(*this);
+	return temp;
+}
+
+/**
+  * @brief 类内重载后自减运算符
+  * @param 无
+  * @retval 值返回，不支持链式调用
+  */
+exported_class exported_class::operator--(int) {
+	exported_class temp(*this);
+	--(*this);
+	return temp;
 }
 
 /**

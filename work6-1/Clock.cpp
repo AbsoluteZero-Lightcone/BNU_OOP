@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Clock.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-20
   * @brief   Clock class
   * @encode  GB2312
@@ -198,7 +198,7 @@ void Clock::operator=(const Clock& source) {
   * @param 无
   * @retval 返回自身引用实现链式编程
   */
-Clock& Clock::operator++(int) {
+Clock& Clock::operator++() {
 	m_nSecond++;
 	if (m_nSecond == 60) {
 		m_nSecond = 0;
@@ -214,13 +214,18 @@ Clock& Clock::operator++(int) {
 	}
 	return *this;
 }
+Clock Clock::operator++(int) {
+	Clock temp(*this);
+	(*this)++;
+	return temp;
+}
 
 /**
   * @brief 类内重载自减运算符，到上一秒
   * @param 无
   * @retval 返回自身引用实现链式编程
   */
-Clock& Clock::operator--(int) {
+Clock& Clock::operator--() {
 	m_nSecond--;
 	if (m_nSecond == -1) {
 		m_nSecond = 59;
@@ -235,6 +240,11 @@ Clock& Clock::operator--(int) {
 		}
 	}
 	return *this;
+}
+Clock Clock::operator--(int) {
+	Clock temp(*this);
+	(*this)--;
+	return temp;
 }
 
 /**
