@@ -61,6 +61,7 @@ void Fish::set(string t_strName, string t_strColor) {
 如果一条鱼连续5天吃不到食物，体重就要减少10克。
 鱼的体重减少到0克时，鱼就饿死了。
 鱼的体重长到300克时，鱼就撑死了。
+不给死了的喂食？
 */
 void Fish::update(bool isFed) {
 	if (!m_bAlive)return;

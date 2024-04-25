@@ -25,10 +25,13 @@ bool isContinue() {
 	string command;
 	cout << "您要结束养鱼吗？(Y/N) : ";
 	cin >> command;
-	if (command == "y" || command == "Y")
+	if (command == "y" || command == "Y") {
+		cout << "程序结束。" << endl;
 		return 0;
-	else if (command == "n" || command == "N")
+	}
+	else if (command == "n" || command == "N") {
 		return 1;
+	}
 	else {
 		cerr << "Invalid command." << endl;
 		return isContinue();
@@ -49,6 +52,7 @@ int main() {
 	cout << "开始养鱼了！" << endl;
 	do {
 		Fish::s_nCurrentDay++;
+
 		cout << "第" << Fish::s_nCurrentDay << "天：";
 		int feed = random() % N;
 		for (int i = 0; i < N; i++) {
@@ -63,6 +67,10 @@ int main() {
 		}
 		else {
 			cout << "第" << Fish::s_nCurrentDay << "天：" << fish[feed]->getName() << " 吃到了食物" << endl;
+		}
+		if (Fish::s_nAlive == 0) {
+			cout << "抱歉，所有的鱼都死了，养鱼失败了，程序结束。" << endl;
+			break;
 		}
 	} while (isContinue());
 	return 0;
