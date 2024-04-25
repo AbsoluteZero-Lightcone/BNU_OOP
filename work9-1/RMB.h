@@ -32,6 +32,7 @@ private:
 public:
 	// Constructors & Deconstructor
 	RMB();
+	RMB(int fen);
 	RMB(const RMB& source);
 	~RMB();
 

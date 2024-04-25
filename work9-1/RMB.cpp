@@ -9,15 +9,18 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "RMB.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
 RMB::RMB() :
+	m_chSign('+'),
 	m_nYuan(0),
 	m_nJiao(0),
 	m_nFen(0)
 {}
+
+RMB::RMB(int fen) { fromFen(fen); }
 
 RMB::RMB(const RMB& source) :
 	m_chSign(source.m_chSign),
@@ -34,7 +37,7 @@ RMB::~RMB() {}
   * @param None
   * @retval 分
   */
-int RMB::toFen()const{
+int RMB::toFen()const {
 	return (m_chSign == '+' ? 1 : -1) * (m_nYuan * 100 + m_nJiao * 10 + m_nFen);
 }
 /**
@@ -53,6 +56,7 @@ void RMB::fromFen(int fen) {
 	m_nJiao = fen % 10;
 	m_nYuan = fen / 10;
 }
+
 /* Exported functions ------------------------------------------------------- */
 /**
   * @brief 类内重载负号
@@ -60,9 +64,7 @@ void RMB::fromFen(int fen) {
   * @retval -*this
   */
 RMB RMB::operator-() {
-	RMB temp;
-	// todo
-	return temp;
+	return RMB(-(this->toFen()));
 }
 
 /**
@@ -72,9 +74,7 @@ RMB RMB::operator-() {
   * @retval *this + n2
   */
 RMB RMB::operator+(const RMB& n2) {
-	RMB temp;
-	// todo
-	return temp;
+	return RMB((this->toFen()) + (n2.toFen()));
 }
 
 /**
@@ -84,9 +84,7 @@ RMB RMB::operator+(const RMB& n2) {
   * @retval *this - n2
   */
 RMB RMB::operator-(const RMB& n2) {
-	RMB temp;
-	// todo
-	return temp;
+	return RMB((this->toFen()) - (n2.toFen()));
 }
 
 /**
@@ -102,21 +100,21 @@ void RMB::operator=(const RMB& source) {
 }
 
 /**
-  * @brief 类内重载使用整数赋值的赋值运算符
-  * @param int n : 待赋的值
+  * @brief 类内重载使用分赋值的赋值运算符
+  * @param int n : 分
   * @retval 无
   */
 void RMB::operator=(int n) {
-	// todo
+	fromFen(n);
 }
 
 /**
   * @brief 类内重载+=运算符
-  * @param n : 待加的值
+  * @param n : 分
   * @retval 返回自身引用实现链式编程
   */
 RMB& RMB::operator+=(int n) {
-	// todo
+	fromFen(toFen() + n);
 	return *this;
 }
 
@@ -126,7 +124,7 @@ RMB& RMB::operator+=(int n) {
   * @retval 返回自身引用实现链式编程
   */
 RMB& RMB::operator++() {
-	// todo
+	fromFen(toFen() + 1);
 	return *this;
 }
 
@@ -147,15 +145,16 @@ RMB RMB::operator++(int) {
   * @retval 返回自身引用实现链式编程
   */
 RMB& operator--(RMB& n) {
-	// todo
+	n.fromFen(n.toFen() + 1);
 	return n;
 }
+
 /**
   * @brief 重载后自减运算符
   * @param 无
   * @retval 值返回，不支持链式调用
   */
-RMB operator--(RMB& n,int) {
+RMB operator--(RMB& n, int) {
 	RMB temp(n);
 	--n;
 	return temp;
@@ -168,7 +167,7 @@ RMB operator--(RMB& n,int) {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const RMB& source) {
-	// todo
+	out << "(" << source.m_chSign << source.m_nYuan << "元" << source.m_nJiao << "角" << source.m_nFen << "分)";
 	return out;
 }
 
@@ -178,11 +177,27 @@ ostream& operator<<(ostream& out, const RMB& source) {
   * @param RMB& target : 接受输入数据的对象
   * @retval istream& 实现链式编程
   */
-istream& operator>>(istream& input, RMB& target){
-	cout << "input:";
+istream& operator>>(istream& input, RMB& target) {
+	char         t_chSign;
+	unsigned int t_nYuan;
+	unsigned int t_nJiao;
+	unsigned int t_nFen;
+
 	input
-		>> target.m_nYuan
-		>> target.m_nJiao;
+		>> t_chSign
+		>> t_nYuan
+		>> t_nJiao
+		>> t_nFen;
+	if (t_chSign != '+' && t_chSign != '-') {
+		cerr << "Incorrect sign. Please try again:";
+		input >> target;
+	}
+	else {
+		target.m_chSign = t_chSign;
+		target.m_nYuan = t_nYuan;
+		target.m_nJiao = t_nJiao;
+		target.m_nFen = t_nFen;
+	}
 	return input;
 }
 
@@ -193,8 +208,7 @@ istream& operator>>(istream& input, RMB& target){
   * @retval bool, true for n1 > n2
   */
 bool operator>(const RMB& n1, const RMB& n2) {
-	// todo
-	return false;
+	return n1.toFen() > n2.toFen();
 }
 
 /**

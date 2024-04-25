@@ -14,9 +14,13 @@
 #include <cmath>
 #include <cstdint>
 using namespace std;
+#include "RMB.h"
 
 int main() {
-
+	RMB rmb1;
+	cout << "请构造两个人民币：";
+	cin >> rmb1;
+	cout << rmb1;
 	return 0;
 }
 
