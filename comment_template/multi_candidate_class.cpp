@@ -59,12 +59,29 @@ void multi_candidate_class::set_dataname6(datatype6 t_dataname6) { m_dataname6 =
   * @brief 重载标准输出流 <<运算符
   * @param ostream& out : 标准输出流对象
   * @param const multi_candidate_class& source : 待输出的对象
-  * @retval ostream&
+  * @retval ostream& 实现链式编程
   */
 ostream& operator<<(ostream& out, const multi_candidate_class& source) {
 	// todo
 	return out;
 }
 
-
+/**
+  * @brief 重载标准输入流 >>运算符
+  * @param istream& input : 标准输出流对象
+  * @param multi_candidate_class& target : 接受输入数据的对象
+  * @retval istream& 实现链式编程
+  */
+istream& operator>>(istream& input, multi_candidate_class& target)
+{
+	cout << "input:";
+	input 
+		>> target.m_dataname1 
+		>> target.m_dataname2 
+		>> target.m_dataname3 
+		>> target.m_dataname4 
+		>> target.m_dataname5 
+		>> target.m_dataname6;
+	return input;
+}
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

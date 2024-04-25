@@ -33,6 +33,9 @@
     <ClCompile Include="small_3_class.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="param3operators.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exported_class.h">
@@ -48,6 +51,9 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="small_3_class.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="param3operators.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

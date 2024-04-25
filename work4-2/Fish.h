@@ -36,17 +36,9 @@ public:
 	void day(bool isfed);
 
 	// Getter & Setter
-	string get_strName()const;
-	void set_strName(string t_strName);
-	string get_strColor()const;
-	void set_strColor(string t_strColor);
-	int get_nWeight()const;
-	void set_nWeight(int t_nWeight);
-	void set(string t_strName, string t_strColor, int t_nWeight);
+	void set(string t_strName, string t_strColor);
 
 	// ‘ÀÀ„∑˚÷ÿ‘ÿ
-	void operator=(const Fish& source);
-
 	friend ostream& operator<<(ostream& out, const Fish& source);
 };
 

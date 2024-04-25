@@ -73,10 +73,12 @@ public:
 	void operator=(const multi_candidate_class& source) = delete;
 
 	friend ostream& operator<<(ostream& out, const multi_candidate_class& source);
+	friend istream& operator>>(istream& input, multi_candidate_class& target);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const multi_candidate_class& source);
+istream& operator>>(istream& input, multi_candidate_class& target);
 
 #endif /* !__multi_candidate_class_H */
 

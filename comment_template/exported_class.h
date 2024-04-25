@@ -56,6 +56,7 @@ public:
 	exported_class& operator!();
 
 	friend ostream& operator<<(ostream& out, const exported_class& source);
+	friend istream& operator>>(istream& input, exported_class& target);
 	friend bool operator>(const exported_class& n1, const exported_class& n2);
 	friend bool operator<(const exported_class& n1, const exported_class& n2);
 	friend bool operator>=(const exported_class& n1, const exported_class& n2);
@@ -71,6 +72,7 @@ public:
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const exported_class& source);
+istream& operator>>(istream& input, exported_class& target);
 bool operator>(const exported_class& n1, const exported_class& n2);
 bool operator<(const exported_class& n1, const exported_class& n2);
 bool operator>=(const exported_class& n1, const exported_class& n2);

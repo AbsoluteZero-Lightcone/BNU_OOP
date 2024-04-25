@@ -112,6 +112,21 @@ ostream& operator<<(ostream& out, const exported_class& source) {
 }
 
 /**
+  * @brief 重载标准输入流 >>运算符
+  * @param istream& input : 标准输出流对象
+  * @param exported_class& target : 接受输入数据的对象
+  * @retval istream& 实现链式编程
+  */
+istream& operator>>(istream& input, exported_class& target)
+{
+	cout << "input:";
+	input
+		>> target.m_dataname1
+		>> target.m_dataname2;
+	return input;
+}
+
+/**
   * @brief 重载大于运算符
   * @param const exported_class& n1 : 运算符左边的值
   * @param const exported_class& n2 : 运算符右边的值
