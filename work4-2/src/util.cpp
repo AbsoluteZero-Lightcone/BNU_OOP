@@ -19,7 +19,7 @@
 int random(int range) {
 	time_t now;
 	time(&now);
-	srand(now);
+	srand((unsigned int)now);
 	return rand() % range;
 }
 /**

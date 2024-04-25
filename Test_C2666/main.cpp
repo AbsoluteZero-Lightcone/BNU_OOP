@@ -20,8 +20,8 @@ public:
 // 关键是这两个 const ：
 	//int operator-(      Date& date)      { return 0; }
 	//int operator-(      Date& date)const { return 0; }
-	  int operator-(const Date& date)      { return 0; }
-	//int operator-(const Date& date)const { return 0; }
+	//int operator-(const Date& date)      { return 0; }
+	  int operator-(const Date& date)const { return 0; }
 // 和这个只有一个参数的构造函数：
 	Date(int a = 0) :_a(a) {}
 };

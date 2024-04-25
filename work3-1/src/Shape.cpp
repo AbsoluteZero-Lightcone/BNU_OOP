@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Shape.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-24
   * @brief   Shape class
   * @encode  GB2312
@@ -16,23 +16,24 @@
 ostream& operator<<(ostream& out, const Shape& source) {
 	if (typeid(source) == typeid(Empty)) {
 		const Empty& temp = dynamic_cast<Empty&>(const_cast<Shape&>(source));
-		cout << "不相交";
+		out << "不相交";
 		return out;
 	}
 	if (typeid(source) == typeid(Point)) {
 		const Point& temp = dynamic_cast<Point&>(const_cast<Shape&>(source));
-		cout << "Point(" << temp.getX() << "," << temp.getY();
+		out << "Point(" << temp.getX() << "," << temp.getY();
 		return out;
 	}
 	if (typeid(source) == typeid(Line)) {
 		const Line& temp = dynamic_cast<Line&>(const_cast<Shape&>(source));
-		cout << "Line(" << temp.get_pointP1() << "," << temp.get_pointP2();
+		out << "Line(" << temp.get_pointP1() << "," << temp.get_pointP2();
 		return out;
 	}
 	if (typeid(source) == typeid(Rectangle)) {
 		const Rectangle& temp = dynamic_cast<Rectangle&>(const_cast<Shape&>(source));
-		cout << temp;
+		out << temp;
 		return out;
 	}
+	return out;
 }
 /********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Line.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.0.1
   * @date    2024-04-23
   * @brief   Line class
   * @encode  GB2312
@@ -19,6 +19,7 @@
 using namespace std;
 #include "Shape.h"
 #include "Point.h"
+#include "Rectangle.h"
 
 /* Class ---------------------------------------------------------------------*/
 class Line:public Shape {

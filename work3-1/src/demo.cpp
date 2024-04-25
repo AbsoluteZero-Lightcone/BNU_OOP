@@ -22,7 +22,7 @@ int input_index(int length, int n) {
 		return i;
 	else {
 		cerr << "Invalid Index." << endl;
-		input_index(length, n);
+		return input_index(length, n);
 	}
 }
 
@@ -35,7 +35,7 @@ int input_index(int length) {
 		return i;
 	else {
 		cerr << "Invalid Index." << endl;
-		input_index(length);
+		return input_index(length);
 	}
 }
 
