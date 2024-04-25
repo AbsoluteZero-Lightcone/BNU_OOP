@@ -24,6 +24,7 @@
     <ProjectGuid>{5153cebe-d4f2-4150-8dd2-6cc95e6ecf4b}</ProjectGuid>
     <RootNamespace>work91</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>work9-1 赛博人民币</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
