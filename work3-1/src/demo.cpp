@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Demo.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-24
   * @brief   Demo
   * @encode  GB2312
@@ -80,7 +80,9 @@ void Intersect_demo(Rectangle* rectangles, int length) {
 			cerr << selected_rectangle2->getDiagonal() << " " << err << endl;
 		}
 	}
-	cout << *selected_rectangle1 << " intersect with " << *selected_rectangle2 << " at "
-		<< InterSectRect(*selected_rectangle1, *selected_rectangle2);
+	Shape& InterSect = InterSectRect(*selected_rectangle1, *selected_rectangle2);
+	if (typeid(InterSect) == typeid(Empty))
+		cout << *selected_rectangle1 << " 和 " << *selected_rectangle2 << " 不相交";
+	else cout << *selected_rectangle1 << " intersect with " << *selected_rectangle2 << " at " << InterSect;
 }
 /********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/

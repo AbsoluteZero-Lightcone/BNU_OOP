@@ -16,17 +16,17 @@
 ostream& operator<<(ostream& out, const Shape& source) {
 	if (typeid(source) == typeid(Empty)) {
 		const Empty& temp = dynamic_cast<Empty&>(const_cast<Shape&>(source));
-		out << "²»Ïà½»";
+		out << "Empty";
 		return out;
 	}
 	if (typeid(source) == typeid(Point)) {
 		const Point& temp = dynamic_cast<Point&>(const_cast<Shape&>(source));
-		out << "Point(" << temp.getX() << "," << temp.getY();
+		out << "Point(" << temp.getX() << "," << temp.getY() << ")";
 		return out;
 	}
 	if (typeid(source) == typeid(Line)) {
 		const Line& temp = dynamic_cast<Line&>(const_cast<Shape&>(source));
-		out << "Line(" << temp.get_pointP1() << "," << temp.get_pointP2();
+		out << "Line(" << temp.get_pointP1() << "," << temp.get_pointP2() << ")";
 		return out;
 	}
 	if (typeid(source) == typeid(Rectangle)) {
