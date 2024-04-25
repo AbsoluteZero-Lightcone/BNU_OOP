@@ -145,7 +145,7 @@ RMB RMB::operator++(int) {
   * @retval 返回自身引用实现链式编程
   */
 RMB& operator--(RMB& n) {
-	n.fromFen(n.toFen() + 1);
+	n.fromFen(n.toFen() - 1);
 	return n;
 }
 
@@ -197,6 +197,7 @@ istream& operator>>(istream& input, RMB& target) {
 		target.m_nYuan = t_nYuan;
 		target.m_nJiao = t_nJiao;
 		target.m_nFen = t_nFen;
+		target.fromFen(target.toFen());
 	}
 	return input;
 }
