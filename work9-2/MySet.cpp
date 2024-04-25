@@ -19,7 +19,7 @@
   */
 MySet::MySet() :_count(0) {}
 MySet::MySet(const MySet& source) :_count(source._count) {
-	for (int i = 0; i < _count; i++) {
+	for (unsigned int i = 0; i < _count; i++) {
 		_array[i] = source._array[i];
 	}
 }
@@ -45,7 +45,7 @@ const int& MySet::operator[](unsigned i)const {
   * @retval bool
   */
 bool MySet::IsInSet(int x) const {
-	for (int i = 0; i < _count; i++)
+	for (unsigned int i = 0; i < _count; i++)
 		if (x == _array[i])
 			return true;
 	return false;
@@ -64,7 +64,7 @@ void MySet::append(int n) {
   */
 void MySet::operator=(const MySet& source) {
 	_count = source._count;
-	for (int i = 0; i < _count; i++) {
+	for (unsigned int i = 0; i < _count; i++) {
 		_array[i] = source._array[i];
 	}
 }
@@ -76,7 +76,7 @@ MySet MySet::operator+(const MySet& n2) const {
 	MySet temp(*this);
 	// n2 用值传递更方便一些，不用创建临时对象
 	// 但是作业要求是传常引用，多比值传递多一步引用，也大差不差
-	for (int i = 0; i < n2._count; i++)
+	for (unsigned int i = 0; i < n2._count; i++)
 		if (!temp.IsInSet(n2._array[i]))
 			temp.append(n2._array[i]);
 	return temp;
@@ -88,7 +88,7 @@ MySet MySet::operator+(const MySet& n2) const {
   */
 MySet MySet::operator-(const MySet& n2) const {
 	MySet temp;
-	for (int i = 0; i < _count; i++)
+	for (unsigned int i = 0; i < _count; i++)
 		if (!n2.IsInSet(_array[i]))
 			temp.append(_array[i]);
 	return temp;
@@ -98,7 +98,7 @@ MySet MySet::operator-(const MySet& n2) const {
   * @brief 集合的“前置++”运算，含义是将集合中的每一个元素自增1（前置自增）
   */
 MySet& MySet::operator++() {
-	for (int i = 0; i < _count; i++)
+	for (unsigned int i = 0; i < _count; i++)
 		_array[i]++;
 	return *this;
 }
@@ -116,7 +116,7 @@ MySet MySet::operator++(int) {
   * @brief 友元：集合的“前置--”运算，含义是将集合中的每一个元素自减1（前置自减）
   */
 MySet& operator--(MySet& source) {
-	for (int i = 0; i < source._count; i++)
+	for (unsigned int i = 0; i < source._count; i++)
 		source._array[i]--;
 	return source;
 }
@@ -130,7 +130,6 @@ MySet operator--(MySet& source, int) {
 	return temp;
 }
 
-
 /**
   * @brief 重载标准输出流 <<运算符
   * @param ostream& out : 标准输出流对象
@@ -138,9 +137,15 @@ MySet operator--(MySet& source, int) {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const MySet& source) {
-
+	out << "(";
+	for (unsigned int i = 0; i < source._count; i++) {
+		out << source._array[i];
+		if (i != source._count - 1)out << ",";
+	}
+	out << ")";
 	return out;
 }
+
 /**
   * @brief 重载标准输入流 >>运算符
   * @param istream& input : 标准输出流对象

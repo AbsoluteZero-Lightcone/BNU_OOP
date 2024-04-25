@@ -22,7 +22,7 @@ int main()
 	cout << m1 << '+' << m2 << '=' << m3 << endl;
 	m3 = m1 - m2;
 	cout << m1 << '-' << m2 << '=' << m3 << endl;
-	cout << " m1=" << m1 << endl;
+	cout << "m1=" << m1 << endl;
 	m2 = ++m1;
 	cout << "m2=++m1;  " << " m2=" << m2 << ",  m1=" << m1 << endl;
 	m2 = m1++;
@@ -31,6 +31,7 @@ int main()
 	cout << "m2=--m1;  " << " m2=" << m2 << ",  m1=" << m1 << endl;
 	m2 = m1--;
 	cout << "m2=m1--;  " << " m2=" << m2 << ",  m1=" << m1 << endl;
+	system("pause");
 	return 0;
 }
 
