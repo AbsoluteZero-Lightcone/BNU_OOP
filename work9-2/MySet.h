@@ -20,10 +20,10 @@ using namespace std;
 /* Constants -----------------------------------------------------------------*/
 #define MAX_COUNT 100
 /* Class ---------------------------------------------------------------------*/
-class MySet
-{
+class MySet{
 	int _array[MAX_COUNT];
 	unsigned _count;
+
 public:
 	MySet(const MySet& source);
 	void append(int n);
