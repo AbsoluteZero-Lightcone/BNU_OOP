@@ -15,22 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Clock.cpp">
+    <ClInclude Include="inc\Clock.h">
       <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
+    </ClInclude>
+    <ClInclude Include="inc\WorldClock.h">
       <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldClock.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Clock.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldClock.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+    <ClCompile Include="src\Clock.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WorldClock.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

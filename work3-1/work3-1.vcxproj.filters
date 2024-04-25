@@ -15,46 +15,46 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Line.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Shape.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="demo.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+    <ClInclude Include="inc\demo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Empty.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Line.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Point.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Rectangle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Shape.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Shapes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Point.h">
+    <ClCompile Include="src\demo.cpp">
       <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Rectangle.h">
+    </ClCompile>
+    <ClCompile Include="src\Line.cpp">
       <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Line.h">
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
       <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Shape.h">
+    </ClCompile>
+    <ClCompile Include="src\Point.cpp">
       <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Empty.h">
+    </ClCompile>
+    <ClCompile Include="src\Rectangle.cpp">
       <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="demo.h">
+    </ClCompile>
+    <ClCompile Include="src\Shape.cpp">
       <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Shapes.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
 </Project>

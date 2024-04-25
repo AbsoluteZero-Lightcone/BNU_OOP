@@ -21,7 +21,7 @@ using namespace std;
 
 int main() {
 	/* 文件输入数据 -------------------------------------- */
-	ifstream infile("rect.txt", ios::in);
+	ifstream infile(".\\res\\rect.txt", ios::in);
 	Rectangle rectangles[LENGTH];
 	double a, b, c, d;
 	for (int i = 0; i < LENGTH; i++) {

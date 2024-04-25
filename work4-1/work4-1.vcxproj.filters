@@ -15,22 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\Date.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Deposit.cpp">
+    <ClCompile Include="src\Deposit.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Date.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Deposit.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="inc\Date.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Date.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="inc\Deposit.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

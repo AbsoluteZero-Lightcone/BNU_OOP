@@ -100,8 +100,8 @@ public:
 
     Date& operator++();
     Date& operator--();
-    Date& operator++(int);
-    Date& operator--(int);
+    Date operator++(int);
+    Date operator--(int);
 
     Date getNextDay()const;
     Date getPreviousDay()const;

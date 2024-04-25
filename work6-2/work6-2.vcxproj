@@ -72,10 +72,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\work6-1;$(IncludePath)</IncludePath>
+    <IncludePath>..\work6-1\inc;.\inc;$(IncludePath)</IncludePath>
+    <SourcePath>.\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\work6-1;$(IncludePath)</IncludePath>
+    <IncludePath>..\work6-1\inc;.\inc;$(IncludePath)</IncludePath>
+    <SourcePath>.\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>..\work6-1\inc;.\inc;$(IncludePath)</IncludePath>
+    <SourcePath>.\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>..\work6-1\inc;.\inc;$(IncludePath)</IncludePath>
+    <SourcePath>.\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -134,13 +144,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\work6-1\Clock.cpp" />
-    <ClCompile Include="AlarmClock.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\work6-1\src\Clock.cpp" />
+    <ClCompile Include="src\AlarmClock.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\work6-1\Clock.h" />
-    <ClInclude Include="AlarmClock.h" />
+    <ClInclude Include="..\work6-1\inc\Clock.h" />
+    <ClInclude Include="inc\AlarmClock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

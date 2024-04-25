@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    AlarmClock.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-21
   * @brief   AlarmClock class
   * @encode  GB2312
@@ -16,7 +16,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#include <Clock.h>
+#include "Clock.h"
 
 /* Class ---------------------------------------------------------------------*/
 class AlarmClock :public Clock {

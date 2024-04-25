@@ -12,8 +12,8 @@
 using namespace std;
 
 void data_format() {
-	ifstream infile("res\\shape.csv", ios::in);
-	ofstream outfile("res\\shape.txt", ios::out);
+	ifstream infile(".\\res\\shape.csv", ios::in);
+	ofstream outfile(".\\res\\shape.txt", ios::out);
 	string temp;
 	while (!infile.eof()) {
 		getline(infile, temp);

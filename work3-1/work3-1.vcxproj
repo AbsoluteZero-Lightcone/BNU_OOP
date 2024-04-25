@@ -18,6 +18,23 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\demo.h" />
+    <ClInclude Include="inc\Empty.h" />
+    <ClInclude Include="inc\Line.h" />
+    <ClInclude Include="inc\Point.h" />
+    <ClInclude Include="inc\Rectangle.h" />
+    <ClInclude Include="inc\Shape.h" />
+    <ClInclude Include="inc\Shapes.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\demo.cpp" />
+    <ClCompile Include="src\Line.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Point.cpp" />
+    <ClCompile Include="src\Rectangle.cpp" />
+    <ClCompile Include="src\Shape.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -71,6 +88,22 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>.\inc;$(IncludePath)</IncludePath>
+    <SourcePath>.\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>.\inc;$(IncludePath)</IncludePath>
+    <SourcePath>.\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>.\inc;$(IncludePath)</IncludePath>
+    <SourcePath>.\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>.\inc;$(IncludePath)</IncludePath>
+    <SourcePath>.\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -127,23 +160,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="demo.cpp" />
-    <ClCompile Include="Line.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
-    <ClCompile Include="Shape.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="demo.h" />
-    <ClInclude Include="Empty.h" />
-    <ClInclude Include="Line.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="Shapes.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
