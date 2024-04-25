@@ -13,5 +13,9 @@
 #include "comment_template.h"
 
 /* Exported functions ------------------------------------------------------- */
-
+/**
+  * @brief 
+  * @param 
+  * @retval 
+  */
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
