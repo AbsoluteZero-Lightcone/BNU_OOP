@@ -24,16 +24,19 @@ private:
 	string m_strName;
 	string m_strColor;
 	int m_nWeight;
+	int m_nLastFedDey;
 	bool m_bAlive;
+	
 public:
 	static int s_nTotal;
 	static int s_nAlive;
+	static int s_nCurrentDay;
 	// Constructors & Deconstructor
 	Fish();
 	Fish(string t_strName, string t_strColor);
 	~Fish();
 
-	void day(bool isfed);
+	void update(bool isfed);
 
 	// Getter & Setter
 	void set(string t_strName, string t_strColor);
@@ -41,7 +44,12 @@ public:
 	// 运算符重载
 	friend ostream& operator<<(ostream& out, const Fish& source);
 };
-
+/*
+吃食后，鱼增长10克。
+如果一条鱼连续5天吃不到食物，体重就要减少10克。
+鱼的体重减少到0克时，鱼就饿死了。
+鱼的体重长到300克时，鱼就撑死了。
+*/
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Fish& source);
 #endif /* !__FISH_H */

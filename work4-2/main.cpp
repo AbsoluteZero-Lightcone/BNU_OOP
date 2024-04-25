@@ -36,9 +36,8 @@ bool isContinue() {
 }
 
 int main() {
-	int day = 0;
 	do {
-		day++;
+		Fish::s_nCurrentDay++;
 		cout << "您要养几条鱼（N>=5）: ";
 		int N;
 		cin >> N;
@@ -50,10 +49,10 @@ int main() {
 			fish[i] = new Fish(name, color);
 		}
 		cout << "开始养鱼了！" << endl;
-		cout << "第" << day << "天：";
+		cout << "第" << Fish::s_nCurrentDay << "天：";
 		int feed = random() % N;
 		for (int i = 0; i < N; i++) {
-			fish[i]->day((i == feed) ? true : false);
+			fish[i]->update((i == feed) ? true : false);
 		}
 	} while (isContinue());
 	return 0;

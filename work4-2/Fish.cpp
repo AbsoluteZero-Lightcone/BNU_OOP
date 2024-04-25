@@ -9,19 +9,21 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "Fish.h"
 
 /* Static Members ------------------------------------------------------------*/
 int Fish::s_nTotal = 0;
 int Fish::s_nAlive = 0;
+int Fish::s_nCurrentDay = 0;
 
 /* Constructors & Deconstructor --------------------------------------------- */
 Fish::Fish() :
 	m_strName(""),
 	m_strColor(""),
 	m_nWeight(100),
-	m_bAlive(1)
+	m_bAlive(1),
+	m_nLastFedDey(0)
 {
 	s_nTotal++;
 	s_nAlive++;
@@ -47,8 +49,9 @@ void Fish::set(string t_strName, string t_strColor) {
 
 /* Exported functions ------------------------------------------------------- */
 
-void Fish::day(bool isfed) {
+void Fish::update(bool isfed) {
 	if (!m_bAlive)return;
+
 }
 
 /**
@@ -58,7 +61,10 @@ void Fish::day(bool isfed) {
   * @retval ostream&
   */
 ostream& operator<<(ostream& out, const Fish& source) {
-	// todo
+	out << source.m_strName << "\t\t"
+		<< source.m_strColor << "\t\t"
+		<< source.m_nWeight << "g" << "\t\t"
+		<< "µÚ" << source.m_nLastFedDey << "Ìì";
 	return out;
 }
 
