@@ -27,6 +27,8 @@ class MySet
 public:
 	MySet(const MySet& source);
 	void append(int n);
+	void modify(int i, int n);
+
 	void operator=(const MySet& source);
 
 	MySet();												//(1)无参构造函数

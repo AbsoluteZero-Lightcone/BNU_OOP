@@ -32,6 +32,7 @@ const int& MySet::operator[](unsigned i)const {
 	// 这里返回的是const int& 但作业里要求是返回int&，有以下两点理由：
 	// 1.这里返回int&引用相当危险，相当于直接暴露了类的私有成员，
 	//   通过返回到类外的引用修改集合元素时，无法检查集合内元素的合法性
+	//   这里是实现了两个成员函数modify和append实现写入操作
 	// 2.使用const修饰的对象无法使用非const的成员函数
 	if (i >= 0 && i < _count) {
 		return _array[i];
@@ -60,6 +61,15 @@ void MySet::append(int n) {
 	else throw "有重复的元素";
 }
 
+void MySet::modify(int i, int n) {
+	if (_array[i] == n)return;
+	if (!IsInSet(n)) {
+		_array[i] = n;
+		return;
+	}
+	else throw "有重复的元素";
+}
+
 /**
   * @brief 类内重载赋值运算符
   */
@@ -75,8 +85,6 @@ void MySet::operator=(const MySet& source) {
   */
 MySet MySet::operator+(const MySet& n2) const {
 	MySet temp(*this);
-	// n2 用值传递更方便一些，不用创建临时对象
-	// 但是作业要求是传常引用，多比值传递多一步引用，也大差不差
 	for (unsigned int i = 0; i < n2._count; i++)
 		if (!temp.IsInSet(n2._array[i]))
 			temp.append(n2._array[i]);

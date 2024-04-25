@@ -55,6 +55,7 @@ int main() {
 
 		cout << "第" << Fish::s_nCurrentDay << "天：";
 		int feed = random() % N;
+		//不给死了的喂食？
 		for (int i = 0; i < N; i++) {
 			fish[i]->update((i == feed) ? true : false);
 		}
