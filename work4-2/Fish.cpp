@@ -70,8 +70,10 @@ void Fish::update(bool isfed) {
 ostream& operator<<(ostream& out, const Fish& source) {
 	out << source.m_strName << "\t\t"
 		<< source.m_strColor << "\t\t"
-		<< source.m_nWeight << "g" << "\t\t"
-		<< "第" << source.m_nLastFedDey << "天" << endl;
+		<< source.m_nWeight << "g" << "\t\t";
+	if (source.m_nLastFedDey)
+		out << "第" << source.m_nLastFedDey << "天" << endl;
+	else out << "还没有被喂过" << endl;
 	return out;
 }
 
