@@ -13,53 +13,60 @@
 #include "MySet.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
+/**
+  * @brief 无参构造函数，创建集合，将元素个数设为0.
+  * @param None
+  */
 MySet::MySet() :_count(0) {}
 
 /* Exported functions ------------------------------------------------------- */
 /**
-  * @brief
-  * @param
-  * @retval
+  * @brief 重载下标运算符
   */
 int& MySet::operator[](unsigned i){}
+
 /**
-  * @brief
-  * @param
-  * @retval
+  * @brief 判断整数x是否是集合的元素
+  * @param int x
+  * @retval bool
   */
 bool MySet::IsInSet(int x) const{}
+
 /**
-  * @brief
+  * @brief 两个集合对象的加法运算”+”，含义是合并两个集合
   * @param
   * @retval
   */
 MySet MySet::operator+(const MySet& n2) const{}
+
 /**
-  * @brief
+  * @brief 两个集合对象的减法运算”-”，含义是求出集合1中的不属于集合2的元素
+	各操作的要求请参看程序注释。
   * @param
   * @retval
   */
 MySet MySet::operator-(const MySet& n2) const{}
+
 /**
-  * @brief
+  * @brief 集合的“前置++”运算，含义是将集合中的每一个元素自增1（前置自增）
   * @param
   * @retval
   */
 MySet& MySet::operator++(){}
 /**
-  * @brief
+  * @brief 集合的“后置++”运算，含义是将集合中的每一个元素自增1（后置自增）
   * @param
   * @retval
   */
 MySet MySet::operator++(int){}
 /**
-  * @brief
+  * @brief 友元：集合的“前置--”运算，含义是将集合中的每一个元素自减1（前置自减）
   * @param
   * @retval
   */
 MySet& operator--(MySet& source){}
 /**
-  * @brief
+  * @brief 友元：集合的“后置--”运算，含义是将集合中的每一个元素自减1（后置自减）
   * @param
   * @retval
   */
