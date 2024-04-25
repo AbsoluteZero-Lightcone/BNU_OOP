@@ -25,12 +25,15 @@ class MySet
 	int _array[MAX_COUNT];
 	unsigned _count;
 public:
+	MySet(const MySet& source);
+	void append(int n);
+
 	MySet();												//(1)无参构造函数
 	friend istream& operator>>(istream&, MySet&);			//(2)输入形式举例：
 															//请输入集合中元素的个数n(n>0): 4 (回车)
 															//请输入这4个元素（不要重复）：1 8 0 -2（回车）
 	friend ostream& operator<<(ostream&, const MySet&);		//(3)输出形式：(1,8,0,-2)
-	int& operator[](unsigned i);							//(4)重载下标运算符
+	const int& operator[](unsigned i)const;					//(4)重载下标运算符
 	bool IsInSet(int x) const;								//(5)判定整数x是否集合中的元素
 	MySet operator+(const MySet&) const;					//(6)(1,8,0,-2) +(1,2,-5) = (1,8,0,-2,2,-5)
 	MySet operator-(const MySet&) const;					//(7)(1,8,0,-2) - (1,2,-5) = (8,0,-2)

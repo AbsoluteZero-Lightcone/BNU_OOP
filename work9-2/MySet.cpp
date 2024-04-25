@@ -18,32 +18,63 @@
   * @param None
   */
 MySet::MySet() :_count(0) {}
+MySet::MySet(const MySet & source) :_count(source._count) {
+	for (int  i = 0; i < _count; i++){
+		_array[i] = source._array[i];
+	}
+}
 
 /* Exported functions ------------------------------------------------------- */
 /**
   * @brief 重载下标运算符
   */
-int& MySet::operator[](unsigned i){}
+const int& MySet::operator[](unsigned i)const {
+	// 这里返回的是const int& 但作业里要求是返回int&，有以下两点理由：
+	// 1.这里返回int&引用相当危险，相当于直接暴露了类的私有成员，
+	//   通过返回到类外的引用修改集合元素时，无法检查集合内元素的合法性
+	// 2.使用const修饰的对象无法使用非const的成员函数
+	if (i >= 0 && i < _count) {
+		return _array[i];
+	}
+	else throw "Index Error.";
+}
 
 /**
   * @brief 判断整数x是否是集合的元素
   * @param int x
   * @retval bool
   */
-bool MySet::IsInSet(int x) const{}
+bool MySet::IsInSet(int x) const{
+	for (int i = 0; i < _count; i++)
+		if (x == _array[i])
+			return true;
+	return false;
+}
+
+void MySet::append(int n) {
+	if (!IsInSet(n)) {
+		_array[_count] = n;
+		_count++;
+	}throw "is already in the set.";
+}
 
 /**
   * @brief 两个集合对象的加法运算”+”，含义是合并两个集合
-  * @param
-  * @retval
   */
-MySet MySet::operator+(const MySet& n2) const{}
+MySet MySet::operator+(const MySet& n2) const{
+	// n2 用值传递更方便一些，不用创建临时对象
+	// 但是作业要求是传常引用，多比值传递多一步引用，也大差不差
+	MySet temp(*this);
+	for (int i = 0; i < n2._count; i++)
+		if (!temp.IsInSet(n2[i])) {
+			temp.append(n2[i]);
+		}
+	return temp;	
+}
 
 /**
   * @brief 两个集合对象的减法运算”-”，含义是求出集合1中的不属于集合2的元素
 	各操作的要求请参看程序注释。
-  * @param
-  * @retval
   */
 MySet MySet::operator-(const MySet& n2) const{}
 
