@@ -216,7 +216,7 @@ Clock& Clock::operator++() {
 }
 Clock Clock::operator++(int) {
 	Clock temp(*this);
-	(*this)++;
+	++(*this);
 	return temp;
 }
 
@@ -243,7 +243,7 @@ Clock& Clock::operator--() {
 }
 Clock Clock::operator--(int) {
 	Clock temp(*this);
-	(*this)--;
+	--(*this);
 	return temp;
 }
 

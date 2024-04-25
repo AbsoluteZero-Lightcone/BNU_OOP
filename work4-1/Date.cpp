@@ -237,7 +237,7 @@ Date& Date::operator--() {
   */
 Date Date::operator++(int) {
 	Date temp(*this);
-	(*this)++;
+	++(*this);
 	return temp;
 }
 /**
@@ -245,7 +245,7 @@ Date Date::operator++(int) {
   */
 Date Date::operator--(int) {
 	Date temp(*this);
-	(*this)--;
+	--(*this);
 	return temp;
 }
 Date Date::getNextDay()const {
