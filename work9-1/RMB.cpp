@@ -31,6 +31,41 @@ RMB::~RMB() {}
 /* Private functions -------------------------------------------------------- */
 /* Exported functions ------------------------------------------------------- */
 /**
+  * @brief 类内重载负号
+  * @param *this : 值传递待取反的值
+  * @retval -*this
+  */
+RMB RMB::operator-() {
+	RMB temp;
+	// todo
+	return temp;
+}
+
+/**
+  * @brief 类内重载加法运算符
+  * @param *this : 加号左边的值
+  * @param const RMB& n2 : 加号右边的值
+  * @retval *this + n2
+  */
+RMB RMB::operator+(const RMB& n2) {
+	RMB temp;
+	// todo
+	return temp;
+}
+
+/**
+  * @brief 类内重载减法运算符
+  * @param *this : 被减数
+  * @param const RMB& n2 : 减数
+  * @retval *this - n2
+  */
+RMB RMB::operator-(const RMB& n2) {
+	RMB temp;
+	// todo
+	return temp;
+}
+
+/**
   * @brief 类内重载通过对象赋值的赋值运算符
   * @param const RMB& source : 待赋的值
   * @retval 无
@@ -72,15 +107,6 @@ RMB& RMB::operator++() {
 }
 
 /**
-  * @brief 类内重载前自减运算符
-  * @param 无
-  * @retval 返回自身引用实现链式编程
-  */
-RMB& RMB::operator--() {
-	// todo
-	return *this;
-}
-/**
   * @brief 类内重载后自增运算符
   * @param 无
   * @retval 值返回，不支持链式调用
@@ -92,24 +118,23 @@ RMB RMB::operator++(int) {
 }
 
 /**
-  * @brief 类内重载后自减运算符
-  * @param 无
-  * @retval 值返回，不支持链式调用
-  */
-RMB RMB::operator--(int) {
-	RMB temp(*this);
-	--(*this);
-	return temp;
-}
-
-/**
-  * @brief 类内重载取反运算符
+  * @brief 重载前自减运算符
   * @param 无
   * @retval 返回自身引用实现链式编程
   */
-RMB& RMB::operator!() {
+RMB& operator--(RMB& n) {
 	// todo
-	return *this;
+	return n;
+}
+/**
+  * @brief 重载后自减运算符
+  * @param 无
+  * @retval 值返回，不支持链式调用
+  */
+RMB operator--(RMB& n,int) {
+	RMB temp(n);
+	--n;
+	return temp;
 }
 
 /**
@@ -204,40 +229,6 @@ bool operator!=(const RMB& n1, const RMB& n2) {
 	if (n1.m_nJiao == n2.m_nJiao)return false;
 	if (n1.m_nFen == n2.m_nFen)return false;
 	return true;
-}
-
-/**
-  * @brief 重载负号
-  * @param RMB n : 值传递待取反的值
-  * @retval -n
-  */
-RMB operator-(RMB n) {
-	// todo
-	return n;
-}
-
-/**
-  * @brief 重载加法运算符
-  * @param const RMB& n1 : 加号左边的值
-  * @param const RMB& n2 : 加号右边的值
-  * @retval n1 + n2
-  */
-RMB operator+(const RMB& n1, const RMB& n2) {
-	RMB temp;
-	// todo
-	return temp;
-}
-
-/**
-  * @brief 重载减法运算符
-  * @param const RMB& n1 : 被减数
-  * @param const RMB& n2 : 减数
-  * @retval n1 - n2
-  */
-RMB operator-(const RMB& n1, const RMB& n2) {
-	RMB temp;
-	// todo
-	return temp;
 }
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

@@ -26,47 +26,51 @@ private:
 	unsigned int m_nJiao;
 	unsigned int m_nFen;
 
-
 public:
 	// Constructors & Deconstructor
 	RMB();
 	RMB(const RMB& source);
 	~RMB();
 
+	int toFen()const;
+	void fromFen(int fen);
+
+	RMB& operator++();
+	RMB operator++(int);
+	RMB operator+(const RMB& n2);
+	RMB operator-(const RMB& n2);
+	RMB operator-();
+	friend RMB& operator--(RMB& n);
+	friend RMB operator--(RMB& n, int);
+	friend ostream& operator<<(ostream& out, const RMB& source);
+	friend istream& operator>>(istream& input, RMB& target);
+
+
 	void operator=(const RMB& source);
 	void operator=(int n);
 	RMB& operator+=(int n);
-	RMB& operator++();
-	RMB& operator--();
-	RMB operator++(int);
-	RMB operator--(int);
-	RMB& operator!();
 
-	friend ostream& operator<<(ostream& out, const RMB& source);
-	friend istream& operator>>(istream& input, RMB& target);
 	friend bool operator>(const RMB& n1, const RMB& n2);
 	friend bool operator<(const RMB& n1, const RMB& n2);
 	friend bool operator>=(const RMB& n1, const RMB& n2);
 	friend bool operator<=(const RMB& n1, const RMB& n2);
 	friend bool operator==(const RMB& n1, const RMB& n2);
 	friend bool operator!=(const RMB& n1, const RMB& n2);
-	friend RMB operator-(RMB n);
-	friend RMB operator+(const RMB& n1, const RMB& n2);
-	friend RMB operator-(const RMB& n1, const RMB& n2);
+
 };
 
 /* Exported functions ------------------------------------------------------- */
+RMB& operator--(RMB& n);
+RMB operator--(RMB& n,int);
 ostream& operator<<(ostream& out, const RMB& source);
 istream& operator>>(istream& input, RMB& target);
+
 bool operator>(const RMB& n1, const RMB& n2);
 bool operator<(const RMB& n1, const RMB& n2);
 bool operator>=(const RMB& n1, const RMB& n2);
 bool operator<=(const RMB& n1, const RMB& n2);
 bool operator==(const RMB& n1, const RMB& n2);
 bool operator!=(const RMB& n1, const RMB& n2);
-RMB operator-(RMB n);
-RMB operator+(const RMB& n1, const RMB& n2);
-RMB operator-(const RMB& n1, const RMB& n2);
 
 #endif /* !__RMB_H */
 
