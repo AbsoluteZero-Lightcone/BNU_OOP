@@ -26,14 +26,14 @@ private:
 	unsigned int m_nJiao;
 	unsigned int m_nFen;
 
+	int toFen()const;
+	void fromFen(int fen);
+
 public:
 	// Constructors & Deconstructor
 	RMB();
 	RMB(const RMB& source);
 	~RMB();
-
-	int toFen()const;
-	void fromFen(int fen);
 
 	RMB& operator++();
 	RMB operator++(int);

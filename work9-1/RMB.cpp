@@ -29,6 +29,30 @@ RMB::RMB(const RMB& source) :
 RMB::~RMB() {}
 
 /* Private functions -------------------------------------------------------- */
+/**
+  * @brief 转化为分
+  * @param None
+  * @retval 分
+  */
+int RMB::toFen()const{
+	return (m_chSign == '+' ? 1 : -1) * (m_nYuan * 100 + m_nJiao * 10 + m_nFen);
+}
+/**
+  * @brief 从分赋值
+  * @param int fen : 分
+  * @retval None
+  */
+void RMB::fromFen(int fen) {
+	if (fen >= 0)m_chSign = '+';
+	else {
+		m_chSign = '-';
+		fen = -fen;
+	}
+	m_nFen = fen % 10;
+	fen /= 10;
+	m_nJiao = fen % 10;
+	m_nYuan = fen / 10;
+}
 /* Exported functions ------------------------------------------------------- */
 /**
   * @brief 类内重载负号
