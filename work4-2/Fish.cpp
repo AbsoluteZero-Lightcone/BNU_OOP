@@ -33,7 +33,8 @@ Fish::Fish(string t_strName, string t_strColor) :
 	m_strName(t_strName),
 	m_strColor(t_strColor),
 	m_nWeight(100),
-	m_bAlive(1)
+	m_bAlive(1),
+	m_nLastFedDey(0)
 {
 	s_nTotal++;
 	s_nAlive++;
@@ -43,6 +44,12 @@ Fish::Fish(string t_strName, string t_strColor) :
 Fish::~Fish() {}
 
 /* Getters & Setters -------------------------------------------------------- */
+string Fish::getName()const{return m_strName;}
+string Fish::getColor()const{return m_strColor;}
+int Fish::getWeight()const{return m_nWeight;}
+int Fish::getLastFedDey()const{return m_nLastFedDey;}
+bool Fish::isAlive()const{return m_bAlive;}
+
 void Fish::set(string t_strName, string t_strColor) {
 	m_strName = t_strName; m_strColor = t_strColor;
 }
@@ -64,7 +71,7 @@ ostream& operator<<(ostream& out, const Fish& source) {
 	out << source.m_strName << "\t\t"
 		<< source.m_strColor << "\t\t"
 		<< source.m_nWeight << "g" << "\t\t"
-		<< "第" << source.m_nLastFedDey << "天";
+		<< "第" << source.m_nLastFedDey << "天" << endl;
 	return out;
 }
 

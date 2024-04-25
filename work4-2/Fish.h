@@ -39,6 +39,11 @@ public:
 	void update(bool isfed);
 
 	// Getter & Setter
+	string getName()const;
+	string getColor()const;
+	int getWeight()const;
+	int getLastFedDey()const;
+	bool isAlive()const;
 	void set(string t_strName, string t_strColor);
 
 	// ÔËËã·ûÖØÔØ
