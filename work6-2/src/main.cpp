@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-21
   * @brief   Entrance Function
   * @encode  GB2312
@@ -33,17 +33,15 @@ int main() {
 		AlarmClock alarm(a, b, c, d, e);
 		cout << "请输入计时时长（分 秒）  ：";
 		cin >> a >> b;
-		Clock current(0, 0, 0);
 		Clock target(0, a, b);
-		while (current < target) {
-			current++;
+		for (Clock current(0, 0, 0); current < target; current++) {
 			cout << alarm << "\r";
 			Sleep(1000);
 			cout << "                         \r";
 			alarm.Tick();
 		}
 	} while (isContinue());
-	
+
 	return 0;
 }
 
