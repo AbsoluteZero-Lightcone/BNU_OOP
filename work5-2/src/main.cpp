@@ -12,9 +12,9 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
 #include "Student.h"
 #include "Teacher.h"
+
 
 int findTeacher(string name, const Teacher* const arr, int length) {
 	for (int i = 0; i < length; i++) {
@@ -55,12 +55,12 @@ int main() {
 	teaArr = new Teacher[teaCount];
 
 	string name;
-	cout << "请输入5位学生的姓名：";
+	cout << "请输入"<< stuCount <<"位学生的姓名：";
 	for (int i = 0; i < stuCount; i++) {
 		cin >> name;
 		stuArr[i].set_strName(name);
 	}
-	cout << "请输入3位教师的姓名：";
+	cout << "请输入"<< teaCount <<"位教师的姓名：";
 	for (int i = 0; i < teaCount; i++) {
 		cin >> name;
 		teaArr[i].set_strName(name);
