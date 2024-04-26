@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-25
   * @brief   Entrance Function
   * @encode  GB2312
@@ -34,9 +34,9 @@ int main() {
 	cout << "开始养鱼了！" << endl;
 	do {
 		/* Update ---------------------------------------- */
-		Fish::s_nCurrentDay++;
-		cout << "第" << Fish::s_nCurrentDay << "天：";
-		int feed = 0, countingdown = random(Fish::s_nAlive);
+		Fish::Fish::nextDay();
+		cout << "第" << Fish::getCurrentDay() << "天：";
+		int feed = 0, countingdown = random(Fish::getAlive());
 		for (int i = 0; i < N; i++)
 			if (fish[i]->isAlive()) { // 不给死了的喂食
 				if (countingdown == 0) {
@@ -48,12 +48,12 @@ int main() {
 			}
 		/* ---------------------------------------- Update */
 		/* Print ----------------------------------------- */
-		if (Fish::s_nAlive == 0) {
+		if (Fish::getAlive() == 0) {
 			showFed(fish[feed]); // 如果恰好死的那天是十的倍数那么不打印空表格，而是使用常规输出
 			cout << "抱歉，所有的鱼都死了，养鱼失败了，程序结束。" << endl;
 			break;
 		}
-		if (Fish::s_nCurrentDay % 10 == 0)showList(fish, N);
+		if (Fish::getCurrentDay() % 10 == 0)showList(fish, N);
 		else showFed(fish[feed]);
 		/* ----------------------------------------- Print */
 	} while (isContinue());

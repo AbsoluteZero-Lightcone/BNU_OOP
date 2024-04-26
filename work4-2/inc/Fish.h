@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Fish.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-25
   * @brief   Fish class
   * @encode  GB2312
@@ -29,9 +29,14 @@ private:
 	
 	static int s_nTotal;
 	static int s_nAlive;
+	static int s_nCurrentDay;
 
 public:
-	static int s_nCurrentDay;
+	static void nextDay();
+	static int getCurrentDay();
+	static int getTotal();
+	static int getAlive();
+
 	// Constructors & Deconstructor
 	Fish();
 	Fish(string t_strName, string t_strColor);

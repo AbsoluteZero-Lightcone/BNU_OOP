@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Fish.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-25
   * @brief   Fish class
   * @encode  GB2312
@@ -53,6 +53,12 @@ bool Fish::isAlive()const { return m_bAlive; }
 void Fish::set(string t_strName, string t_strColor) {
 	m_strName = t_strName; m_strColor = t_strColor;
 }
+
+
+void Fish::nextDay() { s_nCurrentDay++; }
+int Fish::getCurrentDay() { return s_nCurrentDay; }
+int Fish::getTotal() { return s_nTotal; }
+int Fish::getAlive() { return s_nAlive; }
 
 /* Exported functions ------------------------------------------------------- */
 
