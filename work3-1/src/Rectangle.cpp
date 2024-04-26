@@ -18,24 +18,32 @@
 #endif
 
 #ifdef DIRECTION_UR // 平面直角坐标方向 向上为正
-#define DIRECT_R(x,distance) (x+distance)// 向右移动一段距离，可为负值
-#define DIRECT_L(x,distance) (x-distance)// 向左移动一段距离，可为负值
-#define DIRECT_U(y,distance) (y+distance)// 向上移动一段距离，可为负值
-#define DIRECT_D(y,distance) (y-distance)// 向下移动一段距离，可为负值
-#define IS_INCREMENT_R(increment_x) ((increment_x>=0)?true:false)// x增量朝右
-#define IS_INCREMENT_L(increment_x) ((increment_x<=0)?true:false)// x增量朝左
-#define IS_INCREMENT_U(increment_y) ((increment_y>=0)?true:false)// y增量朝上
-#define IS_INCREMENT_D(increment_y) ((increment_y<=0)?true:false)// y增量朝下
+#define DIRECT_R(x,distance) ((x)+(distance))// 向右移动一段距离，可为负值
+#define DIRECT_L(x,distance) ((x)-(distance))// 向左移动一段距离，可为负值
+#define DIRECT_U(y,distance) ((y)+(distance))// 向上移动一段距离，可为负值
+#define DIRECT_D(y,distance) ((y)-(distance))// 向下移动一段距离，可为负值
+#define IS_INCREMENT_R(increment_x) (((increment_x)>=0)?true:false)// x增量朝右
+#define IS_INCREMENT_L(increment_x) (((increment_x)<=0)?true:false)// x增量朝左
+#define IS_INCREMENT_U(increment_y) (((increment_y)>=0)?true:false)// y增量朝上
+#define IS_INCREMENT_D(increment_y) (((increment_y)<=0)?true:false)// y增量朝下
+#define MORE_TO_THE_R(x1,x2) ((x1)>(x2)?(x1):(x2)) // 取更加靠右的一个
+#define MORE_TO_THE_L(x1,x2) ((x1)<(x2)?(x1):(x2)) // 取更加靠左的一个
+#define MORE_TO_THE_U(y1,y2) ((y1)>(y2)?(y1):(y2)) // 取更加靠上的一个
+#define MORE_TO_THE_D(y1,y2) ((y1)<(y2)?(y1):(y2)) // 取更加靠下的一个
 #endif	/* DIRECTION_UR */
 #ifdef DIRECTION_DR // 左上角为原点，制图软件坐标方向 向下为正
-#define DIRECT_R(x,distance) (x+distance)// 向右移动一段距离，可为负值
-#define DIRECT_L(x,distance) (x-distance)// 向左移动一段距离，可为负值
-#define DIRECT_U(y,distance) (y-distance)// 向上移动一段距离，可为负值
-#define DIRECT_D(y,distance) (y+distance)// 向下移动一段距离，可为负值
-#define IS_INCREMENT_R(increment_x) ((increment_x>=0)?true:false)// x增量朝右
-#define IS_INCREMENT_L(increment_x) ((increment_x<=0)?true:false)// x增量朝左
-#define IS_INCREMENT_U(increment_y) ((increment_y<=0)?true:false)// y增量朝上
-#define IS_INCREMENT_D(increment_y) ((increment_y>=0)?true:false)// y增量朝下
+#define DIRECT_R(x,distance) ((x)+(distance))// 向右移动一段距离，可为负值
+#define DIRECT_L(x,distance) ((x)-(distance))// 向左移动一段距离，可为负值
+#define DIRECT_U(y,distance) ((y)-(distance))// 向上移动一段距离，可为负值
+#define DIRECT_D(y,distance) ((y)+(distance))// 向下移动一段距离，可为负值
+#define IS_INCREMENT_R(increment_x) (((increment_x)>=0)?true:false)// x增量朝右
+#define IS_INCREMENT_L(increment_x) (((increment_x)<=0)?true:false)// x增量朝左
+#define IS_INCREMENT_U(increment_y) (((increment_y)<=0)?true:false)// y增量朝上
+#define IS_INCREMENT_D(increment_y) (((increment_y)>=0)?true:false)// y增量朝下
+#define MORE_TO_THE_R(x1,x2) ((x1)>(x2)?(x1):(x2)) // 取更加靠右的一个
+#define MORE_TO_THE_L(x1,x2) ((x1)<(x2)?(x1):(x2)) // 取更加靠左的一个
+#define MORE_TO_THE_U(y1,y2) ((y1)<(y2)?(y1):(y2)) // 取更加靠上的一个
+#define MORE_TO_THE_D(y1,y2) ((y1)>(y2)?(y1):(y2)) // 取更加靠下的一个
 #endif	/* DIRECTION_DR */
 /* ------------------------------------------------------------- 坐标系方向定义 */
 
@@ -101,8 +109,8 @@ Diagonal Rectangle::getDiagonal()const {
 }
 
 /**
-  * @brief 通过主对角线给矩形对象赋值
-  * @param const Line& Diagonal : 矩形的主对角线
+  * @brief 通过主/副对角线给矩形对象赋值
+  * @param const Line& Diagonal : 矩形的主/副对角线
   * @retval 无
   */
 void Rectangle::setDiagonal(const Diagonal& diagonal) {
@@ -204,6 +212,7 @@ bool operator==(const Rectangle& n1, const Rectangle& n2) {
 /* 两矩形相交 ---------------------------------------------------------------- */
 
 #define INTERSECTRECT_METHOD 2  // 设置默认实现方法
+
 #if INTERSECTRECT_METHOD == 1
 /**
   * @brief 两矩形相交 方法1形心距方法
@@ -362,7 +371,7 @@ Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2) {
   * @retval 交集的图形，多态，返回基类引用
   */
 Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2) {
-
+	double left = MORE_TO_THE_R(n1.getLeft(), n2.getLeft());
 }
 #endif /* INTERSECTRECT_METHOD == 2 */
 
