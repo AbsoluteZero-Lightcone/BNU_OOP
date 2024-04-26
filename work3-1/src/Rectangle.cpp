@@ -383,7 +383,26 @@ Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	double r = MORE_TO_THE_L(n1.getRight(), n2.getRight());
 	double u = MORE_TO_THE_D(n1.getTop(), n2.getTop());
 	double d = MORE_TO_THE_U(n1.getBottom(), n2.getBottom());
-	if()
+	if (IS_MORE_TO_THE_R(l, r) || IS_MORE_TO_THE_D(u, d)) {
+		static Empty intersectShape;
+		return intersectShape;
+	}
+	else if (l == r && u == d) {
+		static Point intersectShape(l, u);
+		return intersectShape;
+	}
+	else if (l == r) {
+		static Line intersectShape(Point(l, u), Point(r, d));
+		return intersectShape;
+	}
+	else if (u == d) {
+		static Line intersectShape(Point(l,u), Point(r,d));
+		return intersectShape;
+	}
+	else {
+		static Rectangle intersectShape(l, u, r, d);
+		return intersectShape;
+	}
 }
 #endif /* INTERSECTRECT_METHOD == 2 */
 
