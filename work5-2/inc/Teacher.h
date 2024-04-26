@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Teacher.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.2.0
   * @date    2024-04-23
   * @brief   Teacher class
   * @encode  GB2312
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+#include "Student.h"
 
 /* Class ---------------------------------------------------------------------*/
 class Teacher {
@@ -31,6 +32,9 @@ public:
 	// Getter & Setter
 	string get_strName()const;
 	void set_strName(string t_strName);
+
+	void setStudentScore(Student& s, int n);
+	void setStudentCredit(Student& s, int n);
 };
 
 #endif /* !__TEACHER_H */

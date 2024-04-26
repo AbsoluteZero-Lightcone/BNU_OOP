@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.1.0
+  * @version V1.2.0
   * @date    2024-04-23
   * @brief   Entrance Function
   * @encode  GB2312
@@ -101,13 +101,13 @@ int main() {
 
 		cout << "请输入要增加的学分：";
 		cin >> n;
-		curStudent.set_nCredit(n);
+		curTeacher.setStudentCredit(curStudent, n);
 		cout << "教师" << curTeacher.get_strName() << "给学生" << curStudent.get_strName()
 			<< "增加" << curStudent.get_nCredit() << "学分，操作成功。" << endl;
 
 		cout << "请输入要增加的总成绩：";
 		cin >> n;
-		curStudent.set_nScore(n);
+		curTeacher.setStudentScore(curStudent, n);
 		cout << "教师" << curTeacher.get_strName() << "给学生" << curStudent.get_strName()
 			<< "增加总成绩" << curStudent.get_nCredit() << "，操作成功。" << endl;
 	} while (isContinue());

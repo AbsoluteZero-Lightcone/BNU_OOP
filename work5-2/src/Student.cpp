@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Student.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.2.0
   * @date    2024-04-23
   * @brief   Student class
   * @encode  GB2312
@@ -14,12 +14,12 @@
 
 /* Constructors & Deconstructor --------------------------------------------- */
 Student::Student() :
-	m_strName("ȱʡ"),
+	m_strName(""),
 	m_nCredit(0),
 	m_nScore(0)
 {}
 
-Student::Student(string t_strName, int t_nCredit,int t_nScore) :
+Student::Student(string t_strName, int t_nCredit, int t_nScore) :
 	m_strName(t_strName),
 	m_nCredit(t_nCredit),
 	m_nScore(t_nScore)
