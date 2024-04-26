@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Deposit.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.2.0
+  * @version V1.3.0
   * @date    2024-04-23
   * @brief   Deposit class
   * @encode  GB2312
@@ -43,10 +43,10 @@ public:
 		double t_dDeposit,
 		Date t_dateDate
 	);
-	Deposit(const Deposit& source);
 	~Deposit();
 
-	void operator=(const Deposit& source);
+	Deposit(const Deposit& source) = delete;
+	void operator=(const Deposit& source) = delete;
 
 	void update();
 

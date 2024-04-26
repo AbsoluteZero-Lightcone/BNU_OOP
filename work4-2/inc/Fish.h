@@ -27,9 +27,10 @@ private:
 	int m_nLastFedDey;
 	bool m_bAlive;
 	
-public:
 	static int s_nTotal;
 	static int s_nAlive;
+
+public:
 	static int s_nCurrentDay;
 	// Constructors & Deconstructor
 	Fish();
