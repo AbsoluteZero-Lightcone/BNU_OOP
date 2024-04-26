@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-23
   * @brief   Entrance Function
   * @encode  GB2312
@@ -120,8 +120,8 @@ int main() {
 			<< stuArr[i].get_nScore() << endl;
 	}
 
-	if (stuArr)delete[] stuArr;
-	if (stuArr)delete[] teaArr;
+	if (stuArr != nullptr)delete[] stuArr, stuArr = nullptr;
+	if (teaArr != nullptr)delete[] teaArr, teaArr = nullptr;
 	return 0;
 }
 

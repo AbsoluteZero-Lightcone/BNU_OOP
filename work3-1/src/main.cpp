@@ -28,6 +28,7 @@ int main() {
 		infile >> a >> b >> c >> d;
 		rectangles[i].setDiagonal(Diagonal(Point(a, b), Point(c, d)));
 	}
+	infile.close();
 	/* 展示所有矩形 -------------------------------------- */
 	cout << "10 rectangles in arrRect：" << endl;
 	for (int i = 0; i < LENGTH; i++) {

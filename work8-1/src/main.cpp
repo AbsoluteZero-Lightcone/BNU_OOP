@@ -1,9 +1,11 @@
 /**
   ******************************************************************************
   * @file    main.cpp
-  * @author  张亦法 202311998186
+  * @author  Zhang Yifa 202311998186
+  * @version V1.1.0
   * @date    2024-04-19
-  * @brief   入口函数
+  * @brief   Entrance Function
+  * @encode  GB2312
   ******************************************************************************
   */
 #include <fstream>
@@ -64,6 +66,8 @@ int main() {
 			);
 		}
 	}
+	infile.close();
+
 	double sum_area = 0.0, sum_perimeter = 0.0;
 	for (int i = 0; i < n; i++) {
 		cout << endl;
@@ -78,11 +82,13 @@ int main() {
 	cout << "总周长是：" << sum_perimeter << endl;
 
 
-	for (int i = 0; i < n; i++) {
-		if (ShapeArray[i])delete ShapeArray[i];
-	}
-	if (ShapeArray)delete[] ShapeArray;
-	infile.close();
+	for (int i = 0; i < n; i++)
+		if (ShapeArray[i] != nullptr)
+			delete ShapeArray[i], ShapeArray[i] = nullptr;
+
+	if (ShapeArray != nullptr)
+		delete[] ShapeArray, ShapeArray = nullptr;
+	
 	return 0;
 }
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

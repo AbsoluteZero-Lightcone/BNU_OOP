@@ -2,14 +2,18 @@
 using namespace std;
 
 int main() {
-	int* p = new int[10];
-	cout << NULL << " " << (int)NULL << endl;
-	cout << p << " " << (int)p << endl;
-	delete p;
-	cout << p << " " << (int)p << endl;
-	if (!p)delete p;
-	cout << p << " " << (int)p << endl;
-	if (p)delete p;
-	cout << p << " " << (int)p << endl;
+	int* p = new int[10] {};
+	cout << "NULL = "<<NULL << endl;
+	cout << "nullptr = "<< (int)nullptr << endl;
+	cout << "p = " << p << endl;
+	cout << " (!p) = " <<(!p) << endl;
+	cout <<  " (!!p) = " << (!!p) << endl;
+	cout <<  " (p != nullptr)  = " << (p != nullptr) << endl;
+	delete[] p, cout << "delete[] p" << endl;
+	cout << "p = " << p << endl;
+	cout << " (!p) = " << (!p) << endl;
+	cout << " (!!p) = " << (!!p) << endl;
+	cout << " (p != nullptr)  = " << (p != nullptr) << endl;
+	//cout << p << " " << " (!p) = "<< (!p)<<" (!!p) = " << (!!p) << endl;
 	return 0;
 }

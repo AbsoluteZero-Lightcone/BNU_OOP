@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    School.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-04-25
   * @brief   School class
   * @encode  GB2312
@@ -30,8 +30,10 @@ School::School(const School& source)
 }
 
 School::~School() {
-	if(m_strName)delete[] m_strName;
-	if(m_strAddr)delete[] m_strAddr;
+	if (m_strName != nullptr)
+		delete[] m_strName, m_strName = nullptr;
+	if (m_strAddr != nullptr)
+		delete[] m_strAddr, m_strAddr = nullptr;
 	cout << "school deconstructed. delete space of name and address." << endl;
 }
 
