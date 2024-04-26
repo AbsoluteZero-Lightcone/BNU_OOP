@@ -14,6 +14,5 @@ int main() {
 	cout << " (!p) = " << (!p) << endl;
 	cout << " (!!p) = " << (!!p) << endl;
 	cout << " (p != nullptr)  = " << (p != nullptr) << endl;
-	//cout << p << " " << " (!p) = "<< (!p)<<" (!!p) = " << (!!p) << endl;
 	return 0;
 }
