@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Deposit.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.1.0
+  * @version V1.2.0
   * @date    2024-04-23
   * @brief   Deposit class
   * @encode  GB2312
@@ -27,9 +27,13 @@ private:
 	string m_strPassword;
 	double m_dDeposit;
 	Date m_dateDate;
-public:
+
 	static int s_nCount;
 	static double s_dInterest;
+
+public:
+
+	static void setInterest(double Interest);
 
 	// Constructors & Deconstructor
 	Deposit();
