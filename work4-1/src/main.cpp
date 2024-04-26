@@ -38,7 +38,7 @@ int main() {
 		}
 		current.toNextMonth();
 	}
-
+	system("pause");
 	return 0;
 }
 

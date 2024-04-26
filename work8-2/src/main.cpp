@@ -29,7 +29,7 @@ int main()
 	Huge_Int ha("+12345678901234567890"), hb("+99999999999999999999");
 	ps1 = &ha; ps2 = &hb;
 	ps1->Show(); cout << " + "; ps2->Show(); cout << " = "; ps1->Add(ps2); cout << endl;
-
+	system("pause");
 	return 0;
 }
 

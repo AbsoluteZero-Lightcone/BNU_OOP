@@ -39,6 +39,7 @@ int main() {
 	}
 	cout << "分数最高的同学信息：" << endl;
 	cout << MaxScore(stu2,10);
+	system("pause");
 	return 0;
 }
 
