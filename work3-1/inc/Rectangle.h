@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Rectangle.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.2.0
   * @date    2024-04-24
   * @brief   Rectangle class
   * @encode  GB2312
@@ -34,6 +34,7 @@ public:
 	// Constructors & Deconstructor
 	Rectangle();
 	Rectangle(Point t_pointCenter, double t_dWidth, double m_dHeight);
+	Rectangle(double x1,double y1,double x2,double y2);
 	Rectangle(const Rectangle& source);
 	Rectangle(const Diagonal& diagonal);
 	~Rectangle();

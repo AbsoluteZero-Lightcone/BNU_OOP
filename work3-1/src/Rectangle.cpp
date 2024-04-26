@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Rectangle.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.1.0
+  * @version V1.2.0
   * @date    2024-04-24
   * @brief   Rectangle class
   * @encode  GB2312
@@ -11,39 +11,6 @@
 
   /* Includes ------------------------------------------------------------------*/
 #include "Rectangle.h"
-
-/* Constructors & Deconstructor --------------------------------------------- */
-Rectangle::Rectangle() :
-	m_pointCenter(0, 0),
-	m_dWidth(1),
-	m_dHeight(1)
-{}
-
-Rectangle::Rectangle(Point t_pointCenter, double t_dWidth, double t_dHeight) :
-	m_pointCenter(t_pointCenter),
-	m_dWidth(t_dWidth),
-	m_dHeight(t_dHeight)
-{}
-
-Rectangle::Rectangle(const Rectangle& source) :
-	m_pointCenter(source.m_pointCenter),
-	m_dWidth(source.m_dWidth),
-	m_dHeight(source.m_dHeight)
-{}
-
-Rectangle::Rectangle(const Diagonal& diagonal) {
-	setDiagonal(diagonal);
-}
-
-Rectangle::~Rectangle() {}
-
-/* Getters & Setters -------------------------------------------------------- */
-Point  Rectangle::getCenter()const { return m_pointCenter; }
-void   Rectangle::setCenter(Point t_pointCenter) { m_pointCenter = t_pointCenter; }
-double Rectangle::getWidth()const { return m_dWidth; }
-void   Rectangle::setWidth(double t_dWidth) { m_dWidth = t_dWidth; }
-double Rectangle::getHeight()const { return m_dHeight; }
-void   Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 
 /* 坐标系方向定义 ------------------------------------------------------------- */
 #if !defined(DIRECTION_UR) && !defined(DIRECTION_DR)
@@ -71,6 +38,43 @@ void   Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 #define IS_INCREMENT_D(increment_y) ((increment_y>=0)?true:false)// y增量朝下
 #endif	/* DIRECTION_DR */
 /* ------------------------------------------------------------- 坐标系方向定义 */
+
+/* Constructors & Deconstructor --------------------------------------------- */
+Rectangle::Rectangle() :
+	m_pointCenter(0, 0),
+	m_dWidth(1),
+	m_dHeight(1)
+{}
+
+Rectangle::Rectangle(Point t_pointCenter, double t_dWidth, double t_dHeight) :
+	m_pointCenter(t_pointCenter),
+	m_dWidth(t_dWidth),
+	m_dHeight(t_dHeight)
+{}
+
+Rectangle::Rectangle(double x1, double y1, double x2, double y2):
+	Rectangle(Diagonal(Point(x1, y1),Point(x2, y2)))
+{}
+
+Rectangle::Rectangle(const Rectangle& source) :
+	m_pointCenter(source.m_pointCenter),
+	m_dWidth(source.m_dWidth),
+	m_dHeight(source.m_dHeight)
+{}
+
+Rectangle::Rectangle(const Diagonal& diagonal) {
+	setDiagonal(diagonal);
+}
+
+Rectangle::~Rectangle() {}
+
+/* Getters & Setters -------------------------------------------------------- */
+Point  Rectangle::getCenter()const { return m_pointCenter; }
+void   Rectangle::setCenter(Point t_pointCenter) { m_pointCenter = t_pointCenter; }
+double Rectangle::getWidth()const { return m_dWidth; }
+void   Rectangle::setWidth(double t_dWidth) { m_dWidth = t_dWidth; }
+double Rectangle::getHeight()const { return m_dHeight; }
+void   Rectangle::setHeight(double t_dHeight) { m_dHeight = t_dHeight; }
 
 Point Rectangle::getLeftTop()const		{ return Point(DIRECT_L(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_U(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
 Point Rectangle::getLeftBottom()const	{ return Point(DIRECT_L(m_pointCenter.m_dCoordinateX,m_dWidth / 2), DIRECT_D(m_pointCenter.m_dCoordinateY,m_dHeight / 2)); }
@@ -198,37 +202,40 @@ bool operator==(const Rectangle& n1, const Rectangle& n2) {
 }
 
 /* 两矩形相交 ---------------------------------------------------------------- */
-// 所有情况：
-//       f1  f2   f3  f4  f5
-// 横向： 相离 外切 相交 内切 内含
-// 纵向： 相离 外切 相交 内切 内含
-// 共 25 种情况
-// 每种情况需要判断矩形的相对位置（4种情况）
-// 自由组合，合计 100 种情况
-#define f1(distance_center, sum, sub) (( distance_center > sum                          )?true:false)
-#define f2(distance_center, sum, sub) (( fabs(distance_center - sum) < DBL_EPSILON      )?true:false)
-#define f3(distance_center, sum, sub) (( distance_center < sum && distance_center > sub )?true:false)
-#define f4(distance_center, sum, sub) (( fabs(distance_center - sub) < DBL_EPSILON      )?true:false)
-#define f5(distance_center, sum, sub) (( distance_center < sub                          )?true:false)
 
-#define F1X f1(fabs(center_dx), sum_x, sub_x)
-#define F2X f2(fabs(center_dx), sum_x, sub_x)
-#define F3X f3(fabs(center_dx), sum_x, sub_x)
-#define F4X f4(fabs(center_dx), sum_x, sub_x)
-#define F5X f5(fabs(center_dx), sum_x, sub_x)
-
-#define F1Y f1(fabs(center_dy), sum_y, sub_y)
-#define F2Y f2(fabs(center_dy), sum_y, sub_y)
-#define F3Y f3(fabs(center_dy), sum_y, sub_y)
-#define F4Y f4(fabs(center_dy), sum_y, sub_y)
-#define F5Y f5(fabs(center_dy), sum_y, sub_y)
-
+#define INTERSECTRECT_METHOD 2  // 设置默认实现方法
+#if INTERSECTRECT_METHOD == 1
 /**
-  * @brief 两矩形相交
+  * @brief 两矩形相交 方法1形心距方法
   * @param const Rectangle& n1, const Rectangle& n2 : 两个矩形
   * @retval 交集的图形，多态，返回基类引用
   */
 Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2) {
+	// 所有情况：
+	//       f1  f2   f3  f4  f5
+	// 横向： 相离 外切 相交 内切 内含
+	// 纵向： 相离 外切 相交 内切 内含
+	// 共 25 种情况
+	// 每种情况需要判断矩形的相对位置（4种情况）
+	// 自由组合，合计 100 种情况
+	#define f1(distance_center, sum, sub) (( distance_center > sum                          )?true:false)
+	#define f2(distance_center, sum, sub) (( fabs(distance_center - sum) < DBL_EPSILON      )?true:false)
+	#define f3(distance_center, sum, sub) (( distance_center < sum && distance_center > sub )?true:false)
+	#define f4(distance_center, sum, sub) (( fabs(distance_center - sub) < DBL_EPSILON      )?true:false)
+	#define f5(distance_center, sum, sub) (( distance_center < sub                          )?true:false)
+
+	#define F1X f1(fabs(center_dx), sum_x, sub_x)
+	#define F2X f2(fabs(center_dx), sum_x, sub_x)
+	#define F3X f3(fabs(center_dx), sum_x, sub_x)
+	#define F4X f4(fabs(center_dx), sum_x, sub_x)
+	#define F5X f5(fabs(center_dx), sum_x, sub_x)
+
+	#define F1Y f1(fabs(center_dy), sum_y, sub_y)
+	#define F2Y f2(fabs(center_dy), sum_y, sub_y)
+	#define F3Y f3(fabs(center_dy), sum_y, sub_y)
+	#define F4Y f4(fabs(center_dy), sum_y, sub_y)
+	#define F5Y f5(fabs(center_dy), sum_y, sub_y)
+
 	double center_dx, center_dy; // 增量向量 n1->n2
 	center_dx = n2.m_pointCenter.getX() - n1.m_pointCenter.getX();
 	center_dy = n2.m_pointCenter.getY() - n1.m_pointCenter.getY();
@@ -347,6 +354,18 @@ Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2) {
 	}
 	throw "Error";
 }
+#endif /* INTERSECTRECT_METHOD == 1 */
+#if INTERSECTRECT_METHOD == 2
+/**
+  * @brief 两矩形相交 方法2 范围收缩方法
+  * @param const Rectangle& n1, const Rectangle& n2 : 两个矩形
+  * @retval 交集的图形，多态，返回基类引用
+  */
+Shape& InterSectRect(const Rectangle& n1, const Rectangle& n2) {
+
+}
+#endif /* INTERSECTRECT_METHOD == 2 */
+
 /* ---------------------------------------------------------------- 两矩形相交 */
 
 /********* Zhang Yifa | fabsolute Zero Studio - Lightcone *******END OF FILE****/
