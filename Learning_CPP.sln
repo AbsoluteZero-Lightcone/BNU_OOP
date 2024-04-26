@@ -37,9 +37,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work2-2 深浅拷贝", "wor
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "comment_template", "comment_template\comment_template.vcxproj", "{064857CA-F992-4540-974C-F12D3BF120B0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work9-1", "work9-1\work9-1.vcxproj", "{5153CEBE-D4F2-4150-8DD2-6CC95E6ECF4B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work9-1 赛博人民币", "work9-1\work9-1.vcxproj", "{5153CEBE-D4F2-4150-8DD2-6CC95E6ECF4B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work9-2", "work9-2\work9-2.vcxproj", "{4A9C1066-A6DB-485D-BA7D-B2E56FAB0561}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work9-2 我的集合", "work9-2\work9-2.vcxproj", "{4A9C1066-A6DB-485D-BA7D-B2E56FAB0561}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test_nullptr", "Test_nullptr\Test_nullptr.vcxproj", "{94565C81-03A3-49F1-BF0E-F933080EF261}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -201,6 +203,14 @@ Global
 		{4A9C1066-A6DB-485D-BA7D-B2E56FAB0561}.Release|x64.Build.0 = Release|x64
 		{4A9C1066-A6DB-485D-BA7D-B2E56FAB0561}.Release|x86.ActiveCfg = Release|Win32
 		{4A9C1066-A6DB-485D-BA7D-B2E56FAB0561}.Release|x86.Build.0 = Release|Win32
+		{94565C81-03A3-49F1-BF0E-F933080EF261}.Debug|x64.ActiveCfg = Debug|x64
+		{94565C81-03A3-49F1-BF0E-F933080EF261}.Debug|x64.Build.0 = Debug|x64
+		{94565C81-03A3-49F1-BF0E-F933080EF261}.Debug|x86.ActiveCfg = Debug|Win32
+		{94565C81-03A3-49F1-BF0E-F933080EF261}.Debug|x86.Build.0 = Debug|Win32
+		{94565C81-03A3-49F1-BF0E-F933080EF261}.Release|x64.ActiveCfg = Release|x64
+		{94565C81-03A3-49F1-BF0E-F933080EF261}.Release|x64.Build.0 = Release|x64
+		{94565C81-03A3-49F1-BF0E-F933080EF261}.Release|x86.ActiveCfg = Release|Win32
+		{94565C81-03A3-49F1-BF0E-F933080EF261}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
