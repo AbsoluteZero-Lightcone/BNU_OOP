@@ -33,7 +33,7 @@
     <ProjectGuid>{2880e918-6d7d-4733-b9dd-2403967aa0fc}</ProjectGuid>
     <RootNamespace>work41</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>work4-1 存钱</ProjectName>
+    <ProjectName>work04-1 存钱</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
