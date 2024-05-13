@@ -9,13 +9,13 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "Student.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
 Student::Student() :
-	m_strName(0),
-	m_strID(0),
+	m_strName("XXX"),
+	m_strID("000"),
 	m_dChineseScore(0),
 	m_dMathScore(0),
 	m_dEnglishScore(0)
@@ -37,6 +37,18 @@ Student::Student(
 
 Student::~Student() {}
 
+void Student::sort(Student** arr, int length) {
+	for (int i = 0; i < length; i++) {
+		for (int j = i; j < length; j++) {
+			if (arr[i]->getSum() < arr[j]->getSum()) {
+				Student* temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+}
+
 /* Getters & Setters -------------------------------------------------------- */
 string Student::get_strName()const { return m_strName; }
 string Student::get_strID()const { return m_strID; }
@@ -49,6 +61,10 @@ void Student::set_dChineseScore(double t_dChineseScore) { m_dChineseScore = t_dC
 void Student::set_dMathScore(double t_dMathScore) { m_dMathScore = t_dMathScore; }
 void Student::set_dEnglishScore(double t_dEnglishScore) { m_dEnglishScore = t_dEnglishScore; }
 
+double Student::getSum() const {
+	return m_dChineseScore + m_dMathScore + m_dEnglishScore;
+}
+
 /* Exported functions ------------------------------------------------------- */
 /**
   * @brief 重载标准输出流 <<运算符
@@ -57,7 +73,12 @@ void Student::set_dEnglishScore(double t_dEnglishScore) { m_dEnglishScore = t_dE
   * @retval ostream& 实现链式编程
   */
 ostream& operator<<(ostream& out, const Student& source) {
-	// todo
+	out << source.m_strName << "\t"
+		<< source.m_strID << "\t"
+		<< source.m_dChineseScore << "\t"
+		<< source.m_dMathScore << "\t"
+		<< source.m_dEnglishScore << "\t"
+		<< source.getSum();
 	return out;
 }
 
@@ -70,12 +91,19 @@ ostream& operator<<(ostream& out, const Student& source) {
 istream& operator>>(istream& input, Student& target)
 {
 	cout << "input:";
-	input 
-		>> target.m_strName 
-		>> target.m_strID 
-		>> target.m_dChineseScore 
-		>> target.m_dMathScore 
+	input
+		>> target.m_strName
+		>> target.m_strID
+		>> target.m_dChineseScore
+		>> target.m_dMathScore
 		>> target.m_dEnglishScore;
 	return input;
 }
+
+bool operator==(const Student& a, const Student& b) { return a.getSum() == b.getSum(); }
+bool operator!=(const Student& a, const Student& b) { return a.getSum() != b.getSum(); }
+bool operator>=(const Student& a, const Student& b) { return a.getSum() >= b.getSum(); };
+bool operator<=(const Student& a, const Student& b) { return a.getSum() <= b.getSum(); };
+bool operator>(const Student& a, const Student& b) { return a.getSum() > b.getSum(); };
+bool operator<(const Student& a, const Student& b) { return a.getSum() < b.getSum(); };
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

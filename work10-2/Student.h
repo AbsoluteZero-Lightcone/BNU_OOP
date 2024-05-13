@@ -37,6 +37,8 @@ public:
 		double t_dEnglishScore
 	);
 	~Student();
+	
+	static void sort(Student** arr,int length);
 
 	// Getter & Setter
 	string get_strName()const;
@@ -50,18 +52,32 @@ public:
 	void set_dMathScore(double t_dMathScore);
 	void set_dEnglishScore(double t_dEnglishScore);
 	
+	double getSum()const;
+
 	// ×èÖ¹¸´ÖÆ
 	Student(const Student& source) = delete;
 	void operator=(const Student& source) = delete;
 
 	friend ostream& operator<<(ostream& out, const Student& source);
 	friend istream& operator>>(istream& input, Student& target);
+
+	friend bool operator==(const Student& a, const Student& b);
+	friend bool operator!=(const Student& a, const Student& b);
+	friend bool operator>=(const Student& a, const Student& b);
+	friend bool operator<=(const Student& a, const Student& b);
+	friend bool operator>(const Student& a, const Student& b);
+	friend bool operator<(const Student& a, const Student& b);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Student& source);
 istream& operator>>(istream& input, Student& target);
-
+bool operator==(const Student& a, const Student& b);
+bool operator!=(const Student& a, const Student& b);
+bool operator>=(const Student& a, const Student& b);
+bool operator<=(const Student& a, const Student& b);
+bool operator>(const Student& a, const Student& b);
+bool operator<(const Student& a, const Student& b);
 #endif /* !__STUDENT_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
