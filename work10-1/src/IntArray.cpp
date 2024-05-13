@@ -13,17 +13,34 @@
 #include "IntArray.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
-
-
-IntArray::IntArray()
-{
+IntArray::IntArray(int t_nSize) {
+	if (t_nSize < 1) {
+		cout << "Error dimension description";
+		exit(1);
+	}
+	m_nSize = t_nSize;
+	m_ptrData = new int[m_nSize];
 }
 
-IntArray::IntArray(int t_nSize)
-{
+IntArray::~IntArray() {
+	if (m_ptrData != nullptr) {
+		delete[] m_ptrData;
+	}
+	m_ptrData = nullptr;
 }
 
-IntArray::~IntArray() {}
+int IntArray::size() const{ return m_nSize; }
+
+int& IntArray::operator[](int index) {
+	index = index - 1;//数组下标从1开始
+	if (index < 0 || index >= m_nSize) {
+		cerr << "Index out of range." << endl;
+		delete[] m_ptrData;
+		m_ptrData = nullptr;
+		exit(2);
+	}
+	return m_ptrData[index];
+}
 
 
 /* Getters & Setters -------------------------------------------------------- */
@@ -36,7 +53,7 @@ IntArray::~IntArray() {}
   * @retval ostream& 实现链式编程
   */
 ostream& operator<<(ostream& out, const IntArray& source) {
-	
+
 	return out;
 }
 
@@ -46,10 +63,17 @@ ostream& operator<<(ostream& out, const IntArray& source) {
   * @param IntArray& target : 接受输入数据的对象
   * @retval istream& 实现链式编程
   */
-istream& operator>>(istream& input, IntArray& target)
-{
+istream& operator>>(istream& input, IntArray& target) {
 	cout << "input:";
 	return input;
+}
+
+bool operator==(const IntArray& a, const IntArray& b) {
+	return false;
+}
+
+bool operator!=(const IntArray& a, const IntArray& b) {
+	return !(a == b);
 }
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

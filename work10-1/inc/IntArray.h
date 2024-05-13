@@ -24,12 +24,14 @@ private:
 	int m_nSize;
 	int* m_ptrData;
 public:
-	// Constructors & Deconstructor
-	IntArray();
+	// Constructor & Deconstructor
 	IntArray(int t_nSize);
 	~IntArray();
 	
 	// Getter & Setter
+	int size() const;
+	int& operator[](int index);
+
 	friend ostream& operator<<(ostream& out, const IntArray& source);
 	friend istream& operator>>(istream& input, IntArray& target);
 
