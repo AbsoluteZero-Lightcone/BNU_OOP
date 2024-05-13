@@ -37,6 +37,9 @@ Student::Student(
 
 Student::~Student() {}
 
+/**
+  * @brief 将学生对象数组按总分排序，总分相同则按语文成绩排序，语文成绩相同则按数学成绩排序，数学成绩相同则按英语成绩排序
+  */
 void Student::sort(Student** arr, int length) {
 	for (int i = 0; i < length; i++) {
 		for (int j = i; j < length; j++) {
@@ -71,6 +74,9 @@ void Student::sort(Student** arr, int length) {
 }
 
 /* Getters & Setters -------------------------------------------------------- */
+/**
+  * @brief 获取总分
+  */
 double Student::getSum() const {
 	return m_dChineseScore + m_dMathScore + m_dEnglishScore;
 }
