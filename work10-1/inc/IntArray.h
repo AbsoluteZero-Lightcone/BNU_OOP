@@ -30,6 +30,7 @@ public:
 	
 	// Getter & Setter
 	int size() const;
+	void resize(int t_nSize);
 	int& operator[](int index);
 
 	friend ostream& operator<<(ostream& out, const IntArray& source);

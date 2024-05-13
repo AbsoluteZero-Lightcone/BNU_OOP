@@ -31,6 +31,22 @@ IntArray::~IntArray() {
 
 int IntArray::size() const{ return m_nSize; }
 
+void IntArray::resize(int t_nSize){
+	if (t_nSize < 1) {
+		cout << "Error dimension description";
+		exit(1);
+	}
+	int* temp = new int[t_nSize];
+	int minSize = (t_nSize > m_nSize) ? m_nSize : t_nSize;
+	for (int i = 0; i < minSize; i++) {
+		temp[i] = m_ptrData[i];
+		// 剩余部分初始化为0
+	}
+	delete[] m_ptrData;
+	m_ptrData = temp;
+	m_nSize = t_nSize;
+}
+
 int& IntArray::operator[](int index) {
 	index = index - 1;//数组下标从1开始
 	if (index < 0 || index >= m_nSize) {
@@ -72,6 +88,7 @@ ostream& operator<<(ostream& out, const IntArray& source) {
   */
 istream& operator>>(istream& input, IntArray& target) {
 	cout << "input:";
+	
 	return input;
 }
 
