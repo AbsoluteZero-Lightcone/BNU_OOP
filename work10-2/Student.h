@@ -41,22 +41,7 @@ public:
 	static void sort(Student** arr,int length);
 
 	// Getter & Setter
-	string get_strName()const;
-	string get_strID()const;
-	double get_dChineseScore()const;
-	double get_dMathScore()const;
-	double get_dEnglishScore()const;
-	void set_strName(string t_strName);
-	void set_strID(string t_strID);
-	void set_dChineseScore(double t_dChineseScore);
-	void set_dMathScore(double t_dMathScore);
-	void set_dEnglishScore(double t_dEnglishScore);
-	
 	double getSum()const;
-
-	// ×èÖ¹¸´ÖÆ
-	Student(const Student& source) = delete;
-	void operator=(const Student& source) = delete;
 
 	friend ostream& operator<<(ostream& out, const Student& source);
 	friend istream& operator>>(istream& input, Student& target);
