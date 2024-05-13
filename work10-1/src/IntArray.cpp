@@ -53,7 +53,14 @@ int& IntArray::operator[](int index) {
   * @retval ostream& 实现链式编程
   */
 ostream& operator<<(ostream& out, const IntArray& source) {
-
+	out << "{";
+	for (int i = 0; i < source.m_nSize; i++) {
+		out << source.m_ptrData[i];
+		if (i != source.m_nSize - 1) {
+			out << ", ";
+		}
+	}
+	out << "}";
 	return out;
 }
 
