@@ -37,8 +37,15 @@ IntArray::~IntArray() {
 	m_ptrData = nullptr;
 }
 
+/* Getters & Setters -------------------------------------------------------- */
+/**
+  * @brief 获取数组大小
+  */
 int IntArray::size() const{ return m_nSize; }
 
+/**
+  * @brief 修改数组大小
+  */
 void IntArray::resize(int t_nSize){
 	if (t_nSize < 1) {
 		cout << "Error dimension description";
@@ -55,6 +62,9 @@ void IntArray::resize(int t_nSize){
 	m_nSize = t_nSize;
 }
 
+/**
+  * @brief 重载下标运算符，下标从1开始
+  */
 int& IntArray::operator[](int index) {
 	index = index - 1;//数组下标从1开始
 	if (index < 0 || index >= m_nSize) {
@@ -66,6 +76,9 @@ int& IntArray::operator[](int index) {
 	return m_ptrData[index];
 }
 
+/**
+  * @brief 重载赋值运算符
+  */
 void IntArray::operator=(const IntArray& source){
 	if (this == &source) {
 		return;
@@ -79,9 +92,6 @@ void IntArray::operator=(const IntArray& source){
 		m_ptrData[i] = source.m_ptrData[i];
 	}
 }
-
-
-/* Getters & Setters -------------------------------------------------------- */
 
 /* Exported functions ------------------------------------------------------- */
 /**

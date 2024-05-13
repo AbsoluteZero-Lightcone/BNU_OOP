@@ -23,6 +23,7 @@ class IntArray {
 private:
 	int m_nSize;
 	int* m_ptrData;
+
 public:
 	// Constructors & Deconstructor
 	IntArray(int t_nSize);
@@ -39,7 +40,6 @@ public:
 	// Friend functions
 	friend ostream& operator<<(ostream& out, const IntArray& source);
 	friend istream& operator>>(istream& input, IntArray& target);
-
 	friend bool operator==(const IntArray& a, const IntArray& b);
 	friend bool operator!=(const IntArray& a, const IntArray& b);
 };
