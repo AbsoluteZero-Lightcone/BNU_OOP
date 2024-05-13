@@ -19,7 +19,7 @@ using namespace std;
 
 int main() {
 	Student* arr[LENGTH];
-	ifstream infile("in.txt");
+	ifstream infile(".\\res\\in.txt");
 	if (!infile.is_open()) {
 		cerr << "文件打开失败" << endl;
 		return 1;
