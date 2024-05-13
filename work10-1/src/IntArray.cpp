@@ -22,6 +22,14 @@ IntArray::IntArray(int t_nSize) {
 	m_ptrData = new int[m_nSize];
 }
 
+IntArray::IntArray(const IntArray& source){
+	m_nSize = source.m_nSize;
+	m_ptrData = new int[m_nSize];
+	for (int i = 0; i < m_nSize; i++) {
+		m_ptrData[i] = source.m_ptrData[i];
+	}
+}
+
 IntArray::~IntArray() {
 	if (m_ptrData != nullptr) {
 		delete[] m_ptrData;
@@ -56,6 +64,20 @@ int& IntArray::operator[](int index) {
 		exit(2);
 	}
 	return m_ptrData[index];
+}
+
+void IntArray::operator=(const IntArray& source){
+	if (this == &source) {
+		return;
+	}
+	if (m_ptrData != nullptr) {
+		delete[] m_ptrData, m_ptrData=nullptr;
+	}
+	m_nSize = source.m_nSize;
+	m_ptrData = new int[m_nSize];
+	for (int i = 0; i < m_nSize; i++) {
+		m_ptrData[i] = source.m_ptrData[i];
+	}
 }
 
 

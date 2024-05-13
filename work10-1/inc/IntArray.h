@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+  /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __INTARRAY_H
 #define __INTARRAY_H
 /* Includes ------------------------------------------------------------------*/
@@ -24,15 +24,19 @@ private:
 	int m_nSize;
 	int* m_ptrData;
 public:
-	// Constructor & Deconstructor
+	// Constructors & Deconstructor
 	IntArray(int t_nSize);
+	IntArray(const IntArray& source);
 	~IntArray();
-	
+
 	// Getter & Setter
 	int size() const;
 	void resize(int t_nSize);
 	int& operator[](int index);
 
+	void operator=(const IntArray& source);
+
+	// Friend functions
 	friend ostream& operator<<(ostream& out, const IntArray& source);
 	friend istream& operator>>(istream& input, IntArray& target);
 
