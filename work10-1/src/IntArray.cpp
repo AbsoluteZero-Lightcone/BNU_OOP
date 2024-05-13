@@ -109,13 +109,22 @@ ostream& operator<<(ostream& out, const IntArray& source) {
   * @retval istream& 实现链式编程
   */
 istream& operator>>(istream& input, IntArray& target) {
-	cout << "input:";
-	
+	for (int i = 0; i < target.m_nSize; i++) {
+		input >> target.m_ptrData[i];
+	}
 	return input;
 }
 
 bool operator==(const IntArray& a, const IntArray& b) {
-	return false;
+	if (a.m_nSize != b.m_nSize) {
+		return false;
+	}
+	for (int i = 0; i < a.m_nSize; i++) {
+		if (a.m_ptrData[i] != b.m_ptrData[i]) {
+			return false;
+		}
+	}
+	return true;
 }
 
 bool operator!=(const IntArray& a, const IntArray& b) {
