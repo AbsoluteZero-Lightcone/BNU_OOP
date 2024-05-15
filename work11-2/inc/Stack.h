@@ -14,8 +14,6 @@
 #define __STACK_H
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
-#include <string>
-#include <cmath>
 using namespace std;
 
 /* Class ---------------------------------------------------------------------*/

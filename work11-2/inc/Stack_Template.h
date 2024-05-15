@@ -54,25 +54,25 @@ T& Stack<T>::at(int t_nIndex) const {
 }
 
 template<class T>
-T& Stack<T>::front() const { return m_ptrData[0]; }
+inline T& Stack<T>::front() const { return m_ptrData[0]; }
 
 template<typename T>
-T& Stack<T>::back() const { return m_ptrData[m_nSize - 1]; }
+inline T& Stack<T>::back() const { return m_ptrData[m_nSize - 1]; }
 
 template<typename T>
-T& Stack<T>::top() const { return m_ptrData[m_nSize - 1]; }
+inline T& Stack<T>::top() const { return m_ptrData[m_nSize - 1]; }
 
 template<class T>
-T& Stack<T>::bottom() const { return m_ptrData[0]; }
+inline T& Stack<T>::bottom() const { return m_ptrData[0]; }
 
 template<class T>
-T* Stack<T>::data() const { return m_ptrData; }
+inline T* Stack<T>::data() const { return m_ptrData; }
 
 template<class T>
-int Stack<T>::size() const { return m_nSize; }
+inline int Stack<T>::size() const { return m_nSize; }
 
 template<class T>
-bool Stack<T>::isEmpty() const { return m_nSize == 0; }
+inline bool Stack<T>::isEmpty() const { return m_nSize == 0; }
 
 /* Operations --------------------------------------------------------------- */
 

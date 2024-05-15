@@ -24,7 +24,7 @@ int main() {
 	s1 >> a >> b >> c;
 	cout << a << b << c << endl;
 	cout << s1 << endl;
-
+	cout << s1.back() << endl;
 	return 0;
 }
 
