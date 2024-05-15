@@ -162,6 +162,9 @@ void Stack<T>::operator=(const Stack<T>& source) {
 	m_nSize = source.m_nSize;
 }
 
+template<class T>
+Stack<T>::operator T* () const{return m_ptrData;}
+
 /**
   * @brief 重载标准输入流 >>运算符
   * @param istream& in : 标准输入流对象
@@ -184,9 +187,9 @@ istream& operator>>(istream& in, Stack<T>& source) {
 template<class T>
 ostream& operator<<(ostream& out, const Stack<T>& source) {
 	out << "stack:[";
-	for (int i = 0; i < source.size(); i++) {
+	for (int i = 0; i < source.m_nSize; i++) {
 		out << source[i];
-		if (i != source.size() - 1) {
+		if (i != source.m_nSize - 1) {
 			out << ",";
 		}
 	}

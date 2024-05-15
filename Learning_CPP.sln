@@ -37,9 +37,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work10-1 可变数组", "wo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work10-2 学生排名", "work10-2\work10-2.vcxproj", "{7B6E6CD0-D9E5-42B2-A057-15BD0FA61EDC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work11-1", "work11-1\work11-1.vcxproj", "{A79995E1-74AA-447B-8F90-BDEED3958F59}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work11-1 查找模板", "work11-1\work11-1.vcxproj", "{A79995E1-74AA-447B-8F90-BDEED3958F59}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work11-2", "work11-2\work11-2.vcxproj", "{EBD5FE4B-9CA9-4088-838A-B7B92154BDAC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work11-2 我的栈", "work11-2\work11-2.vcxproj", "{EBD5FE4B-9CA9-4088-838A-B7B92154BDAC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "work11-3", "work11-3\work11-3.vcxproj", "{45199A8B-4229-48D8-9220-A43D49164201}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -201,6 +203,14 @@ Global
 		{EBD5FE4B-9CA9-4088-838A-B7B92154BDAC}.Release|x64.Build.0 = Release|x64
 		{EBD5FE4B-9CA9-4088-838A-B7B92154BDAC}.Release|x86.ActiveCfg = Release|Win32
 		{EBD5FE4B-9CA9-4088-838A-B7B92154BDAC}.Release|x86.Build.0 = Release|Win32
+		{45199A8B-4229-48D8-9220-A43D49164201}.Debug|x64.ActiveCfg = Debug|x64
+		{45199A8B-4229-48D8-9220-A43D49164201}.Debug|x64.Build.0 = Debug|x64
+		{45199A8B-4229-48D8-9220-A43D49164201}.Debug|x86.ActiveCfg = Debug|Win32
+		{45199A8B-4229-48D8-9220-A43D49164201}.Debug|x86.Build.0 = Debug|Win32
+		{45199A8B-4229-48D8-9220-A43D49164201}.Release|x64.ActiveCfg = Release|x64
+		{45199A8B-4229-48D8-9220-A43D49164201}.Release|x64.Build.0 = Release|x64
+		{45199A8B-4229-48D8-9220-A43D49164201}.Release|x86.ActiveCfg = Release|Win32
+		{45199A8B-4229-48D8-9220-A43D49164201}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -52,6 +52,8 @@ public:
 
 	void operator=(const Stack<T>& source);
 
+	operator T* () const;
+
 	template<class T> friend istream& operator>>(istream& in, Stack<T>& source);
 	template<class T> friend ostream& operator<<(ostream& out, const Stack<T>& source);
 	template<class T> friend bool operator==(const Stack<T>& n1, const Stack<T>& n2);
