@@ -1,14 +1,15 @@
 /**
   ******************************************************************************
-  * @file    Stack.cpp
+  * @file    Stack_Template.h
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
-  * @date    2024-05-15
+  * @date    2024-05-16
   * @brief   Stack class
   * @encode  GB2312
   ******************************************************************************
   */
-
+#ifndef __STACK_TEMPLATE_H
+#define __STACK_TEMPLATE_H
   /* Includes ------------------------------------------------------------------*/
 #include "Stack.h"
 
@@ -202,6 +203,6 @@ bool operator!=(const Stack<T>& n1, const Stack<T>& n2) {
 	if (n1.m_ptrData == n2.m_ptrData)return false;
 	return true;
 }
-
+#endif // /* !__STACK_TEMPLATE_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

@@ -8,16 +8,16 @@
   * @encode  GB2312
   ******************************************************************************
   */
+#include <vector>
 
 #include <iostream>
 #include <string>
 using namespace std;
 #include "Stack.h"
-
 int main() {
 	Stack<int> s1;
 	Stack<int> s2;
-	s2 = s1.push(1).push(2);
+	s1.push(1);
 	return 0;
 }
 

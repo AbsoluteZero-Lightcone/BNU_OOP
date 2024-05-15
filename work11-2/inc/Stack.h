@@ -65,6 +65,8 @@ bool operator==(const Stack<T>& n1, const Stack<T>& n2);
 template<class T>
 bool operator!=(const Stack<T>& n1, const Stack<T>& n2);
 
+#include "Stack_Template.h"
+
 #endif /* !__STACK_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
