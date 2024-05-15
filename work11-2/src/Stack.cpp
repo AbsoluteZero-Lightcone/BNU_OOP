@@ -16,7 +16,7 @@
 template<class T>
 Stack<T>::Stack() :
 	m_nSize(0),
-	m_ptrData(0)
+	m_ptrData(nullptr)
 {}
 
 template<class T>
@@ -32,20 +32,7 @@ Stack<T>::Stack(const Stack<T>& source) :
 template<class T>
 Stack<T>::~Stack() {}
 
-/* Getters & Setters -------------------------------------------------------- */
-
-template<class T>
-int Stack<T>::get_nSize()const { return m_nSize; }
-template<class T>
-void Stack<T>::set_nSize(int t_nSize) { m_nSize = t_nSize; }
-template<class T>
-T* Stack<T>::get_ptrData()const { return m_ptrData; }
-template<class T>
-void Stack<T>::set_ptrData(T* t_ptrData) { m_ptrData = t_ptrData; }
-template<class T>
-void Stack<T>::set(int t_nSize, T* t_ptrData) {
-	m_nSize = t_nSize; m_ptrData = t_ptrData;
-}
+/* Getters ------------------------------------------------------------------ */
 
 /* Exported functions ------------------------------------------------------- */
 /**

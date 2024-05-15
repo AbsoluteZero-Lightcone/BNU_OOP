@@ -31,12 +31,21 @@ public:
 	Stack(const Stack<T>& source);
 	~Stack();
 
-	// Getter & Setter
-	int get_nSize()const;
-	void set_nSize(int t_nSize);
-	T* get_ptrData()const;
-	void set_ptrData(T* t_ptrData);
-	void set(int t_nSize, T* t_ptrData);
+	// Getters
+	T& operator[](int t_nIndex)const;
+	T& at(int t_nIndex)const;
+	T& back()const;
+	T& top()const;
+	int size()const;
+	bool isEmpty()const;
+
+	// Operations
+	T& pop();
+	void push(const T& t_data);
+	void clear();
+
+	void resize(int t_nSize);
+	void reserve(int t_nSize);
 
 	
 	void operator=(const Stack<T>& source);
