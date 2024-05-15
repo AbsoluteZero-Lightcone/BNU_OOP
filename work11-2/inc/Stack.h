@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+  /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STACK_H
 #define __STACK_H
 /* Includes ------------------------------------------------------------------*/
@@ -34,28 +34,31 @@ public:
 	// Getters
 	T& operator[](int t_nIndex)const;
 	T& at(int t_nIndex)const;
+	T& front()const;
 	T& back()const;
 	T& top()const;
+	T& bottom()const;
+	T* data()const;
 	int size()const;
 	bool isEmpty()const;
 
 	// Operations
-	T& pop();
-	void push(const T& t_data);
+	T pop();
+	Stack<T>& push(const T& t_data);
 	void clear();
+	Stack<T>& resize(int t_nSize);
 
-	void resize(int t_nSize);
-	void reserve(int t_nSize);
-
-	
 	void operator=(const Stack<T>& source);
 
-	friend ostream& operator<<(ostream& out, const Stack<T>& source);
-	friend bool operator==(const Stack<T>& n1, const Stack<T>& n2);
-	friend bool operator!=(const Stack<T>& n1, const Stack<T>& n2);
+	template<class T> friend istream& operator>>(istream& in, Stack<T>& source);
+	template<class T> friend ostream& operator<<(ostream& out, const Stack<T>& source);
+	template<class T> friend bool operator==(const Stack<T>& n1, const Stack<T>& n2);
+	template<class T> friend bool operator!=(const Stack<T>& n1, const Stack<T>& n2);
 };
 
 /* Exported functions ------------------------------------------------------- */
+template<class T>
+istream& operator>>(istream& in, Stack<T>& source);
 template<class T>
 ostream& operator<<(ostream& out, const Stack<T>& source);
 template<class T>

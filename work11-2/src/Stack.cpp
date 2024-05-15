@@ -33,6 +33,90 @@ template<class T>
 Stack<T>::~Stack() {}
 
 /* Getters ------------------------------------------------------------------ */
+template<typename T>
+T& Stack<T>::operator[](int t_nIndex) const {
+	//if (t_nIndex < 0 || t_nIndex >= m_nSize) {
+	//	throw out_of_range("out of range");
+	//}
+	// 按照[]的语义，不应该有边界检查
+	return m_ptrData[t_nIndex];
+}
+
+template<typename T>
+T& Stack<T>::at(int t_nIndex) const{
+	if (t_nIndex < 0 || t_nIndex >= m_nSize) {
+		throw out_of_range("out of range");
+	}// at的语义有边界检查
+	return m_ptrData[t_nIndex];
+}
+
+template<class T>
+T& Stack<T>::front() const{return m_ptrData[0];}
+
+template<typename T>
+T& Stack<T>::back() const{return m_ptrData[m_nSize - 1];}
+
+template<typename T>
+T& Stack<T>::top() const{return m_ptrData[m_nSize - 1];}
+
+template<class T>
+T& Stack<T>::bottom() const{return m_ptrData[0];}
+
+template<class T>
+T* Stack<T>::data() const{return m_ptrData;}
+
+template<class T>
+int Stack<T>::size() const{	return m_nSize;}
+
+template<class T>
+bool Stack<T>::isEmpty() const{	return m_nSize == 0;}
+
+/* Operations --------------------------------------------------------------- */
+template<typename T>
+T Stack<T>::pop() {
+	if (m_nSize == 0) {
+		throw out_of_range("out of range");
+	}
+	T temp = m_ptrData[m_nSize - 1];
+	resize(m_nSize - 1);
+	return temp;
+}
+
+/**
+  * @brief 压栈
+  * @param const T& t_data : 待压栈的数据
+  * @retval Stack<T>& : 压栈后的栈, 用于链式调用
+  */
+template<typename T>
+Stack<T>& Stack<T>::push(const T& t_data){
+		resize(m_nSize + 1);
+	m_ptrData[m_nSize - 1] = t_data;
+	return *this;
+}
+
+template<class T>
+void Stack<T>::clear(){
+	delete[] m_ptrData;
+	m_ptrData = nullptr;
+	m_nSize = 0;
+}
+
+/**
+  * @brief 改变栈的大小
+  * @param int t_nSize : 新的栈大小
+  * @retval Stack<T>& : 改变大小后的栈, 用于链式调用
+  */
+template<class T>
+Stack<T>& Stack<T>::resize(int t_nSize){
+	T* temp = new T[t_nSize];
+	for (int i = 0; i < m_nSize; i++) {
+		temp[i] = m_ptrData[i];
+	}
+	delete[] m_ptrData;
+	m_ptrData = temp;
+	m_nSize = t_nSize;
+	return *this;
+}
 
 /* Exported functions ------------------------------------------------------- */
 /**
@@ -46,15 +130,38 @@ void Stack<T>::operator=(const Stack<T>& source) {
 	m_ptrData = source.m_ptrData;
 }
 
+
+
+/**
+  * @brief 重载标准输入流 >>运算符
+  * @param istream& in : 标准输入流对象
+  * @param const Stack<T>& source : 待输入的对象
+  * @retval istream&
+  */
+template<class T>
+istream& operator>>(istream& in, Stack<T>& source)
+{
+	T temp;
+	in >> temp;
+	source.push(temp);
+}
+
 /**
   * @brief 重载标准输出流 <<运算符
   * @param ostream& out : 标准输出流对象
-  * @param const Stack& source : 待输出的对象
+  * @param const Stack<T>& source : 待输出的对象
   * @retval ostream&
   */
 template<class T>
 ostream& operator<<(ostream& out, const Stack<T>& source) {
-	// todo
+	out << "stack:[ ";
+	for (int i = 0; i < source.size(); i++) {
+		out << source[i];
+		if (i != source.size() - 1) {
+			out << ", ";
+		}
+	}
+	out << " ]";
 	return out;
 }
 
