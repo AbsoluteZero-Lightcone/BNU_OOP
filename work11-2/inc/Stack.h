@@ -44,6 +44,9 @@ public:
 	// Operations
 	T pop();
 	Stack<T>& push(const T& t_data);
+	Stack<T>& operator>>(T& pop);
+	Stack<T>& operator<<(const T& push);
+
 	void clear();
 	Stack<T>& resize(int t_nSize);
 

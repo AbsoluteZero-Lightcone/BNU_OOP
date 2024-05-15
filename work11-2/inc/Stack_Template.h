@@ -102,6 +102,18 @@ Stack<T>& Stack<T>::push(const T& t_data) {
 	return *this;
 }
 
+template<class T>
+Stack<T>& Stack<T>::operator>>(T& pop){
+	pop = this->pop();
+	return *this;
+}
+
+template<class T>
+Stack<T>& Stack<T>::operator<<(const T& push){
+	this->push(push);
+	return *this;
+}
+
 /**
   * @brief 清空栈
   * @retval None
@@ -121,9 +133,10 @@ void Stack<T>::clear() {
 template<class T>
 Stack<T>& Stack<T>::resize(int t_nSize) {
 	T* temp = new T[t_nSize];
-	for (int i = 0; i < m_nSize; i++) {
+	for (int i = 0; i < t_nSize && i < m_nSize; i++) {
 		temp[i] = m_ptrData[i];
 	}
+	// 多出来的部分初始化为0
 	delete[] m_ptrData;
 	m_ptrData = temp;
 	m_nSize = t_nSize;
