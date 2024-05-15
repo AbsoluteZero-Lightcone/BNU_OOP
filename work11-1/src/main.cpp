@@ -35,15 +35,16 @@ int main() {
 		Person("zhangsan",40),
 		Person("zhaoming",20)
 	};	//·Ö±ğ²éÕÒPerson£¨"liuli", 30£©, Person£¨"liuli", 20£©
+
 	int index;
-	index = find(a, 0); if (index != -1)cout << "a[" << index << "] = " << a[index] << endl;else cout << "Not Found." <<endl;
-	index = find(a, 4); if (index != -1)cout << "a[" << index << "] = " << a[index] << endl;else cout << "Not Found." <<endl;
-	index = find(b, 'm'); if (index != -1)cout << "b[" << index << "] = " << b[index] << endl;else cout << "Not Found." <<endl;
-	index = find(b, 'i'); if (index != -1)cout << "b[" << index << "] = " << b[index] << endl;else cout << "Not Found." <<endl;
-	index = find(b, 'z'); if (index != -1)cout << "b[" << index << "] = " << b[index] << endl;else cout << "Not Found." <<endl;
-	index = find<string>(c,"ok");if(index!=-1)cout << "c[" << index << "] = " << c[index] << endl;else cout << "Not Found." <<endl;
-	index = find<string>(c,"abc");if(index!=-1)cout << "c[" << index << "] = " << c[index] << endl;else cout << "Not Found." <<endl;
-	index = find(d, Person("liuli", 30)); if (index != -1)cout << "d[" << index << "] = " << d[index] << endl;else cout << "Not Found." <<endl;
+	index = find(a, 0); if (index != -1)cout << "a[" << index << "] = " << a[index] << endl; else cout << "Not Found." << endl;
+	index = find(a, 4); if (index != -1)cout << "a[" << index << "] = " << a[index] << endl; else cout << "Not Found." << endl;
+	index = find(b, 'm'); if (index != -1)cout << "b[" << index << "] = " << b[index] << endl; else cout << "Not Found." << endl;
+	index = find(b, 'i'); if (index != -1)cout << "b[" << index << "] = " << b[index] << endl; else cout << "Not Found." << endl;
+	index = find(b, 'z'); if (index != -1)cout << "b[" << index << "] = " << b[index] << endl; else cout << "Not Found." << endl;
+	index = find<string>(c, "ok"); if (index != -1)cout << "c[" << index << "] = " << c[index] << endl; else cout << "Not Found." << endl;
+	index = find<string>(c, "abc"); if (index != -1)cout << "c[" << index << "] = " << c[index] << endl; else cout << "Not Found." << endl;
+	index = find(d, Person("liuli", 30)); if (index != -1)cout << "d[" << index << "] = " << d[index] << endl; else cout << "Not Found." << endl;
 	index = find(d, Person("liuli", 20)); if (index != -1)cout << "d[" << index << "] = " << d[index] << endl; else cout << "Not Found." << endl;
 
 	return 0;
