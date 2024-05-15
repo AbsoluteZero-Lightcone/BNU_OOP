@@ -3,7 +3,7 @@
   * @file    Person.cpp
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
-  * @date    2024-04-23
+  * @date    2024-05-15
   * @brief   Person class
   * @encode  GB2312
   ******************************************************************************
@@ -14,7 +14,7 @@
 
 /* Constructors & Deconstructor --------------------------------------------- */
 Person::Person() :
-	m_strName(0),
+	m_strName(""),
 	m_nAge(0)
 {}
 
