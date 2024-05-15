@@ -9,7 +9,7 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "Stack.h"
 
 /* Constructors & Deconstructor --------------------------------------------- */
@@ -20,17 +20,19 @@ Stack<T>::Stack() :
 {}
 
 template<class T>
-Stack<T>::Stack(int t_nSize, T* t_ptrData) :
-	m_nSize(t_nSize),
-	m_ptrData(t_ptrData)
-{}
+Stack<T>::Stack(const Stack<T>& source) {
+	m_ptrData = new T[source.m_nSize];
+	for (int i = 0; i < source.m_nSize; i++) {
+		m_ptrData[i] = source.m_ptrData[i];
+	}
+	m_nSize = source.m_nSize;
+}
+
 template<class T>
-Stack<T>::Stack(const Stack<T>& source) :
-	m_nSize(source.m_nSize),
-	m_ptrData(source.m_ptrData)
-{}
-template<class T>
-Stack<T>::~Stack() {}
+Stack<T>::~Stack() {
+	delete[] m_ptrData;
+	m_ptrData = nullptr;
+}
 
 /* Getters ------------------------------------------------------------------ */
 template<typename T>
@@ -43,7 +45,7 @@ T& Stack<T>::operator[](int t_nIndex) const {
 }
 
 template<typename T>
-T& Stack<T>::at(int t_nIndex) const{
+T& Stack<T>::at(int t_nIndex) const {
 	if (t_nIndex < 0 || t_nIndex >= m_nSize) {
 		throw out_of_range("out of range");
 	}// at的语义有边界检查
@@ -51,27 +53,32 @@ T& Stack<T>::at(int t_nIndex) const{
 }
 
 template<class T>
-T& Stack<T>::front() const{return m_ptrData[0];}
+T& Stack<T>::front() const { return m_ptrData[0]; }
 
 template<typename T>
-T& Stack<T>::back() const{return m_ptrData[m_nSize - 1];}
+T& Stack<T>::back() const { return m_ptrData[m_nSize - 1]; }
 
 template<typename T>
-T& Stack<T>::top() const{return m_ptrData[m_nSize - 1];}
+T& Stack<T>::top() const { return m_ptrData[m_nSize - 1]; }
 
 template<class T>
-T& Stack<T>::bottom() const{return m_ptrData[0];}
+T& Stack<T>::bottom() const { return m_ptrData[0]; }
 
 template<class T>
-T* Stack<T>::data() const{return m_ptrData;}
+T* Stack<T>::data() const { return m_ptrData; }
 
 template<class T>
-int Stack<T>::size() const{	return m_nSize;}
+int Stack<T>::size() const { return m_nSize; }
 
 template<class T>
-bool Stack<T>::isEmpty() const{	return m_nSize == 0;}
+bool Stack<T>::isEmpty() const { return m_nSize == 0; }
 
 /* Operations --------------------------------------------------------------- */
+
+/**
+  * @brief 出栈
+  * @retval T : 出栈的数据
+  */
 template<typename T>
 T Stack<T>::pop() {
 	if (m_nSize == 0) {
@@ -88,14 +95,18 @@ T Stack<T>::pop() {
   * @retval Stack<T>& : 压栈后的栈, 用于链式调用
   */
 template<typename T>
-Stack<T>& Stack<T>::push(const T& t_data){
-		resize(m_nSize + 1);
+Stack<T>& Stack<T>::push(const T& t_data) {
+	resize(m_nSize + 1);
 	m_ptrData[m_nSize - 1] = t_data;
 	return *this;
 }
 
+/**
+  * @brief 清空栈
+  * @retval None
+  */
 template<class T>
-void Stack<T>::clear(){
+void Stack<T>::clear() {
 	delete[] m_ptrData;
 	m_ptrData = nullptr;
 	m_nSize = 0;
@@ -107,7 +118,7 @@ void Stack<T>::clear(){
   * @retval Stack<T>& : 改变大小后的栈, 用于链式调用
   */
 template<class T>
-Stack<T>& Stack<T>::resize(int t_nSize){
+Stack<T>& Stack<T>::resize(int t_nSize) {
 	T* temp = new T[t_nSize];
 	for (int i = 0; i < m_nSize; i++) {
 		temp[i] = m_ptrData[i];
@@ -126,11 +137,13 @@ Stack<T>& Stack<T>::resize(int t_nSize){
   */
 template<class T>
 void Stack<T>::operator=(const Stack<T>& source) {
+	delete[] m_ptrData;
+	m_ptrData = new T[source.m_nSize];
+	for (int i = 0; i < source.m_nSize; i++) {
+		m_ptrData[i] = source.m_ptrData[i];
+	}
 	m_nSize = source.m_nSize;
-	m_ptrData = source.m_ptrData;
 }
-
-
 
 /**
   * @brief 重载标准输入流 >>运算符
@@ -139,8 +152,7 @@ void Stack<T>::operator=(const Stack<T>& source) {
   * @retval istream&
   */
 template<class T>
-istream& operator>>(istream& in, Stack<T>& source)
-{
+istream& operator>>(istream& in, Stack<T>& source) {
 	T temp;
 	in >> temp;
 	source.push(temp);

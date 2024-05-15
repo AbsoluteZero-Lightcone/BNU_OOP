@@ -27,7 +27,6 @@ private:
 public:
 	// Constructors & Deconstructor
 	Stack();
-	Stack(int t_nSize, T* t_ptrData);
 	Stack(const Stack<T>& source);
 	~Stack();
 
