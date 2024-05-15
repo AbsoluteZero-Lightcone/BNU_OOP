@@ -167,14 +167,14 @@ istream& operator>>(istream& in, Stack<T>& source) {
   */
 template<class T>
 ostream& operator<<(ostream& out, const Stack<T>& source) {
-	out << "stack:[ ";
+	out << "stack:[";
 	for (int i = 0; i < source.size(); i++) {
 		out << source[i];
 		if (i != source.size() - 1) {
-			out << ", ";
+			out << ",";
 		}
 	}
-	out << " ]";
+	out << "]";
 	return out;
 }
 
@@ -187,7 +187,9 @@ ostream& operator<<(ostream& out, const Stack<T>& source) {
 template<class T>
 bool operator==(const Stack<T>& n1, const Stack<T>& n2) {
 	if (n1.m_nSize != n2.m_nSize)return false;
-	if (n1.m_ptrData != n2.m_ptrData)return false;
+	for (int i = 0; i < n1.m_nSize; i++)
+		if (n1.m_ptrData[i] != n2.m_ptrData[i])
+			return false;
 	return true;
 }
 
@@ -198,11 +200,8 @@ bool operator==(const Stack<T>& n1, const Stack<T>& n2) {
   * @retval bool, true for n1 != n2
   */
 template<class T>
-bool operator!=(const Stack<T>& n1, const Stack<T>& n2) {
-	if (n1.m_nSize == n2.m_nSize)return false;
-	if (n1.m_ptrData == n2.m_ptrData)return false;
-	return true;
-}
+bool operator!=(const Stack<T>& n1, const Stack<T>& n2) {return !(n1 == n2);}
+
 #endif // /* !__STACK_TEMPLATE_H */
 
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
