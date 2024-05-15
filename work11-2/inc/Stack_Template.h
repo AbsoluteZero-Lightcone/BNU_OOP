@@ -132,6 +132,9 @@ void Stack<T>::clear() {
   */
 template<class T>
 Stack<T>& Stack<T>::resize(int t_nSize) {
+	if (t_nSize < 0) {
+		throw invalid_argument("invalid argument");
+	}
 	T* temp = new T[t_nSize];
 	for (int i = 0; i < t_nSize && i < m_nSize; i++) {
 		temp[i] = m_ptrData[i];
