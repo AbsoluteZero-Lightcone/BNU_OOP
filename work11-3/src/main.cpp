@@ -54,7 +54,7 @@ void test(T(&tests)[N]) {
 }
 
 int main() {
-	test(tests);
+	//test(tests);
 	cout << "Supported operators: + - * / ^ %" << endl;
 	do {
 		try {
@@ -63,7 +63,7 @@ int main() {
 			cin >> s;
 			Expression e(s);
 #ifdef ENABLE_PROCESS_PRINT
-			cout << " [Calculating process]" << endl;
+			cout << "[Calculating process]" << endl;
 #endif
 			double res = Expression::Calculate(e);
 			cout << endl << ">>> " << e << " = " << res << endl << endl;
