@@ -22,6 +22,10 @@ ExpressionDouble& ExpressionDouble::operator=(const ExpressionDouble& e) {
 	return *this;
 }
 
+ExpressionDouble::operator double() const{
+	return m_dData;
+}
+
 /**
   * @brief 从字符串中提取一个浮点数，字符串中的第一个浮点数被提取出来，字符串被修改为去掉提取的部分
   * @param s 字符串

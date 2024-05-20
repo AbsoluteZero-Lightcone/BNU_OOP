@@ -27,7 +27,7 @@ public:
 	ExpressionDouble(string s);
 	ExpressionDouble(const ExpressionDouble& e);
 	ExpressionDouble& operator=(const ExpressionDouble& e);
-
+	operator double()const;
 	void fetch(string& s);
 	friend ostream& operator<<(ostream& out, const ExpressionDouble& e);
 	friend ExpressionDouble operator+(const ExpressionDouble& a, const ExpressionDouble& b);
