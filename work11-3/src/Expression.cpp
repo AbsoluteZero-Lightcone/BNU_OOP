@@ -120,28 +120,29 @@ bool Expression::_isValidBrackets(string s) {
   * @brief 生成括号层次，越外层的括号层次越高，括号和外层平级
   * @retval None
   */
-void Expression::_formOrder(Expression e, int* m_ptrOrder) {
+void Expression::_formOrder(Expression e, int* hierarchy) {
 	int cur = 0;
 	for (int i = 0; i < e.size(); i++) {
 		if (typeid(e[i]) == typeid(ExpressionBrackets)) {
 			ExpressionBrackets eb = dynamic_cast<ExpressionBrackets&>(e[i]);
 			if (eb.getOperator() == '(') {
-				m_ptrOrder[i] = cur;
+				hierarchy[i] = cur;
 				cur++;
 			}
 			else if (eb.getOperator() == ')') {
 				cur--;
-				m_ptrOrder[i] = cur;
+				hierarchy[i] = cur;
 			}
 			else {
-				m_ptrOrder[i] = cur;
+				hierarchy[i] = cur;
 			}
 		}
 		else {
-			m_ptrOrder[i] = cur;
+			hierarchy[i] = cur;
 		}
 	}
 }
+
 /**
   * @brief 判断括号是否配对
   * @retval Bool: 是否匹配 1:匹配 0:不匹配
@@ -155,7 +156,7 @@ bool Expression::_isPaired(const Expression& e, int l, int r) {
 
 	int* order = new int[e.size()];
 	_formOrder(e, order);
-	for (int i = l + 1; i < r; i++) 
+	for (int i = l + 1; i < r; i++)
 		if (order[i] == order[l]) {
 			delete[] order;
 			return false;
@@ -168,16 +169,16 @@ bool Expression::_isPaired(const Expression& e, int l, int r) {
   * @brief 判断括号是否配对，避免重复计算括号层次数组
   * @retval Bool: 是否匹配 1:匹配 0:不匹配
   */
-bool Expression::_isPaired(const Expression& e,int* order, int l, int r){
+bool Expression::_isPaired(const Expression& e, int* hierarchy, int l, int r) {
 	if (typeid(e[l]) != typeid(ExpressionBrackets) || typeid(e[r]) != typeid(ExpressionBrackets))
 		return false;
 	ExpressionBrackets lb = dynamic_cast<ExpressionBrackets&>(e[l]);
 	ExpressionBrackets rb = dynamic_cast<ExpressionBrackets&>(e[r]);
 	if (lb.getOperator() != '(' || rb.getOperator() != ')')return false;
 
-	if (order[l] != order[r])return false;
+	if (hierarchy[l] != hierarchy[r])return false;
 	for (int i = l + 1; i < r; i++)
-		if (order[i] == order[l])return false;
+		if (hierarchy[i] == hierarchy[l])return false;
 	return true;
 }
 
@@ -214,24 +215,24 @@ void Expression::fetch(string s) {
   * @brief 使用递归方法计算表达式
   */
 ExpressionDouble Expression::Calculate(Expression e) {
-	cout << "sub-tree: " << e << endl;
+	cout << endl << "calculate: " << e << endl;
 	if (e.size() == 1) {
 		if (typeid(e[0]) == typeid(ExpressionDouble))
 			return dynamic_cast<ExpressionDouble&>(e[0]);
 		else throw "Invalid Expression.";
 	}
-	int* order = new int[e.size()];
+	int* hierarchy = new int[e.size()];
 	//cout << "前" << e.size() << endl;
 	//cout << e.at(0) << endl;
-	_formOrder(e, order);
-	if (_isPaired(e,order,0,e.size()-1)) { // 去掉多余括号，将运算符暴露在最外层
+	_formOrder(e, hierarchy);
+	if (_isPaired(e, hierarchy, 0, e.size() - 1)) { // 去掉多余括号，将运算符暴露在最外层
 		return Calculate(Expression(e, 1, e.size() - 1));
 	}
 	//cout << "后" << e.size() << endl;
 	//cout << e.at(0) << endl;
-	cout << "Order: ";
+	cout << "hierarchy: ";
 	for (int i = 0; i < e.size(); i++) {
-		cout << order[i] << " ";
+		cout << hierarchy[i] << " ";
 	}
 	cout << endl;
 	int n = 0;// 将表达式中优先级最低的运算符作为分割点
@@ -239,17 +240,18 @@ ExpressionDouble Expression::Calculate(Expression e) {
 	for (int i = 0; i < e.size(); i++) { // 从左到右，平级情况下留下最右边的运算符
 		if (typeid(e[i]) == typeid(ExpressionOperator)) { // 筛选是运算符的元素
 			ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[i]);
-			if (order[i] == 0 && op.getPriority() < min) { // 在最外层找优先级最低的运算符
+			if (hierarchy[i] == 0 && op.getPriority() < min) { // 在最外层找优先级最低的运算符
 				min = op.getPriority();
 				n = i;
 			}
 		}
 	}
 
-	delete[] order;
+	delete[] hierarchy;
 
 	cout << "operator: " << e[n] << endl;
 
+	if (n <= 0 || n + 1 >= e.size())throw "Invalid Expression.";
 	ExpressionDouble a = Calculate(Expression(e, 0, n));
 	ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[n]);
 	ExpressionDouble b = Calculate(Expression(e, n + 1, e.size()));

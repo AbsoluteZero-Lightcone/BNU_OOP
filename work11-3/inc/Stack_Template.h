@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Stack_Template.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.2.0
+  * @version V1.2.1
   * @date    2024-05-16
   * @brief   Stack class
   * @encode  GB2312
@@ -38,10 +38,10 @@ Stack<T>::~Stack() {
 /* Getters ------------------------------------------------------------------ */
 template<typename T>
 T& Stack<T>::operator[](int t_nIndex) const {
-	//if (t_nIndex < 0 || t_nIndex >= m_nSize) {
-	//	throw out_of_range("out of range");
-	//}
-	// 按照[]的语义，不应该有边界检查
+	if (t_nIndex < 0 || t_nIndex >= m_nSize) {
+		throw out_of_range("out of range");
+	}
+	// 但是按照[]的语义，不应该有边界检查
 	return m_ptrData[t_nIndex];
 }
 

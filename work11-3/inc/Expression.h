@@ -27,9 +27,9 @@ class Expression {
 	Stack<Element*> m_stackElementPtrs;
 private:
 	static bool _isValidBrackets(string s);
-	static void _formOrder(class Expression e, int* order);
+	static void _formOrder(class Expression e, int* hierarchy);
 	static bool _isPaired(const Expression& e, int l,int r);
-	static bool _isPaired(const Expression& e,int* order, int l,int r);
+	static bool _isPaired(const Expression& e,int* hierarchy, int l,int r);
 public:
 	Expression();
 	Expression(string s);
