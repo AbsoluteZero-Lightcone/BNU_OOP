@@ -20,6 +20,30 @@
 using namespace std;
 
 /* Class ---------------------------------------------------------------------*/
+#include "ExpressionElement_Base.h"
+class ExpressionOperator :public ExpressionElement_Base {
+	char m_cOperator;
+public:
+	void fetch(string& s) {
+		assert(s.length() > 0);
+		assert(
+			s[0] == '+' ||
+			s[0] == '-' ||
+			s[0] == '*' ||
+			s[0] == '/' ||
+			s[0] == '(' ||
+			s[0] == ')'
+		);
+		m_cOperator = s[0];
+		s = s.substr(1);
+	}
+	friend ostream& operator<<(ostream& out, const ExpressionOperator& e);
+};
+
+ostream& operator<<(ostream& out, const ExpressionOperator& e) {
+	out << e.m_cOperator;
+	return out;
+}
 /* Exported functions ------------------------------------------------------- */
 
 #endif /* !__EXPRESSIONOPERATOR_H */

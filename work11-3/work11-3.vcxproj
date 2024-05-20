@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="src\Expression.cpp" />
     <ClCompile Include="src\ExpressionDouble.cpp" />
+    <ClCompile Include="src\ExpressionElement_Base.cpp" />
     <ClCompile Include="src\ExpressionOperator.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>

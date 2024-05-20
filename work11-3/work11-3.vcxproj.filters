@@ -27,6 +27,9 @@
     <ClCompile Include="src\ExpressionOperator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\ExpressionElement_Base.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\Stack.h">

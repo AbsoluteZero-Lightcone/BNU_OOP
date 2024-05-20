@@ -16,12 +16,19 @@
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <string>
-#include <cmath>
 using namespace std;
 
 /* Class ---------------------------------------------------------------------*/
+class ExpressionElement_Base {
+public:
+	ExpressionElement_Base() {}
+	virtual ~ExpressionElement_Base() {}
+	virtual void fetch(string& s) = 0;
+};
+using Element = ExpressionElement_Base;
+
 /* Exported functions ------------------------------------------------------- */
+ostream& operator<<(ostream& out, const ExpressionElement_Base& e);
 
 #endif /* !__EXPRESSIONELEMENT_BASE_H */
-
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
