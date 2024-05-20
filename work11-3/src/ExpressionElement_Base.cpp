@@ -13,6 +13,8 @@
 #include "ExpressionElement_Base.h"
 #include "ExpressionDouble.h"
 #include "ExpressionOperator.h"
+#include "ExpressionBrackets.h"
+
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const ExpressionElement_Base& e) {
 	if (typeid(e) == typeid(ExpressionDouble)) {
@@ -20,6 +22,9 @@ ostream& operator<<(ostream& out, const ExpressionElement_Base& e) {
 	}
 	else if (typeid(e) == typeid(ExpressionOperator)) {
 		out << dynamic_cast<const ExpressionOperator&>(e);
+	}
+	else if(typeid(e) == typeid(ExpressionBrackets)){
+		out << dynamic_cast<const ExpressionBrackets&>(e);
 	}
 	return out;
 }

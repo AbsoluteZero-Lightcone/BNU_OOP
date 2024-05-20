@@ -64,8 +64,13 @@ Expression::Expression(string s) {
 			p->fetch(s);
 			m_stackElementPtrs.push(p);
 		}
-		else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/' || s[0] == '(' || s[0] == ')') {
+		else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/' ) {
 			ExpressionOperator* p = new ExpressionOperator();
+			p->fetch(s);
+			m_stackElementPtrs.push(p);
+		}
+		else if (s[0] == '(' || s[0] == ')') {
+			ExpressionBrackets* p = new ExpressionBrackets();
 			p->fetch(s);
 			m_stackElementPtrs.push(p);
 		}

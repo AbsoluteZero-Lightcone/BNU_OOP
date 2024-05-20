@@ -1,46 +1,37 @@
 /**
   ******************************************************************************
-  * @file    Expression.h
+  * @file    ExpressionBrackets.h
   * @author  Zhang Yifa 202311998186
   * @version V1.0.0
   * @date    2024-05-20
-  * @brief   Expression
+  * @brief   ExpressionBrackets
   * @encode  GB2312
   ******************************************************************************
   */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __EXPRESSION_H
-#define __EXPRESSION_H
+#ifndef __EXPRESSIONBRACKETS_H
+#define __EXPRESSIONBRACKETS_H
 
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <string>
 using namespace std;
-#include "Stack.h"
-#include "ExpressionDouble.h"
-#include "ExpressionOperator.h"
 #include "ExpressionElement_Base.h"
-#include "ExpressionBrackets.h"
-
 /* Class ---------------------------------------------------------------------*/
-class Expression {
-	Stack<Element*> m_stackElementPtrs;
-private:
-	bool _isValidBrackets(string s);
-	void _formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder);
+class ExpressionBrackets :public ExpressionElement_Base {
+	char m_cOperator;
 public:
-	Expression(string s);
-	~Expression();
+	ExpressionBrackets(char c = '(');
+	ExpressionBrackets(string s);
+	ExpressionBrackets(const ExpressionBrackets& e);
+	ExpressionBrackets& operator=(const ExpressionBrackets& e);
 
-	double calculate();
-	static double Calculate(Expression e);
-	static double eval(string s);
-
-	friend ostream& operator<<(ostream& out, const Expression& e);
+	void fetch(string& s);
+	friend ostream& operator<<(ostream& out, const ExpressionBrackets& e);
 };
-
 /* Exported functions ------------------------------------------------------- */
-ostream& operator<<(ostream& out, const Expression& e);
+ostream& operator<<(ostream& out, const ExpressionBrackets& e);
 
-#endif /* !__EXPRESSION_H */
+#endif /* !__EXPRESSIONBRACKETS_H */
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

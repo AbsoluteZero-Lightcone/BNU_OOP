@@ -14,7 +14,7 @@ using namespace std;
 #include "Expression.h"
 
 int main() {
-	string s = "1 + 2 * 3";
+	string s = "1 + 2.15 * 3 / (2.12*(1-6))";
 	Expression e(s);
 	cout << e << endl;
 	return 0;

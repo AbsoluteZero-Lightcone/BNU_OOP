@@ -48,9 +48,7 @@ void ExpressionOperator::fetch(string& s) {
 		s[0] == '+' ||
 		s[0] == '-' ||
 		s[0] == '*' ||
-		s[0] == '/' ||
-		s[0] == '(' ||
-		s[0] == ')'
+		s[0] == '/' 
 	);
 	m_cOperator = s[0];
 	s = s.substr(1);
