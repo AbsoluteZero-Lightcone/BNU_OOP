@@ -143,9 +143,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Expression.cpp" />
+    <ClCompile Include="src\ExpressionDouble.cpp" />
+    <ClCompile Include="src\ExpressionOperator.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\Expression.h" />
+    <ClInclude Include="inc\ExpressionDouble.h" />
+    <ClInclude Include="inc\ExpressionElement_Base.h" />
+    <ClInclude Include="inc\ExpressionOperator.h" />
     <ClInclude Include="inc\Stack.h" />
     <ClInclude Include="inc\Stack_Template.h" />
   </ItemGroup>

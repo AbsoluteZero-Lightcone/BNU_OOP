@@ -87,7 +87,7 @@ ostream& operator<<(ostream& out, const ExpressionElement_Base& e) {
 	}
 	return out;
 }
-class Experssion {
+class Expression {
 	Stack<Element*> m_stackElementPtrs;
 private:
 	bool _isValidBrackets(string s) {
@@ -118,7 +118,7 @@ private:
 		}
 	}
 public:
-	Experssion(string s) {
+	Expression(string s) {
 		if (!_isValidBrackets(s))
 			throw "Invalid Brackets.";
 		while (s.length() > 0) {
@@ -136,15 +136,15 @@ public:
 			else throw "Invalid Expression.";
 		}
 	}
-	~Experssion() {
+	~Expression() {
 		while (!m_stackElementPtrs.isEmpty()) {
 			delete m_stackElementPtrs.pop();
 		}
 	}
-	friend ostream& operator<<(ostream& out, const Experssion& e);
+	friend ostream& operator<<(ostream& out, const Expression& e);
 };
 
-ostream& operator<<(ostream& out, const Experssion& e) {
+ostream& operator<<(ostream& out, const Expression& e) {
 	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
 		out << *e.m_stackElementPtrs[i];
 	}
@@ -152,7 +152,7 @@ ostream& operator<<(ostream& out, const Experssion& e) {
 }
 int main() {
 	string s = "1 + 2 * 3";
-	Experssion e(s);
+	Expression e(s);
 	cout << e << endl;
 	return 0;
 }
