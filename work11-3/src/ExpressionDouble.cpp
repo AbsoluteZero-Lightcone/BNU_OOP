@@ -11,11 +11,38 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ExpressionDouble.h"
-
+#include <cassert>
 /* Exported functions ------------------------------------------------------- */
 /**
-  * @brief 
-  * @param 
-  * @retval 
+  * @brief 从字符串中提取一个浮点数
+  * @param s 字符串
+  * @retval None
   */
+void ExpressionDouble::fetch(string& s) {
+	assert(s.length() > 0);
+	m_dData = 0;
+	int i = 0;
+	while (s[i] >= '0' && s[i] <= '9') { // 整数部分
+		m_dData = m_dData * 10 + (s[i] - '0');
+		i++;
+		if (i >= s.length())break;
+	}
+	if (s[i] == '.') { // 小数部分
+		// 允许没有整数部分 .123 == 0.123
+		// 也允许没有小数部分 123. == 123
+		i++;
+		double weight = 0.1; // 位权
+		while (s[i] >= '0' && s[i] <= '9') {
+			m_dData += weight * (s[i] - '0');
+			weight *= 0.1;
+			i++;
+			if (i >= s.length())break;
+		}
+	}
+	s = s.substr(i);
+}
+ostream& operator<<(ostream& out, const ExpressionDouble& e) {
+	out << e.m_dData;
+	return out;
+}
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
