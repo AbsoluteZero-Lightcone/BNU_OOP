@@ -31,28 +31,7 @@ bool Expression::_isValidBrackets(string s) {
 }
 
 /**
-  * @brief 生成括号层次
-  * @retval None
-  */
-void Expression::_formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder) {
-	int cur = 0;
-	for (int i = 0; i < m_nLength; i++) {
-		if (m_strRaw[i] == '(') {
-			cur++;
-			m_ptrOrder[i] = -1;
-		}
-		else if (m_strRaw[i] == ')') {
-			cur--;
-			m_ptrOrder[i] = -1;
-		}
-		else {
-			m_ptrOrder[i] = cur;
-		}
-	}
-}
-
-/**
-  * @brief 生成括号层次
+  * @brief 生成括号层次，越外层的括号层次越高，括号和外层平级
   * @retval None
   */
 void Expression::_formOrder(Expression e, int* m_ptrOrder) {
@@ -61,12 +40,12 @@ void Expression::_formOrder(Expression e, int* m_ptrOrder) {
 		if (typeid(e[i]) == typeid(ExpressionBrackets)) {
 			ExpressionBrackets eb = dynamic_cast<ExpressionBrackets&>(e[i]);
 			if (eb.getOperator() == '(') {
+				m_ptrOrder[i] = cur;
 				cur++;
-				m_ptrOrder[i] = -1;
 			}
 			else if (eb.getOperator() == ')') {
+				m_ptrOrder[i] = cur;
 				cur--;
-				m_ptrOrder[i] = -1;
 			}
 			else {
 				m_ptrOrder[i] = cur;
@@ -185,7 +164,9 @@ void Expression::push_back(Element& e) {
 }
 
 
-// 使用递归方法计算表达式
+/**
+  * @brief 使用递归方法计算表达式
+  */
 ExpressionDouble Expression::Calculate(Expression e) {
 	cout << "sub-tree: " << e << endl;
 	if (e.size() == 1) {
@@ -193,8 +174,11 @@ ExpressionDouble Expression::Calculate(Expression e) {
 			return dynamic_cast<ExpressionDouble&>(e[0]);
 		else throw "Invalid Expression.";
 	}
-	int n = 0;// 找带括号的表达式中优先级最低的运算符，作为分割点
-	int min = INT32_MAX;
+	if (typeid(e.front()) == typeid(ExpressionBrackets)
+		&& typeid(e.back()) == typeid(ExpressionBrackets)) {
+		// 去掉多余括号，将运算符暴露在最外层
+		return Calculate(Expression(e, 1, e.size() - 1));
+	}
 	int* order = new int[e.size()];
 	//cout << "前" << e.size() << endl;
 	//cout << e.at(0) << endl;
@@ -206,17 +190,18 @@ ExpressionDouble Expression::Calculate(Expression e) {
 		cout << order[i] << " ";
 	}
 	cout << endl;
-	for (int i = 0; i < e.size(); i++) {
-		//cout << e[i] << endl;
-		//cout << typeid(e[i]).name() << endl;
-		if (typeid(e[i]) == typeid(ExpressionOperator)) {
+	int n = 0;// 将表达式中优先级最低的运算符作为分割点
+	int min = INT32_MAX;
+	for (int i = 0; i < e.size(); i++) { // 从左到右，平级情况下留下最右边的运算符
+		if (typeid(e[i]) == typeid(ExpressionOperator)) { // 筛选是运算符的元素
 			ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[i]);
-			if (op.getPriority() < min && order[i] == 0) { // 在最外层的运算符中找优先级最低的
+			if (order[i] == 0 && op.getPriority() < min) { // 在最外层找优先级最低的运算符
 				min = op.getPriority();
 				n = i;
 			}
 		}
 	}
+
 	delete[] order;
 
 	cout << "operator: " << e[n] << endl;

@@ -22,6 +22,9 @@ ExpressionOperator& ExpressionOperator::operator=(const ExpressionOperator& e) {
 	return *this;
 }
 
+/**
+  * @brief 取得运算符优先级，数字越大优先级越高
+  */
 int ExpressionOperator::getPriority() const{
 	switch (m_cOperator) {
 	case '+':

@@ -27,7 +27,6 @@ class Expression {
 	Stack<Element*> m_stackElementPtrs;
 private:
 	static bool _isValidBrackets(string s);
-	static void _formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder);
 	static void _formOrder(class Expression e, int* m_ptrOrder);
 public:
 	Expression(string s);
@@ -58,6 +57,7 @@ public:
 	static ExpressionDouble eval(string s);
 
 	friend ostream& operator<<(ostream& out, const Expression& e);
+
 };
 
 /* Exported functions ------------------------------------------------------- */
