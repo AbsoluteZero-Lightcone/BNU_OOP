@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.1.0
+  * @version V1.1.1
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -14,11 +14,8 @@ using namespace std;
 
 #include "Expression.h"
 
-
-// todo 重载表达式的算数运算符
-// todo 支持更多的运算符 ^ %
-
 string tests[] = {
+	// verified functions:
 	"1 + (2.15) * 3 / (2.120001*(1-6))+2.1 * (3 /2.12)*1-6",// 一般的表达式
 	"123",// 处理纯数字
 	"((((()))))" ,// 判断空括号
@@ -26,15 +23,23 @@ string tests[] = {
 	"1+(-2)",// 处理负号 -1+2 和 1+(-2)
 	"1/(2-2)"// 除零检查
 	"2(3+4)",// 乘号省略的情况非法 2(3+4)
+
 	// todos:
 	"1++++----2"// todo 检查不合法的连续加减号
 	"2^3",// todo 幂运算支持
 	"2%3",// todo 取余运算支持
+	"sin(123)",// todo 函数式运算支持
+	"|-12|",// todo 特殊括号（绝对值）
+	"12!",// todo 后置单目运算(阶乘运算)
+	"E^(i*Pi)",// todo 数学常量
 };
+// todo 重载表达式的算数运算符(符号运算)
+
 
 template<class T, unsigned N>
 void test(T(&tests)[N]) {
 	for (int i = 0; i < N; i++) {
+		cout << "Test " << i << ": " << tests[i] << endl;
 		try {
 			Expression e(tests[i]);
 #ifdef ENABLE_PROCESS_PRINT
