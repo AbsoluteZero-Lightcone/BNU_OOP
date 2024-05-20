@@ -12,43 +12,176 @@
 #include <string>
 using namespace std;
 #include "Stack.h"
+#include <cassert>
+class ExpressionElement_Base {
+	virtual void fetch(string& s) = 0;
+	virtual ostream& operator<<(ostream& out) = 0;
+};
+using Element = ExpressionElement_Base;
 
-
-template<unsigned N>
-bool isValidBrackets(const char(&s)[N]) {
-	int cur = 0;
-	for (int i = 0; i < N-1; i++){
-		if (s[i] == '(')
-			cur++;
-		else if (s[i] == ')')
-			cur--;
+class ExpressionDouble :public ExpressionElement_Base {
+	double m_dData;
+public:
+	void fetch(string& s) {
+		assert(s.length() > 0);
+		m_dData = 0;
+		int i = 0;
+		while (s[i] >= '0' && s[i] <= '9') { // 整数部分
+			m_dData = m_dData * 10 + (s[i] - '0');
+			i++;
+			if (i >= s.length())break;
+		}
+		if (s[i] == '.') { // 小数部分
+			// 允许没有整数部分 .123 == 0.123
+			// 也允许没有小数部分 123. == 123
+			i++;
+			double weight = 0.1; // 位权
+			while (s[i] >= '0' && s[i] <= '9') {
+				m_dData += weight * (s[i] - '0');
+				weight *= 0.1;
+				i++;
+				if (i >= s.length())break;
+			}
+		}
+		s = s.substr(i);
 	}
-	return !cur;
+	ostream& operator<<(ostream& out) {
+		out << m_dData;
+		return out;
+	}
+};
+class ExpressionOperator :public ExpressionElement_Base {
+	char m_cOperator;
+public:
+	void fetch(string& s) {
+		assert(s.length() > 0);
+		assert(
+			s[0] == '+' ||
+			s[0] == '-' ||
+			s[0] == '*' ||
+			s[0] == '/' ||
+			s[0] == '(' ||
+			s[0] == ')'
+		);
+		m_cOperator = s[0];
+		s = s.substr(1);
+	}
+	ostream& operator<<(ostream& out) {
+		out << m_cOperator;
+		return out;
+	}
+};
+
+
+class Experssion {
+	Stack<Element*> m_stackElementPtrs;
+
+	bool _isValidBrackets(string s) {
+		int cur = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (s[i] == '(')
+				cur++;
+			else if (s[i] == ')')
+				cur--;
+			if (cur < 0)return false;
+		}
+		return !cur;
+	}
+public:
+	Experssion(string s) {
+		if(!_isValidBrackets(s))throw "Invalid Brackets.";
+		while (s.length() > 0) {
+			if (s[0] == ' ')s = s.substr(1);
+			if (s[0] >= '0' && s[0] <= '9' || s[0] == '.') {
+				ExpressionDouble* p = new ExpressionDouble();
+				p->fetch(s);
+				m_stackElementPtrs.push(p);
+			}
+			else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/' || s[0] == '(' || s[0] == ')'){
+				ExpressionOperator* p = new ExpressionOperator();
+				p->fetch(s);
+				m_stackElementPtrs.push(p);
+			}
+			else {
+				throw "Invalid Expression.";
+			}
+		}
+	}
+};
+
+int main() {
+
+	return 0;
 }
 
 
-template<unsigned N>
-int (&formOrder(const char (& s)[N]))[N-1] {
-	static int order[N-1];
-	int cur = 0;
-	for (int i = 0; i < N-1; i++) {
-		if (s[i] == '(') {
-			cur++;
-			order[i] = -1;
+class Expression {
+private:
+	string m_strRaw;
+	int m_nLength;
+	int* m_ptrOrder;
+	double m_dValue;
+
+	bool _isValidCharacters(string s) {
+		for (int i = 0; i < s.length(); i++)
+			if (
+				s[i] != '+' &&
+				s[i] != '-' &&
+				s[i] != '*' &&
+				s[i] != '/' &&
+				s[i] != '.' &&
+				s[i] != '(' &&
+				s[i] != ')' &&
+				s[i] < '0' &&
+				s[i] > '9'
+				)
+				return false;
+	}
+	bool _isValidBrackets(string s) {
+		int cur = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (s[i] == '(')
+				cur++;
+			else if (s[i] == ')')
+				cur--;
+			if (cur < 0)return false;
 		}
-		else if (s[i] == ')') {
-			cur--;
-			order[i] = -1;
-		}
-		else {
-			order[i] = cur;
+		return !cur;
+	}
+
+	void _formOrder() {
+		int cur = 0;
+		for (int i = 0; i < m_nLength; i++) {
+			if (m_strRaw[i] == '(') {
+				cur++;
+				m_ptrOrder[i] = -1;
+			}
+			else if (m_strRaw[i] == ')') {
+				cur--;
+				m_ptrOrder[i] = -1;
+			}
+			else {
+				m_ptrOrder[i] = cur;
+			}
 		}
 	}
-	return (int(&)[N-1])order;
-}
+	void _Calculate() {
 
-template<class T,unsigned N>
-void printArray(T (&arr)[N]) {
+	}
+public:
+	Expression(string s) {
+		if (_isValidCharacters(s))throw "Valid Characters.";
+		if (_isValidBrackets(s))throw "Incorrect Brackets.";
+		m_strRaw = s;
+		m_nLength = s.length();
+		m_ptrOrder = new int[m_nLength];
+
+	}
+};
+
+
+template<class T>
+void printArray(T* arr, unsigned N) {
 	cout << "{";
 	for (int i = 0; i < N; i++) {
 		if (i)cout << ",";
@@ -57,16 +190,4 @@ void printArray(T (&arr)[N]) {
 	cout << "}";
 	cout << endl;
 }
-
-template<unsigned N>
-double eval(string s) {
-	
-}
-
-int main() {
-	cout << isValidBrackets("((((146+156))*(12-12)/3))") << endl;
-	printArray(formOrder("((((146+156))*(12-12)/3))"));
-	return 0;
-}
-
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
