@@ -13,9 +13,12 @@
 using namespace std;
 #include "Stack.h"
 #include <cassert>
+
 class ExpressionElement_Base {
+public:
+	ExpressionElement_Base() {}
+	virtual ~ExpressionElement_Base() {}
 	virtual void fetch(string& s) = 0;
-	virtual ostream& operator<<(ostream& out) = 0;
 };
 using Element = ExpressionElement_Base;
 
@@ -45,11 +48,12 @@ public:
 		}
 		s = s.substr(i);
 	}
-	ostream& operator<<(ostream& out) {
-		out << m_dData;
-		return out;
-	}
+	friend ostream& operator<<(ostream& out, const ExpressionDouble& e);
 };
+ostream& operator<<(ostream& out, const ExpressionDouble& e) {
+	out << e.m_dData;
+	return out;
+}
 class ExpressionOperator :public ExpressionElement_Base {
 	char m_cOperator;
 public:
@@ -66,77 +70,26 @@ public:
 		m_cOperator = s[0];
 		s = s.substr(1);
 	}
-	ostream& operator<<(ostream& out) {
-		out << m_cOperator;
-		return out;
-	}
+	friend ostream& operator<<(ostream& out, const ExpressionOperator& e);
 };
 
-
-class Experssion {
-	Stack<Element*> m_stackElementPtrs;
-
-	bool _isValidBrackets(string s) {
-		int cur = 0;
-		for (int i = 0; i < s.length(); i++) {
-			if (s[i] == '(')
-				cur++;
-			else if (s[i] == ')')
-				cur--;
-			if (cur < 0)return false;
-		}
-		return !cur;
-	}
-public:
-	Experssion(string s) {
-		if(!_isValidBrackets(s))throw "Invalid Brackets.";
-		while (s.length() > 0) {
-			if (s[0] == ' ')s = s.substr(1);
-			if (s[0] >= '0' && s[0] <= '9' || s[0] == '.') {
-				ExpressionDouble* p = new ExpressionDouble();
-				p->fetch(s);
-				m_stackElementPtrs.push(p);
-			}
-			else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/' || s[0] == '(' || s[0] == ')'){
-				ExpressionOperator* p = new ExpressionOperator();
-				p->fetch(s);
-				m_stackElementPtrs.push(p);
-			}
-			else {
-				throw "Invalid Expression.";
-			}
-		}
-	}
-};
-
-int main() {
-
-	return 0;
+ostream& operator<<(ostream& out, const ExpressionOperator& e) {
+	out << e.m_cOperator;
+	return out;
 }
 
-
-class Expression {
-private:
-	string m_strRaw;
-	int m_nLength;
-	int* m_ptrOrder;
-	double m_dValue;
-
-	bool _isValidCharacters(string s) {
-		for (int i = 0; i < s.length(); i++)
-			if (
-				s[i] != '+' &&
-				s[i] != '-' &&
-				s[i] != '*' &&
-				s[i] != '/' &&
-				s[i] != '.' &&
-				s[i] != '(' &&
-				s[i] != ')' &&
-				s[i] < '0' &&
-				s[i] > '9'
-				)
-				return false;
+ostream& operator<<(ostream& out, const ExpressionElement_Base& e) {
+	if (typeid(e) == typeid(ExpressionDouble)) {
+		out << dynamic_cast<const ExpressionDouble&>(e);
 	}
+	else if (typeid(e) == typeid(ExpressionOperator)) {
+		out << dynamic_cast<const ExpressionOperator&>(e);
+	}
+	return out;
+}
+class Experssion {
+	Stack<Element*> m_stackElementPtrs;
+private:
 	bool _isValidBrackets(string s) {
 		int cur = 0;
 		for (int i = 0; i < s.length(); i++) {
@@ -148,8 +101,7 @@ private:
 		}
 		return !cur;
 	}
-
-	void _formOrder() {
+	void _formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder) {
 		int cur = 0;
 		for (int i = 0; i < m_nLength; i++) {
 			if (m_strRaw[i] == '(') {
@@ -165,20 +117,45 @@ private:
 			}
 		}
 	}
-	void _Calculate() {
-
-	}
 public:
-	Expression(string s) {
-		if (_isValidCharacters(s))throw "Valid Characters.";
-		if (_isValidBrackets(s))throw "Incorrect Brackets.";
-		m_strRaw = s;
-		m_nLength = s.length();
-		m_ptrOrder = new int[m_nLength];
-
+	Experssion(string s) {
+		if (!_isValidBrackets(s))
+			throw "Invalid Brackets.";
+		while (s.length() > 0) {
+			if (s[0] == ' ')s = s.substr(1);
+			if (s[0] >= '0' && s[0] <= '9' || s[0] == '.') {
+				ExpressionDouble* p = new ExpressionDouble();
+				p->fetch(s);
+				m_stackElementPtrs.push(p);
+			}
+			else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/' || s[0] == '(' || s[0] == ')') {
+				ExpressionOperator* p = new ExpressionOperator();
+				p->fetch(s);
+				m_stackElementPtrs.push(p);
+			}
+			else throw "Invalid Expression.";
+		}
 	}
+	~Experssion() {
+		while (!m_stackElementPtrs.isEmpty()) {
+			delete m_stackElementPtrs.pop();
+		}
+	}
+	friend ostream& operator<<(ostream& out, const Experssion& e);
 };
 
+ostream& operator<<(ostream& out, const Experssion& e) {
+	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
+		out << *e.m_stackElementPtrs[i];
+	}
+	return out;
+}
+int main() {
+	string s = "1 + 2 * 3";
+	Experssion e(s);
+	cout << e << endl;
+	return 0;
+}
 
 template<class T>
 void printArray(T* arr, unsigned N) {
