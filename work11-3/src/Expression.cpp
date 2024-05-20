@@ -9,10 +9,9 @@
   ******************************************************************************
   */
 
-  /* Includes ------------------------------------------------------------------*/
+  /* Includes ----------------------------------------------------------------- */
 #include "Expression.h"
-
-/* Exported functions ------------------------------------------------------- */
+/* Private Functions -------------------------------------------------------- */
 /**
   * @brief 检查括号是否匹配
   * @param s: 待检查字符串
@@ -57,71 +56,29 @@ void Expression::_formOrder(Expression e, int* m_ptrOrder) {
 	}
 }
 
-Expression::Expression(string s) {
-	if (!_isValidBrackets(s))
-		throw "Invalid Brackets.";
-	while (s.length() > 0) {
-		if (s[0] == ' ')s = s.substr(1);
-		if (s[0] >= '0' && s[0] <= '9' || s[0] == '.') {
-			ExpressionDouble* p = new ExpressionDouble();
-			p->fetch(s);
-			m_stackElementPtrs.push_back(p);
-		}
-		else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/') {
-			ExpressionOperator* p = new ExpressionOperator();
-			p->fetch(s);
-			m_stackElementPtrs.push_back(p);
-		}
-		else if (s[0] == '(' || s[0] == ')') {
-			ExpressionBrackets* p = new ExpressionBrackets();
-			p->fetch(s);
-			m_stackElementPtrs.push_back(p);
-		}
-		else throw "Invalid Expression.";
-	}
-}
-
+/* Interfaces --------------------------------------------------------------- */
+Expression::Expression(string s) { fetch(s); }
 Expression::Expression(Element& e) { push_back(e); }
-
 Expression::Expression(const Expression& e) {
-	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
+	for (int i = 0; i < e.m_stackElementPtrs.size(); i++)
 		push_back(e[i]);
-	}
 }
-
-/**
-  * @brief 截取表达式
-  */
-Expression::Expression(const Expression& e, int start, int end) {
-	for (int i = start; i < end; i++) {
+Expression::Expression(const Expression& e, int start, int end) {	
+	for (int i = start; i < end; i++)
 		push_back(e[i]);
-	}
 }
-
 Expression& Expression::operator=(const Expression& e) {
-	if (this == &e)return *this;
-	while (!m_stackElementPtrs.empty()) {
-		delete m_stackElementPtrs.pop_back();
-	}
-	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
-		if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionDouble))
-			m_stackElementPtrs.push_back(new ExpressionDouble(*dynamic_cast<ExpressionDouble*>(e.m_stackElementPtrs[i])));
-		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionOperator))
-			m_stackElementPtrs.push_back(new ExpressionOperator(*dynamic_cast<ExpressionOperator*>(e.m_stackElementPtrs[i])));
-		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionBrackets))
-			m_stackElementPtrs.push_back(new ExpressionBrackets(*dynamic_cast<ExpressionBrackets*>(e.m_stackElementPtrs[i])));
-		else throw "Invalid Expression.";
-	}
+	for (int i = 0; i < e.m_stackElementPtrs.size(); i++)
+		push_back(e[i]);
 	return *this;
 }
-
-
-Expression::~Expression() {
-	while (!m_stackElementPtrs.empty()) {
-		delete m_stackElementPtrs.pop_back();
-	}
+Expression& Expression::operator=(string s) {
+	fetch(s);
+	return *this;
 }
-
+Expression::~Expression() {
+	clear();
+}
 
 Element& Expression::operator[](int t_nIndex)const { return *m_stackElementPtrs[t_nIndex]; }
 Element& Expression::at(int t_nIndex)const { return *m_stackElementPtrs.at(t_nIndex); }
@@ -132,7 +89,24 @@ Element& Expression::bottom()const { return *m_stackElementPtrs[0]; }
 int Expression::size()const { return m_stackElementPtrs.size(); }
 bool Expression::empty()const { return m_stackElementPtrs.empty(); }
 
-// 注意下面4个都得是深拷贝
+/* Exported functions ------------------------------------------------------- */
+ExpressionDouble Expression::calculate() { return Calculate(*this); }
+ExpressionDouble Expression::eval(string s) { return Calculate(Expression(s)); }
+ostream& operator<<(ostream& out, const Expression& e) {
+	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
+		out << *e.m_stackElementPtrs[i];
+	}
+	return out;
+}
+istream& operator>>(istream& in, Expression& e) {
+	string s;
+	in >> s;
+	e = Expression(s);
+	return in;
+}
+
+/* Memory Handling Function ------------------------------------------------- */
+Expression::Expression() { m_stackElementPtrs.push_back(new ExpressionDouble()); }
 void Expression::insert(int t_nIndex, Element& e) {
 	Element* p = nullptr;
 	if (typeid(e) == typeid(ExpressionDouble))
@@ -162,7 +136,40 @@ void Expression::push_back(Element& e) {
 	else throw "Invalid Expression.";
 	m_stackElementPtrs.push_back(p);
 }
+void Expression::clear() {
+	while (!m_stackElementPtrs.empty()) {
+		delete m_stackElementPtrs.pop_back();
+	}
+}
 
+/* Major Functions ---------------------------------------------------------- */
+/**
+  * @brief 从字符串中提取表达式
+  */
+void Expression::fetch(string s) {
+	if (!_isValidBrackets(s))
+		throw "Invalid Brackets.";
+	clear();
+	while (s.length() > 0) {
+		if (s[0] == ' ')s = s.substr(1);
+		if (s[0] >= '0' && s[0] <= '9' || s[0] == '.') {
+			ExpressionDouble* p = new ExpressionDouble();
+			p->fetch(s);
+			m_stackElementPtrs.push_back(p);
+		}
+		else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/') {
+			ExpressionOperator* p = new ExpressionOperator();
+			p->fetch(s);
+			m_stackElementPtrs.push_back(p);
+		}
+		else if (s[0] == '(' || s[0] == ')') {
+			ExpressionBrackets* p = new ExpressionBrackets();
+			p->fetch(s);
+			m_stackElementPtrs.push_back(p);
+		}
+		else throw "Invalid Expression.";
+	}
+}
 
 /**
   * @brief 使用递归方法计算表达式
@@ -212,14 +219,4 @@ ExpressionDouble Expression::Calculate(Expression e) {
 	return op.operate(a, b);
 }
 
-ExpressionDouble Expression::calculate() { return Calculate(*this); }
-
-ExpressionDouble Expression::eval(string s) { return Calculate(Expression(s)); }
-
-ostream& operator<<(ostream& out, const Expression& e) {
-	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
-		out << *e.m_stackElementPtrs[i];
-	}
-	return out;
-}
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

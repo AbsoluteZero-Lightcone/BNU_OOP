@@ -12,12 +12,15 @@
 #include <string>
 using namespace std;
 #include "Expression.h"
-// todo 不能处理负号
-// todo 不能处理乘号省略的情况
+
+// todo 不能处理负号 -1+2 和 1+(-2)
+// todo 不能处理乘号省略的情况 2(3+4) 和 (3+4)2
+
 int main() {
 	string s1 = "1 + 2.1 * 3 /2.12*1-6";
 	string s2 = "1 + 2.15 * 3 / (2.12*(1-6))+2.1 * (3 /2.12)*1-6";
-	Expression e(s2);
+	Expression e;
+
 	cout << e << " = ";
 	cout << Expression::Calculate(e) << endl;
 	return 0;

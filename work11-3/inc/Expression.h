@@ -29,14 +29,17 @@ private:
 	static bool _isValidBrackets(string s);
 	static void _formOrder(class Expression e, int* m_ptrOrder);
 public:
+	Expression();
 	Expression(string s);
 	Expression(Element& e);
 	Expression(const Expression& e);
 	Expression(const Expression& e, int start, int end);
 	Expression& operator=(const Expression& e);
+	Expression& operator=(string s);
 	~Expression();
 
-	// 元素的对外Getter接口全部传引用
+	void fetch(string s);
+
 	Element& operator[](int t_nIndex)const;
 	Element& at(int t_nIndex)const;
 	Element& front()const;
@@ -46,22 +49,23 @@ public:
 	int size()const;
 	bool empty()const;
 
-	// 操作表达式接口，解决内存泄漏问题
 	void insert(int t_nIndex, Element& t_data);
 	void remove(int t_nIndex);
 	void pop_back();
 	void push_back(Element& e);
+	void clear();
 
 	static ExpressionDouble Calculate(Expression e);
 	ExpressionDouble calculate();
 	static ExpressionDouble eval(string s);
 
 	friend ostream& operator<<(ostream& out, const Expression& e);
-
+	friend istream& operator>>(istream& in, Expression& e);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Expression& e);
+istream& operator>>(istream& in, Expression& e);
 
 #endif /* !__EXPRESSION_H */
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
