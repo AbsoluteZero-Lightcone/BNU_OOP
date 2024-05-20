@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Stack.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.1.0
+  * @version V1.2.0
   * @date    2024-05-15
   * @brief   Stack class
   * @encode  GB2312
@@ -44,10 +44,10 @@ public:
 	
 
 	// Operations
-	T back_pop();
-	Stack<T>& back_push(const T& t_data);
-	Stack<T>& operator>>(T& back_pop);
-	Stack<T>& operator<<(const T& back_push);
+	T pop_back();
+	Stack<T>& push_back(const T& t_data);
+	Stack<T>& operator>>(T& pop_back);
+	Stack<T>& operator<<(const T& push_back);
 
 	void clear();
 	Stack<T>& resize(int t_nSize);

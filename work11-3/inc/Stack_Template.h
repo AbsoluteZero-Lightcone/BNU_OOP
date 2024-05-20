@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Stack_Template.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.1.0
+  * @version V1.2.0
   * @date    2024-05-16
   * @brief   Stack class
   * @encode  GB2312
@@ -110,7 +110,7 @@ void Stack<T>::remove(int t_nIndex) {
   * @retval T : 出栈的数据
   */
 template<typename T>
-T Stack<T>::back_pop() {
+T Stack<T>::pop_back() {
 	if (m_nSize == 0) {
 		throw out_of_range("out of range");
 	}
@@ -125,21 +125,21 @@ T Stack<T>::back_pop() {
   * @retval Stack<T>& : 压栈后的栈, 用于链式调用
   */
 template<typename T>
-Stack<T>& Stack<T>::back_push(const T& t_data) {
+Stack<T>& Stack<T>::push_back(const T& t_data) {
 	resize(m_nSize + 1);
 	m_ptrData[m_nSize - 1] = t_data;
 	return *this;
 }
 
 template<class T>
-Stack<T>& Stack<T>::operator>>(T& back_pop) {
-	back_pop = this->back_pop();
+Stack<T>& Stack<T>::operator>>(T& pop_back) {
+	pop_back = this->pop_back();
 	return *this;
 }
 
 template<class T>
-Stack<T>& Stack<T>::operator<<(const T& back_push) {
-	this->back_push(back_push);
+Stack<T>& Stack<T>::operator<<(const T& push_back) {
+	this->push_back(push_back);
 	return *this;
 }
 
@@ -204,7 +204,7 @@ template<class T>
 istream& operator>>(istream& in, Stack<T>& source) {
 	T temp;
 	in >> temp;
-	source.back_push(temp);
+	source.push_back(temp);
 }
 
 /**

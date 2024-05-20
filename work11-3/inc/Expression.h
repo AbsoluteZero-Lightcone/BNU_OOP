@@ -32,6 +32,7 @@ public:
 	Expression(string s);
 	Expression(const Element& e);
 	Expression(const Expression& e);
+	Expression(const Expression& e, int start, int length);
 	Expression& operator=(const Expression& e);
 	~Expression();
 

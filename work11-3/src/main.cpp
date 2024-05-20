@@ -13,23 +13,12 @@
 using namespace std;
 #include "Expression.h"
 
-
-
 int main() {
-	string s = "1 + 2.1(5) * 3 / (2.12*(1-6))";
-	Expression e(s);
-	cout << e << endl;
+	string s1 = "1 + 2.1 * 3 /2.12*1-6";
+	string s2 = "1 + 2.1(5) * 3 / (2.12*(1-6))";
+	Expression e(s1);
+	cout << e << " = ";
+	cout << Expression::Calculate(e) << endl;
 	return 0;
-}
-
-template<class T>
-void printArray(T* arr, unsigned N) {
-	cout << "{";
-	for (int i = 0; i < N; i++) {
-		if (i)cout << ",";
-		cout << arr[i];
-	}
-	cout << "}";
-	cout << endl;
 }
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
