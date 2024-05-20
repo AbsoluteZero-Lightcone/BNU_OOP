@@ -11,50 +11,6 @@
 
   /* Includes ----------------------------------------------------------------- */
 #include "Expression.h"
-/* Private Functions -------------------------------------------------------- */
-/**
-  * @brief 检查括号是否匹配
-  * @param s: 待检查字符串
-  * @retval bool: 是否匹配 1:匹配 0:不匹配
-  */
-bool Expression::_isValidBrackets(string s) {
-	int cur = 0;
-	for (int i = 0; i < s.length(); i++) {
-		if (s[i] == '(')
-			cur++;
-		else if (s[i] == ')')
-			cur--;
-		if (cur < 0)return false;
-	}
-	return !cur;
-}
-
-/**
-  * @brief 生成括号层次，越外层的括号层次越高，括号和外层平级
-  * @retval None
-  */
-void Expression::_formOrder(Expression e, int* m_ptrOrder) {
-	int cur = 0;
-	for (int i = 0; i < e.size(); i++) {
-		if (typeid(e[i]) == typeid(ExpressionBrackets)) {
-			ExpressionBrackets eb = dynamic_cast<ExpressionBrackets&>(e[i]);
-			if (eb.getOperator() == '(') {
-				m_ptrOrder[i] = cur;
-				cur++;
-			}
-			else if (eb.getOperator() == ')') {
-				m_ptrOrder[i] = cur;
-				cur--;
-			}
-			else {
-				m_ptrOrder[i] = cur;
-			}
-		}
-		else {
-			m_ptrOrder[i] = cur;
-		}
-	}
-}
 
 /* Interfaces --------------------------------------------------------------- */
 Expression::Expression(string s) { fetch(s); }
@@ -63,7 +19,7 @@ Expression::Expression(const Expression& e) {
 	for (int i = 0; i < e.m_stackElementPtrs.size(); i++)
 		push_back(e[i]);
 }
-Expression::Expression(const Expression& e, int start, int end) {	
+Expression::Expression(const Expression& e, int start, int end) {
 	for (int i = start; i < end; i++)
 		push_back(e[i]);
 }
@@ -142,6 +98,89 @@ void Expression::clear() {
 	}
 }
 
+/* Private Functions -------------------------------------------------------- */
+/**
+  * @brief 检查括号是否匹配
+  * @param s: 待检查字符串
+  * @retval bool: 是否匹配 1:匹配 0:不匹配
+  */
+bool Expression::_isValidBrackets(string s) {
+	int cur = 0;
+	for (int i = 0; i < s.length(); i++) {
+		if (s[i] == '(')
+			cur++;
+		else if (s[i] == ')')
+			cur--;
+		if (cur < 0)return false;
+	}
+	return !cur;
+}
+
+/**
+  * @brief 生成括号层次，越外层的括号层次越高，括号和外层平级
+  * @retval None
+  */
+void Expression::_formOrder(Expression e, int* m_ptrOrder) {
+	int cur = 0;
+	for (int i = 0; i < e.size(); i++) {
+		if (typeid(e[i]) == typeid(ExpressionBrackets)) {
+			ExpressionBrackets eb = dynamic_cast<ExpressionBrackets&>(e[i]);
+			if (eb.getOperator() == '(') {
+				m_ptrOrder[i] = cur;
+				cur++;
+			}
+			else if (eb.getOperator() == ')') {
+				cur--;
+				m_ptrOrder[i] = cur;
+			}
+			else {
+				m_ptrOrder[i] = cur;
+			}
+		}
+		else {
+			m_ptrOrder[i] = cur;
+		}
+	}
+}
+/**
+  * @brief 判断括号是否配对
+  * @retval Bool: 是否匹配 1:匹配 0:不匹配
+  */
+bool Expression::_isPaired(const Expression& e, int l, int r) {
+	if (typeid(e[l]) != typeid(ExpressionBrackets) || typeid(e[r]) != typeid(ExpressionBrackets))
+		return false;
+	ExpressionBrackets lb = dynamic_cast<ExpressionBrackets&>(e[l]);
+	ExpressionBrackets rb = dynamic_cast<ExpressionBrackets&>(e[r]);
+	if (lb.getOperator() != '(' || rb.getOperator() != ')')return false;
+
+	int* order = new int[e.size()];
+	_formOrder(e, order);
+	for (int i = l + 1; i < r; i++) 
+		if (order[i] == order[l]) {
+			delete[] order;
+			return false;
+		}
+	delete[] order;
+	return true;
+}
+
+/**
+  * @brief 判断括号是否配对，避免重复计算括号层次数组
+  * @retval Bool: 是否匹配 1:匹配 0:不匹配
+  */
+bool Expression::_isPaired(const Expression& e,int* order, int l, int r){
+	if (typeid(e[l]) != typeid(ExpressionBrackets) || typeid(e[r]) != typeid(ExpressionBrackets))
+		return false;
+	ExpressionBrackets lb = dynamic_cast<ExpressionBrackets&>(e[l]);
+	ExpressionBrackets rb = dynamic_cast<ExpressionBrackets&>(e[r]);
+	if (lb.getOperator() != '(' || rb.getOperator() != ')')return false;
+
+	if (order[l] != order[r])return false;
+	for (int i = l + 1; i < r; i++)
+		if (order[i] == order[l])return false;
+	return true;
+}
+
 /* Major Functions ---------------------------------------------------------- */
 /**
   * @brief 从字符串中提取表达式
@@ -181,15 +220,13 @@ ExpressionDouble Expression::Calculate(Expression e) {
 			return dynamic_cast<ExpressionDouble&>(e[0]);
 		else throw "Invalid Expression.";
 	}
-	if (typeid(e.front()) == typeid(ExpressionBrackets)
-		&& typeid(e.back()) == typeid(ExpressionBrackets)) {
-		// 去掉多余括号，将运算符暴露在最外层
-		return Calculate(Expression(e, 1, e.size() - 1));
-	}
 	int* order = new int[e.size()];
 	//cout << "前" << e.size() << endl;
 	//cout << e.at(0) << endl;
 	_formOrder(e, order);
+	if (_isPaired(e,order,0,e.size()-1)) { // 去掉多余括号，将运算符暴露在最外层
+		return Calculate(Expression(e, 1, e.size() - 1));
+	}
 	//cout << "后" << e.size() << endl;
 	//cout << e.at(0) << endl;
 	cout << "Order: ";
