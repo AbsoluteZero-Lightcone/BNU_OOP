@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Stack.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.2.0
+  * @version V1.3.0
   * @date    2024-05-15
   * @brief   Stack class
   * @encode  GB2312

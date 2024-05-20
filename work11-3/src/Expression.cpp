@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Expression.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.2.0
+  * @version V1.3.0
   * @date    2024-05-20
   * @brief   Expression
   * @encode  GB2312
@@ -45,7 +45,7 @@ Element& Expression::bottom()const { return *m_stackElementPtrs[0]; }
 int Expression::size()const { return m_stackElementPtrs.size(); }
 bool Expression::empty()const { return m_stackElementPtrs.empty(); }
 
-void Expression::append(const Expression& e){
+void Expression::append(const Expression& e) {
 	for (int i = 0; i < e.size(); i++)
 		push_back(e[i]);
 }
@@ -67,7 +67,7 @@ istream& operator>>(istream& in, Expression& e) {
 	return in;
 }
 
-Expression operator+(const Expression& e1, const Expression& e2){
+Expression operator+(const Expression& e1, const Expression& e2) {
 	Expression e;
 	e.append(e1);
 	e.push_back(ExpressionOperator('+'));
@@ -255,7 +255,14 @@ void Expression::fetch(string s) {
 			p->fetch(s);
 			m_stackElementPtrs.push_back(p);
 		}
-		else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/') {
+		else if (
+			s[0] == '+' ||
+			s[0] == '-' ||
+			s[0] == '*' ||
+			s[0] == '/' ||
+			s[0] == '%' ||
+			s[0] == '^'
+			) {
 			ExpressionOperator* p = new ExpressionOperator();
 			p->fetch(s);
 			m_stackElementPtrs.push_back(p);

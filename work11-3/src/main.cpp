@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.2.0
+  * @version V1.3.0
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -23,15 +23,16 @@ string tests[] = {
 	"1+(-2)",// 处理负号 -1+2 和 1+(-2)
 	"1/(2-2)"// 除零检查
 	"2(3+4)",// 乘号省略的情况非法 2(3+4)
+	"2^3",// 幂运算支持
+	"2%3",// 浮点取余运算fmod支持
 
 	// todos:
-	"1++++----2"// todo 检查不合法的连续加减号
-	"2^3",// todo 幂运算支持
-	"2%3",// todo 取余运算支持
+	"1++++----2",// todo 检查不合法的连续加减号
 	"sin(123)",// todo 函数式运算支持
 	"|-12|",// todo 特殊括号（绝对值）
 	"12!",// todo 后置单目运算(阶乘运算)
 	"E^(i*Pi)",// todo 数学常量
+	"ans+1",// todo 记忆功能
 };
 
 template<class T, unsigned N>
@@ -54,7 +55,7 @@ void test(T(&tests)[N]) {
 
 int main() {
 	test(tests);
-	cout << "Supported operators: + - * /" << endl;
+	cout << "Supported operators: + - * / ^ %" << endl;
 	do {
 		try {
 			string s;

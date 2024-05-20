@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    ExpressionOperator.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.2.0
+  * @version V1.3.0
   * @date    2024-05-20
   * @brief   ExpressionOperator
   * @encode  GB2312
@@ -11,6 +11,7 @@
 
   /* Includes ------------------------------------------------------------------*/
 #include "ExpressionOperator.h"
+#include <cmath>
 #include <cassert>
 /* Exported functions ------------------------------------------------------- */
 
@@ -25,14 +26,17 @@ ExpressionOperator& ExpressionOperator::operator=(const ExpressionOperator& e) {
 /**
   * @brief 取得运算符优先级，数字越大优先级越高
   */
-int ExpressionOperator::getPriority() const{
+int ExpressionOperator::getPriority() const {
 	switch (m_cOperator) {
 	case '+':
 	case '-':
 		return 1;
 	case '*':
 	case '/':
+	case '%':
 		return 2;
+	case '^':
+		return 3;
 	default:
 		throw "Invalid Operator.";
 	}
@@ -48,6 +52,10 @@ ExpressionDouble ExpressionOperator::operate(const ExpressionDouble& a, const Ex
 		return a * b;
 	case '/':
 		return a / b;
+	case '^':
+		return pow(a, b);
+	case '%':
+		return fmod(a, b);
 	default:
 		throw "Invalid Operator.";
 	}
@@ -64,7 +72,9 @@ void ExpressionOperator::fetch(string& s) {
 		s[0] == '+' ||
 		s[0] == '-' ||
 		s[0] == '*' ||
-		s[0] == '/' 
+		s[0] == '/' ||
+		s[0] == '^' ||
+		s[0] == '%'
 	);
 	m_cOperator = s[0];
 	s = s.substr(1);
