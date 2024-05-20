@@ -51,7 +51,7 @@ void Expression::_formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder) {
 	}
 }
 
-void Expression::_formOrder(Expression e, int* m_ptrOrder){
+void Expression::_formOrder(Expression e, int* m_ptrOrder) {
 	int cur = 0;
 	for (int i = 0; i < e.size(); i++) {
 		if (typeid(e[i]) == typeid(ExpressionBrackets)) {
@@ -98,7 +98,7 @@ Expression::Expression(string s) {
 	}
 }
 
-Expression::Expression(Element& e) {push_back(e);}
+Expression::Expression(Element& e) { push_back(e); }
 
 Expression::Expression(const Expression& e) {
 	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
@@ -109,7 +109,7 @@ Expression::Expression(const Expression& e) {
 /**
   * @brief 截取表达式
   */
-Expression::Expression(const Expression& e, int start, int end){
+Expression::Expression(const Expression& e, int start, int end) {
 	for (int i = start; i < end; i++) {
 		push_back(e[i]);
 	}
@@ -141,7 +141,7 @@ Expression::~Expression() {
 
 
 Element& Expression::operator[](int t_nIndex)const { return *m_stackElementPtrs[t_nIndex]; }
-Element& Expression::at(int t_nIndex)const { return *m_stackElementPtrs[t_nIndex]; }
+Element& Expression::at(int t_nIndex)const { return *m_stackElementPtrs.at(t_nIndex); }
 Element& Expression::front()const { return *m_stackElementPtrs[0]; }
 Element& Expression::back()const { return *m_stackElementPtrs[m_stackElementPtrs.size() - 1]; }
 
@@ -149,10 +149,37 @@ Element& Expression::top()const { return *m_stackElementPtrs[m_stackElementPtrs.
 Element& Expression::bottom()const { return *m_stackElementPtrs[0]; }
 int Expression::size()const { return m_stackElementPtrs.size(); }
 bool Expression::empty()const { return m_stackElementPtrs.empty(); }
-void Expression::insert(int t_nIndex, Element& t_data) { m_stackElementPtrs.insert(t_nIndex, &t_data); }
-void Expression::remove(int t_nIndex) { m_stackElementPtrs.remove(t_nIndex); }
-void Expression::pop_back() { delete m_stackElementPtrs.pop_back(); }
-void Expression::push_back(Element& e) { m_stackElementPtrs.push_back(&e); }
+
+// 注意下面所有的都得是深拷贝
+void Expression::insert(int t_nIndex, Element& e) {
+	Element* p = nullptr;
+	if (typeid(e) == typeid(ExpressionDouble))
+		p = new ExpressionDouble(dynamic_cast<ExpressionDouble&>(e));
+	else if (typeid(e) == typeid(ExpressionOperator))
+		p = new ExpressionOperator(dynamic_cast<ExpressionOperator&>(e));
+	else if (typeid(e) == typeid(ExpressionBrackets))
+		p = new ExpressionBrackets(dynamic_cast<ExpressionBrackets&>(e));
+	else throw "Invalid Expression.";
+	m_stackElementPtrs.insert(t_nIndex, p);
+}
+void Expression::remove(int t_nIndex) {
+	delete m_stackElementPtrs[t_nIndex];
+	m_stackElementPtrs.remove(t_nIndex);
+}
+void Expression::pop_back() {
+	delete m_stackElementPtrs.pop_back();
+}
+void Expression::push_back(Element& e) {
+	Element* p = nullptr;
+	if (typeid(e) == typeid(ExpressionDouble))
+		p = new ExpressionDouble(dynamic_cast<ExpressionDouble&>(e));
+	else if (typeid(e) == typeid(ExpressionOperator))
+		p = new ExpressionOperator(dynamic_cast<ExpressionOperator&>(e));
+	else if (typeid(e) == typeid(ExpressionBrackets))
+		p = new ExpressionBrackets(dynamic_cast<ExpressionBrackets&>(e));
+	else throw "Invalid Expression.";
+	m_stackElementPtrs.push_back(p);
+}
 
 
 // 使用递归方法计算表达式
@@ -165,19 +192,19 @@ ExpressionDouble Expression::Calculate(Expression e) {
 	int n = 0;// 找带括号的表达式中优先级最低的运算符，作为分割点
 	int min = 100;
 	int* order = new int[e.size()];
-	cout << "前" << e.size() << endl;
-	cout << e.at(0) << endl;
-	//_formOrder(e, order);
-	cout << "后" << e.size() << endl;
-	cout << e.at(0) << endl;
+	//cout << "前" << e.size() << endl;
+	//cout << e.at(0) << endl;
+	_formOrder(e, order);
+	//cout << "后" << e.size() << endl;
+	//cout << e.at(0) << endl;
 	//cout << "Order: ";
 	//for (int i = 0; i < e.size(); i++) {
 	//	cout << order[i] << " ";
 	//}
 	//cout << endl;
 	for (int i = 0; i < e.size(); i++) {
-		cout << e[i] << endl;
-		cout << typeid(e[i]).name() << endl;
+		//cout << e[i] << endl;
+		//cout << typeid(e[i]).name() << endl;
 		if (typeid(e[i]) == typeid(ExpressionOperator)) {
 			ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[i]);
 			if (op.getPriority() < min && order[i] == 0) { // 在最外层的运算符中找优先级最低的
@@ -186,7 +213,7 @@ ExpressionDouble Expression::Calculate(Expression e) {
 			}
 		}
 	}
-	
+
 
 	ExpressionDouble a = Calculate(Expression(e, 0, n));
 	ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[n]);
