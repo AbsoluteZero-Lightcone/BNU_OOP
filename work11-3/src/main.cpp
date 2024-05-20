@@ -13,26 +13,30 @@
 using namespace std;
 #include "Expression.h"
 
-// todo 不能处理负号 -1+2 和 1+(-2)
-// todo 不能处理乘号省略的情况 2(3+4)
 // todo 重载表达式的算数运算符
 
+string test[] = {
+	"1 + (2.15) * 3 / (2.12*(1-6))+2.1 * (3 /2.12)*1-6",// 一般的表达式
+	"123",// 处理纯数字
+	"((((()))))" ,// 判断空括号
+	"-1+2",// todo 不能处理负号 -1+2 和 1+(-2)
+	"2(3+4)"// todo 不能处理乘号省略的情况 2(3+4)
+};
+
+
 int main() {
-	Expression e;
-	e = "1 + (2.15) * 3 / (2.12*(1-6))+2.1 * (3 /2.12)*1-6";
-	double res = Expression::Calculate(e);
-	cout << e << " = " << res << endl;
 	do {
 		try {
 			string s;
 			cout << "Input an expression: ";
 			cin >> s;
 			Expression e(s);
+			cout << "Calculating process: " << endl;
 			double res = Expression::Calculate(e);
-			cout << e << " = " << res << endl;
+			cout << endl << e << " = " << res << endl << endl;
 		}
 		catch (const char* err) {
-			cout << err << endl;
+			cout << endl << "[Error] " << err << endl << endl;
 		}
 	} while (true);
 	return 0;

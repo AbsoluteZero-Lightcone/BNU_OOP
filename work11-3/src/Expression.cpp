@@ -50,6 +50,7 @@ ExpressionDouble Expression::calculate() { return Calculate(*this); }
 ExpressionDouble Expression::eval(string s) { return Calculate(Expression(s)); }
 ostream& operator<<(ostream& out, const Expression& e) {
 	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
+		if(i)out << " ";
 		out << *e.m_stackElementPtrs[i];
 	}
 	return out;
@@ -71,7 +72,7 @@ void Expression::insert(int t_nIndex, Element& e) {
 		p = new ExpressionOperator(dynamic_cast<ExpressionOperator&>(e));
 	else if (typeid(e) == typeid(ExpressionBrackets))
 		p = new ExpressionBrackets(dynamic_cast<ExpressionBrackets&>(e));
-	else throw "Invalid Expression.";
+	else throw "Invalid Object.";
 	m_stackElementPtrs.insert(t_nIndex, p);
 }
 void Expression::remove(int t_nIndex) {
@@ -89,7 +90,7 @@ void Expression::push_back(Element& e) {
 		p = new ExpressionOperator(dynamic_cast<ExpressionOperator&>(e));
 	else if (typeid(e) == typeid(ExpressionBrackets))
 		p = new ExpressionBrackets(dynamic_cast<ExpressionBrackets&>(e));
-	else throw "Invalid Expression.";
+	else throw "Invalid Object.";
 	m_stackElementPtrs.push_back(p);
 }
 void Expression::clear() {
@@ -188,7 +189,7 @@ bool Expression::_isPaired(const Expression& e, int* hierarchy, int l, int r) {
   */
 void Expression::fetch(string s) {
 	if (!_isValidBrackets(s))
-		throw "Invalid Brackets.";
+		throw "Invalid Brackets: 括号不配对";
 	clear();
 	while (s.length() > 0) {
 		if (s[0] == ' ')s = s.substr(1);
@@ -207,7 +208,7 @@ void Expression::fetch(string s) {
 			p->fetch(s);
 			m_stackElementPtrs.push_back(p);
 		}
-		else throw "Invalid Expression.";
+		else throw "Invalid Expression: 含有无效字符";
 	}
 }
 
@@ -215,11 +216,12 @@ void Expression::fetch(string s) {
   * @brief 使用递归方法计算表达式
   */
 ExpressionDouble Expression::Calculate(Expression e) {
-	cout << endl << "calculate: " << e << endl;
+	cout << "calculate: " << e << endl;
+	if(e.size() == 0)throw "Invalid Expression: 存在空括号";// 处理空括号产生的空表达式
 	if (e.size() == 1) {
 		if (typeid(e[0]) == typeid(ExpressionDouble))
 			return dynamic_cast<ExpressionDouble&>(e[0]);
-		else throw "Invalid Expression.";
+		else throw "Invalid Expression: 存在孤立的符号";
 	}
 	int* hierarchy = new int[e.size()];
 	//cout << "前" << e.size() << endl;
@@ -251,7 +253,7 @@ ExpressionDouble Expression::Calculate(Expression e) {
 
 	cout << "operator: " << e[n] << endl;
 
-	if (n <= 0 || n + 1 >= e.size())throw "Invalid Expression.";
+	if (n <= 0 || n + 1 >= e.size())throw "Invalid Expression: 参数过少";
 	ExpressionDouble a = Calculate(Expression(e, 0, n));
 	ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[n]);
 	ExpressionDouble b = Calculate(Expression(e, n + 1, e.size()));
