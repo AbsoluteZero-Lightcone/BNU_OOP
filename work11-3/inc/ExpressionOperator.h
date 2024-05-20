@@ -23,8 +23,13 @@ using namespace std;
 class ExpressionOperator :public ExpressionElement_Base {
 	char m_cOperator;
 public:
+	ExpressionOperator(char c = '+');
+	ExpressionOperator(string s);
+	ExpressionOperator(const ExpressionOperator& e);
+	ExpressionOperator& operator=(const ExpressionOperator& e);
+
 	void fetch(string& s);
-	ExpressionDouble calculate(ExpressionDouble a, ExpressionDouble b);
+	ExpressionDouble calculate(const ExpressionDouble& a, const ExpressionDouble& b);
 	friend ostream& operator<<(ostream& out, const ExpressionOperator& e);
 };
 /* Exported functions ------------------------------------------------------- */

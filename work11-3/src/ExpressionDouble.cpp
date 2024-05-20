@@ -14,8 +14,16 @@
 #include <cassert>
 /* Exported functions ------------------------------------------------------- */
 ExpressionDouble::ExpressionDouble(double d) :m_dData(d) {}
+ExpressionDouble::ExpressionDouble(string s) { fetch(s); /* 实参不变 */ }
+ExpressionDouble::ExpressionDouble(const ExpressionDouble& e) : m_dData(e.m_dData) {}
+
+ExpressionDouble& ExpressionDouble::operator=(const ExpressionDouble& e) {
+	m_dData = e.m_dData;
+	return *this;
+}
+
 /**
-  * @brief 从字符串中提取一个浮点数
+  * @brief 从字符串中提取一个浮点数，字符串中的第一个浮点数被提取出来，字符串被修改为去掉提取的部分
   * @param s 字符串
   * @retval None
   */
@@ -57,7 +65,7 @@ ExpressionDouble operator*(const ExpressionDouble& a, const ExpressionDouble& b)
 	return ExpressionDouble(a.m_dData * b.m_dData);
 }
 ExpressionDouble operator/(const ExpressionDouble& a, const ExpressionDouble& b) {
-	if(b.m_dData == 0) throw "Divided by zero.";
+	if (b.m_dData == 0) throw "Divided by zero.";
 	return ExpressionDouble(a.m_dData / b.m_dData);
 }
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

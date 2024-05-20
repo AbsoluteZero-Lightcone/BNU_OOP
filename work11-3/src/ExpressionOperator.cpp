@@ -14,7 +14,15 @@
 #include <cassert>
 /* Exported functions ------------------------------------------------------- */
 
-ExpressionDouble ExpressionOperator::calculate(ExpressionDouble a, ExpressionDouble b) {
+ExpressionOperator::ExpressionOperator(char c) : m_cOperator(c) {}
+ExpressionOperator::ExpressionOperator(string s) { fetch(s); /* 实参不变 */ }
+ExpressionOperator::ExpressionOperator(const ExpressionOperator& e) : m_cOperator(e.m_cOperator) {}
+ExpressionOperator& ExpressionOperator::operator=(const ExpressionOperator& e) {
+	m_cOperator = e.m_cOperator;
+	return *this;
+}
+
+ExpressionDouble ExpressionOperator::calculate(const ExpressionDouble& a, const ExpressionDouble& b) {
 	switch (m_cOperator) {
 	case '+':
 		return a + b;
@@ -24,8 +32,9 @@ ExpressionDouble ExpressionOperator::calculate(ExpressionDouble a, ExpressionDou
 		return a * b;
 	case '/':
 		return a / b;
+	default:
+		throw "Invalid Operator.";
 	}
-	throw "Invalid Operator.";
 }
 
 /**
