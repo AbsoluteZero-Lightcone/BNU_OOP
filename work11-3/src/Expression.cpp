@@ -62,46 +62,57 @@ Expression::Expression(string s) {
 		if (s[0] >= '0' && s[0] <= '9' || s[0] == '.') {
 			ExpressionDouble* p = new ExpressionDouble();
 			p->fetch(s);
-			m_stackElementPtrs.push(p);
+			m_stackElementPtrs.back_push(p);
 		}
 		else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/') {
 			ExpressionOperator* p = new ExpressionOperator();
 			p->fetch(s);
-			m_stackElementPtrs.push(p);
+			m_stackElementPtrs.back_push(p);
 		}
 		else if (s[0] == '(' || s[0] == ')') {
 			ExpressionBrackets* p = new ExpressionBrackets();
 			p->fetch(s);
-			m_stackElementPtrs.push(p);
+			m_stackElementPtrs.back_push(p);
 		}
 		else throw "Invalid Expression.";
 	}
 }
 
+Expression::Expression(const Element& e) {
+	if (typeid(e) == typeid(ExpressionDouble))
+		m_stackElementPtrs.back_push(new ExpressionDouble(dynamic_cast<const ExpressionDouble&>(e)));
+	else if (typeid(e) == typeid(ExpressionOperator))
+		m_stackElementPtrs.back_push(new ExpressionOperator(dynamic_cast<const ExpressionOperator&>(e)));
+	else if (typeid(e) == typeid(ExpressionBrackets))
+		m_stackElementPtrs.back_push(new ExpressionBrackets(dynamic_cast<const ExpressionBrackets&>(e)));
+	else throw "Invalid Expression.";
+}
+
+
 Expression::Expression(const Expression& e) {
 	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
 		if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionDouble))
-			m_stackElementPtrs.push(new ExpressionDouble(*dynamic_cast<ExpressionDouble*>(e.m_stackElementPtrs[i])));
+			m_stackElementPtrs.back_push(new ExpressionDouble(*dynamic_cast<ExpressionDouble*>(e.m_stackElementPtrs[i])));
 		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionOperator))
-			m_stackElementPtrs.push(new ExpressionOperator(*dynamic_cast<ExpressionOperator*>(e.m_stackElementPtrs[i])));
+			m_stackElementPtrs.back_push(new ExpressionOperator(*dynamic_cast<ExpressionOperator*>(e.m_stackElementPtrs[i])));
 		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionBrackets))
-			m_stackElementPtrs.push(new ExpressionBrackets(*dynamic_cast<ExpressionBrackets*>(e.m_stackElementPtrs[i])));
+			m_stackElementPtrs.back_push(new ExpressionBrackets(*dynamic_cast<ExpressionBrackets*>(e.m_stackElementPtrs[i])));
 		else throw "Invalid Expression.";
 	}
 }
 
 Expression& Expression::operator=(const Expression& e) {
 	if (this == &e)return *this;
-	while (!m_stackElementPtrs.isEmpty()) {
-		delete m_stackElementPtrs.pop();
+	while (!m_stackElementPtrs.empty()) {
+		delete m_stackElementPtrs.back_pop();
 	}
 	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
 		if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionDouble))
-			m_stackElementPtrs.push(new ExpressionDouble(*dynamic_cast<ExpressionDouble*>(e.m_stackElementPtrs[i])));
+			m_stackElementPtrs.back_push(new ExpressionDouble(*dynamic_cast<ExpressionDouble*>(e.m_stackElementPtrs[i])));
 		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionOperator))
-			m_stackElementPtrs.push(new ExpressionOperator(*dynamic_cast<ExpressionOperator*>(e.m_stackElementPtrs[i])));
+			m_stackElementPtrs.back_push(new ExpressionOperator(*dynamic_cast<ExpressionOperator*>(e.m_stackElementPtrs[i])));
 		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionBrackets))
-			m_stackElementPtrs.push(new ExpressionBrackets(*dynamic_cast<ExpressionBrackets*>(e.m_stackElementPtrs[i])));
+			m_stackElementPtrs.back_push(new ExpressionBrackets(*dynamic_cast<ExpressionBrackets*>(e.m_stackElementPtrs[i])));
 		else throw "Invalid Expression.";
 	}
 	return *this;
@@ -109,26 +120,47 @@ Expression& Expression::operator=(const Expression& e) {
 
 
 Expression::~Expression() {
-	while (!m_stackElementPtrs.isEmpty()) {
-		delete m_stackElementPtrs.pop();
+	while (!m_stackElementPtrs.empty()) {
+		delete m_stackElementPtrs.back_pop();
 	}
 }
 
+
+Element& Expression::operator[](int t_nIndex)const { return *m_stackElementPtrs[t_nIndex]; }
+Element& Expression::at(int t_nIndex)const { return *m_stackElementPtrs[t_nIndex]; }
+Element& Expression::front()const { return *m_stackElementPtrs[0]; }
+Element& Expression::back()const { return *m_stackElementPtrs[m_stackElementPtrs.size() - 1]; }
+
+Element& Expression::top()const { return *m_stackElementPtrs[m_stackElementPtrs.size() - 1]; }
+Element& Expression::bottom()const { return *m_stackElementPtrs[0]; }
+int Expression::size()const { return m_stackElementPtrs.size(); }
+bool Expression::empty()const { return m_stackElementPtrs.empty(); }
+void Expression::insert(int t_nIndex, Element& t_data) { m_stackElementPtrs.insert(t_nIndex, &t_data); }
+void Expression::remove(int t_nIndex) { m_stackElementPtrs.remove(t_nIndex); }
+void Expression::pop_back() { delete m_stackElementPtrs.back_pop(); }
+void Expression::push_back(Element& e) { m_stackElementPtrs.back_push(&e); }
+
+
+// 使用递归方法计算表达式
 ExpressionDouble Expression::Calculate(Expression e) {
-	Stack<Element*> stack;
-	while (!e.m_stackElementPtrs.isEmpty()) {
-		Element* p = e.m_stackElementPtrs.pop();
-		if (typeid(p) == typeid(ExpressionOperator)) {
-			ExpressionOperator* pOperator = dynamic_cast<ExpressionOperator*>(p);
-			ExpressionDouble* p2 = dynamic_cast<ExpressionDouble*>(stack.pop());
-			ExpressionDouble* p1 = dynamic_cast<ExpressionDouble*>(stack.pop());
-			stack.push(new ExpressionDouble(pOperator->calculate(*p1, *p2)));
-		}
-		else {
-			stack.push(p);
-		}
+	if (e.m_stackElementPtrs.size() == 1) {
+		if (typeid(e.m_stackElementPtrs[0]) == typeid(ExpressionDouble))
+			return *dynamic_cast<ExpressionDouble*>(e.m_stackElementPtrs[0]);
+		else throw "Invalid Expression.";
 	}
-	return *dynamic_cast<ExpressionDouble*>(stack.pop());
+	else {
+		int i = 0;
+		while (typeid(e.m_stackElementPtrs[i]) != typeid(ExpressionOperator))i++;
+		ExpressionDouble a = Calculate(*(e.m_stackElementPtrs[i - 2]));
+		ExpressionDouble b = Calculate(*e.m_stackElementPtrs[i - 1]);
+		ExpressionOperator* p = dynamic_cast<ExpressionOperator*>(e.m_stackElementPtrs[i]);
+		ExpressionDouble c = p->operate(a, b);
+		e.m_stackElementPtrs.remove(i - 2);
+		e.m_stackElementPtrs.remove(i - 2);
+		e.m_stackElementPtrs.remove(i - 2);
+		e.m_stackElementPtrs.insert(i - 2, &c);
+		return Calculate(e);
+	}
 }
 
 

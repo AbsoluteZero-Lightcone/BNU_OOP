@@ -22,7 +22,7 @@ ExpressionOperator& ExpressionOperator::operator=(const ExpressionOperator& e) {
 	return *this;
 }
 
-ExpressionDouble ExpressionOperator::calculate(const ExpressionDouble& a, const ExpressionDouble& b) {
+ExpressionDouble ExpressionOperator::operate(const ExpressionDouble& a, const ExpressionDouble& b) {
 	switch (m_cOperator) {
 	case '+':
 		return a + b;

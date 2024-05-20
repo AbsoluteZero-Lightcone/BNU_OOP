@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Stack_Template.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-05-16
   * @brief   Stack class
   * @encode  GB2312
@@ -72,7 +72,36 @@ template<class T>
 inline int Stack<T>::size() const { return m_nSize; }
 
 template<class T>
-inline bool Stack<T>::isEmpty() const { return m_nSize == 0; }
+inline bool Stack<T>::empty() const { return m_nSize == 0; }
+
+template<class T>
+void Stack<T>::insert(int t_nIndex, const T& t_data) {
+	T* temp = new T[m_nSize + 1];
+	for (int i = 0; i < t_nIndex; i++) {
+		temp[i] = m_ptrData[i];
+	}
+	temp[t_nIndex] = t_data;
+	for (int i = t_nIndex; i < m_nSize; i++) {
+		temp[i + 1] = m_ptrData[i];
+	}
+	delete[] m_ptrData;
+	m_ptrData = temp;
+	m_nSize++;
+}
+
+template<class T>
+void Stack<T>::remove(int t_nIndex) {
+	T* temp = new T[m_nSize - 1];
+	for (int i = 0; i < t_nIndex; i++) {
+		temp[i] = m_ptrData[i];
+	}
+	for (int i = t_nIndex + 1; i < m_nSize; i++) {
+		temp[i - 1] = m_ptrData[i];
+	}
+	delete[] m_ptrData;
+	m_ptrData = temp;
+	m_nSize--;
+}
 
 /* Operations --------------------------------------------------------------- */
 
@@ -81,7 +110,7 @@ inline bool Stack<T>::isEmpty() const { return m_nSize == 0; }
   * @retval T : 出栈的数据
   */
 template<typename T>
-T Stack<T>::pop() {
+T Stack<T>::back_pop() {
 	if (m_nSize == 0) {
 		throw out_of_range("out of range");
 	}
@@ -96,21 +125,21 @@ T Stack<T>::pop() {
   * @retval Stack<T>& : 压栈后的栈, 用于链式调用
   */
 template<typename T>
-Stack<T>& Stack<T>::push(const T& t_data) {
+Stack<T>& Stack<T>::back_push(const T& t_data) {
 	resize(m_nSize + 1);
 	m_ptrData[m_nSize - 1] = t_data;
 	return *this;
 }
 
 template<class T>
-Stack<T>& Stack<T>::operator>>(T& pop){
-	pop = this->pop();
+Stack<T>& Stack<T>::operator>>(T& back_pop) {
+	back_pop = this->back_pop();
 	return *this;
 }
 
 template<class T>
-Stack<T>& Stack<T>::operator<<(const T& push){
-	this->push(push);
+Stack<T>& Stack<T>::operator<<(const T& back_push) {
+	this->back_push(back_push);
 	return *this;
 }
 
@@ -163,7 +192,7 @@ void Stack<T>::operator=(const Stack<T>& source) {
 }
 
 template<class T>
-Stack<T>::operator T* () const{return m_ptrData;}
+Stack<T>::operator T* () const { return m_ptrData; }
 
 /**
   * @brief 重载标准输入流 >>运算符
@@ -175,7 +204,7 @@ template<class T>
 istream& operator>>(istream& in, Stack<T>& source) {
 	T temp;
 	in >> temp;
-	source.push(temp);
+	source.back_push(temp);
 }
 
 /**
@@ -219,7 +248,7 @@ bool operator==(const Stack<T>& n1, const Stack<T>& n2) {
   * @retval bool, true for n1 != n2
   */
 template<class T>
-bool operator!=(const Stack<T>& n1, const Stack<T>& n2) {return !(n1 == n2);}
+bool operator!=(const Stack<T>& n1, const Stack<T>& n2) { return !(n1 == n2); }
 
 #endif // /* !__STACK_TEMPLATE_H */
 

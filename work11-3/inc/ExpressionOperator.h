@@ -29,7 +29,7 @@ public:
 	ExpressionOperator& operator=(const ExpressionOperator& e);
 
 	void fetch(string& s);
-	ExpressionDouble calculate(const ExpressionDouble& a, const ExpressionDouble& b);
+	ExpressionDouble operate(const ExpressionDouble& a, const ExpressionDouble& b);
 	friend ostream& operator<<(ostream& out, const ExpressionOperator& e);
 };
 /* Exported functions ------------------------------------------------------- */

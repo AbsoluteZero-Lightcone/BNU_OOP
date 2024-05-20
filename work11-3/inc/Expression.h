@@ -8,7 +8,7 @@
   * @encode  GB2312
   ******************************************************************************
   */
-/* Define to prevent recursive inclusion -------------------------------------*/
+  /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __EXPRESSION_H
 #define __EXPRESSION_H
 
@@ -30,13 +30,30 @@ private:
 	void _formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder);
 public:
 	Expression(string s);
+	Expression(const Element& e);
 	Expression(const Expression& e);
 	Expression& operator=(const Expression& e);
 	~Expression();
 
-	ExpressionDouble calculate();
+	// 元素的对外Getter接口全部传引用
+	Element& operator[](int t_nIndex)const;
+	Element& at(int t_nIndex)const;
+	Element& front()const;
+	Element& back()const;
+	Element& top()const;
+	Element& bottom()const;
+	int size()const;
+	bool empty()const;
+
+	// 操作表达式接口，解决内存泄漏问题
+	void insert(int t_nIndex, Element& t_data);
+	void remove(int t_nIndex);
+	void pop_back();
+	void push_back(Element& e);
+
 	static ExpressionDouble Calculate(Expression e);
-	static ExpressionDouble eval(string s);
+	//ExpressionDouble calculate();
+	//static ExpressionDouble eval(string s);
 
 	friend ostream& operator<<(ostream& out, const Expression& e);
 };
