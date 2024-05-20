@@ -16,36 +16,18 @@
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <string>
-#include <cmath>
 using namespace std;
+#include "ExpressionElement_Base.h"
 
 /* Class ---------------------------------------------------------------------*/
-#include "ExpressionElement_Base.h"
 class ExpressionOperator :public ExpressionElement_Base {
 	char m_cOperator;
 public:
-	void fetch(string& s) {
-		assert(s.length() > 0);
-		assert(
-			s[0] == '+' ||
-			s[0] == '-' ||
-			s[0] == '*' ||
-			s[0] == '/' ||
-			s[0] == '(' ||
-			s[0] == ')'
-		);
-		m_cOperator = s[0];
-		s = s.substr(1);
-	}
+	void fetch(string& s);
 	friend ostream& operator<<(ostream& out, const ExpressionOperator& e);
 };
-
-ostream& operator<<(ostream& out, const ExpressionOperator& e) {
-	out << e.m_cOperator;
-	return out;
-}
 /* Exported functions ------------------------------------------------------- */
+ostream& operator<<(ostream& out, const ExpressionOperator& e);
 
 #endif /* !__EXPRESSIONOPERATOR_H */
-
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

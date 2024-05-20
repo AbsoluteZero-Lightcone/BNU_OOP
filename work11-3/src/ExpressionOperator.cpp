@@ -11,11 +11,30 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ExpressionOperator.h"
-
+#include <cassert>
 /* Exported functions ------------------------------------------------------- */
 /**
-  * @brief 
-  * @param 
-  * @retval 
+  * @brief ´Ó×Ö·û´®ÖÐÌáÈ¡ÔËËã·û
+  * @param s ×Ö·û´®
+  * @retval None
   */
+void ExpressionOperator::fetch(string& s) {
+	assert(s.length() > 0);
+	assert(
+		s[0] == '+' ||
+		s[0] == '-' ||
+		s[0] == '*' ||
+		s[0] == '/' ||
+		s[0] == '(' ||
+		s[0] == ')'
+	);
+	m_cOperator = s[0];
+	s = s.substr(1);
+}
+
+
+ostream& operator<<(ostream& out, const ExpressionOperator& e) {
+	out << e.m_cOperator;
+	return out;
+}
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
