@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.1.1
+  * @version V1.2.0
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -33,8 +33,6 @@ string tests[] = {
 	"12!",// todo 后置单目运算(阶乘运算)
 	"E^(i*Pi)",// todo 数学常量
 };
-// todo 重载表达式的算数运算符(符号运算)
-
 
 template<class T, unsigned N>
 void test(T(&tests)[N]) {
@@ -60,7 +58,7 @@ int main() {
 	do {
 		try {
 			string s;
-			cout << endl << "Input an expression: ";
+			cout << "Input an expression: " << endl << ">>> ";
 			cin >> s;
 			Expression e(s);
 #ifdef ENABLE_PROCESS_PRINT

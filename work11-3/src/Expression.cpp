@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Expression.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.1.1
+  * @version V1.2.0
   * @date    2024-05-20
   * @brief   Expression
   * @encode  GB2312
@@ -45,6 +45,11 @@ Element& Expression::bottom()const { return *m_stackElementPtrs[0]; }
 int Expression::size()const { return m_stackElementPtrs.size(); }
 bool Expression::empty()const { return m_stackElementPtrs.empty(); }
 
+void Expression::append(const Expression& e){
+	for (int i = 0; i < e.size(); i++)
+		push_back(e[i]);
+}
+
 /* Exported functions ------------------------------------------------------- */
 ExpressionDouble Expression::calculate() { return Calculate(*this); }
 ExpressionDouble Expression::eval(string s) { return Calculate(Expression(s)); }
@@ -62,16 +67,68 @@ istream& operator>>(istream& in, Expression& e) {
 	return in;
 }
 
+Expression operator+(const Expression& e1, const Expression& e2){
+	Expression e;
+	e.append(e1);
+	e.push_back(ExpressionOperator('+'));
+	e.append(e2);
+	return e;
+}
+Expression operator-(const Expression& e1, const Expression& e2) {
+	Expression e;
+	e.append(e1);
+	e.push_back(ExpressionOperator('-'));
+	e.append(e2);
+	return e;
+}
+Expression operator*(const Expression& e1, const Expression& e2) {
+	Expression e;
+	e.append(e1);
+	e.push_back(ExpressionOperator('*'));
+	e.append(e2);
+	return e;
+}
+Expression operator/(const Expression& e1, const Expression& e2) {
+	Expression e;
+	e.append(e1);
+	e.push_back(ExpressionOperator('/'));
+	e.append(e2);
+	return e;
+}
+Expression operator%(const Expression& e1, const Expression& e2) {
+	Expression e;
+	e.append(e1);
+	e.push_back(ExpressionOperator('%'));
+	e.append(e2);
+	return e;
+}
+Expression operator^(const Expression& e1, const Expression& e2) {
+	Expression e;
+	e.append(e1);
+	e.push_back(ExpressionOperator('^'));
+	e.append(e2);
+	return e;
+}
+Expression operator-(const Expression& e) {
+	Expression ne;
+	ne.push_back(ExpressionOperator('-'));
+	ne.append(e);
+	return ne;
+}
+Expression operator+(const Expression& e) {
+	return e;
+}
+
 /* Memory Handling Function ------------------------------------------------- */
 Expression::Expression() { m_stackElementPtrs.push_back(new ExpressionDouble()); }
-void Expression::insert(int t_nIndex, Element& e) {
+void Expression::insert(int t_nIndex, const Element& e) {
 	Element* p = nullptr;
 	if (typeid(e) == typeid(ExpressionDouble))
-		p = new ExpressionDouble(dynamic_cast<ExpressionDouble&>(e));
+		p = new ExpressionDouble(dynamic_cast<ExpressionDouble&>(const_cast<Element&>(e)));
 	else if (typeid(e) == typeid(ExpressionOperator))
-		p = new ExpressionOperator(dynamic_cast<ExpressionOperator&>(e));
+		p = new ExpressionOperator(dynamic_cast<ExpressionOperator&>(const_cast<Element&>(e)));
 	else if (typeid(e) == typeid(ExpressionBrackets))
-		p = new ExpressionBrackets(dynamic_cast<ExpressionBrackets&>(e));
+		p = new ExpressionBrackets(dynamic_cast<ExpressionBrackets&>(const_cast<Element&>(e)));
 	else throw "Invalid Object.";
 	m_stackElementPtrs.insert(t_nIndex, p);
 }
@@ -82,14 +139,14 @@ void Expression::remove(int t_nIndex) {
 void Expression::pop_back() {
 	delete m_stackElementPtrs.pop_back();
 }
-void Expression::push_back(Element& e) {
+void Expression::push_back(const Element& e) {
 	Element* p = nullptr;
 	if (typeid(e) == typeid(ExpressionDouble))
-		p = new ExpressionDouble(dynamic_cast<ExpressionDouble&>(e));
+		p = new ExpressionDouble(dynamic_cast<ExpressionDouble&>(const_cast<Element&>(e)));
 	else if (typeid(e) == typeid(ExpressionOperator))
-		p = new ExpressionOperator(dynamic_cast<ExpressionOperator&>(e));
+		p = new ExpressionOperator(dynamic_cast<ExpressionOperator&>(const_cast<Element&>(e)));
 	else if (typeid(e) == typeid(ExpressionBrackets))
-		p = new ExpressionBrackets(dynamic_cast<ExpressionBrackets&>(e));
+		p = new ExpressionBrackets(dynamic_cast<ExpressionBrackets&>(const_cast<Element&>(e)));
 	else throw "Invalid Object.";
 	m_stackElementPtrs.push_back(p);
 }

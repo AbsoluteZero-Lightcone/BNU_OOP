@@ -12,7 +12,7 @@
 #define __STACK_TEMPLATE_H
   /* Includes ------------------------------------------------------------------*/
 #include "Stack.h"
-
+#include <cassert>
 /* Constructors & Deconstructor --------------------------------------------- */
 template<class T>
 Stack<T>::Stack() :
@@ -76,6 +76,7 @@ inline bool Stack<T>::empty() const { return m_nSize == 0; }
 
 template<class T>
 void Stack<T>::insert(int t_nIndex, const T& t_data) {
+	assert(t_nIndex >= 0 && t_nIndex <= m_nSize);
 	T* temp = new T[m_nSize + 1];
 	for (int i = 0; i < t_nIndex; i++) {
 		temp[i] = m_ptrData[i];
@@ -91,6 +92,7 @@ void Stack<T>::insert(int t_nIndex, const T& t_data) {
 
 template<class T>
 void Stack<T>::remove(int t_nIndex) {
+	assert(t_nIndex >= 0 && t_nIndex < m_nSize);
 	T* temp = new T[m_nSize - 1];
 	for (int i = 0; i < t_nIndex; i++) {
 		temp[i] = m_ptrData[i];

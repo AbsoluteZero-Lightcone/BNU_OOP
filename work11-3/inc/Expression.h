@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Expression.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.1.1
+  * @version V1.2.0
   * @date    2024-05-20
   * @brief   Expression
   * @encode  GB2312
@@ -53,11 +53,13 @@ public:
 	int size()const;
 	bool empty()const;
 
-	void insert(int t_nIndex, Element& t_data);
+	void insert(int t_nIndex, const Element& t_data);
 	void remove(int t_nIndex);
 	void pop_back();
-	void push_back(Element& e);
+	void push_back(const Element& e);
 	void clear();
+
+	void append(const Expression& e);
 
 	static ExpressionDouble Calculate(Expression e);
 	ExpressionDouble calculate();
@@ -65,11 +67,27 @@ public:
 
 	friend ostream& operator<<(ostream& out, const Expression& e);
 	friend istream& operator>>(istream& in, Expression& e);
+	friend Expression operator+(const Expression& e1, const Expression& e2);
+	friend Expression operator-(const Expression& e1, const Expression& e2);
+	friend Expression operator*(const Expression& e1, const Expression& e2);
+	friend Expression operator/(const Expression& e1, const Expression& e2);
+	friend Expression operator%(const Expression& e1, const Expression& e2);
+	friend Expression operator^(const Expression& e1, const Expression& e2);
+	friend Expression operator-(const Expression& e);
+	friend Expression operator+(const Expression& e);
 };
 
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const Expression& e);
 istream& operator>>(istream& in, Expression& e);
 
+Expression operator+(const Expression& e1, const Expression& e2);
+Expression operator-(const Expression& e1, const Expression& e2);
+Expression operator*(const Expression& e1, const Expression& e2);
+Expression operator/(const Expression& e1, const Expression& e2);
+Expression operator%(const Expression& e1, const Expression& e2);
+Expression operator^(const Expression& e1, const Expression& e2);
+Expression operator-(const Expression& e);
+Expression operator+(const Expression& e);
 #endif /* !__EXPRESSION_H */
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
