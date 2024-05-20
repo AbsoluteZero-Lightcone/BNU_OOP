@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Expression.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-05-20
   * @brief   Expression
   * @encode  GB2312
@@ -216,7 +216,11 @@ void Expression::fetch(string s) {
   * @brief 使用递归方法计算表达式
   */
 ExpressionDouble Expression::Calculate(Expression e) {
+
+#ifdef ENABLE_PROCESS_PRINT
 	cout << "calculate: " << e << endl;
+#endif
+
 	if (e.size() == 0)throw "Invalid Expression: 存在空括号";// 处理空括号产生的空表达式
 	if (e.size() == 1) {
 		if (typeid(e[0]) == typeid(ExpressionDouble))
@@ -239,9 +243,11 @@ ExpressionDouble Expression::Calculate(Expression e) {
 		return Calculate(Expression(e, 1, e.size() - 1));
 	}
 
+#ifdef ENABLE_PROCESS_PRINT
 	cout << "hierarchy: ";
 	for (int i = 0; i < e.size(); i++)cout << hierarchy[i] << " ";
 	cout << endl;
+#endif
 
 	int n = -1;// 将表达式中优先级最低的运算符作为分割点
 	int min = INT32_MAX;
@@ -258,7 +264,9 @@ ExpressionDouble Expression::Calculate(Expression e) {
 
 	delete[] hierarchy;
 
+#ifdef ENABLE_PROCESS_PRINT
 	cout << "operator: " << e[n] << endl;
+#endif
 
 	if (n <= 0 || n + 1 >= e.size())throw "Invalid Expression: 参与运算的参数过少";
 	ExpressionDouble a = Calculate(Expression(e, 0, n));

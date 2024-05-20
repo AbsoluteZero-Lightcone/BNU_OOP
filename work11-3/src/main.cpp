@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.0.0
+  * @version V1.1.0
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -11,30 +11,58 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
 #include "Expression.h"
 
-// todo 重载表达式的算数运算符
 
-string test[] = {
-	"1 + (2.15) * 3 / (2.12*(1-6))+2.1 * (3 /2.12)*1-6",// 一般的表达式
+// todo 重载表达式的算数运算符
+// todo 支持更多的运算符 ^ %
+
+string tests[] = {
+	"1 + (2.15) * 3 / (2.120001*(1-6))+2.1 * (3 /2.12)*1-6",// 一般的表达式
 	"123",// 处理纯数字
 	"((((()))))" ,// 判断空括号
 	"-1+2",
 	"1+(-2)",// 处理负号 -1+2 和 1+(-2)
-	"2(3+4)"// 乘号省略的情况非法 2(3+4)
+	"1/(2-2)"// 除零检查
+	"2(3+4)",// 乘号省略的情况非法 2(3+4)
+	// todos:
+	"1++++----2"// todo 检查不合法的连续加减号
+	"2^3",// todo 幂运算支持
+	"2%3",// todo 取余运算支持
 };
 
+template<class T, unsigned N>
+void test(T(&tests)[N]) {
+	for (int i = 0; i < N; i++) {
+		try {
+			Expression e(tests[i]);
+#ifdef ENABLE_PROCESS_PRINT
+			cout << "[Calculating process]" << endl;
+#endif
+			cout << endl << ">>> " << e << " = " << Expression::Calculate(e) << endl << endl;
+		}
+		catch (const char* err) {
+			cerr << endl << "[Error] " << err << endl << endl;
+		}
+	}
+
+}
 
 int main() {
+	test(tests);
+	cout << "Supported operators: + - * /" << endl;
 	do {
 		try {
 			string s;
-			cout << "Input an expression: ";
+			cout << endl << "Input an expression: ";
 			cin >> s;
 			Expression e(s);
-			cout << "Calculating process: " << endl;
+#ifdef ENABLE_PROCESS_PRINT
+			cout << " [Calculating process]" << endl;
+#endif
 			double res = Expression::Calculate(e);
-			cout << endl << e << " = " << res << endl << endl;
+			cout << endl << ">>> " << e << " = " << res << endl << endl;
 		}
 		catch (const char* err) {
 			cerr << endl << "[Error] " << err << endl << endl;
