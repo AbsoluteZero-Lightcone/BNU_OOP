@@ -23,11 +23,23 @@ using namespace std;
 class ExpressionDouble :public ExpressionElement_Base {
 	double m_dData;
 public:
+	ExpressionDouble(double d = 0);
+	ExpressionDouble(string s);
+	ExpressionDouble(const ExpressionDouble& e);
+	ExpressionDouble& operator=(const ExpressionDouble& e);
+
 	void fetch(string& s);
 	friend ostream& operator<<(ostream& out, const ExpressionDouble& e);
+	friend ExpressionDouble operator+(const ExpressionDouble& a, const ExpressionDouble& b);
+	friend ExpressionDouble operator-(const ExpressionDouble& a, const ExpressionDouble& b);
+	friend ExpressionDouble operator*(const ExpressionDouble& a, const ExpressionDouble& b);
+	friend ExpressionDouble operator/(const ExpressionDouble& a, const ExpressionDouble& b);
 };
 /* Exported functions ------------------------------------------------------- */
 ostream& operator<<(ostream& out, const ExpressionDouble& e);
-
+ExpressionDouble operator+(const ExpressionDouble& a, const ExpressionDouble& b);
+ExpressionDouble operator-(const ExpressionDouble& a, const ExpressionDouble& b);
+ExpressionDouble operator*(const ExpressionDouble& a, const ExpressionDouble& b);
+ExpressionDouble operator/(const ExpressionDouble& a, const ExpressionDouble& b);
 #endif /* !__ExpressionDouble_H */
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

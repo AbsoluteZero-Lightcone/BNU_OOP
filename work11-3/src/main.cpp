@@ -13,7 +13,6 @@
 using namespace std;
 #include "Expression.h"
 
-
 int main() {
 	string s = "1 + 2 * 3";
 	Expression e(s);

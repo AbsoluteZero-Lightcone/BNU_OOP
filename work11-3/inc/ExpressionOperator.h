@@ -18,12 +18,13 @@
 #include <string>
 using namespace std;
 #include "ExpressionElement_Base.h"
-
+#include "ExpressionDouble.h"
 /* Class ---------------------------------------------------------------------*/
 class ExpressionOperator :public ExpressionElement_Base {
 	char m_cOperator;
 public:
 	void fetch(string& s);
+	ExpressionDouble calculate(ExpressionDouble a, ExpressionDouble b);
 	friend ostream& operator<<(ostream& out, const ExpressionOperator& e);
 };
 /* Exported functions ------------------------------------------------------- */

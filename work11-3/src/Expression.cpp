@@ -73,11 +73,13 @@ Expression::Expression(string s) {
 	}
 }
 
+
 Expression::~Expression() {
 	while (!m_stackElementPtrs.isEmpty()) {
 		delete m_stackElementPtrs.pop();
 	}
 }
+
 
 ostream& operator<<(ostream& out, const Expression& e) {
 	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {

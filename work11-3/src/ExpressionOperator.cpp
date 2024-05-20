@@ -9,10 +9,25 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "ExpressionOperator.h"
 #include <cassert>
 /* Exported functions ------------------------------------------------------- */
+
+ExpressionDouble ExpressionOperator::calculate(ExpressionDouble a, ExpressionDouble b) {
+	switch (m_cOperator) {
+	case '+':
+		return a + b;
+	case '-':
+		return a - b;
+	case '*':
+		return a * b;
+	case '/':
+		return a / b;
+	}
+	throw "Invalid Operator.";
+}
+
 /**
   * @brief 从字符串中提取运算符
   * @param s 字符串

@@ -9,10 +9,11 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "ExpressionDouble.h"
 #include <cassert>
 /* Exported functions ------------------------------------------------------- */
+ExpressionDouble::ExpressionDouble(double d) :m_dData(d) {}
 /**
   * @brief 从字符串中提取一个浮点数
   * @param s 字符串
@@ -44,5 +45,19 @@ void ExpressionDouble::fetch(string& s) {
 ostream& operator<<(ostream& out, const ExpressionDouble& e) {
 	out << e.m_dData;
 	return out;
+}
+
+ExpressionDouble operator+(const ExpressionDouble& a, const ExpressionDouble& b) {
+	return ExpressionDouble(a.m_dData + b.m_dData);
+}
+ExpressionDouble operator-(const ExpressionDouble& a, const ExpressionDouble& b) {
+	return ExpressionDouble(a.m_dData - b.m_dData);
+}
+ExpressionDouble operator*(const ExpressionDouble& a, const ExpressionDouble& b) {
+	return ExpressionDouble(a.m_dData * b.m_dData);
+}
+ExpressionDouble operator/(const ExpressionDouble& a, const ExpressionDouble& b) {
+	if(b.m_dData == 0) throw "Divided by zero.";
+	return ExpressionDouble(a.m_dData / b.m_dData);
 }
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/

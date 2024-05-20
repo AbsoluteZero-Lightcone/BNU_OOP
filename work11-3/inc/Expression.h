@@ -30,6 +30,11 @@ private:
 public:
 	Expression(string s);
 	~Expression();
+
+	double calculate();
+	static double Calculate(Expression e);
+	static double eval(string s);
+
 	friend ostream& operator<<(ostream& out, const Expression& e);
 };
 
