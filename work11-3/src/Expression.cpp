@@ -64,7 +64,7 @@ Expression::Expression(string s) {
 			p->fetch(s);
 			m_stackElementPtrs.push(p);
 		}
-		else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/' ) {
+		else if (s[0] == '+' || s[0] == '-' || s[0] == '*' || s[0] == '/') {
 			ExpressionOperator* p = new ExpressionOperator();
 			p->fetch(s);
 			m_stackElementPtrs.push(p);
@@ -78,11 +78,57 @@ Expression::Expression(string s) {
 	}
 }
 
+Expression::Expression(const Expression& e) {
+	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
+		if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionDouble))
+			m_stackElementPtrs.push(new ExpressionDouble(*dynamic_cast<ExpressionDouble*>(e.m_stackElementPtrs[i])));
+		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionOperator))
+			m_stackElementPtrs.push(new ExpressionOperator(*dynamic_cast<ExpressionOperator*>(e.m_stackElementPtrs[i])));
+		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionBrackets))
+			m_stackElementPtrs.push(new ExpressionBrackets(*dynamic_cast<ExpressionBrackets*>(e.m_stackElementPtrs[i])));
+		else throw "Invalid Expression.";
+	}
+}
+
+Expression& Expression::operator=(const Expression& e) {
+	if (this == &e)return *this;
+	while (!m_stackElementPtrs.isEmpty()) {
+		delete m_stackElementPtrs.pop();
+	}
+	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
+		if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionDouble))
+			m_stackElementPtrs.push(new ExpressionDouble(*dynamic_cast<ExpressionDouble*>(e.m_stackElementPtrs[i])));
+		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionOperator))
+			m_stackElementPtrs.push(new ExpressionOperator(*dynamic_cast<ExpressionOperator*>(e.m_stackElementPtrs[i])));
+		else if (typeid(e.m_stackElementPtrs[i]) == typeid(ExpressionBrackets))
+			m_stackElementPtrs.push(new ExpressionBrackets(*dynamic_cast<ExpressionBrackets*>(e.m_stackElementPtrs[i])));
+		else throw "Invalid Expression.";
+	}
+	return *this;
+}
+
 
 Expression::~Expression() {
 	while (!m_stackElementPtrs.isEmpty()) {
 		delete m_stackElementPtrs.pop();
 	}
+}
+
+ExpressionDouble Expression::Calculate(Expression e) {
+	Stack<Element*> stack;
+	while (!e.m_stackElementPtrs.isEmpty()) {
+		Element* p = e.m_stackElementPtrs.pop();
+		if (typeid(p) == typeid(ExpressionOperator)) {
+			ExpressionOperator* pOperator = dynamic_cast<ExpressionOperator*>(p);
+			ExpressionDouble* p2 = dynamic_cast<ExpressionDouble*>(stack.pop());
+			ExpressionDouble* p1 = dynamic_cast<ExpressionDouble*>(stack.pop());
+			stack.push(new ExpressionDouble(pOperator->calculate(*p1, *p2)));
+		}
+		else {
+			stack.push(p);
+		}
+	}
+	return *dynamic_cast<ExpressionDouble*>(stack.pop());
 }
 
 

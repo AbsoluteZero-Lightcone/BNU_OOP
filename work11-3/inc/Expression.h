@@ -30,11 +30,13 @@ private:
 	void _formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder);
 public:
 	Expression(string s);
+	Expression(const Expression& e);
+	Expression& operator=(const Expression& e);
 	~Expression();
 
-	double calculate();
-	static double Calculate(Expression e);
-	static double eval(string s);
+	ExpressionDouble calculate();
+	static ExpressionDouble Calculate(Expression e);
+	static ExpressionDouble eval(string s);
 
 	friend ostream& operator<<(ostream& out, const Expression& e);
 };
