@@ -32,9 +32,6 @@ bool Expression::_isValidBrackets(string s) {
 
 /**
   * @brief 生成括号层次
-  * @param m_strRaw: 待检查字符串
-  * @param m_nLength: 字符串长度
-  * @param m_ptrOrder: 括号层次数组
   * @retval None
   */
 void Expression::_formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder) {
@@ -47,6 +44,29 @@ void Expression::_formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder) {
 		else if (m_strRaw[i] == ')') {
 			cur--;
 			m_ptrOrder[i] = -1;
+		}
+		else {
+			m_ptrOrder[i] = cur;
+		}
+	}
+}
+
+void Expression::_formOrder(Expression e, int* m_ptrOrder){
+	int cur = 0;
+	for (int i = 0; i < e.size(); i++) {
+		if (typeid(e[i]) == typeid(ExpressionBrackets)) {
+			ExpressionBrackets eb = dynamic_cast<ExpressionBrackets&>(e[i]);
+			if (eb.getOperator() == '(') {
+				cur++;
+				m_ptrOrder[i] = -1;
+			}
+			else if (eb.getOperator() == ')') {
+				cur--;
+				m_ptrOrder[i] = -1;
+			}
+			else {
+				m_ptrOrder[i] = cur;
+			}
 		}
 		else {
 			m_ptrOrder[i] = cur;
@@ -78,15 +98,7 @@ Expression::Expression(string s) {
 	}
 }
 
-Expression::Expression(const Element& e) {
-	if (typeid(e) == typeid(ExpressionDouble))
-		m_stackElementPtrs.push_back(new ExpressionDouble(dynamic_cast<const ExpressionDouble&>(e)));
-	else if (typeid(e) == typeid(ExpressionOperator))
-		m_stackElementPtrs.push_back(new ExpressionOperator(dynamic_cast<const ExpressionOperator&>(e)));
-	else if (typeid(e) == typeid(ExpressionBrackets))
-		m_stackElementPtrs.push_back(new ExpressionBrackets(dynamic_cast<const ExpressionBrackets&>(e)));
-	else throw "Invalid Expression.";
-}
+Expression::Expression(Element& e) {push_back(e);}
 
 Expression::Expression(const Expression& e) {
 	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
@@ -97,8 +109,8 @@ Expression::Expression(const Expression& e) {
 /**
   * @brief 截取表达式
   */
-Expression::Expression(const Expression& e, int start, int length){
-	for (int i = start; i < start + length; i++) {
+Expression::Expression(const Expression& e, int start, int end){
+	for (int i = start; i < end; i++) {
 		push_back(e[i]);
 	}
 }
@@ -150,27 +162,35 @@ ExpressionDouble Expression::Calculate(Expression e) {
 			return dynamic_cast<ExpressionDouble&>(e[0]);
 		else throw "Invalid Expression.";
 	}
-	int n = 0;
+	int n = 0;// 找带括号的表达式中优先级最低的运算符，作为分割点
+	int min = 100;
+	int* order = new int[e.size()];
+	cout << "前" << e.size() << endl;
+	cout << e.at(0) << endl;
+	//_formOrder(e, order);
+	cout << "后" << e.size() << endl;
+	cout << e.at(0) << endl;
+	//cout << "Order: ";
+	//for (int i = 0; i < e.size(); i++) {
+	//	cout << order[i] << " ";
+	//}
+	//cout << endl;
 	for (int i = 0; i < e.size(); i++) {
-		if (typeid(e[i]) == typeid(ExpressionBrackets)) {
-			n = i;
-			break;
-		}
-	}
-	if (n == 0) {
-		for (int i = 0; i < e.size(); i++) {
-			if (typeid(e[i]) == typeid(ExpressionOperator)) {
+		cout << e[i] << endl;
+		cout << typeid(e[i]).name() << endl;
+		if (typeid(e[i]) == typeid(ExpressionOperator)) {
+			ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[i]);
+			if (op.getPriority() < min && order[i] == 0) { // 在最外层的运算符中找优先级最低的
+				min = op.getPriority();
 				n = i;
-				break;
 			}
 		}
 	}
-	if (n == 0) {
-		throw "Invalid Expression.";
-	}
+	
+
 	ExpressionDouble a = Calculate(Expression(e, 0, n));
-	ExpressionDouble b = Calculate(Expression(e, n + 1, e.size()));
 	ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[n]);
+	ExpressionDouble b = Calculate(Expression(e, n + 1, e.size()));
 	return op.operate(a, b);
 }
 

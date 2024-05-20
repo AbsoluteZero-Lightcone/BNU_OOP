@@ -22,6 +22,19 @@ ExpressionOperator& ExpressionOperator::operator=(const ExpressionOperator& e) {
 	return *this;
 }
 
+int ExpressionOperator::getPriority() const{
+	switch (m_cOperator) {
+	case '+':
+	case '-':
+		return 1;
+	case '*':
+	case '/':
+		return 2;
+	default:
+		throw "Invalid Operator.";
+	}
+}
+
 ExpressionDouble ExpressionOperator::operate(const ExpressionDouble& a, const ExpressionDouble& b) {
 	switch (m_cOperator) {
 	case '+':

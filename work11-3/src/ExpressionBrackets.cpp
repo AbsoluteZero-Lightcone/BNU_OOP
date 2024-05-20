@@ -38,6 +38,10 @@ void ExpressionBrackets::fetch(string& s) {
 	s = s.substr(1);
 }
 
+char ExpressionBrackets::getOperator() const{
+	return m_cOperator;
+}
+
 
 ostream& operator<<(ostream& out, const ExpressionBrackets& e) {
 	out << e.m_cOperator;

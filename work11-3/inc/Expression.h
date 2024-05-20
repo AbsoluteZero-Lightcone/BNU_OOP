@@ -26,13 +26,14 @@ using namespace std;
 class Expression {
 	Stack<Element*> m_stackElementPtrs;
 private:
-	bool _isValidBrackets(string s);
-	void _formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder);
+	static bool _isValidBrackets(string s);
+	static void _formOrder(string m_strRaw, int m_nLength, int* m_ptrOrder);
+	static void _formOrder(class Expression e, int* m_ptrOrder);
 public:
 	Expression(string s);
-	Expression(const Element& e);
+	Expression(Element& e);
 	Expression(const Expression& e);
-	Expression(const Expression& e, int start, int length);
+	Expression(const Expression& e, int start, int end);
 	Expression& operator=(const Expression& e);
 	~Expression();
 

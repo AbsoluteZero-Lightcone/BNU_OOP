@@ -29,6 +29,7 @@ public:
 	ExpressionOperator& operator=(const ExpressionOperator& e);
 
 	void fetch(string& s);
+	int getPriority()const;
 	ExpressionDouble operate(const ExpressionDouble& a, const ExpressionDouble& b);
 	friend ostream& operator<<(ostream& out, const ExpressionOperator& e);
 };

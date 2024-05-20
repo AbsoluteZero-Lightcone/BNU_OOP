@@ -28,6 +28,7 @@ public:
 	ExpressionBrackets& operator=(const ExpressionBrackets& e);
 
 	void fetch(string& s);
+	char getOperator()const;
 	friend ostream& operator<<(ostream& out, const ExpressionBrackets& e);
 };
 /* Exported functions ------------------------------------------------------- */
