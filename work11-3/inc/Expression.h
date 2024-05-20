@@ -16,6 +16,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
 #include "Stack.h"
 #include "ExpressionDouble.h"
 #include "ExpressionOperator.h"

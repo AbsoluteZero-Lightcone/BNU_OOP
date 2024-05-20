@@ -50,7 +50,7 @@ ExpressionDouble Expression::calculate() { return Calculate(*this); }
 ExpressionDouble Expression::eval(string s) { return Calculate(Expression(s)); }
 ostream& operator<<(ostream& out, const Expression& e) {
 	for (int i = 0; i < e.m_stackElementPtrs.size(); i++) {
-		if(i)out << " ";
+		if (i)out << " ";
 		out << *e.m_stackElementPtrs[i];
 	}
 	return out;
@@ -217,27 +217,33 @@ void Expression::fetch(string s) {
   */
 ExpressionDouble Expression::Calculate(Expression e) {
 	cout << "calculate: " << e << endl;
-	if(e.size() == 0)throw "Invalid Expression: 存在空括号";// 处理空括号产生的空表达式
+	if (e.size() == 0)throw "Invalid Expression: 存在空括号";// 处理空括号产生的空表达式
 	if (e.size() == 1) {
 		if (typeid(e[0]) == typeid(ExpressionDouble))
 			return dynamic_cast<ExpressionDouble&>(e[0]);
 		else throw "Invalid Expression: 存在孤立的符号";
 	}
+	if (typeid(e[0]) == typeid(ExpressionOperator)) { // 处理开头的运算符
+		ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[0]);
+		if (op.getPriority() == 1) { // 将开头的加减号处理为正负号
+			ExpressionDouble a = ExpressionDouble(0);
+			ExpressionDouble b = Calculate(Expression(e, 1, e.size()));
+			return op.operate(a, b);
+		}
+		else throw "Invalid Expression: 前缀只能是正负号";
+	}
+
 	int* hierarchy = new int[e.size()];
-	//cout << "前" << e.size() << endl;
-	//cout << e.at(0) << endl;
 	_formOrder(e, hierarchy);
 	if (_isPaired(e, hierarchy, 0, e.size() - 1)) { // 去掉多余括号，将运算符暴露在最外层
 		return Calculate(Expression(e, 1, e.size() - 1));
 	}
-	//cout << "后" << e.size() << endl;
-	//cout << e.at(0) << endl;
+
 	cout << "hierarchy: ";
-	for (int i = 0; i < e.size(); i++) {
-		cout << hierarchy[i] << " ";
-	}
+	for (int i = 0; i < e.size(); i++)cout << hierarchy[i] << " ";
 	cout << endl;
-	int n = 0;// 将表达式中优先级最低的运算符作为分割点
+
+	int n = -1;// 将表达式中优先级最低的运算符作为分割点
 	int min = INT32_MAX;
 	for (int i = 0; i < e.size(); i++) { // 从左到右，平级情况下留下最右边的运算符
 		if (typeid(e[i]) == typeid(ExpressionOperator)) { // 筛选是运算符的元素
@@ -248,12 +254,13 @@ ExpressionDouble Expression::Calculate(Expression e) {
 			}
 		}
 	}
+	if (n == -1)throw "Invalid Expression: 找不到运算符";
 
 	delete[] hierarchy;
 
 	cout << "operator: " << e[n] << endl;
 
-	if (n <= 0 || n + 1 >= e.size())throw "Invalid Expression: 参数过少";
+	if (n <= 0 || n + 1 >= e.size())throw "Invalid Expression: 参与运算的参数过少";
 	ExpressionDouble a = Calculate(Expression(e, 0, n));
 	ExpressionOperator op = dynamic_cast<ExpressionOperator&>(e[n]);
 	ExpressionDouble b = Calculate(Expression(e, n + 1, e.size()));
