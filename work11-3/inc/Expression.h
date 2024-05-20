@@ -54,8 +54,8 @@ public:
 	void push_back(Element& e);
 
 	static ExpressionDouble Calculate(Expression e);
-	//ExpressionDouble calculate();
-	//static ExpressionDouble eval(string s);
+	ExpressionDouble calculate();
+	static ExpressionDouble eval(string s);
 
 	friend ostream& operator<<(ostream& out, const Expression& e);
 };
