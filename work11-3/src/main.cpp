@@ -11,12 +11,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#include "Stack.h"
-#include <cassert>
-#include "ExpressionDouble.h"
-#include "ExpressionOperator.h"
 #include "Expression.h"
-#include "ExpressionElement_Base.h"
 
 
 int main() {
