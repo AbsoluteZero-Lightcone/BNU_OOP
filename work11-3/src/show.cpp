@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.5.6
+  * @version V2.5.7
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -77,11 +77,16 @@ void _arg_help() {
 	cout << "  -t, --test      Run test cases" << endl;
 	cout << "  -d, --detailed  Show detailed information" << endl;
 	cout << "  -e, --echo      Same as --detailed" << endl;
+	cout << endl;
+	cout << "[Attention] Charactor ^ cannot be passed into the program directly" << endl;
+	cout << "            Use ^^ instead of ^ for power operation" << endl;
+	cout << "            Or use double quotes to wrap the whole expression" << endl;
+	cout << "            For example: 2^3 should be input as 2^^3 or \"2^3\"" << endl;
 }
 void _help() {
 	cout << endl;
 	cout << "-- Help Document ---------------------------------------------------------------" << endl << endl;
-	cout << "eval 2.5.6" << endl << endl;
+	cout << "eval 2.5.7" << endl << endl;
 	cout << "Supproted arguments: " << endl << endl;
 	_arg_help();
 	cout << endl;
@@ -94,7 +99,7 @@ void _help() {
 	cout << "  Type 'help' or 'h' to show help document" << endl << endl << endl;
 	cout << "Find the git repository online at: " << endl << endl;
 	cout << "  github.com/AbsoluteZero-Lightcone/BNU_OOP-2024" << endl << endl;
-	cout << "                                                       2024-05-21, version 2.5.6" << endl;
+	cout << "                                                       2024-05-21, version 2.5.7" << endl;
 	cout << "---------------------------------- Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
 	cout << endl;
 }
