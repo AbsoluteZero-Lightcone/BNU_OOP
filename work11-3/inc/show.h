@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.h
   * @author  Zhang Yifa 202311998186
-  * @version V2.4.9
+  * @version V2.5.2
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -20,6 +20,12 @@ using namespace std;
 #include "Expression.h"
 
 /* Global Mode Flags -------------------------------------------------------- */
+enum MODE {
+	MODE_ARG,
+	MODE_CLI,
+};
+extern MODE global_mode;
+
 enum ARG_MODE {
 	ARG_MODE_SILENT,
 	ARG_MODE_COUNT,
@@ -77,9 +83,20 @@ void show(const Expression& e);
 template<class T, unsigned N>
 void test(T(&tests)[N]) {
 	for (int i = 0; i < N; i++) {
-		cout << "Test " << i << ": " << tests[i] << endl;
+		cout << "Test " << i << ": " << tests[i];
 		try {
-			show(Expression(tests[i]));
+			if (global_mode == MODE_ARG) {
+				if (arg_mode[ARG_MODE_SILENT])
+					cout << " = " << Expression::eval(tests[i]) << endl;
+				else
+					cout << endl, show(Expression(tests[i]));
+			}
+			else {
+				if (cli_mode[CLI_MODE_SILENT])
+					cout << " = " << Expression::eval(tests[i]) << endl;
+				else
+					cout << endl, show(Expression(tests[i]));
+			}
 		}
 		catch (const char* err) {
 			cerr << endl << "[Error] " << err << endl << endl;

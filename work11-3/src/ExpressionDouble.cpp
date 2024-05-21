@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    ExpressionDouble.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.4.9
+  * @version V2.5.2
   * @date    2024-05-20
   * @brief   ExpressionDouble
   * @encode  GB2312

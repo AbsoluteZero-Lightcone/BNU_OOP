@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.4.9
+  * @version V2.5.2
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -17,6 +17,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	if (argc > 1) { // 接受参数，支持pipeline
+		global_mode = MODE_ARG;
 		for (int i = 1; i < argc; i++)
 			arg_detector(argv[i]);// 参数解析前置
 		for (int i = 1; i < argc; i++) {
@@ -35,9 +36,10 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	cout << "eval 2.4.9" << endl;
+	cout << "eval 2.5.2" << endl;
 	cout << "For help, type \"help\"." << endl;
 	cout << endl;
+	global_mode = MODE_CLI;
 	do {
 		string s;
 		if (!cli_mode[CLI_MODE_SILENT])
