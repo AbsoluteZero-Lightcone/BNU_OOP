@@ -15,14 +15,40 @@ using namespace std;
 #include "Expression.h"
 #include "show.h"
 
+enum CMD {
+	CMD_EXIT,
+	CMD_TEST,
+	CMD_COUNT,
+};
+const string cmds[] = {
+	"exit",
+	"test",
+};
+bool cmd_detector(string s) {
+	for (int i = 0; i < CMD_COUNT; i++) {
+		if (s == cmds[i]) {
+			switch (i) {
+			case CMD_EXIT:
+				exit(0);
+				break;
+			case CMD_TEST:
+				test(tests);
+				break;
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
 int main() {
-	test(tests);
-	cout << "Supported operators: + - * / ^ %" << endl;
+	cout << "Supported operators: + - * / ^ % test exit" << endl;
 	do {
+		string s;
+		cout << "Input an expression: " << endl << ">>> ";
+		cin >> s;
+		if (cmd_detector(s))continue;
 		try {
-			string s;
-			cout << "Input an expression: " << endl << ">>> ";
-			cin >> s;
 			show(Expression(s));
 		}
 		catch (const char* err) {
