@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.2.5
+  * @version V2.2.6
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -20,20 +20,19 @@ int main(int argc, char** argv) {
 	if (argc > 1) { // 接受参数，支持pipeline
 		bool silent = false;
 		for (int i = 1; i < argc; i++) {// 参数解析
-			if (argv[i] == "-s" || argv[i] == "--silent")
+			if (string(argv[i]) == "-s" || string(argv[i]) == "--silent")
 				silent = true;// 静默模式
 		}
-
 		if (silent)
 			for (int i = 1; i < argc; i++) {
-				if (argv[i] == "-s" || argv[i] == "--silent")continue;
+				if (string(argv[i]) == "-s" || string(argv[i]) == "--silent")continue;
 				if (cmd_detector(argv[i]))continue;
 				try { cout << Expression::eval(argv[i]) << endl; }
 				catch (const char* err) {}
 			}
 		else
 			for (int i = 1; i < argc; i++) {
-				if (argv[i] == "-s" || argv[i] == "--silent")continue;
+				if (string(argv[i]) == "-s" || string(argv[i]) == "--silent")continue;
 				if (cmd_detector(argv[i]))continue;
 				try { show(Expression(argv[i])); }
 				catch (const char* err) {
@@ -43,7 +42,9 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	cout << "Supported keywords: + - * / ^ % test exit help" << endl;
+	cout << "Expression Calculator 2.2.6" << endl;
+	cout << "For help, type \"help\"." << endl;
+	cout << endl;
 	do {
 		string s;
 		cout << "Input an expression: " << endl << ">>> ";
