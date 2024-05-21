@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    ExpressionDouble.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.4.8
+  * @version V2.4.9
   * @date    2024-05-20
   * @brief   ExpressionDouble
   * @encode  GB2312
@@ -79,7 +79,7 @@ ExpressionDouble operator*(const ExpressionDouble& a, const ExpressionDouble& b)
 	return ExpressionDouble(a.m_dData * b.m_dData);
 }
 ExpressionDouble operator/(const ExpressionDouble& a, const ExpressionDouble& b) {
-	if (b.m_dData == 0) throw "Divided by zero.";
+	if (b.m_dData == 0) throw "Divided by zero: 除数不能为0";
 	return ExpressionDouble(a.m_dData / b.m_dData);
 }
 /********* Zhang Yifa | Absolute Zero Studio - Lightcone *******END OF FILE****/
