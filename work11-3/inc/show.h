@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.h
   * @author  Zhang Yifa 202311998186
-  * @version V2.2.3
+  * @version V2.3.2
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -19,9 +19,18 @@
 using namespace std;
 #include "Expression.h"
 
-/* Exported variables ------------------------------------------------------- */
-extern const string tests[14];
+/* Global Mode Flags -------------------------------------------------------- */
+enum ARG_MODE {
+	ARG_MODE_SILENT,
+	ARG_MODE_COUNT,
+};
 
+enum CLI_MODE {
+	CLI_MODE_SILENT,
+	CLI_MODE_COUNT,
+};
+
+/* Keyword Tables ----------------------------------------------------------- */
 enum CMD {
 	CMD_EXIT,
 	CMD_EXIT_SHORT,
@@ -31,9 +40,29 @@ enum CMD {
 	CMD_HELP_SHORT,
 	CMD_COUNT,
 };
+enum ARGS {
+	ARGS_S,
+	ARGS_SILENT,
+	ARGS_H,
+	ARGS_HELP,
+	ARGS_T,
+	ARGS_TEST,
+	ARGS_D,
+	ARGS_DETAILED,
+	ARGS_E,
+	ARGS_ECHO,
+	ARGS_COUNT,
+};
+
+/* Exported Values ---------------------------------------------------------- */
+extern bool arg_mode[ARG_MODE_COUNT];
+extern bool cli_mode[CLI_MODE_COUNT];
+extern const string tests[14];
 extern const string cmds[CMD_COUNT];
+extern const string args[ARGS_COUNT];
 
 /* Exported functions ------------------------------------------------------- */
+bool arg_detector(string s);
 bool cmd_detector(string s);
 void show(const Expression& e);
 

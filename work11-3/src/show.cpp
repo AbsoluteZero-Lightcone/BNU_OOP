@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.3.1
+  * @version V2.3.2
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -12,7 +12,14 @@
   /* Includes ----------------------------------------------------------------- */
 #include "show.h"
 
-/* Exported variables ------------------------------------------------------- */
+/* Global Mode Flags -------------------------------------------------------- */
+bool arg_mode[ARG_MODE_COUNT] = {
+	true,
+};
+bool cli_mode[CLI_MODE_COUNT] = {
+	true,
+};
+/* Exported Values ---------------------------------------------------------- */
 const string tests[] = {
 	// verified functions:
 	"1 + (2.15) * 3 / (2.120001*(1-6))+2.1 * (3 /2.12)*1-6",// 一般的表达式
@@ -34,7 +41,7 @@ const string tests[] = {
 	"ans+1",// todo 记忆功能
 };
 
-const string cmds[] = {
+const string cmds[CMD_COUNT] = {
 	"exit",
 	"x",
 	"test",
@@ -42,12 +49,34 @@ const string cmds[] = {
 	"help",
 	"h",
 };
+const string args[ARGS_COUNT] = {
+	"-s",
+	"--silent",
+	"-h",
+	"--help",
+	"-t",
+	"--test",
+	"-d",
+	"--detailed",
+	"-e",
+	"--echo"
+};
 /* Private functions -------------------------------------------------------- */
+void arg_help() {
+	cout << "Usage: eval [options] [expression]" << endl;
+	cout << "Options:" << endl;
+	cout << "  -s, --silent    Silent mode, only output the result" << endl;
+	cout << "  -h, --help      Show this help document" << endl;
+	cout << "  -t, --test      Run test cases" << endl;
+	cout << "  -d, --detailed    Show detailed information" << endl;
+}
 void help() {
 	cout << endl;
 	cout << "-- Help Document ---------------------------------------------------------------" << endl << endl;
-	cout << "eval 2.3.1" << endl << endl;
-	cout << "Supproted arguments: -s --silent" << endl << endl;
+	cout << "eval 2.3.2" << endl << endl;
+	cout << "Supproted arguments: " << endl << endl;
+	arg_help();
+	cout << endl;
 	cout << "Supported operators: + - * / ^ %" << endl << endl;
 	cout << "Supported shell-like cmds: test(t) exit(x) help(h)" << endl;
 	cout << "  Type 'test' or 't' to run tests" << endl;
@@ -55,11 +84,39 @@ void help() {
 	cout << "  Type 'help' or 'h' to show help document" << endl << endl << endl;
 	cout << "Find the git repository online at: " << endl << endl;
 	cout << "  github.com/AbsoluteZero-Lightcone/BNU_OOP-2024" << endl << endl;
-	cout << "                                                       2024-05-21, version 2.3.1" << endl;
+	cout << "                                                       2024-05-21, version 2.3.2" << endl;
 	cout << "---------------------------------- Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
 	cout << endl;
 }
 /* Exported functions ------------------------------------------------------- */
+bool arg_detector(string s) {
+	for (int i = 0; i < ARGS_COUNT; i++) {
+		if (s == args[i]) {
+			switch (i) {
+			case ARGS_H:
+			case ARGS_HELP:
+				arg_help();
+				break;
+			case ARGS_T:
+			case ARGS_TEST:
+				test(tests);
+				break;
+			case ARGS_S:
+			case ARGS_SILENT:
+				arg_mode[ARG_MODE_SILENT] = true;
+				break;
+			case ARGS_D:
+			case ARGS_DETAILED:
+				arg_mode[ARG_MODE_SILENT] = false;
+				break;
+			default:
+				break;
+			}
+		}
+		return true;
+	}
+	return false;
+}
 bool cmd_detector(string s) {
 	for (int i = 0; i < CMD_COUNT; i++) {
 		if (s == cmds[i]) {
