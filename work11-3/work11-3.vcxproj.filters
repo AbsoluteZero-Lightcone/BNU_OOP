@@ -33,6 +33,9 @@
     <ClCompile Include="src\ExpressionBrackets.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\show.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\Stack.h">
@@ -54,6 +57,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="inc\ExpressionBrackets.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\show.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
