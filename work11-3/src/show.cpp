@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.2.9
+  * @version V2.3.1
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -46,7 +46,7 @@ const string cmds[] = {
 void help() {
 	cout << endl;
 	cout << "-- Help Document ---------------------------------------------------------------" << endl << endl;
-	cout << "eval 2.2.9" << endl << endl;
+	cout << "eval 2.3.1" << endl << endl;
 	cout << "Supproted arguments: -s --silent" << endl << endl;
 	cout << "Supported operators: + - * / ^ %" << endl << endl;
 	cout << "Supported shell-like cmds: test(t) exit(x) help(h)" << endl;
@@ -55,7 +55,7 @@ void help() {
 	cout << "  Type 'help' or 'h' to show help document" << endl << endl << endl;
 	cout << "Find the git repository online at: " << endl << endl;
 	cout << "  github.com/AbsoluteZero-Lightcone/BNU_OOP-2024" << endl << endl;
-	cout << "                                                       2024-05-21, version 2.2.9" << endl;
+	cout << "                                                       2024-05-21, version 2.3.1" << endl;
 	cout << "---------------------------------- Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
 	cout << endl;
 }
