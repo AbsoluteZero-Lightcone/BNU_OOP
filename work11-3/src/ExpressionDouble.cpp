@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    ExpressionDouble.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.1.0
+  * @version V2.4.8
   * @date    2024-05-20
   * @brief   ExpressionDouble
   * @encode  GB2312
@@ -27,7 +27,7 @@ ExpressionDouble::operator double() const{
 }
 
 /**
-  * @brief 从字符串中提取一个浮点数，字符串中的第一个浮点数被提取出来，字符串被修改为去掉提取的部分
+  * @brief 从字符串中提取一个浮点数，字符串中的第一个浮点数被提取出来，字符串被修改为去掉提取的部分，空格被忽略
   * @param s 字符串
   * @retval None
   */
@@ -35,7 +35,12 @@ void ExpressionDouble::fetch(string& s) {
 	assert(s.length() > 0);
 	m_dData = 0;
 	int i = 0;
-	while (s[i] >= '0' && s[i] <= '9') { // 整数部分
+	while (s[i] >= '0' && s[i] <= '9'|| s[i] <= ' ') { // 整数部分
+		if (s[i] == ' ') {
+			i++;
+			if (i >= s.length())break;
+			continue;
+		}
 		m_dData = m_dData * 10 + (s[i] - '0');
 		i++;
 		if (i >= s.length())break;
@@ -45,7 +50,12 @@ void ExpressionDouble::fetch(string& s) {
 		// 也允许没有小数部分 123. == 123
 		i++;
 		double weight = 0.1; // 位权
-		while (s[i] >= '0' && s[i] <= '9') {
+		while (s[i] >= '0' && s[i] <= '9'||s[i]==' ') {
+			if (s[i] == ' ') {
+				i++;
+				if (i >= s.length())break;
+				continue;
+			}
 			m_dData += weight * (s[i] - '0');
 			weight *= 0.1;
 			i++;
