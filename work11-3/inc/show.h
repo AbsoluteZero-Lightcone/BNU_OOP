@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.h
   * @author  Zhang Yifa 202311998186
-  * @version V2.4.6
+  * @version V2.4.8
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -61,7 +61,7 @@ enum ARGS {
 /* Exported Values ---------------------------------------------------------- */
 extern bool arg_mode[ARG_MODE_COUNT];
 extern bool cli_mode[CLI_MODE_COUNT];
-extern const string tests[14];
+extern const string tests[9];
 extern const string cmds[CMD_COUNT];
 extern const string args[ARGS_COUNT];
 

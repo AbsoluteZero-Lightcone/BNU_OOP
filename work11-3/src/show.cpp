@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.4.6
+  * @version V2.4.8
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -22,7 +22,8 @@ bool cli_mode[CLI_MODE_COUNT] = {
 /* Exported Values ---------------------------------------------------------- */
 const string tests[] = {
 	// verified functions:
-	"1 + (2.15) * 3 / (2.120001*(1-6))+2.1 * (3 /2.12)*1-6",// 一般的表达式
+	"1 + ((2.15)) *( 300^(-0.56)%5.35/ ((2.1*(1-6)*(-2))^(0.12)+2.1) / (3 /(-2.12))*1.5)*3-6",// 一般的表达式
+	"1    +   2  .   2",// 忽略空格
 	"123",// 处理纯数字
 	"((((()))))" ,// 判断空括号
 	"-1+2",
@@ -33,12 +34,12 @@ const string tests[] = {
 	"2%3",// 浮点取余运算fmod支持
 
 	// todos:
-	"1++++----2",// todo 检查不合法的连续加减号
-	"sin(123)",// todo 函数式运算支持
-	"|-12|",// todo 含语义的括号（绝对值）
-	"12!",// todo 后置单目运算(阶乘运算)
-	"E^(i*Pi)",// todo 数学常量
-	"ans+1",// todo 记忆功能
+	//"1++++----2",// todo 检查不合法的连续加减号
+	//"sin(123)",// todo 函数式运算支持
+	//"|-12|",// todo 含语义的括号（绝对值）
+	//"12!",// todo 后置单目运算(阶乘运算)
+	//"E^(i*Pi)",// todo 数学常量
+	//"ans+1",// todo 记忆功能
 };
 
 const string cmds[CMD_COUNT] = {
@@ -78,7 +79,7 @@ void arg_help() {
 void help() {
 	cout << endl;
 	cout << "-- Help Document ---------------------------------------------------------------" << endl << endl;
-	cout << "eval 2.4.6" << endl << endl;
+	cout << "eval 2.4.8" << endl << endl;
 	cout << "Supproted arguments: " << endl << endl;
 	arg_help();
 	cout << endl;
@@ -91,7 +92,7 @@ void help() {
 	cout << "  Type 'help' or 'h' to show help document" << endl << endl << endl;
 	cout << "Find the git repository online at: " << endl << endl;
 	cout << "  github.com/AbsoluteZero-Lightcone/BNU_OOP-2024" << endl << endl;
-	cout << "                                                       2024-05-21, version 2.4.6" << endl;
+	cout << "                                                       2024-05-21, version 2.4.8" << endl;
 	cout << "---------------------------------- Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
 	cout << endl;
 }
@@ -115,6 +116,7 @@ bool arg_detector(string s) {
 			case ARGS_H:
 			case ARGS_HELP:
 				arg_help();
+				exit(0);// help后直接退出，忽略其他的参数，并且不会执行表达式
 				break;
 			case ARGS_T:
 			case ARGS_TEST:
