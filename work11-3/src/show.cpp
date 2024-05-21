@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.1.0
+  * @version V2.2.1
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -13,7 +13,7 @@
 #include "show.h"
 
 /* Exported variables ------------------------------------------------------- */
-string tests[] = {
+const string tests[] = {
 	// verified functions:
 	"1 + (2.15) * 3 / (2.120001*(1-6))+2.1 * (3 /2.12)*1-6",// 一般的表达式
 	"123",// 处理纯数字
@@ -34,7 +34,28 @@ string tests[] = {
 	"ans+1",// todo 记忆功能
 };
 
+const string cmds[] = {
+	"exit",
+	"test",
+};
 /* Exported functions ------------------------------------------------------- */
+bool cmd_detector(string s) {
+	for (int i = 0; i < CMD_COUNT; i++) {
+		if (s == cmds[i]) {
+			switch (i) {
+			case CMD_EXIT:
+				exit(0);
+				break;
+			case CMD_TEST:
+				test(tests);
+				break;
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
 void show(const Expression& e) {
 	cout << endl << "-- Calculating process ---------------------------------------------------------" << endl << endl;
 	double res = Expression::Process(e);

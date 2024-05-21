@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.h
   * @author  Zhang Yifa 202311998186
-  * @version V2.1.0
+  * @version V2.2.1
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -20,9 +20,17 @@ using namespace std;
 #include "Expression.h"
 
 /* Exported variables ------------------------------------------------------- */
-extern string tests[14];
+extern const string tests[14];
+
+enum CMD {
+	CMD_EXIT,
+	CMD_TEST,
+	CMD_COUNT,
+};
+extern const string cmds[CMD_COUNT];
 
 /* Exported functions ------------------------------------------------------- */
+bool cmd_detector(string s);
 void show(const Expression& e);
 
 template<class T, unsigned N>

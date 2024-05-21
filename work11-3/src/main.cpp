@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.1.0
+  * @version V2.2.1
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -14,32 +14,6 @@ using namespace std;
 
 #include "Expression.h"
 #include "show.h"
-
-enum CMD {
-	CMD_EXIT,
-	CMD_TEST,
-	CMD_COUNT,
-};
-const string cmds[] = {
-	"exit",
-	"test",
-};
-bool cmd_detector(string s) {
-	for (int i = 0; i < CMD_COUNT; i++) {
-		if (s == cmds[i]) {
-			switch (i) {
-			case CMD_EXIT:
-				exit(0);
-				break;
-			case CMD_TEST:
-				test(tests);
-				break;
-			}
-			return true;
-		}
-	}
-	return false;
-}
 
 int main() {
 	cout << "Supported operators: + - * / ^ % test exit" << endl;
