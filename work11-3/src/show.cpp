@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.3.2
+  * @version V2.3.3
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -68,12 +68,13 @@ void arg_help() {
 	cout << "  -s, --silent    Silent mode, only output the result" << endl;
 	cout << "  -h, --help      Show this help document" << endl;
 	cout << "  -t, --test      Run test cases" << endl;
-	cout << "  -d, --detailed    Show detailed information" << endl;
+	cout << "  -d, --detailed  Show detailed information" << endl;
+	cout << "  -e, --echo      Same as --detailed" << endl;
 }
 void help() {
 	cout << endl;
 	cout << "-- Help Document ---------------------------------------------------------------" << endl << endl;
-	cout << "eval 2.3.2" << endl << endl;
+	cout << "eval 2.3.3" << endl << endl;
 	cout << "Supproted arguments: " << endl << endl;
 	arg_help();
 	cout << endl;
@@ -84,7 +85,7 @@ void help() {
 	cout << "  Type 'help' or 'h' to show help document" << endl << endl << endl;
 	cout << "Find the git repository online at: " << endl << endl;
 	cout << "  github.com/AbsoluteZero-Lightcone/BNU_OOP-2024" << endl << endl;
-	cout << "                                                       2024-05-21, version 2.3.2" << endl;
+	cout << "                                                       2024-05-21, version 2.3.3" << endl;
 	cout << "---------------------------------- Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
 	cout << endl;
 }
@@ -107,6 +108,10 @@ bool arg_detector(string s) {
 				break;
 			case ARGS_D:
 			case ARGS_DETAILED:
+				arg_mode[ARG_MODE_SILENT] = false;
+				break;
+			case ARGS_E:
+			case ARGS_ECHO:
 				arg_mode[ARG_MODE_SILENT] = false;
 				break;
 			default:
