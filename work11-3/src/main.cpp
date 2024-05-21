@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.5.4
+  * @version V2.5.5
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	cout << "eval 2.5.4" << endl;
+	cout << "eval 2.5.5" << endl;
 	cout << "For help, type \"help\"." << endl;
 	cout << endl;
 	global_mode = MODE_CLI;
@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
 		if (!cli_mode[CLI_MODE_SILENT])
 			cout << "Input an expression: "<< endl;
 		cout  << ">>> ";
-		getline(cin, s);
+		getline(cin, s);// 读取一行，产生了空格问题
 		if (cmd_detector(s))continue;
 		try {
 			if (cli_mode[CLI_MODE_SILENT])
