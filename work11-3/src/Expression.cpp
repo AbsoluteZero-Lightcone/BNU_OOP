@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Expression.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.5.4
+  * @version V2.5.6
   * @date    2024-05-20
   * @brief   Expression
   * @encode  GB2312
@@ -280,7 +280,7 @@ void Expression::fetch(string s) {
   * @brief 使用递归方法计算表达式
   */
 ExpressionDouble Expression::Calculate(Expression e) {
-	if (e.size() == 0)throw "Invalid Expression: 存在空括号";// 处理空括号产生的空表达式
+	if (e.size() == 0)throw "Invalid Expression: 表达式为空或存在空括号";// 处理空括号产生的空表达式
 	if (e.size() == 1) {
 		if (typeid(e[0]) == typeid(ExpressionDouble))
 			return dynamic_cast<ExpressionDouble&>(e[0]);

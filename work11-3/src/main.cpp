@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.5.5
+  * @version V2.5.6
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	cout << "eval 2.5.5" << endl;
+	cout << "eval 2.5.6" << endl;
 	cout << "For help, type \"help\"." << endl;
 	cout << endl;
 	global_mode = MODE_CLI;
