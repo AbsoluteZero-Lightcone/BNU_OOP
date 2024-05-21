@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Expression.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.1.0
+  * @version V2.5.4
   * @date    2024-05-20
   * @brief   Expression
   * @encode  GB2312
@@ -313,7 +313,7 @@ ExpressionDouble Expression::Calculate(Expression e) {
 			}
 		}
 	}
-	if (n == -1)throw "Invalid Expression: 找不到运算符";
+	if (n == -1)throw "Invalid Expression: 缺少运算符";
 
 	delete[] hierarchy;
 

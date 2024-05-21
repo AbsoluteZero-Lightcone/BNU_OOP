@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.h
   * @author  Zhang Yifa 202311998186
-  * @version V2.5.3
+  * @version V2.5.4
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -83,7 +83,7 @@ void show(const Expression& e);
 template<unsigned N>
 void test(const string(&tests)[N]) {
 	for (int i = 0; i < N; i++) {
-		cout << "Test " << i << ": " << tests[i];
+		cout << "Test " << i+1 << ": " << tests[i];
 		try {
 			if (global_mode == MODE_ARG) {
 				if (arg_mode[ARG_MODE_SILENT])
