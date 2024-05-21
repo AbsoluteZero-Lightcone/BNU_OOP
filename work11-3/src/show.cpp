@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.2.6
+  * @version V2.2.7
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -46,13 +46,14 @@ const string cmds[] = {
 void help() {
 	cout << endl;
 	cout << "-- Help Document ---------------------------------------------------------------" << endl << endl;
-	cout << "Supported operators: + - * / ^ %" << endl;
+	cout << "Supproted arguments: -s --silent" << endl << endl;
+	cout << "Supported operators: + - * / ^ %" << endl << endl;
 	cout << "Supported shell-like cmds: test(t) exit(x) help(h)" << endl;
-	cout << " Type 'test' or 't' to run tests" << endl;
-	cout << " Type 'exit' or 'x' to exit" << endl;
-	cout << " Type 'help' or 'h' to show help document" << endl;
+	cout << "  Type 'test' or 't' to run tests" << endl;
+	cout << "  Type 'exit' or 'x' to exit" << endl;
+	cout << "  Type 'help' or 'h' to show help document" << endl;
 	cout << endl;
-	cout << "                                                       2024-05-21, version 2.2.6" << endl;
+	cout << "                                                       2024-05-21, version 2.2.7" << endl;
 	cout << "---------------------------------- Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
 	cout << endl;
 }
