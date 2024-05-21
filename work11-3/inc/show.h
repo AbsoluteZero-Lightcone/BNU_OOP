@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.h
   * @author  Zhang Yifa 202311998186
-  * @version V2.5.2
+  * @version V2.5.3
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -80,8 +80,8 @@ bool is_cmd(string s);
 
 void show(const Expression& e);
 
-template<class T, unsigned N>
-void test(T(&tests)[N]) {
+template<unsigned N>
+void test(const string(&tests)[N]) {
 	for (int i = 0; i < N; i++) {
 		cout << "Test " << i << ": " << tests[i];
 		try {
