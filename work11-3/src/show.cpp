@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.2.2
+  * @version V2.2.3
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -36,27 +36,42 @@ const string tests[] = {
 
 const string cmds[] = {
 	"exit",
+	"x",
 	"test",
+	"t",
 	"help",
+	"h",
 };
+/* Private functions -------------------------------------------------------- */
+void help() {
+	cout << endl;
+	cout << "-- Help Document ---------------------------------------------------------------" << endl << endl;
+	cout << "Supported operators: + - * / ^ %" << endl;
+	cout << "Supported shell-like cmds: test(t) exit(x) help(h)" << endl;
+	cout << " Type 'test' or 't' to run tests" << endl;
+	cout << " Type 'exit' or 'x' to exit" << endl;
+	cout << " Type 'help' or 'h' to show help document" << endl;
+	cout << endl;
+	cout << "                                                       2024-05-21, version 2.2.3" << endl;
+	cout << "---------------------------------- Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
+	cout << endl;
+}
 /* Exported functions ------------------------------------------------------- */
 bool cmd_detector(string s) {
 	for (int i = 0; i < CMD_COUNT; i++) {
 		if (s == cmds[i]) {
 			switch (i) {
 			case CMD_EXIT:
+			case CMD_EXIT_SHORT:
 				exit(0);
 				break;
 			case CMD_TEST:
+			case CMD_TEST_SHORT:
 				test(tests);
 				break;
 			case CMD_HELP:
-				cout << endl;
-				cout << "Supported operators: + - * / ^ %" << endl;
-				cout << "Supported shell-like cmds: test exit help" << endl;
-				cout  <<"Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
-				cout << "2024-05-21, version 2.2.2" << endl;
-				cout << endl;
+			case CMD_HELP_SHORT:
+				help();
 				break;
 			}
 			return true;

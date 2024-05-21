@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.h
   * @author  Zhang Yifa 202311998186
-  * @version V2.2.2
+  * @version V2.2.3
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -24,8 +24,11 @@ extern const string tests[14];
 
 enum CMD {
 	CMD_EXIT,
+	CMD_EXIT_SHORT,
 	CMD_TEST,
+	CMD_TEST_SHORT,
 	CMD_HELP,
+	CMD_HELP_SHORT,
 	CMD_COUNT,
 };
 extern const string cmds[CMD_COUNT];
