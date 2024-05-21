@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.2.1
+  * @version V2.2.2
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
   ******************************************************************************
   */
 
-/* Includes ----------------------------------------------------------------- */
+  /* Includes ----------------------------------------------------------------- */
 #include "show.h"
 
 /* Exported variables ------------------------------------------------------- */
@@ -37,6 +37,7 @@ const string tests[] = {
 const string cmds[] = {
 	"exit",
 	"test",
+	"help",
 };
 /* Exported functions ------------------------------------------------------- */
 bool cmd_detector(string s) {
@@ -48,6 +49,14 @@ bool cmd_detector(string s) {
 				break;
 			case CMD_TEST:
 				test(tests);
+				break;
+			case CMD_HELP:
+				cout << endl;
+				cout << "Supported operators: + - * / ^ %" << endl;
+				cout << "Supported shell-like cmds: test exit help" << endl;
+				cout  <<"Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
+				cout << "2024-05-21, version 2.2.2" << endl;
+				cout << endl;
 				break;
 			}
 			return true;
