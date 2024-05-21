@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.h
   * @author  Zhang Yifa 202311998186
-  * @version V2.3.3
+  * @version V2.4.1
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -38,6 +38,10 @@ enum CMD {
 	CMD_TEST_SHORT,
 	CMD_HELP,
 	CMD_HELP_SHORT,
+	CMD_SILENT,
+	CMD_SILENT_SHORT,
+	CMD_DETAILED,
+	CMD_DETAILED_SHORT,
 	CMD_COUNT,
 };
 enum ARGS {

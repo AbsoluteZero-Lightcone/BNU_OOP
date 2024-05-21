@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.3.3
+  * @version V2.4.1
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	cout << "eval 2.3.3" << endl;
+	cout << "eval 2.4.1" << endl;
 	cout << "For help, type \"help\"." << endl;
 	cout << endl;
 	do {
@@ -46,7 +46,10 @@ int main(int argc, char** argv) {
 		cin >> s;
 		if (cmd_detector(s))continue;
 		try {
-			show(Expression(s));
+			if(cli_mode[CLI_MODE_SILENT])
+				cout << Expression::eval(s) << endl;
+			else
+				show(Expression(s));
 		}
 		catch (const char* err) {
 			cerr << endl << "[Error] " << err;

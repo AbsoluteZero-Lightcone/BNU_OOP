@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.3.3
+  * @version V2.4.1
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -17,7 +17,7 @@ bool arg_mode[ARG_MODE_COUNT] = {
 	true,
 };
 bool cli_mode[CLI_MODE_COUNT] = {
-	true,
+	false,
 };
 /* Exported Values ---------------------------------------------------------- */
 const string tests[] = {
@@ -48,6 +48,10 @@ const string cmds[CMD_COUNT] = {
 	"t",
 	"help",
 	"h",
+	"silent",
+	"s",
+	"detailed",
+	"d",
 };
 const string args[ARGS_COUNT] = {
 	"-s",
@@ -74,18 +78,20 @@ void arg_help() {
 void help() {
 	cout << endl;
 	cout << "-- Help Document ---------------------------------------------------------------" << endl << endl;
-	cout << "eval 2.3.3" << endl << endl;
+	cout << "eval 2.4.1" << endl << endl;
 	cout << "Supproted arguments: " << endl << endl;
 	arg_help();
 	cout << endl;
-	cout << "Supported operators: + - * / ^ %" << endl << endl;
-	cout << "Supported shell-like cmds: test(t) exit(x) help(h)" << endl;
+	cout << "Supported operators:  + - * / ^ %" << endl << endl;
+	cout << "Supported shell-like cmds:  test(t) exit(x) silent(s) detailed(d) help(h)" << endl;
 	cout << "  Type 'test' or 't' to run tests" << endl;
 	cout << "  Type 'exit' or 'x' to exit" << endl;
+	cout << "  Type 'silent' or 's' to switch to silent mode" << endl;
+	cout << "  Type 'detailed' or 'd' to switch to detailed mode" << endl;
 	cout << "  Type 'help' or 'h' to show help document" << endl << endl << endl;
 	cout << "Find the git repository online at: " << endl << endl;
 	cout << "  github.com/AbsoluteZero-Lightcone/BNU_OOP-2024" << endl << endl;
-	cout << "                                                       2024-05-21, version 2.3.3" << endl;
+	cout << "                                                       2024-05-21, version 2.4.1" << endl;
 	cout << "---------------------------------- Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
 	cout << endl;
 }
@@ -137,6 +143,14 @@ bool cmd_detector(string s) {
 			case CMD_HELP:
 			case CMD_HELP_SHORT:
 				help();
+				break;
+			case CMD_SILENT:
+			case CMD_SILENT_SHORT:
+				cli_mode[CLI_MODE_SILENT] = true;
+				break;
+			case CMD_DETAILED:
+			case CMD_DETAILED_SHORT:
+				cli_mode[CLI_MODE_SILENT] = false;
 				break;
 			}
 			return true;
