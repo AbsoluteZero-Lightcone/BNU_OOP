@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.h
   * @author  Zhang Yifa 202311998186
-  * @version V2.4.2
+  * @version V2.4.3
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -68,6 +68,10 @@ extern const string args[ARGS_COUNT];
 /* Exported functions ------------------------------------------------------- */
 bool arg_detector(string s);
 bool cmd_detector(string s);
+
+bool is_arg(string s);
+bool is_cmd(string s);
+
 void show(const Expression& e);
 
 template<class T, unsigned N>
