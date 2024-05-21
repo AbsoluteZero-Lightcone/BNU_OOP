@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    show.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.2.3
+  * @version V2.2.4
   * @date    2024-05-21
   * @brief   show
   * @encode  GB2312
@@ -52,7 +52,7 @@ void help() {
 	cout << " Type 'exit' or 'x' to exit" << endl;
 	cout << " Type 'help' or 'h' to show help document" << endl;
 	cout << endl;
-	cout << "                                                       2024-05-21, version 2.2.3" << endl;
+	cout << "                                                       2024-05-21, version 2.2.4" << endl;
 	cout << "---------------------------------- Zhang Yifa | Absolute Zero Studio - Lightcone" << endl;
 	cout << endl;
 }
