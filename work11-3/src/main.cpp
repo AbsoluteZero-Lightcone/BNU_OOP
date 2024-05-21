@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.3.0
+  * @version V2.0.0
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -41,10 +41,11 @@ void test(T(&tests)[N]) {
 		cout << "Test " << i << ": " << tests[i] << endl;
 		try {
 			Expression e(tests[i]);
-#ifdef ENABLE_PROCESS_PRINT
-			cout << "[Calculating process]" << endl;
-#endif
-			cout << endl << ">>> " << e << " = " << Expression::Calculate(e) << endl << endl;
+
+			cout << "-- Calculating process ---------------------------------------------------------" << endl;
+			double res = Expression::Process(e);
+			cout << endl << "------------------------------------------------------- Calculation completed --" << endl ;
+			cout << endl << ">>> " << e << " = " << res << endl << endl;
 		}
 		catch (const char* err) {
 			cerr << endl << "[Error] " << err << endl << endl;
@@ -62,10 +63,9 @@ int main() {
 			cout << "Input an expression: " << endl << ">>> ";
 			cin >> s;
 			Expression e(s);
-#ifdef ENABLE_PROCESS_PRINT
-			cout << " [Calculating process]" << endl;
-#endif
-			double res = Expression::Calculate(e);
+			cout << endl << "-- Calculating process ---------------------------------------------------------" << endl << endl;
+			double res = Expression::Process(e);
+			cout << endl << "------------------------------------------------------- Calculation completed --" << endl;
 			cout << endl << ">>> " << e << " = " << res << endl << endl;
 		}
 		catch (const char* err) {

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Expression.h
   * @author  Zhang Yifa 202311998186
-  * @version V1.3.0
+  * @version V2.0.0
   * @date    2024-05-20
   * @brief   Expression
   * @encode  GB2312
@@ -12,7 +12,6 @@
 #ifndef __EXPRESSION_H
 #define __EXPRESSION_H
 
-#define ENABLE_PROCESS_PRINT
 /* Includes ------------------------------------------------------------------*/
 #include <iostream>
 #include <string>
@@ -62,6 +61,7 @@ public:
 	void append(const Expression& e);
 
 	static ExpressionDouble Calculate(Expression e);
+	static ExpressionDouble Process(Expression e,int depth = 0);
 	ExpressionDouble calculate();
 	static ExpressionDouble eval(string s);
 

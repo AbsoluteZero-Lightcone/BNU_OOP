@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    ExpressionBrackets.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V1.3.0
+  * @version V2.0.0
   * @date    2024-05-20
   * @brief   ExpressionBrackets
   * @encode  GB2312
@@ -41,7 +41,6 @@ void ExpressionBrackets::fetch(string& s) {
 char ExpressionBrackets::getOperator() const{
 	return m_cOperator;
 }
-
 
 ostream& operator<<(ostream& out, const ExpressionBrackets& e) {
 	out << e.m_cOperator;
