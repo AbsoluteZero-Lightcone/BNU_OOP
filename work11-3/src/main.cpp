@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.cpp
   * @author  Zhang Yifa 202311998186
-  * @version V2.4.3
+  * @version V2.4.4
   * @date    2024-05-16
   * @brief   Entrance Function
   * @encode  GB2312
@@ -34,14 +34,14 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	cout << "eval 2.4.3" << endl;
+	cout << "eval 2.4.4" << endl;
 	cout << "For help, type \"help\"." << endl;
 	cout << endl;
 	do {
 		string s;
-		if (cli_mode[CLI_MODE_SILENT])
-			cout << "Input an expression: ";
-		cout << endl << ">>> ";
+		if (!cli_mode[CLI_MODE_SILENT])
+			cout << "Input an expression: "<< endl;
+		cout  << ">>> ";
 		cin >> s;
 		if (cmd_detector(s))continue;
 		try {
