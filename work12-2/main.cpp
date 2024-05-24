@@ -23,7 +23,7 @@ void dic_multiset() {
 	multiset<string> dic;
 	string word;
 	while (true) {
-		cout << "word: ";
+		cout << "word: "; 
 		cin >> word;
 		if (word == "QUIT")break;
 		cout << (dic.count(word) ? "出现过" : "没出现过") << " 曾经出现次数: " << dic.count(word) << endl;
