@@ -12,13 +12,50 @@
 #include <iostream>
 using namespace std;
 #include <map>
+#include <set>
+
 
 /**
-  * @brief 
-  * @param 
-  * @retval 
+  * @brief 使用multiset实现
+  * @retval	None
   */
+void dic_multiset() {
+	multiset<string> dic;
+	string word;
+	while (true) {
+		cout << "word: ";
+		cin >> word;
+		if (word == "QUIT")break;
+		dic.insert(word);
+		for (auto it = dic.begin(); it != dic.end(); it++) {
+			cout << *it << " " << dic.count(*it) << endl;
+		}
+	}
+}
+
+/**
+  * @brief 使用map实现
+  * @retval None
+  */
+void dic_map() {
+	map<string, int> dic;
+	string word;
+	while (true) {
+		cout << "word: ";
+		cin >> word;
+		if (word == "QUIT")break;
+		dic[word]++;
+		for (auto it = dic.begin(); it != dic.end(); it++) {
+			cout << it->first << " " << it->second << endl;
+		}
+	}
+}
+
 int main() {
+	cout << "使用map实现" << endl;
+	dic_map();
+	cout << "使用multiset实现" << endl;
+	dic_multiset();
 	return 0;
 }
 
