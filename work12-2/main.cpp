@@ -13,7 +13,7 @@
 using namespace std;
 #include <map>
 #include <set>
-
+#include <string>
 
 /**
   * @brief 使用multiset实现
@@ -26,10 +26,8 @@ void dic_multiset() {
 		cout << "word: ";
 		cin >> word;
 		if (word == "QUIT")break;
+		cout << (dic.count(word) ? "出现过" : "没出现过") << " 曾经出现次数: " << dic.count(word) << endl;
 		dic.insert(word);
-		for (auto it = dic.begin(); it != dic.end(); it++) {
-			cout << *it << " " << dic.count(*it) << endl;
-		}
 	}
 }
 
@@ -44,17 +42,15 @@ void dic_map() {
 		cout << "word: ";
 		cin >> word;
 		if (word == "QUIT")break;
+		cout << (dic[word] ? "出现过" : "没出现过") << " 曾经出现次数: " << dic[word] << endl;
 		dic[word]++;
-		for (auto it = dic.begin(); it != dic.end(); it++) {
-			cout << it->first << " " << it->second << endl;
-		}
 	}
 }
 
 int main() {
-	cout << "使用map实现" << endl;
+	cout << "-------使用map实现--------" << endl;
 	dic_map();
-	cout << "使用multiset实现" << endl;
+	cout << "-----使用multiset实现-----" << endl;
 	dic_multiset();
 	return 0;
 }
